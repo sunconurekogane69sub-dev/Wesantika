@@ -1,0 +1,174 @@
+import type { PartialDictionary } from "../types";
+
+/**
+ * Vietnamese.
+ *
+ * Complete except for `about.blocks` — the five long-form narrative sections on
+ * the About Us page, which fall back to English on purpose. They need a human
+ * transcreation rather than a translation. Drop the strings into `about.blocks`
+ * here and they take effect immediately.
+ */
+export const vi: PartialDictionary = {
+  meta: {
+    siteTitle: "Wesantika — Phần mềm hiện đại. Tăng trưởng thực chất.",
+    siteDescription:
+      "Chúng tôi thiết kế và xây dựng phần mềm ứng dụng AI, nền tảng đám mây và hệ thống số giúp doanh nghiệp đổi mới, vận hành hiệu quả và mở rộng một cách tự tin.",
+    aboutTitle: "Về chúng tôi",
+    aboutDescription:
+      "Chúng tôi giúp các tổ chức biến ý tưởng thành giải pháp số có khả năng mở rộng, thông qua AI, công nghệ đám mây và kỹ thuật phần mềm chuyên sâu.",
+  },
+
+  nav: {
+    top: "Trang chủ",
+    solution: "Giải pháp",
+    about: "Về chúng tôi",
+    work: "Dự án",
+    newsroom: "Tin tức",
+    blog: "Blog",
+    contact: "Liên hệ",
+    openMenu: "Mở menu",
+    languageLabel: "Đổi ngôn ngữ",
+    comingSoon: "Sắp ra mắt",
+  },
+
+  hero: {
+    title: "Phần mềm hiện đại. Tăng trưởng thực chất.",
+    subtitle:
+      "Chúng tôi thiết kế và xây dựng phần mềm ứng dụng AI, nền tảng đám mây và hệ thống số giúp doanh nghiệp đổi mới, vận hành hiệu quả và mở rộng một cách tự tin.",
+  },
+
+  services: {
+    heading: "Dịch vụ toàn diện",
+    cta: "Xem chi tiết dịch vụ",
+    categories: {
+      custom: "Phát triển phần mềm theo yêu cầu",
+      offshore: "Offshore & Outsourcing",
+      ai: "Phát triển AI",
+      qa: "Kiểm thử QA",
+      infrastructure: "Hạ tầng",
+      hire: "Tuyển dụng lập trình viên",
+    },
+    cards: {
+      custom: {
+        title: "Phát triển phần mềm theo yêu cầu",
+        body: "Giải pháp phần mềm toàn trình của chúng tôi mang lại các tính năng được thiết kế riêng, hiệu năng có khả năng mở rộng và mức độ cá nhân hoá hoàn toàn, giúp bạn có được lợi thế cạnh tranh xứng đáng.",
+      },
+      web: {
+        title: "Phát triển ứng dụng web",
+        body: "Chúng tôi áp dụng Agile và thiết kế mobile-first để xây dựng ứng dụng web an toàn, dễ mở rộng, giúp rút ngắn thời gian ra mắt và tạo ra kết quả kinh doanh đo lường được.",
+      },
+      mobile: {
+        title: "Phát triển ứng dụng di động",
+        body: "Phát triển ứng dụng iOS và Android theo hướng native và đa nền tảng. Các công nghệ như Swift, Kotlin, Flutter và React Native đảm bảo hiệu năng cao và mức độ tương tác của người dùng.",
+      },
+      mvp: {
+        title: "Phát triển MVP",
+        body: "Xây dựng MVP và PoC theo các sprint Agile. Chúng tôi dùng Figma, React và Firebase để giảm rủi ro, kiểm chứng thị trường và đẩy nhanh việc gọi vốn.",
+      },
+      legacy: {
+        title: "Hiện đại hoá hệ thống cũ",
+        body: "Giảm tới 40% chi phí bảo trì hệ thống cũ và ra tính năng nhanh gấp 3 lần. Chúng tôi chuyển đổi các ứng dụng lỗi thời sang hạ tầng cloud-native theo từng bước — không di chuyển ồ ạt, không đóng băng lộ trình, không gián đoạn môi trường thật.",
+      },
+      saas: {
+        title: "Phát triển ứng dụng SaaS",
+        body: "Xây dựng nền tảng SaaS multi-tenant an toàn với AWS, Azure và Kubernetes. Agile và DevOps đảm bảo khả năng mở rộng, tuân thủ và tốc độ ra mắt.",
+      },
+      enterprise: {
+        title: "Phát triển phần mềm doanh nghiệp",
+        body: "Dịch vụ phát triển phần mềm doanh nghiệp của chúng tôi được xây dựng trên sự am hiểu toàn diện về đặc thù từng ngành và những tiến bộ công nghệ mới nhất.",
+      },
+      backend: {
+        title: "Phát triển back-end",
+        body: "Xây dựng hệ thống back-end an toàn với Node.js, .NET và Java. Chúng tôi bao quát tích hợp API, hạ tầng đám mây và tối ưu cơ sở dữ liệu với hiệu năng ở mức doanh nghiệp.",
+      },
+      frontend: {
+        title: "Phát triển front-end",
+        body: "Xây dựng giao diện responsive, tuân thủ WCAG với React, Angular và Vue. Chúng tôi mang lại trải nghiệm nhanh và dễ tiếp cận, giúp tăng tương tác và tỷ lệ chuyển đổi.",
+      },
+      integration: {
+        title: "Dịch vụ tích hợp hệ thống",
+        body: "Thúc đẩy tăng trưởng bằng các kết nối an toàn giữa ERP, CRM và ứng dụng đám mây. Xoá bỏ dữ liệu phân tán, tự động hoá quy trình và có được khả năng theo dõi tức thời với API dễ mở rộng cùng hỗ trợ 24/7.",
+      },
+      maintenance: {
+        title: "Bảo trì và hỗ trợ phần mềm",
+        body: "Giám sát 24/7, bảo trì chủ động và nâng cấp tính năng. Các giải pháp của chúng tôi đảm bảo SLA nghiêm ngặt về tính ổn định, bảo mật và hiệu năng dài hạn của hệ thống.",
+      },
+    },
+  },
+
+  ai: {
+    heading: "Đối tác đổi mới AI mang lại tác động kinh doanh thực sự",
+    subtitle:
+      "Từ chiến lược AI đến triển khai đám mây, chúng tôi giúp doanh nghiệp xây dựng hệ thống số an toàn, thông minh và sẵn sàng cho tương lai.",
+    labels: {
+      nlp: ["NLP &", "Tìm kiếm doanh nghiệp"],
+      cv: ["Thị giác máy tính"],
+      genai: ["Kỹ thuật GenAI", "& LLM"],
+      data: ["Kỹ thuật", "dữ liệu"],
+      agentic: ["Hệ thống AI", "tác tử"],
+      erp: ["AI cho ERP & SAP"],
+      predictive: ["Phân tích dự báo &", "Mô hình học máy"],
+      advanced: ["Kỹ thuật AI", "nâng cao"],
+      mlops: ["MLOps & LLMOps"],
+    },
+  },
+
+  rfp: {
+    heading: "Gửi yêu cầu của bạn. Thấy sản phẩm sau 24 giờ.",
+    body: "Không cần bài thuyết trình bán hàng. Các kỹ sư của chúng tôi biến toàn bộ đề bài của bạn thành một nguyên mẫu chạy được chỉ trong một ngày, để bạn đánh giá chúng tôi qua sản phẩm chứ không qua lời giới thiệu.",
+    cta: "Gửi yêu cầu",
+    checklist: [
+      "Nguyên mẫu bấm được của luồng người dùng cốt lõi",
+      "Sơ đồ quy trình mô tả toàn bộ hệ thống từ đầu đến cuối",
+      "Định hướng kiến trúc gồm công nghệ, tích hợp và khả năng mở rộng",
+      "Buổi tư vấn kỹ thuật cùng đội ngũ kỹ sư cấp cao của chúng tôi",
+    ],
+  },
+
+  footer: {
+    heading:
+      "Bạn đã sẵn sàng tăng tốc hành trình phát triển phần mềm của đội ngũ?",
+    subtitle:
+      "Khai phá tiềm năng và đạt được nhiều hơn cùng Wesantika. Bắt đầu ngay hôm nay!",
+    fields: {
+      name: "Họ và tên*",
+      email: "Email*",
+      phone: "Số điện thoại",
+      company: "Công ty*",
+      message: "Chúng tôi có thể giúp gì cho bạn?*",
+    },
+    submit: "Gửi tin nhắn",
+    submitting: "Đang gửi…",
+    sentMessage:
+      "Cảm ơn bạn — tin nhắn đã được gửi. Chúng tôi sẽ liên hệ lại trong thời gian sớm nhất.",
+    previewLink: "Xem email đã gửi",
+    errorGeneric: "Đã xảy ra lỗi. Vui lòng thử lại.",
+    errorNetwork:
+      "Không kết nối được tới máy chủ. Vui lòng kiểm tra đường truyền của bạn.",
+    copyright: "© 2026 Wesantika. All Rights Reserved.",
+    privacy: "Chính sách bảo mật",
+  },
+
+  about: {
+    heroLead:
+      "Chúng tôi giúp các tổ chức biến ý tưởng thành giải pháp số có khả năng mở rộng, thông qua AI, công nghệ đám mây và kỹ thuật phần mềm chuyên sâu. Chúng tôi tin rằng thành công bền vững được xây dựng từ sự đổi mới, quan hệ đối tác đáng tin cậy và sự xuất sắc trong kỹ thuật.",
+    title: "Về chúng tôi",
+    // about.blocks — intentionally untranslated, see the note above.
+    vision: {
+      label: "Tầm nhìn của chúng tôi",
+      statement:
+        "Trở thành đối tác công nghệ mà doanh nghiệp tin tưởng vào những thời điểm đổi mới quan trọng nhất.",
+      body: [
+        "Không phải vì chúng tôi dùng công nghệ mới nhất.",
+        "Mà vì chúng tôi biết cách biến công nghệ thành thành công kinh doanh bền vững.",
+      ],
+    },
+  },
+
+  rail: {
+    email: "Email",
+    telegram: "Telegram",
+    whatsapp: "WhatsApp",
+    line: "LINE",
+  },
+};

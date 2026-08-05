@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens lifted from the Figma file "Wesantika".
+   Nothing here is invented: every value is a measured value from the source.
+   --------------------------------------------------------------------------- */
+@theme {
+  /* --font-app is set by whichever next/font matches the active locale's script:
+     Inter for Latin/Vietnamese, Noto Sans JP / TC / Thai otherwise. Inter has no
+     CJK or Thai glyphs, so this swap is required, not cosmetic. */
+  --font-sans:
+    var(--font-app), ui-sans-serif, system-ui, -apple-system,
+    "Hiragino Kaku Gothic ProN", "Noto Sans JP", "PingFang TC",
+    "Microsoft JhengHei", "Noto Sans Thai", sans-serif;
+
+  /* Brand blues. #0e84fe also appears once in the file — it is #0f84fd with a
+     one-unit copy/paste drift, so it is normalised to the primary here. */
+  --color-brand: #0f84fd;
+  --color-brand-cta: #00aef7; /* nav "Contact Us" pill */
+
+  /* Footer / form navies */
+  --color-navy-950: #041d38; /* copyright bar */
+  --color-navy-900: #062a52; /* footer panel */
+  --color-navy-700: #0b3a68; /* input wells */
+  --color-navy-600: #1a527f; /* footer hairline */
+  --color-field: #afc7dc; /* input placeholder */
+
+  /* Card + button hairline: #000000 at 30% */
+  --color-hairline: rgb(0 0 0 / 0.3);
+
+  /* Type scale — Inter, 7 sizes, line-heights as authored */
+  --text-body: 16px;
+  --text-body--line-height: 19px;
+  --text-lead: 20px;
+  --text-lead--line-height: 24px;
+  --text-h5: 24px;
+  --text-h5--line-height: 29px;
+  --text-h4: 32px;
+  --text-h4--line-height: 39px;
+  --text-h3: 36px;
+  --text-h3--line-height: 44px;
+  --text-h2: 48px;
+  --text-h2--line-height: 58px;
+  --text-h1: 64px;
+  --text-h1--line-height: 77px;
+
+  /* Radii as authored */
+  --radius-pill-nav: 4px;
+  --radius-field: 6px;
+  --radius-card: 8px;
+  --radius-btn: 14px;
+  --radius-panel: 24px;
+  --radius-hero-panel: 42px;
+}
+
+/* The Figma artboard is 1672px wide. Sections centre on that canvas and fall
+   back to fluid padding below it. */
+@utility canvas {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1672px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #fff;
+    color: #000;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Keyboard focus is not specified in the design; this is the accessible
+     default the file was missing. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

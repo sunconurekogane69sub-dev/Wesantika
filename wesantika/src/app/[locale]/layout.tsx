@@ -1,0 +1,99 @@
+import type { Metadata } from "next";
+import { Inter, Noto_Sans_JP, Noto_Sans_TC, Noto_Sans_Thai } from "next/font/google";
+import { notFound } from "next/navigation";
+import "../globals.css";
+import { getDictionary } from "@/lib/i18n";
+import {
+  DEFAULT_LOCALE,
+  getLocaleDefinition,
+  isLocale,
+  LOCALE_CODES,
+  type FontKey,
+} from "@/lib/i18n/locales";
+
+/**
+ * One CSS variable, four fonts. Only the class for the active locale's script is
+ * applied, so `--font-app` resolves to a font that actually has the glyphs —
+ * Inter covers Latin and Vietnamese but has no CJK or Thai coverage at all.
+ */
+const inter = Inter({
+  subsets: ["latin", "latin-ext", "vietnamese"],
+  weight: ["400", "500", "700"],
+  variable: "--font-app",
+  display: "swap",
+});
+const notoJP = Noto_Sans_JP({
+  weight: ["400", "500", "700"],
+  variable: "--font-app",
+  display: "swap",
+  preload: false,
+});
+const notoTC = Noto_Sans_TC({
+  weight: ["400", "500", "700"],
+  variable: "--font-app",
+  display: "swap",
+  preload: false,
+});
+const notoThai = Noto_Sans_Thai({
+  weight: ["400", "500", "700"],
+  variable: "--font-app",
+  display: "swap",
+  preload: false,
+});
+
+const FONT_CLASS: Record<FontKey, string> = {
+  latin: inter.variable,
+  jp: notoJP.variable,
+  tc: notoTC.variable,
+  thai: notoThai.variable,
+};
+
+export function generateStaticParams() {
+  return LOCALE_CODES.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  const dict = getDictionary(locale);
+
+  return {
+    // hreflang and canonical must be absolute URLs to be honoured by crawlers.
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+    ),
+    title: { default: dict.meta.siteTitle, template: "%s | Wesantika" },
+    description: dict.meta.siteDescription,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        ...Object.fromEntries(LOCALE_CODES.map((code) => [code, `/${code}`])),
+        "x-default": `/${DEFAULT_LOCALE}`,
+      },
+    },
+  };
+}
+
+export default async function LocaleLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+
+  const definition = getLocaleDefinition(locale);
+
+  return (
+    // All five locales are left-to-right; `dir` is where an RTL locale would hook in.
+    <html lang={locale} dir="ltr" className={FONT_CLASS[definition.font]}>
+      <body className="overflow-x-hidden">{children}</body>
+    </html>
+  );
+}

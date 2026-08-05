@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -L --max-time 30 \"https://www.figma.com/api/oembed?url=https://www.figma.com/design/iexSBqWRZILgZ0R6SKKDgr/Wesantika\")",
+      "Bash(echo \"---EXIT:$?---\")",
+      "Bash(curl -s -o /dev/null -w \"files API: %{http_code}\\\\n\" --max-time 30 \"https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr\")",
+      "Bash(curl -s --max-time 30 \"https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr\")",
+      "Bash(curl -s -H 'X-Figma-Token: __CMDSUB_OUTPUT__' --max-time 120 -o /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/nodes-pages.json -w 'http: %{http_code}  bytes: %{size_download}\\\\n' 'https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr/nodes?ids=211:1002,210:1001&depth=2')",
+      "Bash(node -e ' *)",
+      "Bash(curl -s -H 'X-Figma-Token: __CMDSUB_OUTPUT__' --max-time 180 -o /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/file-full.json -w 'full file http: %{http_code}  bytes: %{size_download}\\\\n' https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr)",
+      "Bash(node C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/audit.js C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/file-full.json)",
+      "Bash(curl -s -H 'X-Figma-Token: __CMDSUB_OUTPUT__' --max-time 90 -o /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/imagefills.json -w 'imagefills http: %{http_code}\\\\n' https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr/images)",
+      "Bash(node C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/spec.js C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/file-full.json ai)",
+      "Bash(node C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/spec.js C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/file-full.json rail)",
+      "Bash(mkdir -p '/d/IT\\(Orion\\)/Development/wesantika/public/images' '/d/IT\\(Orion\\)/Development/wesantika/public/icons' '/d/IT\\(Orion\\)/Development/wesantika/src/app' '/d/IT\\(Orion\\)/Development/wesantika/src/components' '/d/IT\\(Orion\\)/Development/wesantika/src/lib')",
+      "Bash(node C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/assets.js C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad)",
+      "Read(//c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/**)",
+      "Bash(npm install *)",
+      "Bash(node *)",
+      "Bash(cp .env.example .env.local)",
+      "Bash(printf 'node_modules\\\\n.next\\\\nout\\\\n.env.local\\\\n.DS_Store\\\\n*.tsbuildinfo\\\\nnext-env.d.ts\\\\n')",
+      "Bash(npx next *)",
+      "Bash(curl -s -X POST http://localhost:3100/api/contact -H 'Content-Type: application/json' -d '{\"name\":\"\",\"email\":\"nope\",\"company\":\"\",\"message\":\"\"}' -w '\\\\nHTTP %{http_code}\\\\n')",
+      "Bash(curl -s -X POST http://localhost:3100/api/contact -H 'Content-Type: application/json' -d '{\"name\":\"Ralph Tester\",\"email\":\"ralph@example.com\",\"phone\":\"+81 90 1234 5678\",\"company\":\"Orion IT\",\"message\":\"Hello from the contact form smoke test.\\\\nSecond line.\"}' -w '\\\\nHTTP %{http_code}\\\\n' --max-time 90)",
+      "Bash(curl -s -o /dev/null -w 'localhost:3100 -> %{http_code}\\\\n' http://localhost:3100/)",
+      "Bash(rm -f src/app/layout.tsx src/app/page.tsx src/app/about/page.tsx)",
+      "Bash(rmdir src/app/about)",
+      "Bash(mkdir -p \"src/app/[locale]/about\")",
+      "Bash(rm -rf .git)",
+      "Bash(rm -f src/middleware.ts)",
+      "Bash(curl -s -X POST http://localhost:3100/api/contact -H 'Content-Type: application/json' -d '{\"name\":\"多言語テスト\",\"email\":\"test@example.com\",\"phone\":\"\",\"company\":\"Orion IT\",\"message\":\"i18n後の疎通確認。\"}' -w '\\\\n  HTTP %{http_code}\\\\n' --max-time 90)",
+      "Bash(curl -s http://localhost:3100/ja)",
+      "Bash(curl -s -o /dev/null -w 'ja page: %{http_code}\\\\n' http://localhost:3100/ja)"
+    ]
+  }
+}
