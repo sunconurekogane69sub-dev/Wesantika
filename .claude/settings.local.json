@@ -30,7 +30,9 @@
       "Bash(rm -f src/middleware.ts)",
       "Bash(curl -s -X POST http://localhost:3100/api/contact -H 'Content-Type: application/json' -d '{\"name\":\"多言語テスト\",\"email\":\"test@example.com\",\"phone\":\"\",\"company\":\"Orion IT\",\"message\":\"i18n後の疎通確認。\"}' -w '\\\\n  HTTP %{http_code}\\\\n' --max-time 90)",
       "Bash(curl -s http://localhost:3100/ja)",
-      "Bash(curl -s -o /dev/null -w 'ja page: %{http_code}\\\\n' http://localhost:3100/ja)"
+      "Bash(curl -s -o /dev/null -w 'ja page: %{http_code}\\\\n' http://localhost:3100/ja)",
+      "Bash(rm -f /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/ci-repro/next-env.d.ts)",
+      "Bash(npm ci *)"
     ]
   }
 }
