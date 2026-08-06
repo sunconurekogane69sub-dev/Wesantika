@@ -222,6 +222,37 @@ export const vi: PartialDictionary = {
     },
   },
 
+  // UI translated; article copy is sample content and falls back to English.
+  newsroom: {
+    metaTitle: "Tin tức",
+    metaDescription: "Thông báo, cột mốc và tin hợp tác từ Wesantika.",
+    heroTitle: "Tin tức",
+    heroBody:
+      "Thông báo và tin tức từ đội ngũ xây dựng phần mềm ứng dụng AI, nền tảng đám mây và hệ thống số.",
+    featuredLabel: "Mới nhất",
+    allCategories: "Tất cả",
+    readMore: "Đọc thông báo",
+    back: "Quay lại Tin tức",
+    empty: "Chưa có thông báo nào trong mục này.",
+    categories: { company: "Công ty", product: "Sản phẩm", partnership: "Hợp tác" },
+  },
+
+  blog: {
+    metaTitle: "Blog",
+    metaDescription:
+      "Ghi chép thực tế về kỹ thuật AI, nền tảng đám mây và việc xây dựng phần mềm cùng đội ngũ phân tán.",
+    heroTitle: "Blog",
+    heroBody:
+      "Ghi chép từ các kỹ sư của chúng tôi về AI ứng dụng, nền tảng đám mây, và điều thực sự diễn ra khi các đội ngũ phân tán cùng xây dựng phần mềm.",
+    featuredLabel: "Nổi bật",
+    allCategories: "Tất cả",
+    readMore: "Đọc bài viết",
+    back: "Quay lại Blog",
+    empty: "Chưa có bài viết nào trong mục này.",
+    readTime: "Đọc {minutes} phút",
+    categories: { engineering: "Kỹ thuật", ai: "AI", design: "Thiết kế", business: "Kinh doanh" },
+  },
+
   rail: {
     email: "Email",
     telegram: "Telegram",

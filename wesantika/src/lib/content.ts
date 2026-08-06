@@ -11,8 +11,8 @@ export const NAV_ITEMS = [
   { id: "solution", href: "/services" },
   { id: "about", href: "/about" },
   { id: "work", href: null }, // not designed yet
-  { id: "newsroom", href: null }, // not designed yet
-  { id: "blog", href: null }, // not designed yet
+  { id: "newsroom", href: "/newsroom" },
+  { id: "blog", href: "/blog" },
 ] as const;
 
 export type NavId = (typeof NAV_ITEMS)[number]["id"];
@@ -126,6 +126,114 @@ export const SERVICE_OFFER_PLACEHOLDERS = 17;
 export const GLOBAL_TEAM_POINTS = ["people", "communication", "collaboration"] as const;
 
 export type GlobalTeamPointId = (typeof GLOBAL_TEAM_POINTS)[number];
+
+/* ---------------------------------------------------------------------------
+   Newsroom and Blog
+
+   These two pages have NO Figma artboard — the file only has the nav entries.
+   Layout and structure are designed here against the existing system, and the
+   entries below are sample content so the pages render meaningfully.
+
+   Everything user-visible lives in the dictionaries keyed by `slug`, so this
+   array is the only thing a CMS would need to replace.
+   --------------------------------------------------------------------------- */
+
+export type Article = {
+  slug: string;
+  /** category id — resolved through the dictionary */
+  category: string;
+  /** ISO date, formatted per locale at render time */
+  date: string;
+  image: string;
+  /** blog only */
+  readMinutes?: number;
+};
+
+export const NEWS_CATEGORIES = ["company", "product", "partnership"] as const;
+export type NewsCategoryId = (typeof NEWS_CATEGORIES)[number];
+
+/** Newest first — the first entry renders as the featured item. */
+export const NEWSROOM_ITEMS: readonly Article[] = [
+  {
+    slug: "tokyo-office",
+    category: "company",
+    date: "2026-07-28",
+    image: "/images/vision-bg.png",
+  },
+  {
+    slug: "cloud-partnership",
+    category: "partnership",
+    date: "2026-07-14",
+    image: "/images/svc-global.png",
+  },
+  {
+    slug: "ai-platform-ga",
+    category: "product",
+    date: "2026-06-30",
+    image: "/images/ai-panel.png",
+  },
+  {
+    slug: "iso-27001",
+    category: "company",
+    date: "2026-06-11",
+    image: "/images/svc-award.png",
+  },
+  {
+    slug: "engineering-team-growth",
+    category: "company",
+    date: "2026-05-22",
+    image: "/images/about-hero.png",
+  },
+];
+
+export const BLOG_CATEGORIES = ["engineering", "ai", "design", "business"] as const;
+export type BlogCategoryId = (typeof BLOG_CATEGORIES)[number];
+
+/** Newest first — the first entry renders as the featured post. */
+export const BLOG_POSTS: readonly Article[] = [
+  {
+    slug: "prototype-in-24-hours",
+    category: "engineering",
+    date: "2026-08-01",
+    image: "/images/rfp-visual.png",
+    readMinutes: 6,
+  },
+  {
+    slug: "llmops-in-production",
+    category: "ai",
+    date: "2026-07-21",
+    image: "/images/ai-panel.png",
+    readMinutes: 9,
+  },
+  {
+    slug: "legacy-without-freezing",
+    category: "engineering",
+    date: "2026-07-08",
+    image: "/images/svc-legacy.jpg",
+    readMinutes: 7,
+  },
+  {
+    slug: "designing-for-five-locales",
+    category: "design",
+    date: "2026-06-24",
+    image: "/images/core-values.png",
+    readMinutes: 5,
+  },
+  {
+    slug: "offshore-teams-mistakes",
+    category: "business",
+    date: "2026-06-09",
+    image: "/images/svc-global.png",
+    readMinutes: 6,
+  },
+  {
+    slug: "retrieval-that-works",
+    category: "ai",
+    date: "2026-05-27",
+    image: "/images/svc-ai.jpg",
+    readMinutes: 8,
+  },
+];
 
 /** About Us narrative blocks — Figma 210:979-994 */
 export const ABOUT_BLOCK_IDS = [

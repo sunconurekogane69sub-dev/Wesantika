@@ -217,6 +217,37 @@ export const zhHantTW: PartialDictionary = {
     },
   },
 
+  // UI translated; article copy is sample content and falls back to English.
+  newsroom: {
+    metaTitle: "最新消息",
+    metaDescription: "Wesantika 的公告、里程碑與合作夥伴消息。",
+    heroTitle: "最新消息",
+    heroBody:
+      "來自打造 AI 軟體、雲端平台與數位系統團隊的公告與最新消息。",
+    featuredLabel: "最新",
+    allCategories: "全部",
+    readMore: "閱讀公告",
+    back: "返回最新消息",
+    empty: "此分類目前尚無公告。",
+    categories: { company: "公司", product: "產品", partnership: "合作夥伴" },
+  },
+
+  blog: {
+    metaTitle: "部落格",
+    metaDescription:
+      "關於 AI 工程、雲端平台，以及與分散團隊一起開發軟體的現場筆記。",
+    heroTitle: "部落格",
+    heroBody:
+      "我們的工程師談應用 AI、雲端平台，以及分散團隊共同開發軟體時真正會發生的事。",
+    featuredLabel: "精選",
+    allCategories: "全部",
+    readMore: "閱讀文章",
+    back: "返回部落格",
+    empty: "此分類目前尚無文章。",
+    readTime: "閱讀約 {minutes} 分鐘",
+    categories: { engineering: "工程", ai: "AI", design: "設計", business: "商業" },
+  },
+
   rail: {
     email: "電子郵件",
     telegram: "Telegram",

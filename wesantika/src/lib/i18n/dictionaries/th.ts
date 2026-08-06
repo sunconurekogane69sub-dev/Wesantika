@@ -219,6 +219,37 @@ export const th: PartialDictionary = {
     },
   },
 
+  // UI translated; article copy is sample content and falls back to English.
+  newsroom: {
+    metaTitle: "ข่าวสาร",
+    metaDescription: "ประกาศ ความคืบหน้า และข่าวความร่วมมือจาก Wesantika",
+    heroTitle: "ข่าวสาร",
+    heroBody:
+      "ประกาศและข่าวสารจากทีมที่สร้างซอฟต์แวร์ที่ขับเคลื่อนด้วย AI แพลตฟอร์มคลาวด์ และระบบดิจิทัล",
+    featuredLabel: "ล่าสุด",
+    allCategories: "ทั้งหมด",
+    readMore: "อ่านประกาศ",
+    back: "กลับไปหน้าข่าวสาร",
+    empty: "ยังไม่มีประกาศในหมวดนี้",
+    categories: { company: "บริษัท", product: "ผลิตภัณฑ์", partnership: "ความร่วมมือ" },
+  },
+
+  blog: {
+    metaTitle: "บล็อก",
+    metaDescription:
+      "บันทึกจากหน้างานเกี่ยวกับวิศวกรรม AI แพลตฟอร์มคลาวด์ และการพัฒนาซอฟต์แวร์ร่วมกับทีมแบบกระจาย",
+    heroTitle: "บล็อก",
+    heroBody:
+      "บันทึกจากวิศวกรของเราเกี่ยวกับ AI ประยุกต์ แพลตฟอร์มคลาวด์ และสิ่งที่เกิดขึ้นจริงเมื่อทีมแบบกระจายสร้างซอฟต์แวร์ร่วมกัน",
+    featuredLabel: "บทความแนะนำ",
+    allCategories: "ทั้งหมด",
+    readMore: "อ่านบทความ",
+    back: "กลับไปหน้าบล็อก",
+    empty: "ยังไม่มีบทความในหมวดนี้",
+    readTime: "อ่าน {minutes} นาที",
+    categories: { engineering: "วิศวกรรม", ai: "AI", design: "ดีไซน์", business: "ธุรกิจ" },
+  },
+
   rail: {
     email: "อีเมล",
     telegram: "Telegram",

@@ -4,11 +4,17 @@ Implementation of the **Top**, **About Us** and **Services** pages from the
 Figma file
 [Wesantika](https://www.figma.com/design/iexSBqWRZILgZ0R6SKKDgr/Wesantika)
 (`file key: iexSBqWRZILgZ0R6SKKDgr`, artboards `211:1002`, `210:1001` and
-`405:2302`), in five languages — 15 statically prerendered pages.
+`405:2302`), plus a **Newsroom** and **Blog** designed here — in five
+languages, 80 statically prerendered pages.
 
 The Services page is reached from the **Solution** nav entry and from the Top
 page's "See Service Details" button; the file has no separate "Services" nav
 item.
+
+> **Newsroom and Blog have no Figma artboard.** The file only contains the nav
+> entries. Their layout, components and sample content are my design, built
+> against the existing system — they need design review in a way the other three
+> pages do not. See *Newsroom and Blog* below.
 
 ## Stack
 
@@ -170,6 +176,54 @@ drawn white/black treatment once 30% of the first viewport has scrolled past
 *Logos* below.
 
 All of these respect `prefers-reduced-motion`.
+
+## Newsroom and Blog
+
+Neither page exists in Figma. Both are built from the system the three designed
+pages establish — same type scale, same brand blue, same card radii and
+hairlines, same hero treatment (full-bleed image, navy scrim, white type at the
+212px inset) at a shorter height suited to a listing page.
+
+**Structure**
+
+| | Newsroom | Blog |
+|---|---|---|
+| Index | `/[locale]/newsroom` | `/[locale]/blog` |
+| Article | `/[locale]/newsroom/[slug]` | `/[locale]/blog/[slug]` |
+| Listing | dated list rows | 3-column card grid |
+| Categories | Company · Product · Partnership | Engineering · AI · Design · Business |
+| Extra meta | — | read time |
+
+Both share `ArticleIndex` (featured entry + category filter + listing) and
+`PageHero`. `variant` picks the reading pattern: announcements read better as a
+dated list, articles as a grid.
+
+**Content**
+
+`NEWSROOM_ITEMS` and `BLOG_POSTS` in `src/lib/content.ts` hold only structure —
+slug, category, ISO date, image, read time. Every string lives in the
+dictionaries keyed by slug, so those two arrays are the only thing a CMS would
+need to replace.
+
+**The 5 news items and 6 posts are sample content that I wrote.** They are
+plausible and on-topic, but they are not real announcements and must be replaced
+before launch. Cover images are reused from the Figma exports rather than
+invented.
+
+Translation follows the pattern already in place: UI, categories and filters are
+translated for all five locales; article titles and excerpts are translated for
+Japanese; article bodies fall back to English everywhere. Translating sample
+copy further would be thrown away with the copy.
+
+**Dates** are formatted server-side with `Intl.DateTimeFormat` and passed to the
+client as strings, so no formatting runs during hydration. Note that Thai
+renders in the Buddhist era by default — `28 กรกฎาคม 2569` for 2026-07-28. That
+is locale-correct; `src/lib/date.ts` documents how to force Gregorian.
+
+**Not built:** pagination (unnecessary at 5–6 entries, and the filter is client
+state rather than a URL param for the same reason), author bylines, related
+articles, RSS, and a sitemap. The last two are worth adding now that there are 80
+URLs.
 
 ## Logos
 
