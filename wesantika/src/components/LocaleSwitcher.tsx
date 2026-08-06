@@ -11,6 +11,9 @@ import {
 } from "@/lib/i18n/locales";
 import { Icon } from "./Icon";
 
+/** White knockout, matching the logo treatment on the transparent nav. */
+const KNOCKOUT = "[filter:brightness(0)_invert(1)]";
+
 /**
  * Replaces the design's static "EN" display (Figma 180:591) with a working
  * control. The chevron there implied a menu that was never designed, so this is
@@ -22,10 +25,13 @@ import { Icon } from "./Icon";
 export function LocaleSwitcher({
   locale,
   label,
+  solid = true,
   className = "",
 }: {
   locale: Locale;
   label: string;
+  /** false = sitting on the transparent nav over the hero, so render in white */
+  solid?: boolean;
   className?: string;
 }) {
   const [open, setOpen] = useState(false);
@@ -63,15 +69,28 @@ export function LocaleSwitcher({
         aria-label={label}
         className="flex h-[26px] cursor-pointer items-center gap-[7px]"
       >
-        <Icon src="/icons/icon-language.svg" width={24} height={24} />
-        <span className="text-[16px] leading-[19px] font-bold whitespace-nowrap text-black">
+        {/* The exported icons carry Material's dark #1c1b1f fill, so they need
+            the same white knockout as the logo on the transparent bar. */}
+        <Icon
+          src="/icons/icon-language.svg"
+          width={24}
+          height={24}
+          className={`transition-[filter] duration-300 ease-out ${solid ? "" : KNOCKOUT}`}
+        />
+        <span
+          className={`text-[16px] leading-[19px] font-bold whitespace-nowrap transition-colors duration-300 ease-out ${
+            solid ? "text-black" : "text-white"
+          }`}
+        >
           {current.short}
         </span>
         <Icon
           src="/icons/icon-chevron.svg"
           width={12}
           height={8}
-          className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`transition-transform duration-200 ${open ? "rotate-180" : ""} ${
+            solid ? "" : KNOCKOUT
+          }`}
         />
       </button>
 

@@ -34,7 +34,8 @@ export function StickyContactRail({ labels }: { labels: Dictionary["rail"] }) {
             href={channel.href}
             {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
             aria-label={label}
-            className="group flex h-[55px] w-auto translate-x-[calc(100%-58px)] items-center rounded-l-full bg-brand pr-[24px] pl-[15px] text-white shadow-[0_2px_10px_rgb(0_0_0/0.15)] transition-transform duration-300 ease-out hover:translate-x-0 focus-visible:translate-x-0"
+            // border-2 is inside the 55px box (border-box), so the cap stays 58px.
+            className="group flex h-[55px] w-auto translate-x-[calc(100%-58px)] items-center rounded-l-full border-2 border-white bg-brand pr-[24px] pl-[15px] text-white shadow-[0_2px_10px_rgb(0_0_0/0.15)] transition-transform duration-300 ease-out hover:translate-x-0 focus-visible:translate-x-0"
           >
             <span className="flex h-[34px] w-[34px] shrink-0 items-center justify-center">
               <Icon

@@ -9,7 +9,8 @@ import { ContactForm } from "./ContactForm";
  */
 export function Footer({ strings }: { strings: Dictionary["footer"] }) {
   return (
-    <footer id="contact" className="w-full">
+    // scroll-mt clears the now-fixed 95px nav when #contact is jumped to.
+    <footer id="contact" className="w-full scroll-mt-[95px]">
       <div className="w-full bg-navy-900">
         <div className="canvas flex flex-col gap-12 px-6 pt-[80px] pb-[100px] xl:flex-row xl:gap-[142px] xl:pt-[156px] xl:pr-[208px] xl:pl-[160px]">
           <div className="xl:mt-[100px] xl:max-w-[636px]">

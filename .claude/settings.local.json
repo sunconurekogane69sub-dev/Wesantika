@@ -32,7 +32,9 @@
       "Bash(curl -s http://localhost:3100/ja)",
       "Bash(curl -s -o /dev/null -w 'ja page: %{http_code}\\\\n' http://localhost:3100/ja)",
       "Bash(rm -f /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/ci-repro/next-env.d.ts)",
-      "Bash(npm ci *)"
+      "Bash(npm ci *)",
+      "Bash(curl -s https://api.github.com/repos/sunconurekogane69sub-dev/Wesantika)",
+      "Bash(curl -s https://api.github.com/repos/sunconurekogane69sub-dev/Wesantika/contents/wesantika)"
     ]
   }
 }
