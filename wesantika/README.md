@@ -249,6 +249,30 @@ A white `brightness(0) invert(1)` knockout was used before this and is gone: the
 original `logo.png` had a fully opaque white background, so the filter produced a
 white rectangle rather than a white logo.
 
+### Icons
+
+| File | Size | Background |
+|---|---|---|
+| `src/app/favicon.ico` | 32×32 | transparent |
+| `src/app/icon.png` | 512×512 | transparent |
+| `src/app/apple-icon.png` | 180×180 | white |
+
+All three are the **W mark only** — the wordmark is illegible at 32px. They are
+generated from the full-resolution logo, not hand-cropped.
+
+Isolating the mark is not a simple vertical cut: the mark's trailing pixel
+squares sit high and reach past the wordmark's first letter, which sits low, so
+the two overlap horizontally. The generator separates them on both axes — the
+wordmark is the only near-black artwork in the file, which gives an exact left
+edge, and its cap height gives the top edge; everything below-and-right of that
+corner is masked away.
+
+`apple-icon.png` is the one with a background: iOS composites transparency onto
+black, which would lose the dark part of the gradient.
+
+`favicon.ico` is a PNG wrapped in an ICO container (supported since IE11) rather
+than a legacy BMP-based icon.
+
 ## Contact form
 
 `src/components/ContactForm.tsx` → `POST /api/contact` → `src/lib/mailer.ts`
