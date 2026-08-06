@@ -160,6 +160,63 @@ export const zhHantTW: PartialDictionary = {
     },
   },
 
+  servicesPage: {
+    metaTitle: "軟體開發服務",
+    metaDescription:
+      "Wesantika 提供全週期的軟體開發服務，以客製化方案滿足您獨特的業務需求。",
+    hero: {
+      title: "軟體開發服務",
+      body: "在 Wesantika，我們專注於將想法轉化為高品質的軟體產品。我們提供量身打造的軟體開發方案，並以具競爭力的定價策略協助您節省成本。憑藉投入與經驗，我們的做法能加快您的上市速度，讓您在競爭中脫穎而出。",
+      cta: "與我們談談您的需求",
+    },
+    accelerate: {
+      heading: "與 Wesantika 一起加速您的軟體開發旅程",
+      highlights: {
+        ai: "AI 開發服務",
+        custom: "客製化軟體開發",
+      },
+    },
+    offer: {
+      heading: "我們提供的軟體開發服務",
+      subtitle:
+        "Wesantika 提供全週期的軟體開發服務，以客製化方案滿足您獨特的業務需求。",
+      cards: {
+        custom: {
+          title: "客製化軟體開發",
+          body: "我們的端到端軟體方案提供量身打造的功能、可擴展的效能與完整的客製化，讓您取得應有的競爭優勢。",
+        },
+      },
+    },
+    global: {
+      heading: "如同自家團隊的全球工程團隊",
+      intro:
+        "我們的離岸開發模式不只是提供人力。我們建立專屬團隊，與您的工作流程無縫接軌、共享目標，並致力於您的長期成功。",
+      requiresLead: "打造優秀的軟體，需要的不只是技術能力。",
+      requiresLabel: "還需要：",
+      points: {
+        people: "對的人才",
+        communication: "清楚的溝通",
+        collaboration: "順暢的協作",
+      },
+      outro:
+        "我們的全球工程團隊直接融入您的工作流程，在維持內部團隊般的品質與透明度的同時，協助您加速開發。",
+    },
+    why: {
+      heading: "為什麼選擇 Wesantika？",
+      cta: "與我們的專家聯繫",
+      items: [
+        "具成本效益的開發",
+        "快速擴編團隊",
+        "經驗豐富的工程師",
+        "清楚的溝通",
+        "長期的合作關係",
+        "彈性的協作方式",
+        "現代化技術",
+        "可靠的品質與資安",
+      ],
+    },
+  },
+
   rail: {
     email: "電子郵件",
     telegram: "Telegram",

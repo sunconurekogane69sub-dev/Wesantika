@@ -216,6 +216,67 @@ export const en = {
     },
   },
 
+  /** Services page — Figma 405:2302 */
+  servicesPage: {
+    metaTitle: "Software Development Services",
+    metaDescription:
+      "Wesantika delivers full-cycle software development services. Our custom solutions will meet your unique business needs.",
+    hero: {
+      // Figma 405:1998 reads "At Saigon Technology…" — a competitor's name left
+      // in the copy. Corrected here; it still needs fixing in the source file.
+      title: "Software Development Services",
+      body: "At Wesantika, we specialize in transforming ideas into top-notch software products. We offer software development solutions tailored to your needs, leveraging competitive pricing strategies to drive cost savings. With our dedication and experience, our approach accelerates your time-to-market and sets you apart from the competition.",
+      cta: "Let's discuss your needs",
+    },
+    accelerate: {
+      heading: "Accelerate Your Software Development Journey with Wesantika",
+      highlights: {
+        ai: "AI Development Services",
+        custom: "Custom Software Development",
+      },
+    },
+    offer: {
+      heading: "Software Development Services We Offer",
+      subtitle:
+        "Wesantika delivers full-cycle software development services. Our custom solutions will meet your unique business needs.",
+      cards: {
+        custom: {
+          title: "Custom Software Development",
+          body: "Our end-to-end software solution delivers tailored features, scalable performance, and full personalization. You will get the competitive advantage you deserve.",
+        },
+      },
+    },
+    global: {
+      heading: "Global Engineering Teams That Feel Like Your Own",
+      intro:
+        "Our offshore development model goes beyond providing resources. We build dedicated teams that integrate seamlessly with your workflow, share your goals, and are committed to your long-term success.",
+      requiresLead: "Building great software requires more than technical expertise.",
+      requiresLabel: "It requires :",
+      points: {
+        people: "The right people",
+        communication: "Clear Communication",
+        // Figma 405:2292 reads "Colloboration" — corrected here.
+        collaboration: "Seamless Collaboration",
+      },
+      outro:
+        "Our global engineering teams integrate directly into your workflow, helping you accelerate development while maintaining the quality and transparency of an in-house team.",
+    },
+    why: {
+      heading: "Why Choose Wesantika?",
+      cta: "Get in Touch with Our Experts",
+      items: [
+        "Cost-Effective Development",
+        "Quick Team Expansion",
+        "Skilled Engineers",
+        "Clear Communication",
+        "Long-Term Partnership",
+        "Flexible Collaboration",
+        "Modern Technology",
+        "Reliable Quality & Security",
+      ],
+    },
+  },
+
   rail: {
     email: "Email",
     telegram: "Telegram",

@@ -165,6 +165,63 @@ export const vi: PartialDictionary = {
     },
   },
 
+  servicesPage: {
+    metaTitle: "Dịch vụ phát triển phần mềm",
+    metaDescription:
+      "Wesantika cung cấp dịch vụ phát triển phần mềm trọn vòng đời, với các giải pháp riêng đáp ứng nhu cầu đặc thù của doanh nghiệp bạn.",
+    hero: {
+      title: "Dịch vụ phát triển phần mềm",
+      body: "Tại Wesantika, chúng tôi chuyên biến ý tưởng thành những sản phẩm phần mềm chất lượng cao. Chúng tôi cung cấp các giải pháp phát triển phần mềm được thiết kế theo nhu cầu của bạn, cùng chiến lược giá cạnh tranh giúp tiết kiệm chi phí. Với sự tận tâm và kinh nghiệm, cách làm của chúng tôi rút ngắn thời gian ra thị trường và giúp bạn khác biệt so với đối thủ.",
+      cta: "Trao đổi về nhu cầu của bạn",
+    },
+    accelerate: {
+      heading: "Tăng tốc hành trình phát triển phần mềm cùng Wesantika",
+      highlights: {
+        ai: "Dịch vụ phát triển AI",
+        custom: "Phát triển phần mềm theo yêu cầu",
+      },
+    },
+    offer: {
+      heading: "Các dịch vụ phát triển phần mềm của chúng tôi",
+      subtitle:
+        "Wesantika cung cấp dịch vụ phát triển phần mềm trọn vòng đời, với các giải pháp riêng đáp ứng nhu cầu đặc thù của doanh nghiệp bạn.",
+      cards: {
+        custom: {
+          title: "Phát triển phần mềm theo yêu cầu",
+          body: "Giải pháp phần mềm toàn trình của chúng tôi mang lại các tính năng được thiết kế riêng, hiệu năng có khả năng mở rộng và mức độ cá nhân hoá hoàn toàn, giúp bạn có được lợi thế cạnh tranh xứng đáng.",
+        },
+      },
+    },
+    global: {
+      heading: "Đội ngũ kỹ sư toàn cầu như chính đội ngũ của bạn",
+      intro:
+        "Mô hình phát triển offshore của chúng tôi không chỉ dừng ở việc cung cấp nhân lực. Chúng tôi xây dựng những đội ngũ chuyên trách hòa nhập liền mạch vào quy trình của bạn, chia sẻ mục tiêu và cam kết với thành công dài hạn của bạn.",
+      requiresLead: "Xây dựng phần mềm xuất sắc cần nhiều hơn năng lực kỹ thuật.",
+      requiresLabel: "Nó còn cần :",
+      points: {
+        people: "Đúng người",
+        communication: "Giao tiếp rõ ràng",
+        collaboration: "Hợp tác liền mạch",
+      },
+      outro:
+        "Đội ngũ kỹ sư toàn cầu của chúng tôi tham gia trực tiếp vào quy trình của bạn, giúp tăng tốc phát triển trong khi vẫn giữ chất lượng và sự minh bạch như một đội ngũ nội bộ.",
+    },
+    why: {
+      heading: "Vì sao chọn Wesantika?",
+      cta: "Liên hệ với chuyên gia của chúng tôi",
+      items: [
+        "Phát triển tối ưu chi phí",
+        "Mở rộng đội ngũ nhanh chóng",
+        "Kỹ sư giàu kinh nghiệm",
+        "Giao tiếp rõ ràng",
+        "Quan hệ đối tác dài hạn",
+        "Hợp tác linh hoạt",
+        "Công nghệ hiện đại",
+        "Chất lượng và bảo mật đáng tin cậy",
+      ],
+    },
+  },
+
   rail: {
     email: "Email",
     telegram: "Telegram",

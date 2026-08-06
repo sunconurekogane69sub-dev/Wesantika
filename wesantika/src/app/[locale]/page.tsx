@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AiProximityPanel } from "@/components/AiProximityPanel";
 import { Footer } from "@/components/Footer";
@@ -84,12 +85,12 @@ export default async function TopPage({
         </div>
 
         <div className="mt-[80px] flex justify-center xl:mt-[130px]">
-          <a
-            href="#contact"
+          <Link
+            href={`/${locale}/services`}
             className="flex h-[48px] min-w-[200px] items-center justify-center rounded-card border border-hairline bg-white px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-black transition-colors hover:border-brand hover:text-brand"
           >
             {t.services.cta}
-          </a>
+          </Link>
         </div>
       </section>
 

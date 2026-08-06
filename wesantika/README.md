@@ -1,9 +1,14 @@
 # Wesantika
 
-Implementation of the **Top** and **About Us** pages from the Figma file
+Implementation of the **Top**, **About Us** and **Services** pages from the
+Figma file
 [Wesantika](https://www.figma.com/design/iexSBqWRZILgZ0R6SKKDgr/Wesantika)
-(`file key: iexSBqWRZILgZ0R6SKKDgr`, artboards `211:1002` and `210:1001`),
-in five languages.
+(`file key: iexSBqWRZILgZ0R6SKKDgr`, artboards `211:1002`, `210:1001` and
+`405:2302`), in five languages — 15 statically prerendered pages.
+
+The Services page is reached from the **Solution** nav entry and from the Top
+page's "See Service Details" button; the file has no separate "Services" nav
+item.
 
 ## Stack
 
@@ -150,7 +155,45 @@ layout predictable across five languages.
 reacts to the cursor — it reads as the section's own label rather than one of the
 capabilities.
 
-Both effects respect `prefers-reduced-motion`.
+**Services card reveal** — `src/components/ServiceOfferCard.tsx`
+
+On hover the card's image fades out and its description fades in over the same
+area. Pure CSS — no client component. `tabIndex` plus `focus-within` gives
+keyboard users the same access, and a tap focuses the card on touch devices,
+where there is no hover at all.
+
+**Nav crossfade** — `src/components/Nav.tsx`
+
+The bar starts transparent over the hero with white type and crosses to the
+drawn white/black treatment once 30% of the first viewport has scrolled past
+(`SOLID_AT`). Two logo files crossfade rather than one being filtered: see
+*Logos* below.
+
+All of these respect `prefers-reduced-motion`.
+
+## Logos
+
+Two assets, crossfaded by the nav:
+
+| File | Used when | Wordmark | W mark |
+|---|---|---|---|
+| `logo.png` | bar is solid white | `#000117` | `#0067FF → #00B9FF` |
+| `logo-bright.png` | bar is transparent over the hero | `#FBFFFF` | `#00BAFF → #6AFFFF` |
+
+Measured against the scrimmed hero (`#094F98`), the bright variant scores
+**3.66:1** on the mark and **8.07:1** on the wordmark — both clear of the 3:1
+minimum for a graphical object. The dark variant scores 1.00:1 on the mark
+against the raw hero, i.e. it is literally the same blue as the background,
+which is why a second asset was needed rather than a background tweak.
+
+Both files are cropped to the tight bounding box of their artwork
+(`aspect 4.065` vs `4.076`, a 0.3% difference), so they sit exactly on top of
+one another during the crossfade. `109 x 27` is the size the artwork actually
+occupies inside the design's `130 x 54` slot.
+
+A white `brightness(0) invert(1)` knockout was used before this and is gone: the
+original `logo.png` had a fully opaque white background, so the filter produced a
+white rectangle rather than a white logo.
 
 ## Contact form
 
@@ -265,11 +308,24 @@ rather than links that go nowhere.
 - `sitemap.xml` / `robots.txt` — worth adding now that there are ten localised
   URLs
 
+## Still to do on the Services page
+
+- **Only the first of the 18 grid cards is authored** in the file, as instructed.
+  The other 17 render as the empty cards they are drawn as. Add entries to
+  `SERVICE_OFFER_CARDS` in `src/lib/content.ts` plus copy under
+  `servicesPage.offer.cards` and they fill in; set
+  `SERVICE_OFFER_PLACEHOLDERS` to `0` to hide the empty slots instead.
+- **The three "It requires" icons** (`405:2296`, `405:2297`, `405:2300`) are not
+  exported — Figma's image API was rate limiting throughout. A neutral brand-blue
+  marker stands in for them. They need one export run to replace.
+
 ## Known content issues in the source file
 
-- The **Services** artboard (`250:1107`) still reads *"At **Saigon Technology**,
-  we specialize in…"*. That artboard is not implemented here, so the string has
-  not shipped — but it needs fixing in Figma.
+- The Services hero (`405:1998`) reads *"At **Saigon Technology**, we specialize
+  in…"* — a competitor's name. **Corrected to "Wesantika" in the implementation**
+  so it does not ship, but it still needs fixing in Figma.
+- `405:2292` reads *"Seamless **Colloboration**"*. Corrected to "Collaboration"
+  here; also needs fixing in Figma.
 - Two sections are flat bitmaps with text baked in, set in a non-Inter geometric
   sans: the core-values hexagons (`210:997`, implemented as an image) and a
   "How We Deliver" comparison table (`238:1069`, parked off-canvas and not

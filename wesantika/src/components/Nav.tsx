@@ -11,9 +11,6 @@ import { LocaleSwitcher } from "./LocaleSwitcher";
 /** Fraction of the first viewport that must be scrolled before the bar goes solid. */
 const SOLID_AT = 0.3;
 
-/** White knockout for the logo and the dark Material icons. */
-const KNOCKOUT = "[filter:brightness(0)_invert(1)]";
-
 /**
  * Nav bar — Figma 180:579 / 210:956.
  *
@@ -68,15 +65,34 @@ export function Nav({ locale, nav }: { locale: Locale; nav: Dictionary["nav"] })
       />
 
       <nav className="canvas relative flex h-[95px] items-center px-6 xl:pr-[64px] xl:pl-[52px]">
-        <Link href={href("/")} className="shrink-0" aria-label="Wesantika">
+        {/* Two logos crossfade rather than one being filtered white. Both are
+            cropped to their artwork, and their aspect ratios match to within
+            0.3%, so they sit exactly on top of one another. 109x27 is the size
+            the artwork actually occupies inside the design's 130x54 slot. */}
+        <Link
+          href={href("/")}
+          className="relative block h-[27px] w-[109px] shrink-0"
+          aria-label="Wesantika"
+        >
+          <Image
+            src="/images/logo-bright.png"
+            alt="Wesantika"
+            fill
+            sizes="109px"
+            priority
+            className={`object-contain transition-opacity duration-300 ease-out ${
+              solid ? "opacity-0" : "opacity-100"
+            }`}
+          />
           <Image
             src="/images/logo.png"
-            alt="Wesantika"
-            width={130}
-            height={54}
+            alt=""
+            aria-hidden
+            fill
+            sizes="109px"
             priority
-            className={`h-[54px] w-[130px] object-contain transition-[filter] duration-300 ease-out ${
-              solid ? "" : KNOCKOUT
+            className={`object-contain transition-opacity duration-300 ease-out ${
+              solid ? "opacity-100" : "opacity-0"
             }`}
           />
         </Link>

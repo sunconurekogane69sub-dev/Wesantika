@@ -6,7 +6,9 @@
 
 export const NAV_ITEMS = [
   { id: "top", href: "/" },
-  { id: "solution", href: null }, // not designed yet
+  // "Solution" is the nav entry the Services artboard belongs under; the file
+  // has no separate "Services" nav item.
+  { id: "solution", href: "/services" },
   { id: "about", href: "/about" },
   { id: "work", href: null }, // not designed yet
   { id: "newsroom", href: null }, // not designed yet
@@ -92,6 +94,38 @@ export const AI_LABELS: readonly AiLabel[] = [
 ];
 
 export type AiLabelId = (typeof AI_LABELS)[number]["id"];
+
+/* ---------------------------------------------------------------------------
+   Services page — Figma 405:2302 (1672 x 9390)
+   --------------------------------------------------------------------------- */
+
+/** Two large cards under the "Accelerate…" heading — Figma 405:1983 / 405:1990 */
+export const SERVICE_HIGHLIGHTS = [
+  { id: "ai", image: "/images/svc-ai.jpg", radius: 220 }, // 405:1985, r220
+  { id: "custom", image: "/images/svc-legacy.jpg", radius: 16 }, // 405:1992, r16
+] as const;
+
+export type ServiceHighlightId = (typeof SERVICE_HIGHLIGHTS)[number]["id"];
+
+/**
+ * The "Services We Offer" grid — Figma 405:2322 and siblings.
+ * The artboard draws an 18-slot grid (3 x 6) but only the first card has
+ * content; the rest are empty rectangles. Only the authored one is rendered
+ * with content, and the remaining slots render as the empty cards they are.
+ * Set SERVICE_OFFER_PLACEHOLDERS to 0 to hide them instead.
+ */
+export const SERVICE_OFFER_CARDS = [
+  { id: "custom", image: "/images/svc-card-custom.png" }, // 405:2322
+] as const;
+
+export type ServiceOfferId = (typeof SERVICE_OFFER_CARDS)[number]["id"];
+
+export const SERVICE_OFFER_PLACEHOLDERS = 17;
+
+/** "It requires :" points — Figma 405:2291-2293 */
+export const GLOBAL_TEAM_POINTS = ["people", "communication", "collaboration"] as const;
+
+export type GlobalTeamPointId = (typeof GLOBAL_TEAM_POINTS)[number];
 
 /** About Us narrative blocks — Figma 210:979-994 */
 export const ABOUT_BLOCK_IDS = [
