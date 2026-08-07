@@ -23,7 +23,7 @@ export const vi: PartialDictionary = {
     solution: "Giải pháp",
     about: "Về chúng tôi",
     work: "Dự án",
-    newsroom: "Tin tức",
+    technologies: "Công nghệ",
     blog: "Blog",
     contact: "Liên hệ",
     openMenu: "Mở menu",
@@ -223,19 +223,6 @@ export const vi: PartialDictionary = {
   },
 
   // UI translated; article copy is sample content and falls back to English.
-  newsroom: {
-    metaTitle: "Tin tức",
-    metaDescription: "Thông báo, cột mốc và tin hợp tác từ Wesantika.",
-    heroTitle: "Tin tức",
-    heroBody:
-      "Thông báo và tin tức từ đội ngũ xây dựng phần mềm ứng dụng AI, nền tảng đám mây và hệ thống số.",
-    featuredLabel: "Mới nhất",
-    allCategories: "Tất cả",
-    readMore: "Đọc thông báo",
-    back: "Quay lại Tin tức",
-    empty: "Chưa có thông báo nào trong mục này.",
-    categories: { company: "Công ty", product: "Sản phẩm", partnership: "Hợp tác" },
-  },
 
   blog: {
     metaTitle: "Blog",
@@ -251,6 +238,32 @@ export const vi: PartialDictionary = {
     empty: "Chưa có bài viết nào trong mục này.",
     readTime: "Đọc {minutes} phút",
     categories: { engineering: "Kỹ thuật", ai: "AI", design: "Thiết kế", business: "Kinh doanh" },
+  },
+
+  // `capabilities` (four long paragraphs) falls back to English, as elsewhere.
+  technologies: {
+    metaTitle: "Công nghệ phát triển phần mềm",
+    metaDescription:
+      "Các nhóm công nghệ chúng tôi dùng cho AI, back-end, front-end, phát triển ứng dụng, DevOps và đám mây — nền tảng để xây dựng hệ thống thông minh, dễ mở rộng.",
+    hero: {
+      titleLines: ["Công nghệ phát triển", "phần mềm"],
+      body: "Với kinh nghiệm sâu rộng trong phát triển phần mềm, Wesantika đã xây dựng năng lực công nghệ vững chắc thông qua hợp tác với các đội ngũ đa quốc gia, startup và doanh nghiệp ở nhiều thị trường khác nhau. Chúng tôi liên tục tiếp nhận những tiến bộ mới nhất của AI và kỹ thuật phần mềm hiện đại, kết hợp góc nhìn toàn cầu với năng lực kỹ thuật chuyên sâu để phát triển các giải pháp thông minh, dễ mở rộng và chất lượng cao, đáp ứng những yêu cầu khắt khe của doanh nghiệp và ngành.",
+      cta: "Trao đổi về nhu cầu của bạn",
+    },
+    stacksHeading:
+      "Những nhóm công nghệ phát triển phần mềm hàng đầu, đáp ứng mọi nhu cầu doanh nghiệp",
+    sections: {
+      ai: "Công nghệ cốt lõi cho phát triển AI",
+      backend: "Công nghệ back-end chủ chốt",
+      frontend: "Công nghệ front-end chủ chốt",
+      app: "Phát triển ứng dụng",
+      devops: "DevOps",
+      cloud: "Điện toán đám mây",
+    },
+    rfp: {
+      heading: "Chọn công nghệ của bạn. Thấy sản phẩm sau 24 giờ.",
+      body: "Lộ trình được tăng tốc bằng AI, đi từ đề bài đầy đủ của bạn đến một nguyên mẫu chạy được, do các kỹ sư thành thạo .NET, Java, Python, Node, React và nhiều công nghệ khác thẩm định.",
+    },
   },
 
   rail: {

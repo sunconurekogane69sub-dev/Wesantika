@@ -1,20 +1,20 @@
 # Wesantika
 
-Implementation of the **Top**, **About Us** and **Services** pages from the
-Figma file
+Implementation of the **Top**, **About Us**, **Services** and **Technologies**
+pages from the Figma file
 [Wesantika](https://www.figma.com/design/iexSBqWRZILgZ0R6SKKDgr/Wesantika)
-(`file key: iexSBqWRZILgZ0R6SKKDgr`, artboards `211:1002`, `210:1001` and
-`405:2302`), plus a **Newsroom** and **Blog** designed here — in five
-languages, 80 statically prerendered pages.
+(`file key: iexSBqWRZILgZ0R6SKKDgr`, artboards `211:1002`, `210:1001`,
+`405:2302` and `508:66`), plus a **Blog** designed here — in five languages.
 
 The Services page is reached from the **Solution** nav entry and from the Top
 page's "See Service Details" button; the file has no separate "Services" nav
-item.
+item. Technologies is reached from the **Technologies** nav entry, which
+replaced Newsroom in the file.
 
-> **Newsroom and Blog have no Figma artboard.** The file only contains the nav
-> entries. Their layout, components and sample content are my design, built
-> against the existing system — they need design review in a way the other three
-> pages do not. See *Newsroom and Blog* below.
+> **Blog has no Figma artboard.** The file only contains the nav entry. Its
+> layout, components and sample content are my design, built against the
+> existing system — it needs design review in a way the four designed pages do
+> not. See *Blog* below.
 
 ## Stack
 
@@ -177,38 +177,62 @@ drawn white/black treatment once 30% of the first viewport has scrolled past
 
 All of these respect `prefers-reduced-motion`.
 
-## Newsroom and Blog
+## Technologies
 
-Neither page exists in Figma. Both are built from the system the three designed
+Figma `508:66`. Six stack sections holding **59 logo tiles**, each a 167×88 white
+card at 8px radius with the logo at its authored dimensions — which is what keeps
+marks of very different proportions (140×79 down to 140×23) at a consistent
+optical size.
+
+`src/lib/tech-stack.ts` is **generated from the artboard, not transcribed**: a
+script walks the frame, picks up every image-filled rectangle in the tile band,
+and assigns each to the section heading above it. Regenerating after a Figma
+change is a re-run, not a re-type.
+
+| Section | Logos |
+|---|---|
+| Core Technologies Powering AI Development | 30 |
+| Key Back-end technologies | 8 |
+| Key Front-end technologies | 5 |
+| App development | 5 |
+| DevOps | 8 |
+| Cloud Computing | 3 |
+
+This page carries its own variant of the RFP card ("Pick Your Stack…",
+`507:131`) rather than the shared one.
+
+**Logo alt text is empty.** The tiles are third-party marks and the file gives
+them machine-generated names, so there is nothing to caption them with. The
+section heading carries the meaning. `TechLogo` has room for a `name` field —
+filling those in is the one accessibility gap left on this page.
+
+## Blog
+
+The page does not exist in Figma. It is built from the system the four designed
 pages establish — same type scale, same brand blue, same card radii and
 hairlines, same hero treatment (full-bleed image, navy scrim, white type at the
 212px inset) at a shorter height suited to a listing page.
 
-**Structure**
+| | |
+|---|---|
+| Index | `/[locale]/blog` |
+| Article | `/[locale]/blog/[slug]` |
+| Listing | featured post + 3-column card grid |
+| Categories | Engineering · AI · Design · Business |
 
-| | Newsroom | Blog |
-|---|---|---|
-| Index | `/[locale]/newsroom` | `/[locale]/blog` |
-| Article | `/[locale]/newsroom/[slug]` | `/[locale]/blog/[slug]` |
-| Listing | dated list rows | 3-column card grid |
-| Categories | Company · Product · Partnership | Engineering · AI · Design · Business |
-| Extra meta | — | read time |
-
-Both share `ArticleIndex` (featured entry + category filter + listing) and
-`PageHero`. `variant` picks the reading pattern: announcements read better as a
-dated list, articles as a grid.
+`ArticleIndex` handles the featured entry, category filter and listing; its
+`variant` prop also supports a dated list layout, which is what a newsroom-style
+page would use.
 
 **Content**
 
-`NEWSROOM_ITEMS` and `BLOG_POSTS` in `src/lib/content.ts` hold only structure —
-slug, category, ISO date, image, read time. Every string lives in the
-dictionaries keyed by slug, so those two arrays are the only thing a CMS would
-need to replace.
+`BLOG_POSTS` in `src/lib/content.ts` holds only structure — slug, category, ISO
+date, image, read time. Every string lives in the dictionaries keyed by slug, so
+that array is the only thing a CMS would need to replace.
 
-**The 5 news items and 6 posts are sample content that I wrote.** They are
-plausible and on-topic, but they are not real announcements and must be replaced
-before launch. Cover images are reused from the Figma exports rather than
-invented.
+**The 6 posts are sample content that I wrote.** They are plausible and on-topic,
+but they are not real articles and must be replaced before launch. Cover images
+are reused from the Figma exports rather than invented.
 
 Translation follows the pattern already in place: UI, categories and filters are
 translated for all five locales; article titles and excerpts are translated for
@@ -348,6 +372,12 @@ Everything below is a deliberate change. Nothing else was altered.
    overall footprint.
 6. **Card grid drift.** Column gutters were 55 and 52px, row gaps 65×4 then 68px.
    Now uniform.
+7. **Technologies hero body was white on near-white.** `423:2388` is authored
+   `#ffffff`, but it sits on the pale left side of the hero — measured 1.3:1. The
+   headline directly above it (`423:2389`) is authored black and measures 18:1 on
+   the same ground, so the body is black here too. This hero therefore gets **no
+   scrim**, unlike About Us and Services; the nav's own 140px gradient still
+   carries the white nav type at 5.1:1 over it.
 
 **Judgment calls**
 

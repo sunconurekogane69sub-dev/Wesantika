@@ -23,7 +23,7 @@ export const zhHantTW: PartialDictionary = {
     solution: "解決方案",
     about: "關於我們",
     work: "服務案例",
-    newsroom: "最新消息",
+    technologies: "技術",
     blog: "部落格",
     contact: "聯絡我們",
     openMenu: "開啟選單",
@@ -218,19 +218,6 @@ export const zhHantTW: PartialDictionary = {
   },
 
   // UI translated; article copy is sample content and falls back to English.
-  newsroom: {
-    metaTitle: "最新消息",
-    metaDescription: "Wesantika 的公告、里程碑與合作夥伴消息。",
-    heroTitle: "最新消息",
-    heroBody:
-      "來自打造 AI 軟體、雲端平台與數位系統團隊的公告與最新消息。",
-    featuredLabel: "最新",
-    allCategories: "全部",
-    readMore: "閱讀公告",
-    back: "返回最新消息",
-    empty: "此分類目前尚無公告。",
-    categories: { company: "公司", product: "產品", partnership: "合作夥伴" },
-  },
 
   blog: {
     metaTitle: "部落格",
@@ -246,6 +233,31 @@ export const zhHantTW: PartialDictionary = {
     empty: "此分類目前尚無文章。",
     readTime: "閱讀約 {minutes} 分鐘",
     categories: { engineering: "工程", ai: "AI", design: "設計", business: "商業" },
+  },
+
+  // `capabilities` (four long paragraphs) falls back to English, as elsewhere.
+  technologies: {
+    metaTitle: "軟體開發技術",
+    metaDescription:
+      "涵蓋 AI、後端、前端、應用程式開發、DevOps 與雲端的技術堆疊 — 我們用來打造智慧且可擴展系統的工具。",
+    hero: {
+      titleLines: ["軟體開發", "技術"],
+      body: "憑藉豐富的軟體開發經驗，Wesantika 透過與多國團隊、新創與各類市場企業的合作，累積了深厚的技術專業。我們持續導入 AI 與現代軟體工程的最新進展，結合全球視野與紮實的技術能力，開發出智慧、可擴展且高品質的解決方案，滿足嚴苛的業務與產業需求。",
+      cta: "與我們談談您的需求",
+    },
+    stacksHeading: "滿足各類企業需求的頂尖軟體開發技術堆疊",
+    sections: {
+      ai: "驅動 AI 開發的核心技術",
+      backend: "主要後端技術",
+      frontend: "主要前端技術",
+      app: "應用程式開發",
+      devops: "DevOps",
+      cloud: "雲端運算",
+    },
+    rfp: {
+      heading: "選好你的技術堆疊，24 小時內看到成品。",
+      body: "由精通 .NET、Java、Python、Node、React 等技術的工程師審視，以 AI 加速，從完整需求直達可運作的原型。",
+    },
   },
 
   rail: {

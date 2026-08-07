@@ -11,7 +11,7 @@ export const NAV_ITEMS = [
   { id: "solution", href: "/services" },
   { id: "about", href: "/about" },
   { id: "work", href: null }, // not designed yet
-  { id: "newsroom", href: "/newsroom" },
+  { id: "technologies", href: "/technologies" },
   { id: "blog", href: "/blog" },
 ] as const;
 
@@ -128,11 +128,11 @@ export const GLOBAL_TEAM_POINTS = ["people", "communication", "collaboration"] a
 export type GlobalTeamPointId = (typeof GLOBAL_TEAM_POINTS)[number];
 
 /* ---------------------------------------------------------------------------
-   Newsroom and Blog
+   Blog
 
-   These two pages have NO Figma artboard — the file only has the nav entries.
-   Layout and structure are designed here against the existing system, and the
-   entries below are sample content so the pages render meaningfully.
+   This page has NO Figma artboard — the file only has the nav entry. Layout and
+   structure are designed here against the existing system, and the entries below
+   are sample content so the page renders meaningfully.
 
    Everything user-visible lives in the dictionaries keyed by `slug`, so this
    array is the only thing a CMS would need to replace.
@@ -148,43 +148,6 @@ export type Article = {
   /** blog only */
   readMinutes?: number;
 };
-
-export const NEWS_CATEGORIES = ["company", "product", "partnership"] as const;
-export type NewsCategoryId = (typeof NEWS_CATEGORIES)[number];
-
-/** Newest first — the first entry renders as the featured item. */
-export const NEWSROOM_ITEMS: readonly Article[] = [
-  {
-    slug: "tokyo-office",
-    category: "company",
-    date: "2026-07-28",
-    image: "/images/vision-bg.png",
-  },
-  {
-    slug: "cloud-partnership",
-    category: "partnership",
-    date: "2026-07-14",
-    image: "/images/svc-global.png",
-  },
-  {
-    slug: "ai-platform-ga",
-    category: "product",
-    date: "2026-06-30",
-    image: "/images/ai-panel.png",
-  },
-  {
-    slug: "iso-27001",
-    category: "company",
-    date: "2026-06-11",
-    image: "/images/svc-award.png",
-  },
-  {
-    slug: "engineering-team-growth",
-    category: "company",
-    date: "2026-05-22",
-    image: "/images/about-hero.png",
-  },
-];
 
 export const BLOG_CATEGORIES = ["engineering", "ai", "design", "business"] as const;
 export type BlogCategoryId = (typeof BLOG_CATEGORIES)[number];

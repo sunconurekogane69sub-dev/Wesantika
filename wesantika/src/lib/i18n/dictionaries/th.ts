@@ -23,7 +23,7 @@ export const th: PartialDictionary = {
     solution: "โซลูชัน",
     about: "เกี่ยวกับเรา",
     work: "ผลงานของเรา",
-    newsroom: "ข่าวสาร",
+    technologies: "เทคโนโลยี",
     blog: "บล็อก",
     contact: "ติดต่อเรา",
     openMenu: "เปิดเมนู",
@@ -220,19 +220,6 @@ export const th: PartialDictionary = {
   },
 
   // UI translated; article copy is sample content and falls back to English.
-  newsroom: {
-    metaTitle: "ข่าวสาร",
-    metaDescription: "ประกาศ ความคืบหน้า และข่าวความร่วมมือจาก Wesantika",
-    heroTitle: "ข่าวสาร",
-    heroBody:
-      "ประกาศและข่าวสารจากทีมที่สร้างซอฟต์แวร์ที่ขับเคลื่อนด้วย AI แพลตฟอร์มคลาวด์ และระบบดิจิทัล",
-    featuredLabel: "ล่าสุด",
-    allCategories: "ทั้งหมด",
-    readMore: "อ่านประกาศ",
-    back: "กลับไปหน้าข่าวสาร",
-    empty: "ยังไม่มีประกาศในหมวดนี้",
-    categories: { company: "บริษัท", product: "ผลิตภัณฑ์", partnership: "ความร่วมมือ" },
-  },
 
   blog: {
     metaTitle: "บล็อก",
@@ -248,6 +235,32 @@ export const th: PartialDictionary = {
     empty: "ยังไม่มีบทความในหมวดนี้",
     readTime: "อ่าน {minutes} นาที",
     categories: { engineering: "วิศวกรรม", ai: "AI", design: "ดีไซน์", business: "ธุรกิจ" },
+  },
+
+  // `capabilities` (four long paragraphs) falls back to English, as elsewhere.
+  technologies: {
+    metaTitle: "เทคโนโลยีการพัฒนาซอฟต์แวร์",
+    metaDescription:
+      "เทคโนโลยีที่เราใช้ทั้งด้าน AI, back-end, front-end, การพัฒนาแอป, DevOps และคลาวด์ เพื่อสร้างระบบที่ชาญฉลาดและขยายตัวได้",
+    hero: {
+      titleLines: ["เทคโนโลยีการพัฒนา", "ซอฟต์แวร์"],
+      body: "ด้วยประสบการณ์อันกว้างขวางในการพัฒนาซอฟต์แวร์ Wesantika ได้สั่งสมความเชี่ยวชาญทางเทคโนโลยีผ่านการทำงานร่วมกับทีมข้ามชาติ สตาร์ทอัพ และองค์กรในหลากหลายตลาด เรานำความก้าวหน้าล่าสุดของ AI และวิศวกรรมซอฟต์แวร์สมัยใหม่มาใช้อย่างต่อเนื่อง ผสานมุมมองระดับโลกเข้ากับความสามารถทางเทคนิคเชิงลึก เพื่อพัฒนาโซลูชันที่ชาญฉลาด ขยายตัวได้ และมีคุณภาพสูง ตอบโจทย์ความต้องการทางธุรกิจและอุตสาหกรรมที่เข้มงวด",
+      cta: "ปรึกษาความต้องการของคุณกับเรา",
+    },
+    stacksHeading:
+      "เทคโนโลยีชั้นนำสำหรับการพัฒนาซอฟต์แวร์ ที่ตอบโจทย์ทุกความต้องการทางธุรกิจ",
+    sections: {
+      ai: "เทคโนโลยีหลักที่ขับเคลื่อนการพัฒนา AI",
+      backend: "เทคโนโลยี Back-end หลัก",
+      frontend: "เทคโนโลยี Front-end หลัก",
+      app: "การพัฒนาแอป",
+      devops: "DevOps",
+      cloud: "คลาวด์คอมพิวติง",
+    },
+    rfp: {
+      heading: "เลือกเทคโนโลยีของคุณ แล้วเห็นผลงานใน 24 ชั่วโมง",
+      body: "เส้นทางที่เร่งด้วย AI จากโจทย์ฉบับเต็มของคุณสู่ต้นแบบที่ใช้งานได้จริง ตรวจทานโดยวิศวกรที่เชี่ยวชาญ .NET, Java, Python, Node, React และอื่น ๆ",
+    },
   },
 
   rail: {

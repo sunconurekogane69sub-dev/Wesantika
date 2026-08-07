@@ -37,7 +37,11 @@
       "Bash(curl -s https://api.github.com/repos/sunconurekogane69sub-dev/Wesantika/contents/wesantika)",
       "Bash(node C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/pngprobe.js C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/logo-new.png)",
       "Bash(node C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/pngprobe.js C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/logo-node.png)",
-      "Bash(node C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/pngprobe.js '/d/IT\\(Orion\\)/Development/wesantika/public/images/logo.png')"
+      "Bash(node C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/pngprobe.js '/d/IT\\(Orion\\)/Development/wesantika/public/images/logo.png')",
+      "Bash(curl -s -H 'X-Figma-Token: __CMDSUB_OUTPUT__' --max-time 120 -o /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/fills-v4.json -w 'fills map http %{http_code}\\\\n' https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr/images)",
+      "Bash(awk '/^  \\\\/\\\\*\\\\*$/{s=NR} /^  newsroom: \\\\{$/{print \"newsroom block starts at line\", NR; found=1} found && /^  \\\\},$/{print \"ends at line\", NR; exit}' src/lib/i18n/dictionaries/en.ts)",
+      "Bash(cp src/lib/i18n/dictionaries/en.ts /tmp/en.bak)",
+      "Bash(cp src/lib/i18n/dictionaries/en.ts __TRACKED_VAR__/en.bak)"
     ]
   }
 }

@@ -20,7 +20,7 @@ export const en = {
     solution: "Solution",
     about: "About Us",
     work: "Our Work",
-    newsroom: "Newsroom",
+    technologies: "Technologies",
     blog: "Blog",
     contact: "Contact Us",
     openMenu: "Toggle navigation",
@@ -278,84 +278,9 @@ export const en = {
   },
 
   /**
-   * Newsroom — no Figma artboard exists for this page.
+   * Blog — no Figma artboard exists for this page.
    * The entries below are SAMPLE CONTENT so the layout renders meaningfully.
-   * Replace them (or swap NEWSROOM_ITEMS for a CMS) before launch.
-   */
-  newsroom: {
-    metaTitle: "Newsroom",
-    metaDescription:
-      "Announcements, milestones and partnership news from Wesantika.",
-    heroTitle: "Newsroom",
-    heroBody:
-      "Announcements, milestones and partnership news from the team building AI-powered software, cloud platforms and digital systems.",
-    featuredLabel: "Latest",
-    allCategories: "All",
-    readMore: "Read the announcement",
-    back: "Back to Newsroom",
-    empty: "No announcements in this category yet.",
-    categories: {
-      company: "Company",
-      product: "Product",
-      partnership: "Partnership",
-    },
-    items: {
-      "tokyo-office": {
-        title: "Wesantika opens an engineering office in Tokyo",
-        excerpt:
-          "The new office puts delivery leads in the same timezone as our Japanese clients, with the engineering team continuing to work as one distributed group.",
-        body: [
-          "Wesantika has opened an engineering office in Tokyo. The team there will focus on delivery leadership and client partnership for our growing base of Japanese enterprises, working alongside the wider engineering group rather than as a separate unit.",
-          "The move follows two years of steady work with clients in the region. What consistently mattered most to them was not headcount but overlap — being able to reach the people making technical decisions during their own working day. Placing delivery leads in Tokyo closes that gap without fragmenting the engineering organisation.",
-          "Our operating model is unchanged. Every project still runs as a single dedicated team with shared standards, shared tooling and one definition of done, wherever the individual engineers happen to sit.",
-        ],
-      },
-      "cloud-partnership": {
-        title: "Wesantika becomes a certified cloud delivery partner",
-        excerpt:
-          "Certification covers architecture review, migration and managed operations, and gives our clients a documented path for enterprise cloud workloads.",
-        body: [
-          "Wesantika has completed certification as a cloud delivery partner. The programme covers architecture review, migration planning and managed operations, and required our engineers to demonstrate production experience across each area rather than pass an exam.",
-          "For clients this changes two practical things. Architecture decisions can now be validated against a published reference framework instead of being argued from first principles on every engagement, and migrations come with a documented operational handover rather than an informal one.",
-          "The certification applies to the whole engineering group. It is not a badge held by a specialist team that gets parachuted in at review time.",
-        ],
-      },
-      "ai-platform-ga": {
-        title: "Our AI delivery platform reaches general availability",
-        excerpt:
-          "The internal platform we use to build and operate AI features for clients — evaluation harnesses, prompt versioning and cost tracing — is now available on every engagement.",
-        body: [
-          "The internal platform our teams use to build and operate AI features has reached general availability and is now part of every AI engagement by default.",
-          "It exists because the hard part of shipping AI is rarely the model. It is knowing whether a change made things better, catching a regression before a client does, and being able to explain where the cost went. The platform covers evaluation harnesses, prompt and model versioning, structured tracing and per-feature cost attribution.",
-          "None of it is proprietary lock-in. Everything it produces — evaluation sets, traces, configuration — is exportable, and clients keep it whether or not they continue working with us.",
-        ],
-      },
-      "iso-27001": {
-        title: "Wesantika achieves ISO/IEC 27001 certification",
-        excerpt:
-          "Independent certification of our information security management system, covering engineering, delivery and client data handling.",
-        body: [
-          "Wesantika has been certified against ISO/IEC 27001, the international standard for information security management. The scope covers our engineering practice, delivery operations and the handling of client data.",
-          "Certification formalises controls most of our clients had already audited us on individually: access management, secure development lifecycle, incident response and supplier assurance. Having it independently assessed means enterprise procurement can move faster, and smaller clients get the same standard without having to ask for it.",
-          "The certification is maintained through annual surveillance audits rather than being a one-time exercise.",
-        ],
-      },
-      "engineering-team-growth": {
-        title: "Our engineering team has doubled in twelve months",
-        excerpt:
-          "Growth has been deliberately slow relative to demand, with every hire joining an existing delivery team rather than forming a new one.",
-        body: [
-          "Our engineering team has doubled over the past twelve months. That is slower than demand would have allowed, and the pace was deliberate.",
-          "Every engineer joined an existing delivery team rather than forming a new one. It is the least efficient way to grow on paper and the only way we have found to keep standards from drifting. New engineers inherit the working habits of a team that already has them, instead of a written process nobody has practised.",
-          "The specialisms that grew fastest reflect what clients are asking for: applied AI, data engineering, and platform work supporting both.",
-        ],
-      },
-    },
-  },
-
-  /**
-   * Blog — no Figma artboard exists for this page either.
-   * SAMPLE CONTENT, same caveat as the newsroom.
+   * Replace them (or swap BLOG_POSTS for a CMS) before launch.
    */
   blog: {
     metaTitle: "Blog",
@@ -446,6 +371,41 @@ export const en = {
           "None of this is about model choice. It is data modelling, and it is where the time goes.",
         ],
       },
+    },
+  },
+
+  /** Technologies page — Figma 508:66 */
+  technologies: {
+    metaTitle: "Software Development Technologies",
+    metaDescription:
+      "Our technology stacks across AI, back-end, front-end, app development, DevOps and cloud — the tools we use to build intelligent, scalable systems.",
+    hero: {
+      /** Authored as two explicit lines (423:2389). */
+      titleLines: ["Software Development", "Technologies"],
+      body: "With extensive experience in software development, Wesantika has built strong technological expertise through collaboration with multinational teams, startups, and enterprises across diverse markets. We continuously embrace the latest advancements in AI and modern software engineering, combining global perspectives with deep technical capabilities to develop intelligent, scalable, and high-quality solutions that meet demanding business and industry requirements.",
+      cta: "Let's discuss your needs",
+    },
+    stacksHeading:
+      "Top software development technology stacks to cater the needs of any business",
+    /** Four checked paragraphs — 421:2386 with the ei:check instances. */
+    capabilities: [
+      "Our strong passion for modern technology trends, AI innovation, and industry best practices drives us to deliver top-notch, high-quality, and cost-effective software outsourcing solutions for startups and enterprises worldwide. We possess comprehensive expertise across back-end, front-end, DevOps, cloud, and AI technologies, enabling us to build intelligent, scalable, and production-ready digital solutions.",
+      "Wesantika works with growing startups and enterprises across multiple countries and industries. We have developed hundreds of web and mobile applications for clients worldwide, while increasingly helping businesses leverage AI to automate operations, improve decision-making, and create smarter digital products. Through this experience, we have developed extensive expertise and strong technological capabilities to take on projects of any scale and scope.",
+      "In fact, we love large-scale and complex projects. Our multinational team of highly talented technical architects, senior software engineers, and AI specialists brings diverse technical perspectives and international experience to every project. From AI-powered applications and intelligent automation to enterprise platforms and cloud-native systems, we work closely with clients across different markets and time zones to deliver reliable, scalable solutions.",
+      "All our software engineers hold at least a bachelor's or engineering degree in IT or a related field and have years of practical experience in custom software development. Combined with our strong AI and modern technology capabilities, this allows us to provide reliable engineering teams that can seamlessly support businesses from initial concept through to production and long-term growth.",
+    ],
+    sections: {
+      ai: "Core Technologies Powering AI Development",
+      backend: "Key Back-end technologies",
+      frontend: "Key Front-end technologies",
+      app: "App development",
+      devops: "DevOps",
+      cloud: "Cloud Computing",
+    },
+    /** This page carries its own variant of the RFP card — 507:131/507:132. */
+    rfp: {
+      heading: "Pick Your Stack. See It Built in 24 Hours.",
+      body: "An AI-accelerated path from your full brief to a working prototype, reviewed by engineers fluent in .NET, Java, Python, Node, React, and more.",
     },
   },
 
