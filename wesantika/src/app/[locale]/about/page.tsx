@@ -53,17 +53,16 @@ export default async function AboutPage({
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* Not in the design: the hero's left half is near-white sky, and the
-            white headline scored ~1.3:1 against it. This scrim keeps the
-            intended white type and makes it readable. */}
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-r from-navy-900/75 via-navy-900/45 to-navy-900/10"
-        />
         <Nav locale={locale} nav={t.nav} />
         <div className="canvas relative h-full px-6 xl:px-0">
           <div className="pt-[170px] sm:pt-[220px] xl:pt-[286px] xl:pl-[213px]">
-            <p className="max-w-[1158px] text-[26px] leading-[1.25] font-bold text-white sm:text-[36px] xl:text-[48px] xl:leading-[58px]">
+            {/* Authored white (210:995) over near-white sky — 1.3:1. Ink is
+                chosen by measurement rather than from the file: black scores
+                17.5:1 on this ground, so the navy wash that used to force white
+                to work is gone and the photograph is unobscured. The 800px
+                measure keeps the line off the dark right-hand side of the
+                image. See `node scripts/ink-audit.mjs`. */}
+            <p className="max-w-[800px] text-[26px] leading-[1.25] font-bold text-black sm:text-[36px] xl:text-[48px] xl:leading-[58px]">
               {t.about.heroLead}
             </p>
           </div>
@@ -117,7 +116,9 @@ export default async function AboutPage({
         />
         <div className="canvas relative px-6 py-[80px] xl:h-full xl:px-0 xl:py-0">
           <div className="xl:absolute xl:top-[123px] xl:left-[213px]">
-            <p className="text-[20px] leading-[24px] font-normal text-brand">
+            {/* brand-ink, not brand: 20px normal needs 4.5:1 and #0f84fd only
+                reaches 3.3:1 on this near-white band. */}
+            <p className="text-[20px] leading-[24px] font-normal text-brand-ink">
               {t.about.vision.label}
             </p>
             <span aria-hidden className="mt-[4px] block h-[4px] w-[49px] bg-brand" />

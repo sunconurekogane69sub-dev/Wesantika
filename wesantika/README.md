@@ -249,6 +249,58 @@ state rather than a URL param for the same reason), author bylines, related
 articles, RSS, and a sitemap. The last two are worth adding now that there are 80
 URLs.
 
+## Text colour over imagery
+
+**Ink is decided by measurement, not by the Figma value.** The file has
+specified white type over near-white artwork four times now (`210:995`,
+`250:1106`, `250:1107`, `423:2388`), so rather than correct each one as it
+appears, every text-over-image region is declared and measured:
+
+```bash
+npm run ink        # exits non-zero if any region fails
+```
+
+`scripts/ink-audit.mjs` decodes the real PNGs, composites any scrim per pixel,
+and takes the **worst 10% of samples** rather than the average — an average
+hides a bright patch that swallows part of a headline. It applies WCAG
+thresholds (4.5:1 body, 3:1 large text and graphics) and reports what the
+opposite ink would have scored.
+
+That worst-case view caught something averaging had missed: the Technologies
+hero body ran from the pale left of the photo into the blue right-hand side, so
+**neither** ink cleared the whole line. It is now narrowed to 700px.
+
+**The rule**
+
+| Ground | Ink | Scrim |
+|---|---|---|
+| Pale artwork (About, Services, Technologies heroes; Vision and Global bands) | black | none |
+| Dark artwork (Top hero, AI panel, Blog heroes) | white | only where the artwork is mixed |
+| Brand blue on a light ground | `--color-brand-ink` `#0b62bd` | — |
+
+`#0f84fd` reaches only 3.3:1 on the near-white bands it was used over, which
+fails AA under 24px. `--color-brand-ink` measures 5.4:1 on the same grounds and
+is used for the "Our Vision" label and the Services "It requires" points. The
+primary is unchanged everywhere it sits on a solid fill.
+
+Two navy washes are gone: About Us and Services previously carried one purely to
+force white type to work. Black scores 17.5:1 and 6.1–8.3:1 on those grounds
+unaided, so the photographs are no longer obscured.
+
+**The nav is the exception.** It spans the full width, so it crosses both pale
+and dark parts of every hero, and its type stays white per the brief. Its
+gradient is held flat at 55% across the bar and only fades below it — the
+previous gradient started fading immediately and reached just 27% at the text
+row, which was the actual failure. It now measures 5.1–8.4:1 on all five heroes.
+
+> If you would rather keep the heroes completely clean, **dark nav type needs no
+> gradient at all** — it measures 5.5:1 on the Top hero and 11–12:1 on the other
+> three. Only the Blog heroes would keep white. Say the word and I will switch
+> it; white type was your brief, so it stays until you decide otherwise.
+
+Re-run `npm run ink` after any image or layout change. The regions are declared
+in the CSS coordinates that actually ship, not in Figma coordinates.
+
 ## Logos
 
 Two assets, crossfaded by the nav:

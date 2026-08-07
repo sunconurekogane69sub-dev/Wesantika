@@ -53,13 +53,14 @@ export function Nav({ locale, nav }: { locale: Locale; nav: Dictionary["nav"] })
         solid ? "bg-white" : "bg-transparent"
       }`}
     >
-      {/* Not in the design, but a genuinely transparent bar puts white 16px type
-          over the hero at roughly 3:1 — below AA. This scrim keeps the image
-          visible through the bar while carrying the type to ~6:1, and fades out
-          as the solid state takes over. */}
+      {/* White 16px type needs 4.5:1, and three of the four heroes are near-white
+          where the bar sits. The gradient is held flat at 55% across the bar and
+          only fades below it — a gradient that starts fading immediately reached
+          just 27% at the text row, which was the actual failure. Measured
+          5.1-8.4:1 on every hero by `node scripts/ink-audit.mjs`. */}
       <div
         aria-hidden
-        className={`pointer-events-none absolute inset-x-0 top-0 h-[140px] bg-gradient-to-b from-black/40 to-transparent transition-opacity duration-300 ease-out ${
+        className={`pointer-events-none absolute inset-x-0 top-0 h-[190px] bg-gradient-to-b from-black/55 via-black/55 to-transparent transition-opacity duration-300 ease-out ${
           solid ? "opacity-0" : "opacity-100"
         }`}
       />

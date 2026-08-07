@@ -74,9 +74,11 @@ export default async function TechnologiesPage({
             ))}
           </h1>
           {/* Authored white (423:2388) but sitting on the pale side of the
-              artwork — 1.7:1 there. Black measures 11.97:1 on the same ground,
-              and matches the headline directly above it. */}
-          <p className="mt-[34px] max-w-[886px] text-[16px] leading-[24px] font-normal text-black xl:absolute xl:top-[506px] xl:left-[217px] xl:mt-0 xl:text-[20px]">
+              artwork. Black, and narrowed from the authored 886px: at full
+              width the line ran into the blue right-hand side of the photo,
+              where black drops to 3.8:1. At 700px it stays on the pale ground
+              at 9.6:1. See `node scripts/ink-audit.mjs`. */}
+          <p className="mt-[34px] max-w-[700px] text-[16px] leading-[24px] font-normal text-black xl:absolute xl:top-[506px] xl:left-[217px] xl:mt-0 xl:text-[20px]">
             {tech.hero.body}
           </p>
           <a

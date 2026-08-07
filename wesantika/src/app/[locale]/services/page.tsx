@@ -63,19 +63,17 @@ export default async function ServicesPage({
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* The headline is white in the file and the hero's left side is pale,
-            so it carries the same navy scrim used on the About Us hero. */}
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-r from-navy-900/70 via-navy-900/40 to-navy-900/5"
-        />
         <Nav locale={locale} nav={t.nav} />
         <div className="canvas relative h-full px-6 xl:px-0">
           <div className="pt-[170px] sm:pt-[230px] xl:pt-[356px] xl:pl-[207px]">
-            <h1 className="max-w-[755px] text-[32px] leading-[1.2] font-bold text-white sm:text-[40px] xl:text-[48px] xl:leading-[58px]">
+            {/* Both authored white (250:1106/1107) over the pale left side of the
+                photo — 2.8:1 even with a navy wash over it. Black measures
+                6.1:1 (headline) and 8.3:1 (body) unaided, so the wash is gone.
+                See `node scripts/ink-audit.mjs`. */}
+            <h1 className="max-w-[755px] text-[32px] leading-[1.2] font-bold text-black sm:text-[40px] xl:text-[48px] xl:leading-[58px]">
               {s.hero.title}
             </h1>
-            <p className="mt-[40px] max-w-[748px] text-[16px] leading-[24px] font-normal text-white xl:text-[20px]">
+            <p className="mt-[40px] max-w-[748px] text-[16px] leading-[24px] font-normal text-black xl:text-[20px]">
               {s.hero.body}
             </p>
             <a
@@ -176,7 +174,7 @@ export default async function ServicesPage({
                     aria-hidden
                     className="h-[14px] w-[14px] shrink-0 rounded-[3px] bg-brand"
                   />
-                  <span className="text-[24px] leading-[1.2] font-bold text-brand xl:text-[32px] xl:leading-[39px]">
+                  <span className="text-[24px] leading-[1.2] font-bold text-brand-ink xl:text-[32px] xl:leading-[39px]">
                     {s.global.points[point]}
                   </span>
                 </li>

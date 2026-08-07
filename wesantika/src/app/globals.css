@@ -17,6 +17,11 @@
      one-unit copy/paste drift, so it is normalised to the primary here. */
   --color-brand: #0f84fd;
   --color-brand-cta: #00aef7; /* nav "Contact Us" pill */
+  /* Brand blue for text on light grounds. #0f84fd only reaches 3.3:1 on the
+     near-white artwork it is used over, which fails AA for anything under 24px.
+     This darker step measures 5.4:1 on the same grounds. Verified by
+     `node scripts/ink-audit.mjs`. */
+  --color-brand-ink: #0b62bd;
 
   /* Footer / form navies */
   --color-navy-950: #041d38; /* copyright bar */
