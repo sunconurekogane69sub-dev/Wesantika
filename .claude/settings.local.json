@@ -41,7 +41,8 @@
       "Bash(curl -s -H 'X-Figma-Token: __CMDSUB_OUTPUT__' --max-time 120 -o /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/fills-v4.json -w 'fills map http %{http_code}\\\\n' https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr/images)",
       "Bash(awk '/^  \\\\/\\\\*\\\\*$/{s=NR} /^  newsroom: \\\\{$/{print \"newsroom block starts at line\", NR; found=1} found && /^  \\\\},$/{print \"ends at line\", NR; exit}' src/lib/i18n/dictionaries/en.ts)",
       "Bash(cp src/lib/i18n/dictionaries/en.ts /tmp/en.bak)",
-      "Bash(cp src/lib/i18n/dictionaries/en.ts __TRACKED_VAR__/en.bak)"
+      "Bash(cp src/lib/i18n/dictionaries/en.ts __TRACKED_VAR__/en.bak)",
+      "Bash(curl -s -H 'X-Figma-Token: __CMDSUB_OUTPUT__' --max-time 240 -o /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/file-v5.json -w 'http %{http_code}  %{size_download} bytes\\\\n' https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr)"
     ]
   }
 }

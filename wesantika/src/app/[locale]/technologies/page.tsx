@@ -53,7 +53,7 @@ export default async function TechnologiesPage({
           No scrim over the artwork: this hero is pale on the left and the
           headline is authored black, which measures 18:1 there. The nav's own
           140px gradient still carries the white nav type at 5.1:1. */}
-      <section className="relative h-[560px] sm:h-[700px] xl:h-[892px]">
+      <section className="relative h-[560px] sm:h-[700px] xl:h-[952px]">
         <Image
           src="/images/tech-hero.png"
           alt=""
@@ -62,32 +62,35 @@ export default async function TechnologiesPage({
           sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="canvas relative h-full px-6 xl:px-0">
-          <div className="pt-[160px] sm:pt-[200px] xl:pt-[237px] xl:pl-[210px]">
-            <h1 className="text-[34px] leading-[1.2] font-bold text-black sm:text-[40px] xl:text-[48px] xl:leading-[58px]">
-              {tech.hero.titleLines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </h1>
-            {/* Authored white (423:2388) on a near-white background — ~1.3:1.
-                Black here, matching the headline that sits on the same ground. */}
-            <p className="mt-[34px] max-w-[886px] text-[16px] leading-[24px] font-normal text-black xl:text-[20px]">
-              {tech.hero.body}
-            </p>
-            <a
-              href="#contact"
-              className="mt-[48px] inline-flex h-[46px] min-w-[289px] items-center justify-center rounded-btn bg-brand px-[27px] text-[20px] leading-[24px] font-normal whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[60px]"
-            >
-              {tech.hero.cta}
-            </a>
-          </div>
+        {/* Absolute at xl so the three blocks land on the exact rows the file
+            gives them (333 / 506 / 769) — this hero's contrast depends on where
+            the type sits over the artwork, so the offsets are not decorative. */}
+        <div className="canvas relative h-full px-6 pt-[160px] sm:pt-[200px] xl:px-0 xl:pt-0">
+          <h1 className="text-[34px] leading-[1.2] font-bold text-black sm:text-[40px] xl:absolute xl:top-[333px] xl:left-[217px] xl:max-w-[568px] xl:text-[48px] xl:leading-[58px]">
+            {tech.hero.titleLines.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
+          </h1>
+          {/* Authored white (423:2388) but sitting on the pale side of the
+              artwork — 1.7:1 there. Black measures 11.97:1 on the same ground,
+              and matches the headline directly above it. */}
+          <p className="mt-[34px] max-w-[886px] text-[16px] leading-[24px] font-normal text-black xl:absolute xl:top-[506px] xl:left-[217px] xl:mt-0 xl:text-[20px]">
+            {tech.hero.body}
+          </p>
+          <a
+            href="#contact"
+            className="mt-[48px] inline-flex h-[46px] min-w-[289px] items-center justify-center rounded-btn bg-brand px-[27px] text-[20px] leading-[24px] font-normal whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:absolute xl:top-[769px] xl:left-[210px] xl:mt-0"
+          >
+            {tech.hero.cta}
+          </a>
         </div>
       </section>
 
       {/* ---- Stacks heading + capabilities — 421:2387 / 421:2386 ----- */}
-      <section className="canvas px-6 pt-[70px] xl:px-0 xl:pt-[119px]">
+      {/* The taller hero closes the gap to this heading: 1011 - 952 = 59. */}
+      <section className="canvas px-6 pt-[70px] xl:px-0 xl:pt-[59px]">
         <h2 className="max-w-[652px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:pl-[210px] xl:text-[48px] xl:leading-[58px]">
           {tech.stacksHeading}
         </h2>
