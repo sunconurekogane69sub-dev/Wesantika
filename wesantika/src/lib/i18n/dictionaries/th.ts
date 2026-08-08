@@ -263,6 +263,25 @@ export const th: PartialDictionary = {
     },
   },
 
+  work: {
+    metaTitle: "ผลงานของเรา",
+    metaDescription:
+      "กรณีศึกษาครอบคลุม AI, บล็อกเชน, คลาวด์, ซอฟต์แวร์ตามความต้องการ, ERP และโมบาย — โครงการที่ส่งมอบร่วมกับพาร์ตเนอร์ของเรา",
+    heroTitle: "ผลงานของเรา",
+    heroBody:
+      "โครงการที่เราส่งมอบร่วมกับบริษัทพาร์ตเนอร์ ครอบคลุม AI, บล็อกเชน, คลาวด์, ERP และโมบาย ตั้งแต่ต้นแบบแรกจนถึงการใช้งานจริง",
+    searchPlaceholder: "ค้นหาคำสำคัญ...",
+    searchLabel: "ค้นหากรณีศึกษา",
+    all: "ทั้งหมด",
+    servicesLabel: "กรองตามบริการ",
+    industriesLabel: "กรองตามอุตสาหกรรม",
+    empty: "ยังไม่มีโครงการที่ตรงกับเงื่อนไขนี้",
+    resultCount: "{count} โครงการ",
+    pagination: "หน้า",
+    previous: "ก่อนหน้า",
+    next: "ถัดไป",
+  },
+
   rail: {
     email: "อีเมล",
     telegram: "Telegram",

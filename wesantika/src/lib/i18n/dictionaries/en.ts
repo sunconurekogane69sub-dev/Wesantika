@@ -409,6 +409,30 @@ export const en = {
     },
   },
 
+  /**
+   * Our Work — the case-study browser pasted into Figma as seven paginated
+   * pages. Case-study titles are proper nouns and live in
+   * `src/lib/our-work.ts`, shared across all locales.
+   */
+  work: {
+    metaTitle: "Our Work",
+    metaDescription:
+      "Case studies across AI, blockchain, cloud, custom software, ERP and mobile — projects delivered with our partners.",
+    heroTitle: "Our Work",
+    heroBody:
+      "Projects delivered with our partner companies across AI, blockchain, cloud, ERP and mobile — from first prototype through to production.",
+    searchPlaceholder: "Search keywords...",
+    searchLabel: "Search case studies",
+    all: "All",
+    servicesLabel: "Filter by service",
+    industriesLabel: "Filter by industry",
+    empty: "No projects match those filters yet.",
+    resultCount: "{count} projects",
+    pagination: "Pagination",
+    previous: "Previous",
+    next: "Next",
+  },
+
   rail: {
     email: "Email",
     telegram: "Telegram",

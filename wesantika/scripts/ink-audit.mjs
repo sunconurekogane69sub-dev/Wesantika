@@ -147,6 +147,14 @@ const REGIONS = [
   { page: "Technologies", what: "body", image: "images/tech-hero.png", section: [1672, 952],
     box: [217, 506, 700, 120], ink: "black", scrim: "none", size: 20 },
 
+  // --- Our Work hero (no artboard; built on vision-bg) -------------------
+  { page: "Our Work", what: "nav strip", image: "images/vision-bg.png", section: [1672, 620],
+    box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
+  { page: "Our Work", what: "H1", image: "images/vision-bg.png", section: [1672, 620],
+    box: [212, 250, 760, 90], ink: "black", scrim: "none", size: 64 },
+  { page: "Our Work", what: "body", image: "images/vision-bg.png", section: [1672, 620],
+    box: [212, 358, 700, 60], ink: "black", scrim: "none", size: 20 },
+
   // --- AI Innovation panel (180:752) ------------------------------------
   { page: "Top", what: "AI labels", image: "images/ai-panel.png", section: [1564, 1006],
     box: [130, 100, 1200, 800], ink: "white", scrim: "none", size: 20, bold: true },

@@ -102,7 +102,7 @@ export default async function TechnologiesPage({
         <ul className="mt-[48px] flex flex-col gap-[28px] xl:mt-[79px] xl:pl-[612px]">
           {tech.capabilities.map((paragraph) => (
             <li key={paragraph.slice(0, 40)} className="flex gap-[6px]">
-              <CheckMark className="mt-[-3px] h-[28px] w-[28px] shrink-0 text-brand" />
+              <CheckMark className="mt-[-3px] shrink-0" />
               <p className="max-w-[805px] text-[16px] leading-[24px] font-normal text-black">
                 {paragraph}
               </p>

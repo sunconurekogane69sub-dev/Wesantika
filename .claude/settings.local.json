@@ -44,7 +44,15 @@
       "Bash(cp src/lib/i18n/dictionaries/en.ts __TRACKED_VAR__/en.bak)",
       "Bash(curl -s -H 'X-Figma-Token: __CMDSUB_OUTPUT__' --max-time 240 -o /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/file-v5.json -w 'http %{http_code}  %{size_download} bytes\\\\n' https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr)",
       "Bash(echo \"exit: $?\")",
-      "Bash(python -)"
+      "Bash(python -)",
+      "Bash(curl -s -H 'X-Figma-Token: __CMDSUB_OUTPUT__' --max-time 300 -o /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/file-v6.json -w 'http %{http_code}  %{size_download} bytes\\\\n' https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr)",
+      "Read(//d/IT\\\\\\(Orion\\\\\\)/Development/**)",
+      "Read(//c/Users/ralph/**)",
+      "Bash(curl -s -H 'X-Figma-Token: __CMDSUB_OUTPUT__' --max-time 180 -o /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/fills-v6.json -w 'fills map http %{http_code}\\\\n' https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr/images)",
+      "Bash(industries)",
+      "Bash(node C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/work-gen.js C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad 'D:/IT\\(Orion\\)/Development/wesantika')",
+      "Bash(npm run *)",
+      "Bash(sed -n '/Our Work/,/^$/p')"
     ]
   }
 }

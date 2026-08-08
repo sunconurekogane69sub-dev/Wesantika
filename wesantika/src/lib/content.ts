@@ -10,7 +10,7 @@ export const NAV_ITEMS = [
   // has no separate "Services" nav item.
   { id: "solution", href: "/services" },
   { id: "about", href: "/about" },
-  { id: "work", href: null }, // not designed yet
+  { id: "work", href: "/our-work" },
   { id: "technologies", href: "/technologies" },
   { id: "blog", href: "/blog" },
 ] as const;
@@ -122,10 +122,18 @@ export type ServiceOfferId = (typeof SERVICE_OFFER_CARDS)[number]["id"];
 
 export const SERVICE_OFFER_PLACEHOLDERS = 17;
 
-/** "It requires :" points — Figma 405:2291-2293 */
-export const GLOBAL_TEAM_POINTS = ["people", "communication", "collaboration"] as const;
+/**
+ * "It requires :" points — Figma 405:2291-2293 with their icons.
+ * The communication icon is composed from 405:2298 + 405:2299: the group that
+ * held them (405:2297) was ungrouped in the file and no longer renders as one.
+ */
+export const GLOBAL_TEAM_POINTS = [
+  { id: "people", icon: "/icons/icon-people.svg", w: 54, h: 48 },
+  { id: "communication", icon: "/icons/icon-communication.svg", w: 50, h: 50 },
+  { id: "collaboration", icon: "/icons/icon-collaboration.svg", w: 45, h: 53 },
+] as const;
 
-export type GlobalTeamPointId = (typeof GLOBAL_TEAM_POINTS)[number];
+export type GlobalTeamPointId = (typeof GLOBAL_TEAM_POINTS)[number]["id"];
 
 /* ---------------------------------------------------------------------------
    Blog

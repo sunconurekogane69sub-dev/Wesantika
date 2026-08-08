@@ -206,6 +206,52 @@ them machine-generated names, so there is nothing to caption them with. The
 section heading carries the meaning. `TechLogo` has room for a `name` field —
 filling those in is the one accessibility gap left on this page.
 
+## Our Work
+
+The case-study browser exists in Figma as **seven pasted pages** (`554:855`,
+`554:1457`, `554:1467`, `554:1746`, `555:2084`, `556:2395`, `556:2714`) rather
+than a 1672px artboard — they carry no nav, hero or footer, and their widths run
+1290–1655px. So the browser is reproduced faithfully and the page shell follows
+the system the four designed pages establish.
+
+**83 case studies** across 7 pages of 12, matching the "1 2 3 … 7" control in the
+artboard. `src/lib/our-work.ts` is generated from the artboards, not
+transcribed — one of the seven containers is not a top-level frame, and listing
+them by hand missed 12 cards, so the extractor scans every `Article` frame in the
+document.
+
+| | |
+|---|---|
+| Search | keyword match on the title |
+| Service filters | 12, all populated |
+| Industry filters | 14 defined, **0 populated** |
+| Grid | 3 columns, card 409×333 with a 407×220 image band |
+| Pagination | 12 per page |
+
+**Chips are derived from the data.** A category with nothing behind it is never
+rendered, so no filter can dead-end. That is why the industry band is currently
+absent: the artboard defines fourteen industries but none of the 83 cards carry
+an industry tag. Fill `industries` in `src/lib/our-work.ts` and the band appears
+on its own — no code change.
+
+### Brand unification
+
+Five partner product brands were unified under Wesantika at the client's
+instruction, applied during extraction so the mapping is reproducible:
+
+| Figma | Shipped |
+|---|---|
+| `SotaVision` | Wesantika Vision |
+| `Sotabox` | Wesantika Box |
+| `SotaAgents` | Wesantika Agents |
+| `SOTA Finance` | Wesantika Finance |
+| `Wesang` | Wesantika |
+
+Client and partner company names in the titles (LG Innotek, Decathlon, Q CELLS
+and so on) are left as authored — the client confirmed these are partner
+companies and the projects were jointly developed. Verified: no `Sota`,
+`Saigon` or bare `Wesang` string reaches any rendered page.
+
 ## Blog
 
 The page does not exist in Figma. It is built from the system the four designed

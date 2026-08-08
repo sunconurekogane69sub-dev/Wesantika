@@ -349,6 +349,25 @@ export const ja: PartialDictionary = {
     },
   },
 
+  work: {
+    metaTitle: "実績",
+    metaDescription:
+      "AI、ブロックチェーン、クラウド、カスタムソフトウェア、ERP、モバイルにわたるケーススタディ — パートナー企業との共同開発案件です。",
+    heroTitle: "実績",
+    heroBody:
+      "AI、ブロックチェーン、クラウド、ERP、モバイルの各領域で、パートナー企業とともに手がけた案件です。最初のプロトタイプから本番稼働まで。",
+    searchPlaceholder: "キーワードで検索...",
+    searchLabel: "実績を検索",
+    all: "すべて",
+    servicesLabel: "サービスで絞り込む",
+    industriesLabel: "業界で絞り込む",
+    empty: "この条件に該当する案件はまだありません。",
+    resultCount: "{count}件の案件",
+    pagination: "ページ送り",
+    previous: "前へ",
+    next: "次へ",
+  },
+
   rail: {
     email: "メール",
     telegram: "Telegram",

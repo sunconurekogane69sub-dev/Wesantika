@@ -260,6 +260,25 @@ export const zhHantTW: PartialDictionary = {
     },
   },
 
+  work: {
+    metaTitle: "服務案例",
+    metaDescription:
+      "涵蓋 AI、區塊鏈、雲端、客製化軟體、ERP 與行動應用的案例 — 與合作夥伴共同交付的專案。",
+    heroTitle: "服務案例",
+    heroBody:
+      "與合作夥伴共同交付的專案，涵蓋 AI、區塊鏈、雲端、ERP 與行動應用，從最初的原型到正式上線。",
+    searchPlaceholder: "搜尋關鍵字...",
+    searchLabel: "搜尋案例",
+    all: "全部",
+    servicesLabel: "依服務篩選",
+    industriesLabel: "依產業篩選",
+    empty: "目前沒有符合條件的專案。",
+    resultCount: "{count} 個專案",
+    pagination: "分頁",
+    previous: "上一頁",
+    next: "下一頁",
+  },
+
   rail: {
     email: "電子郵件",
     telegram: "Telegram",

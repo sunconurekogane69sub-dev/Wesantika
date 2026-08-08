@@ -266,6 +266,25 @@ export const vi: PartialDictionary = {
     },
   },
 
+  work: {
+    metaTitle: "Dự án",
+    metaDescription:
+      "Các dự án tiêu biểu về AI, blockchain, đám mây, phần mềm theo yêu cầu, ERP và di động — được triển khai cùng các công ty đối tác.",
+    heroTitle: "Dự án",
+    heroBody:
+      "Những dự án chúng tôi triển khai cùng các công ty đối tác trong lĩnh vực AI, blockchain, đám mây, ERP và di động — từ nguyên mẫu đầu tiên đến khi vận hành thực tế.",
+    searchPlaceholder: "Tìm theo từ khoá...",
+    searchLabel: "Tìm kiếm dự án",
+    all: "Tất cả",
+    servicesLabel: "Lọc theo dịch vụ",
+    industriesLabel: "Lọc theo ngành",
+    empty: "Chưa có dự án nào khớp với bộ lọc này.",
+    resultCount: "{count} dự án",
+    pagination: "Phân trang",
+    previous: "Trước",
+    next: "Sau",
+  },
+
   rail: {
     email: "Email",
     telegram: "Telegram",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
+import { Icon } from "@/components/Icon";
 import { Nav } from "@/components/Nav";
 import {
   ServiceOfferCard,
@@ -166,16 +167,15 @@ export default async function ServicesPage({
 
             <ul className="mt-[24px] flex flex-col gap-[28px]">
               {GLOBAL_TEAM_POINTS.map((point) => (
-                <li key={point} className="flex items-center gap-[24px]">
-                  {/* The three icons (405:2296/2297/2300) could not be exported —
-                      Figma's image API was rate limiting. This is a neutral
-                      stand-in, not the designed artwork. */}
-                  <span
-                    aria-hidden
-                    className="h-[14px] w-[14px] shrink-0 rounded-[3px] bg-brand"
+                <li key={point.id} className="flex items-center gap-[24px]">
+                  <Icon
+                    src={point.icon}
+                    width={point.w}
+                    height={point.h}
+                    className="h-[40px] w-[44px] shrink-0 object-contain xl:h-[50px] xl:w-[54px]"
                   />
                   <span className="text-[24px] leading-[1.2] font-bold text-brand-ink xl:text-[32px] xl:leading-[39px]">
-                    {s.global.points[point]}
+                    {s.global.points[point.id]}
                   </span>
                 </li>
               ))}

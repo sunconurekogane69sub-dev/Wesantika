@@ -101,27 +101,15 @@ export function Nav({ locale, nav }: { locale: Locale; nav: Dictionary["nav"] })
         <ul className="ml-[67px] hidden items-center gap-[73px] xl:flex">
           {NAV_ITEMS.map((item) => (
             <li key={item.id}>
-              {item.href ? (
-                <Link
-                  href={href(item.href)}
-                  className={`text-[16px] leading-[19px] font-bold whitespace-nowrap transition-colors duration-300 ease-out ${
-                    solid ? "text-black hover:text-brand" : "text-white hover:opacity-70"
-                  }`}
-                >
-                  {label(item.id)}
-                </Link>
-              ) : (
-                // Page not designed yet — rendered identically, but inert
-                // rather than a link that goes nowhere.
-                <span
-                  className={`cursor-default text-[16px] leading-[19px] font-bold whitespace-nowrap transition-colors duration-300 ease-out ${
-                    solid ? "text-black" : "text-white"
-                  }`}
-                  title={nav.comingSoon}
-                >
-                  {label(item.id)}
-                </span>
-              )}
+              {/* Every nav destination now exists, so there is no inert state. */}
+              <Link
+                href={href(item.href)}
+                className={`text-[16px] leading-[19px] font-bold whitespace-nowrap transition-colors duration-300 ease-out ${
+                  solid ? "text-black hover:text-brand" : "text-white hover:opacity-70"
+                }`}
+              >
+                {label(item.id)}
+              </Link>
             </li>
           ))}
         </ul>
@@ -168,19 +156,13 @@ export function Nav({ locale, nav }: { locale: Locale; nav: Dictionary["nav"] })
           <ul className="flex flex-col gap-1">
             {NAV_ITEMS.map((item) => (
               <li key={item.id} className="py-2">
-                {item.href ? (
-                  <Link
-                    href={href(item.href)}
-                    onClick={() => setOpen(false)}
-                    className="text-[16px] leading-[19px] font-bold text-black"
-                  >
-                    {label(item.id)}
-                  </Link>
-                ) : (
-                  <span className="text-[16px] leading-[19px] font-bold text-black/40">
-                    {label(item.id)}
-                  </span>
-                )}
+                <Link
+                  href={href(item.href)}
+                  onClick={() => setOpen(false)}
+                  className="text-[16px] leading-[19px] font-bold text-black"
+                >
+                  {label(item.id)}
+                </Link>
               </li>
             ))}
           </ul>
