@@ -698,6 +698,27 @@ filled in from the design file — each needs a real value from Wesantika.
   exported — Figma's image API was rate limiting throughout. A neutral brand-blue
   marker stands in for them. They need one export run to replace.
 
+## Is it actually on the page? `npm run smoke`
+
+```
+npx next start -p 3000 &
+npm run smoke                      # or: npm run smoke -- http://host:port
+```
+
+Every other check here passed on a footer whose **contact form had been
+deleted**. Nothing was broken: `tsc` was clean, `next build` produced 122 pages,
+`ink`, `fit` and `i18n` were green. A component had simply stopped being
+rendered, and not one of those checks looks at whether a component is *there*.
+
+`scripts/smoke.mjs` fetches the built pages and asserts the markers that must be
+present — the form and its five fields, the `main` landmark, the skip-link
+target, the head office, the canonical link, `og:image`, the Organization
+schema — plus, on the Contact page, that the footer form is *absent*, since that
+page carries its own.
+
+It found a second defect on its first run: `/[locale]/services/[topic]` had a
+`<main>` but no `id`, so "Skip to content" did nothing on all 85 of those pages.
+
 ## Does the copy fit? `npm run fit`
 
 A hero is a box with a fixed height, and the copy inside it is five different

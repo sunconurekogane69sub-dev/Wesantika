@@ -9,7 +9,8 @@
     "ink": "node scripts/ink-audit.mjs",
     "i18n": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/i18n-coverage.mjs",
     "og": "node scripts/og-image.mjs",
-    "fit": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/fit-check.mjs"
+    "fit": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/fit-check.mjs",
+    "smoke": "node scripts/smoke.mjs"
   },
   "dependencies": {
     "next": "^16.3.0",

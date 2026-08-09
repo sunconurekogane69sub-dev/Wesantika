@@ -65,7 +65,9 @@ export default async function ServiceDetailPage({
       <StickyContactRail labels={t.rail} />
       <Nav locale={locale} nav={t.nav} alwaysSolid />
 
-      <main className="canvas px-6 pt-[95px] xl:px-0">
+      {/* The id is what the skip link targets. This page had the landmark but
+          not the id, so "Skip to content" did nothing on all 85 of these. */}
+      <main id="main-content" className="canvas px-6 pt-[95px] xl:px-0">
         <div className="mx-auto max-w-[1140px] pt-[56px] xl:pt-[88px]">
           <Link
             href={`/${locale}/services`}

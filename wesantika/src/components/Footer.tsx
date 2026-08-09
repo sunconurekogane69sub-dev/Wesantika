@@ -48,29 +48,34 @@ export function Footer({
               <p className="mt-[14px] text-[16px] leading-[26px] font-normal text-white/80 xl:text-[17px]">
                 {strings.subtitle}
               </p>
+
+              {/* The head office, on every page that carries the footer panel.
+                  A postal address is the ordinary way a B2B visitor checks that
+                  a supplier is a real company in a real place, and it is the one
+                  piece of contact information that was missing everywhere.
+
+                  It belongs in this column, under the pitch — not as a third
+                  grid child, which is where it first landed and which pushed the
+                  form out of the layout entirely.
+
+                  Not translated — see the note in src/lib/content.ts. */}
+              <address className="mt-[24px] block not-italic xl:mt-[28px]">
+                <p className="text-[13px] leading-[16px] font-bold tracking-[0.02em] text-white/70">
+                  {office.heading}
+                </p>
+                <p className="mt-[8px] text-[15px] leading-[24px] font-normal text-white/85">
+                  {HEAD_OFFICE.lines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </p>
+              </address>
             </div>
 
-            {/* The head office, on every page that carries the footer panel.
-                A postal address is the ordinary way a B2B visitor checks that a
-                supplier is a real company in a real place, and it is the one
-                piece of contact information that was missing everywhere.
-
-                Not translated — see the note in src/lib/content.ts. */}
-            <address className="mt-[24px] block not-italic xl:mt-[28px]">
-              <p className="text-[13px] leading-[16px] font-bold tracking-[0.02em] text-white/70">
-                {office.heading}
-              </p>
-              <p className="mt-[8px] text-[15px] leading-[24px] font-normal text-white/85">
-                {HEAD_OFFICE.lines.map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </p>
-            </address>
-          </div>
-
-          <div className="w-full">
+            <div className="w-full">
+              <ContactForm strings={strings} />
+            </div>
           </div>
         </div>
       )}
