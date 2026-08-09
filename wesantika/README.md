@@ -440,6 +440,47 @@ disallowed type (.exe)    -> 415  {"error":"file_type"}
 CRLF injected into a name -> 200  (stripped before it reaches a mail header)
 ```
 
+### Figma image adjustments are not in the export
+
+The modal's background carries adjustments and a crop that live on the **fill**,
+not in the asset:
+
+```
+filters        { exposure .52, contrast .30, saturation .19, highlights .06 }
+imageTransform [[1, 0, 0.0018], [0, 0.48839, 0.45606]]
+```
+
+Downloading the `imageRef` gives the raw 429×630 photo — darker, flatter and
+uncropped. Both are reproduced in CSS from the fill's own numbers: the transform
+says full width and the vertical band from 45.6% to 94.4%, which is `height:
+204.756%` at `top: -93.380%`; the filters become
+`brightness(1.52) contrast(1.3) saturate(1.19)`.
+
+The filter values are Figma's own numbers mapped to their CSS equivalents.
+Figma does not publish its formulas, so this is close rather than exact — **if
+pixel-exactness matters, export the background flattened** (adjustments applied)
+and drop it in; the CSS filter can then come off.
+
+### The heading is two-tone
+
+`572:321` has a base fill of white, which is why it first shipped all-white and
+looked wrong. The colour is actually per-character:
+
+| Characters | Colour | Weight |
+|---|---|---|
+| `Your RFP, reviewed by expertsin` | `#000000` | 600 |
+| `24 hours` | `#ffffff` | 800 |
+
+Measured on the adjusted background, black scores 5.4–6.1:1 across the heading
+and the white emphasis 3.4:1, which clears AA for 32px/800. The body and
+checklist are black at 7.6:1 and 10.8:1; the form sits over the deep blue on the
+right, where white scores 6.9:1.
+
+`heading` is split into `lead` / `emphasis` / `trail` so each locale decides
+where the emphasis falls — Japanese needs it mid-sentence.
+
+The source reads `expertsin` (a missing space). Corrected to `experts in`.
+
 ### One trap worth knowing about
 
 `.env.example` declares every key with a blank value and `.env.local` is copied

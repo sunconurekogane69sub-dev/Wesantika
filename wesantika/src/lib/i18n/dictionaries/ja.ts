@@ -371,7 +371,11 @@ export const ja: PartialDictionary = {
   rfpModal: {
     open: "RFPを送る",
     close: "閉じる",
-    headingLines: ["専門家が24時間以内に", "あなたのRFPをレビューします"],
+    heading: {
+      lead: "あなたのRFPを専門家が",
+      emphasis: "24時間以内に",
+      trail: "レビューします",
+    },
     bodyLines: [
       "要件書から動くプロトタイプまで、AIで加速。",
       "営業ではなく、エンジニアが対応します。",

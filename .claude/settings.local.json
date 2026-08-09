@@ -58,7 +58,8 @@
       "Bash(curl -s -X POST https://challenges.cloudflare.com/turnstile/v0/siteverify -d secret=1x0000000000000000000000000000000AA -d response=XXXX.DUMMY.TOKEN.XXXX --max-time 60)",
       "Bash(curl -s -X POST https://challenges.cloudflare.com/turnstile/v0/siteverify -d secret=1x0000000000000000000000000000000AA -d response=dummy --max-time 60)",
       "Bash(curl -s -X POST http://localhost:3100/api/rfp -F 'name=A' -F 'phone=1' -F 'company=B' -F 'email=a@b.co' -F 'brief=x' -w '\\\\n  HTTP %{http_code}\\\\n' --max-time 60)",
-      "Bash(curl -s -X POST http://localhost:3100/api/rfp -F turnstileToken=XXXX.DUMMY.TOKEN.XXXX -F 'name=Ralph Tester' -F 'phone=+81 90 1234 5678' -F 'company=Orion IT' -F email=ralph@example.com -F 'brief=We need an AI-assisted document pipeline. Two-week discovery, then a pilot.' -w '\\\\n  HTTP %{http_code}\\\\n' --max-time 120)"
+      "Bash(curl -s -X POST http://localhost:3100/api/rfp -F turnstileToken=XXXX.DUMMY.TOKEN.XXXX -F 'name=Ralph Tester' -F 'phone=+81 90 1234 5678' -F 'company=Orion IT' -F email=ralph@example.com -F 'brief=We need an AI-assisted document pipeline. Two-week discovery, then a pilot.' -w '\\\\n  HTTP %{http_code}\\\\n' --max-time 120)",
+      "Bash(curl -s -H 'X-Figma-Token: __CMDSUB_OUTPUT__' --max-time 300 -o /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/file-v8.json -w 'http %{http_code}  %{size_download} bytes\\\\n' https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr?ids=572:98,572:323)"
     ]
   }
 }

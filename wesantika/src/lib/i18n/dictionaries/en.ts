@@ -437,7 +437,12 @@ export const en = {
   rfpModal: {
     open: "Send Your RFP",
     close: "Close",
-    headingLines: ["Your RFP, reviewed by experts", "in 24 hours"],
+    // 572:321 reads "expertsin" — a missing space in the source. Corrected.
+    heading: {
+      lead: "Your RFP, reviewed by experts in",
+      emphasis: "24 hours",
+      trail: "",
+    },
     bodyLines: [
       "AI-accelerated path from brief to working",
       "prototype. Engineers, not sales.",

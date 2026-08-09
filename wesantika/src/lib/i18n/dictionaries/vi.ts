@@ -288,7 +288,11 @@ export const vi: PartialDictionary = {
   rfpModal: {
     open: "Gửi yêu cầu",
     close: "Đóng",
-    headingLines: ["Yêu cầu của bạn, được chuyên gia xem xét", "trong 24 giờ"],
+    heading: {
+      lead: "Yêu cầu của bạn, được chuyên gia xem xét trong",
+      emphasis: "24 giờ",
+      trail: "",
+    },
     bodyLines: [
       "Lộ trình tăng tốc bằng AI, từ đề bài đến nguyên mẫu chạy được.",
       "Làm việc với kỹ sư, không phải nhân viên bán hàng.",

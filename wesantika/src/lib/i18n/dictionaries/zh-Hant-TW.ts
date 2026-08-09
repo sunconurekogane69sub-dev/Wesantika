@@ -282,7 +282,11 @@ export const zhHantTW: PartialDictionary = {
   rfpModal: {
     open: "寄出需求規格書",
     close: "關閉",
-    headingLines: ["您的需求規格書，由專家審視", "24 小時內回覆"],
+    heading: {
+      lead: "您的需求規格書，由專家在",
+      emphasis: "24 小時內",
+      trail: "完成審視",
+    },
     bodyLines: [
       "以 AI 加速，從需求直達可運作的原型。",
       "由工程師對應，而非業務。",

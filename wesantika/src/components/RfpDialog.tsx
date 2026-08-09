@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Icon } from "./Icon";
 
@@ -33,7 +32,12 @@ declare global {
 export type RfpCopy = {
   open: string;
   close: string;
-  headingLines: string[];
+  /**
+   * The heading is two-tone in the file (572:321 character overrides): the run
+   * around the emphasis is black at weight 600, the emphasis itself white at
+   * weight 800. Split so each locale chooses where the emphasis falls.
+   */
+  heading: { lead: string; emphasis: string; trail: string };
   bodyLines: string[];
   checklist: string[];
   fields: {
@@ -254,14 +258,33 @@ function Modal({ copy, onClose }: { copy: RfpCopy; onClose: () => void }) {
         aria-labelledby={titleId}
         className="relative my-auto w-full max-w-[976px] overflow-hidden rounded-[29px] bg-navy-900"
       >
-        <Image
-          src="/images/rfp-modal-bg.jpg"
-          alt=""
-          fill
-          sizes="976px"
-          className="object-cover"
-          priority
-        />
+        {/* Figma's image adjustments are NOT baked into the exported asset, and
+            the fill is cropped. Both are reproduced here from the fill's own
+            numbers (572:98):
+
+              imageTransform [[1,0,0.0018],[0,0.48839,0.45606]]
+                -> full width, and the vertical band from 45.6% to 94.4%
+                   stretched over the panel, hence height 204.756% at -93.380%.
+              filters {exposure .52, contrast .30, saturation .19}
+                -> the CSS equivalents below.
+
+            Without these the raw asset renders far darker and flatter than the
+            design, which is what made the white heading look wrong. */}
+        <div aria-hidden className="absolute inset-0 overflow-hidden rounded-[29px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/rfp-modal-bg.jpg"
+            alt=""
+            className="absolute max-w-none"
+            style={{
+              left: "-0.183%",
+              top: "-93.380%",
+              width: "100%",
+              height: "204.756%",
+              filter: "brightness(1.52) contrast(1.3) saturate(1.19)",
+            }}
+          />
+        </div>
 
         <button
           type="button"
@@ -275,15 +298,16 @@ function Modal({ copy, onClose }: { copy: RfpCopy; onClose: () => void }) {
         <div className="relative grid gap-[28px] p-[28px] sm:p-[40px] lg:grid-cols-[439px_389px] lg:gap-[42px] lg:px-[49px] lg:py-[52px]">
           {/* ---- pitch ------------------------------------------------ */}
           <div className="lg:pt-[45px]">
+            {/* Black on this bright-blue ground measures 5.4-6.1:1; the white
+                emphasis is 3.4:1, which clears AA for 32px/800. Measured off the
+                Figma render of 572:98. */}
             <h2
               id={titleId}
-              className="text-[26px] leading-[1.2] font-semibold text-white sm:text-[32px] sm:leading-[38px]"
+              className="max-w-[439px] text-[26px] leading-[1.2] font-semibold text-black sm:text-[32px] sm:leading-[38px]"
             >
-              {copy.headingLines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
+              {copy.heading.lead}{" "}
+              <span className="font-extrabold text-white">{copy.heading.emphasis}</span>
+              {copy.heading.trail ? <> {copy.heading.trail}</> : null}
             </h2>
 
             <p className="mt-[24px] text-[16px] leading-[24px] font-bold text-black sm:text-[18px] sm:leading-[27px]">
