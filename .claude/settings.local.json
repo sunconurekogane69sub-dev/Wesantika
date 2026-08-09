@@ -98,7 +98,8 @@
       "Bash(curl -s \"http://localhost:3114/ja/contact\")",
       "Bash(curl -s \"http://localhost:3114/sitemap.xml\")",
       "Bash(curl -s \"http://localhost:3115/en/about\")",
-      "Bash(grep -E \"Generating static|Route|/\\\\[locale\\\\]\")"
+      "Bash(grep -E \"Generating static|Route|/\\\\[locale\\\\]\")",
+      "Bash(awk '{print \"  svc-award.png \"$5\" bytes\"}')"
     ]
   }
 }

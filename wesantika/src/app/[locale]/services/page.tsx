@@ -237,43 +237,62 @@ export default async function ServicesPage({
         </div>
       </section>
 
-      {/* ---- Why Choose Wesantika — 405:1972-1980 -------------------- */}
-      <section className="mt-[80px] w-full bg-[#fafaf9] xl:mt-[136px]">
-        <div className="canvas relative px-6 py-[80px] xl:px-0 xl:py-0 xl:pt-[103px] xl:pb-[104px]">
-          <h2 className="text-[36px] leading-[1.15] font-bold text-black sm:text-[48px] xl:pl-[150px] xl:text-[64px] xl:leading-[77px]">
+      {/*
+        ---- Why Choose Wesantika — 405:1972-1980 ---------------------
+
+        The photograph is gone on request, and it turned out to be the smaller
+        half of the problem. Four other things went with it:
+
+          - Eight claims set at **40px bold** in a single column was a wall of
+            display type where a scannable list belonged. 17px in a grid now,
+            and the section is shorter for it.
+          - The tick was the literal character **✔**, so its shape came from
+            whatever font the reader happens to have, and it lands on a dingbat
+            face on Windows. `icon-check.svg` had been in /public all along.
+          - The ground was `#fafaf9`, a *warm* grey, on a site that is cool blue
+            throughout — and an ad-hoc hex besides. It is the brand tint now.
+          - The heading indented 150px and the list 207px, in a section sitting
+            on the site's 212px gutter. Both numbers were arbitrary.
+
+        Losing the image also removes the reason the list was one narrow column.
+        Four across on two rows fills the width the photograph freed, and every
+        claim is legible at a glance rather than something to scroll past.
+      */}
+      <section className="mt-[80px] w-full bg-brand-tint xl:mt-[120px]">
+        <div className="canvas px-6 py-[72px] xl:px-[212px] xl:py-[104px]">
+          <h2 className="text-[32px] leading-[1.15] font-bold text-black sm:text-[40px] xl:text-[48px] xl:leading-[58px]">
             {s.why.heading}
           </h2>
 
-          <div className="mt-[40px] flex flex-col gap-[48px] xl:mt-[56px] xl:flex-row xl:items-start xl:gap-0 xl:pl-[207px]">
-            <ul className="flex flex-col gap-0 xl:w-[643px] xl:shrink-0">
-              {s.why.items.map((item) => (
-                <li
-                  key={item}
-                  className="flex gap-[12px] text-[24px] leading-[36px] font-bold text-black sm:text-[32px] xl:text-[40px] xl:leading-[48px]"
-                >
-                  <span aria-hidden className="text-brand">
-                    ✔
-                  </span>
+          <ul className="mt-[36px] grid gap-[16px] sm:grid-cols-2 xl:mt-[48px] xl:grid-cols-4">
+            {s.why.items.map((item) => (
+              <li
+                key={item}
+                className="flex flex-col gap-[16px] rounded-[16px] bg-white p-[24px] transition-shadow duration-200 hover:shadow-[0_10px_28px_-10px_rgb(6_42_82/0.22)]"
+              >
+                {/* Brand disc, white glyph — the same treatment as the Contact
+                    page's channel list and the sticky rail, so an icon means
+                    the same thing everywhere. The blue original measures only
+                    3.34:1 on a tint disc; white on brand-btn is 6.01:1. */}
+                <span className="flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full bg-brand-btn">
+                  <Icon
+                    src="/icons/icon-check-white.svg"
+                    width={22}
+                    height={22}
+                    className="h-[22px] w-[22px]"
+                  />
+                </span>
+                <span className="text-[17px] leading-[26px] font-bold text-black">
                   {item}
-                </li>
-              ))}
-            </ul>
+                </span>
+              </li>
+            ))}
+          </ul>
 
-            <div className="relative aspect-square w-full max-w-[693px] overflow-hidden rounded-[53px] xl:w-[693px] xl:shrink-0">
-              <Image
-                src="/images/svc-award.png"
-                alt=""
-                fill
-                sizes="(max-width: 1280px) 100vw, 693px"
-                className="object-cover"
-              />
-            </div>
-          </div>
-
-          <div className="mt-[56px] flex justify-center xl:mt-[110px]">
+          <div className="mt-[48px] flex justify-center xl:mt-[64px]">
             <Link
               href={`/${locale}/contact`}
-              className="inline-flex h-[46px] min-w-[300px] items-center justify-center rounded-btn border border-hairline bg-brand-btn px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
+              className="inline-flex h-[48px] min-w-[280px] items-center justify-center rounded-btn bg-brand-btn px-[28px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
             >
               {s.why.cta}
             </Link>
