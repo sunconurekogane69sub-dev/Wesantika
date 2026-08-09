@@ -118,7 +118,7 @@ export default async function ServiceDetailPage({
         </div>
       </main>
 
-      <Footer strings={t.footer} />
+      <Footer strings={t.footer} office={t.contact.office} />
     </>
   );
 }

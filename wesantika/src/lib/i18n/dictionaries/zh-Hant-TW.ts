@@ -183,6 +183,10 @@ export const zhHantTW: PartialDictionary = {
       heading: "或直接聯絡我們",
       body: "您從哪個管道開始，我們就在那個管道回覆。",
     },
+    office: {
+      heading: "總部地址",
+      mapLink: "在 Google 地圖開啟",
+    },
     next: {
       heading: "接下來會發生什麼",
       steps: {

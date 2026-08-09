@@ -6,7 +6,12 @@ import { Icon } from "@/components/Icon";
 import { Nav } from "@/components/Nav";
 import { PageHero } from "@/components/PageHero";
 import { RfpDialog } from "@/components/RfpDialog";
-import { CONTACT_CHANNELS, CONTACT_STEP_IDS } from "@/lib/content";
+import {
+  CONTACT_CHANNELS,
+  CONTACT_STEP_IDS,
+  HEAD_OFFICE,
+  HEAD_OFFICE_MAP_URL,
+} from "@/lib/content";
 import { getDictionary } from "@/lib/i18n";
 import { isLocale } from "@/lib/i18n/locales";
 import { socialMetadata } from "@/lib/metadata";
@@ -181,7 +186,41 @@ export default async function ContactPage({
                 })}
               </ul>
 
-              <div className="mt-[32px] rounded-[12px] bg-brand-tint p-[24px]">
+              {/*
+                The head office sits with the other ways to reach the company,
+                not in a separate band — someone on this page is looking for a
+                way in, and a postal address is one.
+
+                `<address>` is the right element and it is not a styling choice:
+                it tells assistive tech that this is contact information for the
+                page, which a `<div>` of three lines does not.
+
+                The address itself is deliberately identical in all five locales
+                — see the note in src/lib/content.ts.
+              */}
+              <address className="mt-[32px] block rounded-[12px] border border-hairline bg-white p-[24px] not-italic">
+                <h3 className="text-[18px] leading-[24px] font-bold text-black">
+                  {c.office.heading}
+                </h3>
+                <p className="mt-[10px] text-[15px] leading-[24px] text-black/80">
+                  {HEAD_OFFICE.lines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </p>
+                <a
+                  href={HEAD_OFFICE_MAP_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-[12px] inline-flex items-center gap-[6px] text-[15px] leading-[22px] font-bold text-brand-ink underline-offset-4 hover:underline"
+                >
+                  {c.office.mapLink}
+                  <span aria-hidden>→</span>
+                </a>
+              </address>
+
+              <div className="mt-[16px] rounded-[12px] bg-brand-tint p-[24px]">
                 <h3 className="text-[18px] leading-[24px] font-bold text-black">
                   {c.global.heading}
                 </h3>
@@ -227,7 +266,7 @@ export default async function ContactPage({
         </section>
       </main>
 
-      <Footer strings={t.footer} withForm={false} />
+      <Footer strings={t.footer} office={t.contact.office} withForm={false} />
     </>
   );
 }

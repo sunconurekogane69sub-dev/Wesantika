@@ -181,6 +181,10 @@ export const en = {
       heading: "Or reach us directly",
       body: "We answer on whichever channel you start on.",
     },
+    office: {
+      heading: "Head office",
+      mapLink: "Open in Google Maps",
+    },
     next: {
       heading: "What happens next",
       steps: {

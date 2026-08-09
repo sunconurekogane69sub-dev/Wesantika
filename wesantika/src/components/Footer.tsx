@@ -1,3 +1,4 @@
+import { HEAD_OFFICE } from "@/lib/content";
 import type { Dictionary } from "@/lib/i18n";
 import { ContactForm } from "./ContactForm";
 
@@ -9,9 +10,12 @@ import { ContactForm } from "./ContactForm";
  */
 export function Footer({
   strings,
+  office,
   withForm = true,
 }: {
   strings: Dictionary["footer"];
+  /** Only the label is translated; the address itself never is. */
+  office: Dictionary["contact"]["office"];
   /**
    * The Contact page carries its own form, and two identical forms on one page
    * is worse than one — it makes "Send Message" ambiguous in a screen reader's
@@ -46,9 +50,27 @@ export function Footer({
               </p>
             </div>
 
-            <div className="w-full">
-              <ContactForm strings={strings} />
-            </div>
+            {/* The head office, on every page that carries the footer panel.
+                A postal address is the ordinary way a B2B visitor checks that a
+                supplier is a real company in a real place, and it is the one
+                piece of contact information that was missing everywhere.
+
+                Not translated — see the note in src/lib/content.ts. */}
+            <address className="mt-[24px] block not-italic xl:mt-[28px]">
+              <p className="text-[13px] leading-[16px] font-bold tracking-[0.02em] text-white/70">
+                {office.heading}
+              </p>
+              <p className="mt-[8px] text-[15px] leading-[24px] font-normal text-white/85">
+                {HEAD_OFFICE.lines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </p>
+            </address>
+          </div>
+
+          <div className="w-full">
           </div>
         </div>
       )}

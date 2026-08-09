@@ -183,6 +183,10 @@ export const th: PartialDictionary = {
       heading: "หรือติดต่อเราโดยตรง",
       body: "คุณเริ่มจากช่องทางไหน เราตอบกลับทางช่องทางนั้น",
     },
+    office: {
+      heading: "สำนักงานใหญ่",
+      mapLink: "เปิดใน Google Maps",
+    },
     next: {
       heading: "ขั้นตอนต่อไป",
       steps: {

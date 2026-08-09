@@ -53,6 +53,39 @@ export const CONTACT_CHANNELS = [
 export type ChannelId = (typeof CONTACT_CHANNELS)[number]["id"];
 
 /**
+ * Head office.
+ *
+ * This lives here rather than in the dictionaries **on purpose**. An address is
+ * not translated — it is what someone writes on an envelope, or reads out to a
+ * driver, and a transliterated address is a misdelivered one. So the same Latin
+ * transcription ships in all five locales; only the *label* above it is
+ * translated (`contact.office.heading`).
+ *
+ * The parts below are split for `PostalAddress` in the Organization JSON-LD.
+ * `lines` is what gets rendered, broken where a Thai address is conventionally
+ * broken so it stays readable in a narrow column.
+ */
+export const HEAD_OFFICE = {
+  lines: [
+    "99/9 Moo 2, Chaeng Wattana Road",
+    "Bang Talat, Pak Kret District",
+    "Nonthaburi 11120, Thailand",
+  ],
+  postal: {
+    streetAddress: "99/9 Moo 2, Chaeng Wattana Road",
+    addressLocality: "Bang Talat, Pak Kret District",
+    addressRegion: "Nonthaburi",
+    postalCode: "11120",
+    addressCountry: "TH",
+  },
+} as const;
+
+/** Google Maps deep link — the documented query form, so it needs no place id. */
+export const HEAD_OFFICE_MAP_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  HEAD_OFFICE.lines.join(", "),
+)}`;
+
+/**
  * Left rail of the services section — Figma 180:624-628.
  *
  * "Hire Developers" (180:629) was dropped on request. The node is still in the

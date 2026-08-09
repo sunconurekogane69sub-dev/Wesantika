@@ -144,7 +144,7 @@ export default async function TopPage({
       </main>
 
       <div className="mt-[80px] xl:mt-[107px]">
-        <Footer strings={t.footer} />
+        <Footer strings={t.footer} office={t.contact.office} />
       </div>
     </>
   );

@@ -176,6 +176,10 @@ export const ja: PartialDictionary = {
       heading: "直接ご連絡いただくことも可能です",
       body: "ご連絡いただいたチャネルでそのまま対応します。",
     },
+    office: {
+      heading: "本社所在地",
+      mapLink: "Google マップで開く",
+    },
     next: {
       heading: "この後の流れ",
       steps: {

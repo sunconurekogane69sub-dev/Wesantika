@@ -173,7 +173,7 @@ export default async function AboutPage({
       </main>
 
       <div className="mt-[14px]">
-        <Footer strings={t.footer} />
+        <Footer strings={t.footer} office={t.contact.office} />
       </div>
     </>
   );

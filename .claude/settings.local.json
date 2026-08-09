@@ -99,7 +99,10 @@
       "Bash(curl -s \"http://localhost:3114/sitemap.xml\")",
       "Bash(curl -s \"http://localhost:3115/en/about\")",
       "Bash(grep -E \"Generating static|Route|/\\\\[locale\\\\]\")",
-      "Bash(awk '{print \"  svc-award.png \"$5\" bytes\"}')"
+      "Bash(awk '{print \"  svc-award.png \"$5\" bytes\"}')",
+      "Bash(curl -s \"http://localhost:3121/en\")",
+      "Bash(python -m json.tool)",
+      "Bash(curl -s \"http://localhost:3121/en/contact\")"
     ]
   }
 }

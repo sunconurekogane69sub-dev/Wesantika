@@ -183,6 +183,10 @@ export const vi: PartialDictionary = {
       heading: "Hoặc liên hệ trực tiếp",
       body: "Bạn bắt đầu từ kênh nào, chúng tôi trả lời ngay trên kênh đó.",
     },
+    office: {
+      heading: "Trụ sở chính",
+      mapLink: "Mở trong Google Maps",
+    },
     next: {
       heading: "Điều gì diễn ra tiếp theo",
       steps: {

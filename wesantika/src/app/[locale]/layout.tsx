@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Noto_Sans_JP, Noto_Sans_TC, Noto_Sans_Thai } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
+import { OrganizationSchema } from "@/components/OrganizationSchema";
 import { SkipLink } from "@/components/SkipLink";
 import { getDictionary } from "@/lib/i18n";
 import {
@@ -92,6 +93,7 @@ export default async function LocaleLayout({
       <body className="overflow-x-hidden">
         {/* First focusable element in the document — it only works from here. */}
         <SkipLink label={t.a11y.skipToContent} />
+        <OrganizationSchema locale={locale} />
         {children}
       </body>
     </html>

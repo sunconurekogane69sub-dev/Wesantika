@@ -914,6 +914,32 @@ They now get the rail's own treatment: white glyph on a `brand-btn` disc
 (6.01:1, well past the 3:1 a graphic needs). The two places a visitor can reach
 these channels look like the same thing, because they are.
 
+### The head office
+
+`99/9 Moo 2, Chaeng Wattana Road, Bang Talat, Pak Kret District, Nonthaburi
+11120` lives in `src/lib/content.ts` as `HEAD_OFFICE`, in three places:
+
+- the **Contact page sidebar**, with a Google Maps link, next to the other ways
+  to reach the company;
+- the **footer**, so it is on every page that carries the form panel — a postal
+  address is how a B2B visitor checks a supplier is a real company in a real
+  place, and it was the one piece of contact information missing everywhere;
+- **`Organization` JSON-LD** as a `PostalAddress`, which is what a search engine
+  actually reads and what a knowledge panel is built from. Three lines of text
+  tell it nothing.
+
+Both renderings use `<address>`, which is not a styling choice: it marks the
+block as contact information for assistive tech, where a `<div>` would not.
+
+**It is deliberately not translated.** An address is what someone writes on an
+envelope or reads out to a driver, and a transliterated address is a
+misdelivered one — so the same Latin transcription ships in all five locales.
+Only the label above it (`contact.office.heading`) is translated.
+
+The JSON-LD omits `contactPoint` while the address is still on `.example`:
+publishing a structured contact that cannot receive mail is worse than
+publishing none. It appears on its own once the real address is set.
+
 ### Brand colours on this page
 
 `--color-brand-tint` (`#eef5ff`, brand blue at ~7% over white) was added to the
