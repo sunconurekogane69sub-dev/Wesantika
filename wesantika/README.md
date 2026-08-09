@@ -127,6 +127,42 @@ outside-click and Escape handling.
 
 ## Interactions
 
+**Our Full-Range Services rail** — `src/components/ServiceTabs.tsx`
+
+The five category labels are a tab list, not a static list: clicking one swaps
+the card grid beside it. `custom` shows the 11-card grid drawn inside the Top
+frame (`180:630-709`); the other four sets were designed off-canvas around
+x ≈ -1007 (`578:472-607`) and are matched to the rail label sitting above each
+cluster.
+
+| Category | Cards |
+|---|---|
+| Custom Software Development | 11 |
+| Offshore & Outsourcing | 2 |
+| AI Development | 2 |
+| QA Testing | 1 |
+| Infrastructure | 3 |
+
+Semantics are `role="tablist"` with `aria-orientation="vertical"` and a roving
+`tabindex`, so Up/Down move between tabs and Home/End jump to the ends. Left and
+Right are deliberately left alone — the rail is vertical. Activation follows
+focus, safe here because all five panels are already in the document.
+
+Panels stay mounted and toggle with a **conditional display utility**, not just
+the `hidden` attribute: Preflight's `[hidden]` rule and `.grid` have equal
+specificity, and utilities come later in the sheet, so `.grid` would win and the
+"hidden" panels would all render at once.
+
+Colours are ours; Figma only ever draws the selected state. Idle labels are 55%
+black — 4.74:1 on white, which clears AA as body text rather than scraping by on
+the large-text allowance — and hover and selection both go to full black. The
+5px marker is black too, not the brand blue of the Figma line (`180:710`), so
+that a selected item reads as *completely* black.
+
+`Hire Developers` (`180:629`) was dropped on request. **The node is still in the
+Figma file**, so anything that re-syncs the rail from Figma will bring it back;
+`SERVICE_CATEGORY_IDS` in `src/lib/content.ts` is the authority.
+
 **Sticky contact rail** — `src/components/StickyContactRail.tsx`
 
 Four pills fixed to the right edge, vertically centred. At rest only the 58px
@@ -628,6 +664,12 @@ rather than links that go nowhere.
   so it does not ship, but it still needs fixing in Figma.
 - `405:2292` reads *"Seamless **Colloboration**"*. Corrected to "Collaboration"
   here; also needs fixing in Figma.
+- **"DevOps Development Services" (`578:607`) has the wrong body.** It repeats
+  "AI Development Services" (`578:482`) word for word — *"By combining
+  cutting-edge AI with machine learning…"* — which says nothing about DevOps.
+  Shipped verbatim because the copy is the design's call, not ours, but it reads
+  as a paste error and wants replacing in Figma. It is currently duplicated into
+  the English and Japanese dictionaries.
 - Two sections are flat bitmaps with text baked in, set in a non-Inter geometric
   sans: the core-values hexagons (`210:997`, implemented as an image) and a
   "How We Deliver" comparison table (`238:1069`, parked off-canvas and not

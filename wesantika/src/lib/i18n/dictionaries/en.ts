@@ -43,7 +43,6 @@ export const en = {
       ai: "AI Development",
       qa: "QA Testing",
       infrastructure: "Infrastructure",
-      hire: "Hire Developers",
     },
     cards: {
       custom: {
@@ -89,6 +88,38 @@ export const en = {
       maintenance: {
         title: "Software Maintenance and Support",
         body: "Enjoy 24/7 monitoring, proactive maintenance, and feature upgrades. Our solutions ensure strict SLAs for system stability, security, and long-term performance.",
+      },
+      outsourcing: {
+        title: "Software Development Outsourcing",
+        body: "We have five outsourcing models. By outsourcing software development in Vietnam, you can focus on your core business while accelerating time-to-market.",
+      },
+      offshoreTeams: {
+        title: "Offshore Development Solutions",
+        body: "Interview elite developers today. Our team offers high-quality offshore software in Vietnam at a reasonable cost.",
+      },
+      aiDevelopment: {
+        title: "AI Development Services",
+        body: "By combining cutting-edge AI with machine learning, we can create smart software that can streamline business operations and enhance decision-making. Let us transform your business into a realm of efficiency and innovation.",
+      },
+      generativeAi: {
+        title: "Generative AI Integration Services",
+        body: "Integrate generative AI into your products to automate workflows. We personalize experiences, reduce costs, and scale securely with enterprise compliance.",
+      },
+      qaTesting: {
+        title: "Software QA Testing Services",
+        body: "Get manual and automated QA with Selenium, Cypress, and CI/CD. The tests cover functional, security, and performance, ensuring faster releases and reduced risk.",
+      },
+      itServices: {
+        title: "IT Services",
+        body: "We operate as your fully outsourced IT partner or an expert extension of your team, reducing downtime, optimizing performance, and delivering measurable business outcomes.",
+      },
+      devops: {
+        title: "DevOps Development Services",
+        body: "By combining cutting-edge AI with machine learning, we can create smart software that can streamline business operations and enhance decision-making. Let us transform your business into a realm of efficiency and innovation.",
+      },
+      cloudMigration: {
+        title: "Cloud Migration Services",
+        body: "Migrate workloads to AWS, Azure, and GCP using rehost, replatform, and refactor strategies. We ensure minimal downtime, compliance, cost efficiency, and scalability.",
       },
     },
   },

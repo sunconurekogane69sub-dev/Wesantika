@@ -59,7 +59,19 @@
       "Bash(curl -s -X POST https://challenges.cloudflare.com/turnstile/v0/siteverify -d secret=1x0000000000000000000000000000000AA -d response=dummy --max-time 60)",
       "Bash(curl -s -X POST http://localhost:3100/api/rfp -F 'name=A' -F 'phone=1' -F 'company=B' -F 'email=a@b.co' -F 'brief=x' -w '\\\\n  HTTP %{http_code}\\\\n' --max-time 60)",
       "Bash(curl -s -X POST http://localhost:3100/api/rfp -F turnstileToken=XXXX.DUMMY.TOKEN.XXXX -F 'name=Ralph Tester' -F 'phone=+81 90 1234 5678' -F 'company=Orion IT' -F email=ralph@example.com -F 'brief=We need an AI-assisted document pipeline. Two-week discovery, then a pilot.' -w '\\\\n  HTTP %{http_code}\\\\n' --max-time 120)",
-      "Bash(curl -s -H 'X-Figma-Token: __CMDSUB_OUTPUT__' --max-time 300 -o /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/file-v8.json -w 'http %{http_code}  %{size_download} bytes\\\\n' https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr?ids=572:98,572:323)"
+      "Bash(curl -s -H 'X-Figma-Token: __CMDSUB_OUTPUT__' --max-time 300 -o /c/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/file-v8.json -w 'http %{http_code}  %{size_download} bytes\\\\n' https://api.figma.com/v1/files/iexSBqWRZILgZ0R6SKKDgr?ids=572:98,572:323)",
+      "Bash(sort -k5 -n -r)",
+      "Bash(node C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/fr3.mjs C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/file-v9.json)",
+      "Bash(node C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/fr4.mjs C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/file-v9.json 578:476 578:478 578:550 578:562 578:583 578:589 578:591)",
+      "Bash(node C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/fr5.mjs C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/file-v9.json)",
+      "Bash(curl -s -o C:/Users/ralph/AppData/Local/Temp/claude/D--IT-Orion--Development/8dd1acf9-ab28-4c32-949c-e35850ed0832/scratchpad/svg-v9.json -w '%{http_code}' -H 'X-Figma-Token: __CMDSUB_OUTPUT__' 'https://api.figma.com/v1/images/iexSBqWRZILgZ0R6SKKDgr?ids=__TRACKED_VAR__&format=svg')",
+      "Bash(sed -n '1,30p' src/app/[locale]/page.tsx)",
+      "Bash(sed -n '50,100p' src/app/[locale]/page.tsx)",
+      "Bash(awk '/^  services: \\\\{/,/^  \\\\},/' src/lib/i18n/dictionaries/en.ts)",
+      "Bash(awk '/^  services: \\\\{/,/^  \\\\},/' src/lib/i18n/dictionaries/ja.ts)",
+      "Bash(awk '/^  services: \\\\{/,/^  \\\\},$/' src/lib/i18n/dictionaries/en.ts)",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"const p=require\\('./package.json'\\);console.log\\('deps:',Object.keys\\({...p.dependencies,...p.devDependencies}\\).join\\(' '\\)\\)\")"
     ]
   }
 }

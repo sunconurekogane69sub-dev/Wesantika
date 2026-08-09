@@ -46,7 +46,6 @@ export const vi: PartialDictionary = {
       ai: "Phát triển AI",
       qa: "Kiểm thử QA",
       infrastructure: "Hạ tầng",
-      hire: "Tuyển dụng lập trình viên",
     },
     cards: {
       custom: {

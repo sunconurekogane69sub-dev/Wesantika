@@ -46,7 +46,6 @@ export const th: PartialDictionary = {
       ai: "พัฒนา AI",
       qa: "การทดสอบ QA",
       infrastructure: "โครงสร้างพื้นฐาน",
-      hire: "จัดหานักพัฒนา",
     },
     cards: {
       custom: {

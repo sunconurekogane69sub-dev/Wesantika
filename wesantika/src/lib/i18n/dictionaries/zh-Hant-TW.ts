@@ -46,7 +46,6 @@ export const zhHantTW: PartialDictionary = {
       ai: "AI 開發",
       qa: "QA 測試",
       infrastructure: "基礎架構",
-      hire: "工程人才招募",
     },
     cards: {
       custom: {

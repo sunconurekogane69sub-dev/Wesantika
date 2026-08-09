@@ -5,9 +5,9 @@ import { AiProximityPanel } from "@/components/AiProximityPanel";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { RfpDialog } from "@/components/RfpDialog";
-import { ServiceCard } from "@/components/ServiceCard";
+import { ServiceTabs } from "@/components/ServiceTabs";
 import { StickyContactRail } from "@/components/StickyContactRail";
-import { SERVICE_CARDS, SERVICE_CATEGORY_IDS } from "@/lib/content";
+import { SERVICE_CARD_SETS, SERVICE_CATEGORY_IDS } from "@/lib/content";
 import { getDictionary } from "@/lib/i18n";
 import { isLocale } from "@/lib/i18n/locales";
 
@@ -54,36 +54,18 @@ export default async function TopPage({
           {t.services.heading}
         </h2>
 
-        <div className="mt-[40px] flex flex-col gap-[40px] xl:mt-[59px] xl:flex-row xl:gap-0 xl:pl-[212px]">
-          <ul className="flex flex-col gap-[27px] xl:w-[363px] xl:shrink-0">
-            {SERVICE_CATEGORY_IDS.map((id, index) => (
-              <li
-                key={id}
-                className="relative pl-[12px] text-[20px] leading-[24px] font-bold text-black"
-              >
-                {/* Active marker — Figma 180:710, a 5px brand rule */}
-                {index === 0 && (
-                  <span
-                    aria-hidden
-                    className="absolute top-[-2px] left-0 h-[27px] w-[5px] bg-brand"
-                  />
-                )}
-                {t.services.categories[id]}
-              </li>
-            ))}
-          </ul>
-
-          <div className="grid gap-x-[11px] gap-y-[12px] sm:grid-cols-2 xl:w-[891px]">
-            {SERVICE_CARDS.map((card) => (
-              <ServiceCard
-                key={card.id}
-                icon={card.icon}
-                title={t.services.cards[card.id].title}
-                body={t.services.cards[card.id].body}
-              />
-            ))}
-          </div>
-        </div>
+        <ServiceTabs
+          categories={SERVICE_CATEGORY_IDS.map((id) => ({
+            id,
+            label: t.services.categories[id],
+            cards: SERVICE_CARD_SETS[id].map((card) => ({
+              id: card.id,
+              icon: card.icon,
+              title: t.services.cards[card.id].title,
+              body: t.services.cards[card.id].body,
+            })),
+          }))}
+        />
 
         <div className="mt-[80px] flex justify-center xl:mt-[130px]">
           <Link

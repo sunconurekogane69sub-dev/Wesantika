@@ -27,34 +27,69 @@ export const CONTACT_CHANNELS = [
 
 export type ChannelId = (typeof CONTACT_CHANNELS)[number]["id"];
 
-/** Left rail of the services section — Figma 180:624-629 */
+/**
+ * Left rail of the services section — Figma 180:624-628.
+ *
+ * "Hire Developers" (180:629) was dropped on request. The node is still in the
+ * Figma file, so re-syncing the rail from Figma would bring it back; the list
+ * here is the authority.
+ */
 export const SERVICE_CATEGORY_IDS = [
   "custom",
   "offshore",
   "ai",
   "qa",
   "infrastructure",
-  "hire",
 ] as const;
 
 export type ServiceCategoryId = (typeof SERVICE_CATEGORY_IDS)[number];
 
-/** 11 cards, row-major so reading order matches the 2-column grid. */
-export const SERVICE_CARDS = [
-  { id: "custom", icon: "/icons/icon-custom-software.svg" },
-  { id: "web", icon: "/icons/icon-web-app.svg" },
-  { id: "mobile", icon: "/icons/icon-mobile-app.svg" },
-  { id: "mvp", icon: "/icons/icon-mvp.svg" },
-  { id: "legacy", icon: "/icons/icon-legacy.svg" },
-  { id: "saas", icon: "/icons/icon-saas.svg" },
-  { id: "enterprise", icon: "/icons/icon-enterprise.svg" },
-  { id: "backend", icon: "/icons/icon-backend.svg" },
-  { id: "frontend", icon: "/icons/icon-frontend.svg" },
-  { id: "integration", icon: "/icons/icon-integration.svg" },
-  { id: "maintenance", icon: "/icons/icon-maintenance.svg" },
-] as const;
+/**
+ * One card set per rail category — the rail is a tab list and this is what each
+ * tab reveals.
+ *
+ * `custom` is the 11-card grid drawn in the Top frame (180:630-709). The other
+ * four sets were designed off-canvas at x ≈ -1007 (578:472-607) and are keyed
+ * to the rail label that sits above each cluster.
+ *
+ * Card ids are unique across every set so the dictionary can keep one flat
+ * `services.cards` map instead of nesting by category.
+ */
+export const SERVICE_CARD_SETS = {
+  custom: [
+    { id: "custom", icon: "/icons/icon-custom-software.svg" },
+    { id: "web", icon: "/icons/icon-web-app.svg" },
+    { id: "mobile", icon: "/icons/icon-mobile-app.svg" },
+    { id: "mvp", icon: "/icons/icon-mvp.svg" },
+    { id: "legacy", icon: "/icons/icon-legacy.svg" },
+    { id: "saas", icon: "/icons/icon-saas.svg" },
+    { id: "enterprise", icon: "/icons/icon-enterprise.svg" },
+    { id: "backend", icon: "/icons/icon-backend.svg" },
+    { id: "frontend", icon: "/icons/icon-frontend.svg" },
+    { id: "integration", icon: "/icons/icon-integration.svg" },
+    { id: "maintenance", icon: "/icons/icon-maintenance.svg" },
+  ],
+  offshore: [
+    { id: "outsourcing", icon: "/icons/icon-outsourcing.svg" },
+    { id: "offshoreTeams", icon: "/icons/icon-offshore.svg" },
+  ],
+  ai: [
+    { id: "aiDevelopment", icon: "/icons/icon-ai-development.svg" },
+    { id: "generativeAi", icon: "/icons/icon-generative-ai.svg" },
+  ],
+  qa: [{ id: "qaTesting", icon: "/icons/icon-qa-testing.svg" }],
+  infrastructure: [
+    { id: "itServices", icon: "/icons/icon-it-services.svg" },
+    { id: "devops", icon: "/icons/icon-devops.svg" },
+    { id: "cloudMigration", icon: "/icons/icon-cloud-migration.svg" },
+  ],
+} as const satisfies Record<
+  ServiceCategoryId,
+  ReadonlyArray<{ id: string; icon: string }>
+>;
 
-export type ServiceCardId = (typeof SERVICE_CARDS)[number]["id"];
+export type ServiceCardId =
+  (typeof SERVICE_CARD_SETS)[ServiceCategoryId][number]["id"];
 
 /** The AI Innovation panel's own coordinate space — Figma 180:752. */
 export const AI_PANEL = { width: 1564, height: 1006 } as const;
