@@ -1,20 +1,18 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Icon } from "@/components/Icon";
 import { Nav } from "@/components/Nav";
 import { RfpDialog } from "@/components/RfpDialog";
-import {
-  ServiceOfferCard,
-  ServiceOfferPlaceholder,
-} from "@/components/ServiceOfferCard";
+import { ServiceOfferCard } from "@/components/ServiceOfferCard";
 import { StickyContactRail } from "@/components/StickyContactRail";
 import {
   GLOBAL_TEAM_POINTS,
   SERVICE_HIGHLIGHTS,
   SERVICE_OFFER_CARDS,
-  SERVICE_OFFER_PLACEHOLDERS,
+  serviceDetailHref,
 } from "@/lib/content";
 import { getDictionary } from "@/lib/i18n";
 import { isLocale, LOCALE_CODES } from "@/lib/i18n/locales";
@@ -94,24 +92,38 @@ export default async function ServicesPage({
           {s.accelerate.heading}
         </h2>
 
-        <div className="mx-auto mt-[60px] grid max-w-[1024px] gap-[26px] md:grid-cols-2 xl:mt-[126px]">
+        {/* 420 x 485 with a 190px gutter — 586:1306 / 586:1298, down from the
+            ~497 x 574 the file used to draw. The gutter only opens up at xl;
+            190px between two cards is a full column on a laptop. */}
+        <div className="mx-auto mt-[60px] grid max-w-[1030px] gap-[40px] md:grid-cols-2 xl:mt-[126px] xl:gap-[190px]">
           {SERVICE_HIGHLIGHTS.map((highlight) => (
             <div
               key={highlight.id}
-              className="relative flex h-[420px] flex-col overflow-hidden rounded-[16px] border-[3px] border-brand bg-white xl:h-[574px]"
+              className="relative flex min-h-[420px] flex-col overflow-hidden rounded-[16px] border-[3px] border-brand bg-white xl:min-h-[485px]"
             >
               <Image
                 src={highlight.image}
                 alt=""
                 fill
-                sizes="(max-width: 768px) 100vw, 500px"
+                sizes="(max-width: 768px) 100vw, 420px"
                 className="object-contain object-bottom"
               />
               {/* Both source photos are white at the top, so the black label
-                  in the file reads cleanly where it is placed. */}
-              <h3 className="relative px-[41px] pt-[91px] text-[24px] leading-[1.2] font-bold text-black xl:text-[32px] xl:leading-[39px]">
+                  and the button below it read cleanly where they are placed. */}
+              <h3 className="relative px-[37px] pt-[61px] text-[24px] leading-[1.2] font-bold text-black xl:text-[28px] xl:leading-[34px]">
                 {s.accelerate.highlights[highlight.id]}
               </h3>
+              {/* 130 x 52 blue button — 586:806 / 586:808. The label is bold
+                  where the file sets it regular: white on #0f84fd measures
+                  3.66:1, which clears AA only once the type counts as large,
+                  and 20px needs to be bold to qualify. */}
+              <Link
+                href={serviceDetailHref(locale, highlight.detail)}
+                className="relative mt-[17px] ml-[37px] inline-flex h-[52px] min-w-[130px] w-fit items-center justify-center rounded-btn bg-brand px-[16px] text-[20px] leading-[24px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink"
+              >
+                {s.detailLabel}
+                <span aria-hidden>&nbsp;→</span>
+              </Link>
             </div>
           ))}
         </div>
@@ -133,11 +145,13 @@ export default async function ServicesPage({
               image={card.image}
               title={s.offer.cards[card.id].title}
               body={s.offer.cards[card.id].body}
+              detailLabel={s.detailLabel}
+              detailHref={
+                "detail" in card
+                  ? serviceDetailHref(locale, card.detail)
+                  : undefined
+              }
             />
-          ))}
-          {/* The artboard draws 18 slots; only the first is authored. */}
-          {Array.from({ length: SERVICE_OFFER_PLACEHOLDERS }, (_, i) => (
-            <ServiceOfferPlaceholder key={`slot-${i}`} />
           ))}
         </div>
       </section>

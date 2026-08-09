@@ -26,11 +26,25 @@ const SOLID_AT = 0.3;
  * The compact menu below 1280px is not in the design — there are no mobile
  * artboards — but without it small viewports would have no navigation at all.
  */
-export function Nav({ locale, nav }: { locale: Locale; nav: Dictionary["nav"] }) {
+export function Nav({
+  locale,
+  nav,
+  alwaysSolid = false,
+}: {
+  locale: Locale;
+  nav: Dictionary["nav"];
+  /**
+   * Skip the transparent-over-hero state. Pages without a hero image have
+   * nothing behind the bar but the white page, where white type is invisible,
+   * so those render solid from the first frame.
+   */
+  alwaysSolid?: boolean;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    if (alwaysSolid) return;
     const update = () => setScrolled(window.scrollY >= window.innerHeight * SOLID_AT);
     update();
     window.addEventListener("scroll", update, { passive: true });
@@ -39,10 +53,10 @@ export function Nav({ locale, nav }: { locale: Locale; nav: Dictionary["nav"] })
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
-  }, []);
+  }, [alwaysSolid]);
 
   // An open mobile panel always needs a solid backdrop to stay readable.
-  const solid = scrolled || open;
+  const solid = alwaysSolid || scrolled || open;
 
   const href = (path: string) => `/${locale}${path === "/" ? "" : path}`;
   const label = (id: NavId) => nav[id];

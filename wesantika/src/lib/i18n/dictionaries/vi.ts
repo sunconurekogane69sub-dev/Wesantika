@@ -44,7 +44,6 @@ export const vi: PartialDictionary = {
       custom: "Phát triển phần mềm theo yêu cầu",
       offshore: "Offshore & Outsourcing",
       ai: "Phát triển AI",
-      qa: "Kiểm thử QA",
       infrastructure: "Hạ tầng",
     },
     cards: {
@@ -71,10 +70,6 @@ export const vi: PartialDictionary = {
       saas: {
         title: "Phát triển ứng dụng SaaS",
         body: "Xây dựng nền tảng SaaS multi-tenant an toàn với AWS, Azure và Kubernetes. Agile và DevOps đảm bảo khả năng mở rộng, tuân thủ và tốc độ ra mắt.",
-      },
-      enterprise: {
-        title: "Phát triển phần mềm doanh nghiệp",
-        body: "Dịch vụ phát triển phần mềm doanh nghiệp của chúng tôi được xây dựng trên sự am hiểu toàn diện về đặc thù từng ngành và những tiến bộ công nghệ mới nhất.",
       },
       backend: {
         title: "Phát triển back-end",
@@ -165,6 +160,7 @@ export const vi: PartialDictionary = {
   },
 
   servicesPage: {
+    detailLabel: "CHI TIẾT",
     metaTitle: "Dịch vụ phát triển phần mềm",
     metaDescription:
       "Wesantika cung cấp dịch vụ phát triển phần mềm trọn vòng đời, với các giải pháp riêng đáp ứng nhu cầu đặc thù của doanh nghiệp bạn.",

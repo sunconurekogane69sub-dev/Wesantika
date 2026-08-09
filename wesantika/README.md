@@ -163,6 +163,50 @@ that a selected item reads as *completely* black.
 Figma file**, so anything that re-syncs the rail from Figma will bring it back;
 `SERVICE_CATEGORY_IDS` in `src/lib/content.ts` is the authority.
 
+**Services We Offer grid** — `src/components/ServiceOfferCard.tsx`
+
+All seventeen cards are authored now; the empty placeholder slots are gone.
+Titles and hover copy come from `586:802` (Group 108), which lays the seventeen
+out off-canvas in the same 3-column reading order as the grid itself, so they
+map by position.
+
+Hovering a card fades the illustration out and the description in over the same
+area. The "DETAIL →" link is a real focusable child, so tabbing to it opens the
+card's copy on the way past.
+
+Two of the seventeen illustrations are **vector groups, not image fills**
+(`405:2002`, `405:2120`). Figma's render endpoint was rate limiting, so they are
+rebuilt as SVG from the file's own `fillGeometry` path data
+(`/v1/files/:key/nodes?geometry=paths`, which is on the generous file-endpoint
+limit rather than the image one). Both come out with identity transforms, so a
+plain translate per leaf is exact.
+
+Those two then hit a second wall: **Next's image optimizer answers 400 for SVG**
+unless `dangerouslyAllowSVG` is set. They pass `unoptimized` instead, which
+serves them from `/public` untouched — there is nothing to optimize in a vector,
+and the flag stays off for every other image on the site.
+
+**Service write-ups** — `src/app/[locale]/services/[topic]/page.tsx`
+
+Two long-form pages behind the "DETAIL →" buttons: `/services/ai-development`
+(`586:813`, 7 cards) and `/services/custom-software` (`586:1081`, 14 cards).
+
+**No hero.** The brief is that the hero must not follow the reader into the
+detail content, so these pages open on the heading. That leaves nothing behind
+the nav bar but white page, where white type is invisible — hence `alwaysSolid`
+on `Nav`, which skips the transparent-over-hero state entirely.
+
+`**…**` in a dictionary string marks an emphasised run. The file styles those
+runs differently in each context — brand blue at normal weight in the intro
+(`PoC → MVP → production`), bold in the same grey as the sentence inside a card
+— so `Emphasis` takes the class from the call site and a translator only has to
+keep the asterisks around the equivalent phrase.
+
+Card titles are normalised to near-black. Figma paints them blue on 12 of 14
+Custom cards and 1 of 7 AI cards with no pattern to it; the heading and the CTA
+already carry the brand colour, and 21 blue headings over grey body copy is a
+wash.
+
 **Sticky contact rail** — `src/components/StickyContactRail.tsx`
 
 Four pills fixed to the right edge, vertically centred. At rest only the 58px
@@ -648,11 +692,13 @@ rather than links that go nowhere.
 
 ## Still to do on the Services page
 
-- **Only the first of the 18 grid cards is authored** in the file, as instructed.
-  The other 17 render as the empty cards they are drawn as. Add entries to
-  `SERVICE_OFFER_CARDS` in `src/lib/content.ts` plus copy under
-  `servicesPage.offer.cards` and they fill in; set
-  `SERVICE_OFFER_PLACEHOLDERS` to `0` to hide the empty slots instead.
+- **Fifteen of the seventeen cards have no write-up.** The grid is fully
+  authored now, but only `custom` and `ai` have long-form material, so only
+  those two render a "DETAIL →" link. The file draws the button on a third card
+  (Web Application Development, `586:785`) as a sample of the pattern; it is not
+  rendered, because a button that goes nowhere is worse than no button. Add a
+  row to `SERVICE_DETAIL_TOPICS`, its copy under `serviceDetails`, and a
+  `detail:` key on the card in `SERVICE_OFFER_CARDS` and the link appears.
 - **The three "It requires" icons** (`405:2296`, `405:2297`, `405:2300`) are not
   exported — Figma's image API was rate limiting throughout. A neutral brand-blue
   marker stands in for them. They need one export run to replace.
@@ -664,6 +710,20 @@ rather than links that go nowhere.
   so it does not ship, but it still needs fixing in Figma.
 - `405:2292` reads *"Seamless **Colloboration**"*. Corrected to "Collaboration"
   here; also needs fixing in Figma.
+- **"SaaS Application Development" (`586:791`) names the competitor again** —
+  *"**Saigon Technology's** seasoned engineers…"*. Corrected to "Wesantika"
+  here; needs fixing in Figma.
+- **White on brand blue is 3.66:1.** Every solid `bg-brand` button with a white
+  label is below the 4.5:1 that normal-weight text needs; it only passes because
+  the label is large enough to count as large text (≥24px, or ≥18.66px bold).
+  The two new buttons ("DETAIL →" and the write-up CTA) are set bold for exactly
+  that reason, against the file's regular weight. **Pre-existing buttons at 16px
+  bold do not qualify** — 16px bold is under the 18.66px threshold — so the
+  Services hero CTA, the RFP button and the Top-page CTA are all technically
+  short of AA. `scripts/ink-audit.mjs` does not catch this: it measures text
+  over *imagery*, not over solid fills. Fixing it means either darkening the
+  button fill to `brand-ink` (5.62:1, passes at any size) or raising those
+  labels to 20px. Not changed here — it is a site-wide visual decision.
 - **"DevOps Development Services" (`578:607`) has the wrong body.** It repeats
   "AI Development Services" (`578:482`) word for word — *"By combining
   cutting-edge AI with machine learning…"* — which says nothing about DevOps.

@@ -4,7 +4,13 @@
  * rather than rendering blank.
  *
  * Strings are transcribed verbatim from the Figma file.
+ *
+ * The fourteen long-form service write-ups live in `./service-details.en` and
+ * are spliced in below as `serviceDetails` — they are most of the catalogue by
+ * volume and were making everything else hard to find.
  */
+import { serviceDetailsEn } from "./service-details.en";
+
 export const en = {
   meta: {
     siteTitle: "Wesantika — Modern Software. Real Business Growth.",
@@ -41,7 +47,6 @@ export const en = {
       custom: "Custom Software Development",
       offshore: "Offshore & Outsourcing",
       ai: "AI Development",
-      qa: "QA Testing",
       infrastructure: "Infrastructure",
     },
     cards: {
@@ -68,10 +73,6 @@ export const en = {
       saas: {
         title: "SaaS Application Development",
         body: "Create secure, multi-tenant SaaS platforms using AWS, Azure, and Kubernetes. Agile and DevOps ensure scalability, compliance, and faster time-to-market.",
-      },
-      enterprise: {
-        title: "Enterprise Software Development",
-        body: "Our enterprise software development services are founded on a comprehensive grasp of industry intricacies and the most recent technological advancements.",
       },
       backend: {
         title: "Back-end Development",
@@ -104,10 +105,6 @@ export const en = {
       generativeAi: {
         title: "Generative AI Integration Services",
         body: "Integrate generative AI into your products to automate workflows. We personalize experiences, reduce costs, and scale securely with enterprise compliance.",
-      },
-      qaTesting: {
-        title: "Software QA Testing Services",
-        body: "Get manual and automated QA with Selenium, Cypress, and CI/CD. The tests cover functional, security, and performance, ensuring faster releases and reduced risk.",
       },
       itServices: {
         title: "IT Services",
@@ -249,6 +246,7 @@ export const en = {
 
   /** Services page — Figma 405:2302 */
   servicesPage: {
+    detailLabel: "DETAIL",
     metaTitle: "Software Development Services",
     metaDescription:
       "Wesantika delivers full-cycle software development services. Our custom solutions will meet your unique business needs.",
@@ -273,7 +271,59 @@ export const en = {
       cards: {
         custom: {
           title: "Custom Software Development",
-          body: "Our end-to-end software solution delivers tailored features, scalable performance, and full personalization. You will get the competitive advantage you deserve.",
+          body: "We tailor software development to your business needs, developing back-end, front-end, and custom integrations. Our solutions give your business an edge, helping you stay ahead in a fast-changing market.",
+        },
+        web: {
+          title: "Web Application Development",
+          body: "Define your business objectives, and we will craft a web application to achieve them. Our web development, agile project management, and web trend skills guarantee a high-ROI app that users will value. Our dedicated team ensures your web apps are equipped with modern, secure, and scalable solutions.",
+        },
+        mobile: {
+          title: "Mobile App Development",
+          body: "We conduct in-depth market research to create user-focused designs that help you stand out in a dynamic market. We build native and cross-platform applications designed for stable performance. Our strategy accelerates app launches, enhancing your competitive edge and fostering business growth.",
+        },
+        ai: {
+          title: "AI Development Services",
+          body: "The AI industry is still emerging, which makes in-house experts hard to find. We offer AI-integrated solutions to help you solve business challenges, automate tasks, and improve decision-making. Our support starts with a PoC or MVP to test ideas. This approach reduces risks and ensures success in the market.",
+        },
+        product: {
+          title: "Software Product Development",
+          body: "Our dedication to innovation and enhancement steers the process from concept to launch. The journey includes user-focused design and detailed features. Our process ensures your software is reliable. Support and maintenance continue after the launch, keeping your project running well.",
+        },
+        saas: {
+          title: "SaaS Application Development",
+          body: "Experienced vendors are essential for successfully delivering long-term and complex SaaS projects. Wesantika's seasoned engineers provide expert help, backed by over 12 years of experience. We create robust, intuitive SaaS solutions that empower modern businesses and drive the business forward with high-quality apps.",
+        },
+        integration: {
+          title: "Software Integration Services",
+          body: "Connect your apps, data, and devices with secure, scalable integrations - APIs, ERP/CRM, and cloud. Eliminate silos, automate workflows, and speed delivery.",
+        },
+        mvp: {
+          title: "MVP Software Development",
+          body: "MVP development helps you test your ideas quickly. We build only the most essential features. This lets you gather user feedback early. It saves time and helps refine your product without wasting resources.",
+        },
+        poc: {
+          title: "PoC Development Services",
+          body: "Our software development services deliver PoC development that proves your ideas' viability. We help you check before full development begins. This reduces risks and helps you decide the best path forward.",
+        },
+        devops: {
+          title: "DevOps Development Services",
+          body: "DevOps services connect development and operations. Our DevOps team accelerates software delivery and automates tasks to streamline workflows. By incorporating cutting-edge security tools, we greatly boost both efficiency and speed.",
+        },
+        cloud: {
+          title: "Cloud Migration Services",
+          body: "Moving your data and applications to the cloud is vital for modern software development. Cloud migration services help make this process smooth. Your data is secure, and your applications are ready for the cloud.",
+        },
+        backend: {
+          title: "Back-end Development Services",
+          body: "A robust back-end is crucial for your software. We focus on building strong server-side logic, incorporating advanced programming techniques to create efficient and reliable back-end systems. Database management gives your applications a solid foundation.",
+        },
+        frontend: {
+          title: "Front-End Development Services",
+          body: "We create user-friendly interfaces that excel in both aesthetics and functionality, designing eye-catching websites and responsive apps with a great UI. These interfaces keep users engaged and improve their experience.",
+        },
+        maintenance: {
+          title: "Software Maintenance and Support",
+          body: "Keeping your software up to date is essential. Our custom software development includes maintenance and support. Your applications stay in top shape so they can keep up with your changing business needs.",
         },
       },
     },
@@ -307,6 +357,7 @@ export const en = {
       ],
     },
   },
+  serviceDetails: serviceDetailsEn,
 
   /**
    * Blog — no Figma artboard exists for this page.

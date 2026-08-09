@@ -33,12 +33,16 @@ export type ChannelId = (typeof CONTACT_CHANNELS)[number]["id"];
  * "Hire Developers" (180:629) was dropped on request. The node is still in the
  * Figma file, so re-syncing the rail from Figma would bring it back; the list
  * here is the authority.
+ *
+ * "QA Testing" (the fifth rail entry) went the same way when Enterprise, Hire
+ * Developers and QA Testing were retired from the service catalogue. Its only
+ * card was `qaTesting`, so the whole category left with it rather than becoming
+ * an empty tab.
  */
 export const SERVICE_CATEGORY_IDS = [
   "custom",
   "offshore",
   "ai",
-  "qa",
   "infrastructure",
 ] as const;
 
@@ -63,7 +67,6 @@ export const SERVICE_CARD_SETS = {
     { id: "mvp", icon: "/icons/icon-mvp.svg" },
     { id: "legacy", icon: "/icons/icon-legacy.svg" },
     { id: "saas", icon: "/icons/icon-saas.svg" },
-    { id: "enterprise", icon: "/icons/icon-enterprise.svg" },
     { id: "backend", icon: "/icons/icon-backend.svg" },
     { id: "frontend", icon: "/icons/icon-frontend.svg" },
     { id: "integration", icon: "/icons/icon-integration.svg" },
@@ -77,7 +80,6 @@ export const SERVICE_CARD_SETS = {
     { id: "aiDevelopment", icon: "/icons/icon-ai-development.svg" },
     { id: "generativeAi", icon: "/icons/icon-generative-ai.svg" },
   ],
-  qa: [{ id: "qaTesting", icon: "/icons/icon-qa-testing.svg" }],
   infrastructure: [
     { id: "itServices", icon: "/icons/icon-it-services.svg" },
     { id: "devops", icon: "/icons/icon-devops.svg" },
@@ -134,28 +136,93 @@ export type AiLabelId = (typeof AI_LABELS)[number]["id"];
    Services page — Figma 405:2302 (1672 x 9390)
    --------------------------------------------------------------------------- */
 
-/** Two large cards under the "Accelerate…" heading — Figma 405:1983 / 405:1990 */
-export const SERVICE_HIGHLIGHTS = [
-  { id: "ai", image: "/images/svc-ai.jpg", radius: 220 }, // 405:1985, r220
-  { id: "custom", image: "/images/svc-legacy.jpg", radius: 16 }, // 405:1992, r16
+/**
+ * Long-form service write-ups — Figma 586:813 and 586:1081 drew the first two
+ * (AI and Custom); the other twelve are built to the same template.
+ *
+ * The slug is the URL segment under /services and the id keys into
+ * `serviceDetails` in the dictionary. Every id here must also appear in
+ * SERVICE_OFFER_CARDS below — the grid is what links into these pages.
+ *
+ * The order matches SERVICE_OFFER_CARDS so the two lists can be read together.
+ */
+export const SERVICE_DETAIL_TOPICS = [
+  { id: "custom", slug: "custom-software" }, // 586:1081
+  { id: "web", slug: "web-application" },
+  { id: "mobile", slug: "mobile-app" },
+  { id: "ai", slug: "ai-development" }, // 586:813
+  { id: "product", slug: "software-product" },
+  { id: "saas", slug: "saas-application" },
+  { id: "integration", slug: "software-integration" },
+  { id: "mvp", slug: "mvp-development" },
+  { id: "poc", slug: "poc-development" },
+  { id: "devops", slug: "devops" },
+  { id: "cloud", slug: "cloud-migration" },
+  { id: "backend", slug: "backend-development" },
+  { id: "frontend", slug: "frontend-development" },
+  { id: "maintenance", slug: "software-maintenance" },
 ] as const;
+
+export type ServiceDetailId = (typeof SERVICE_DETAIL_TOPICS)[number]["id"];
+
+export const serviceDetailHref = (locale: string, id: ServiceDetailId) =>
+  `/${locale}/services/${
+    SERVICE_DETAIL_TOPICS.find((topic) => topic.id === id)!.slug
+  }`;
+
+/**
+ * Two large cards under the "Accelerate…" heading — Figma 586:1306 / 586:1298.
+ * Both were resized from ~497x574 to 420x485 and gained a "DETAIL →" button,
+ * which is the entry point to the long-form write-ups above.
+ */
+export const SERVICE_HIGHLIGHTS = [
+  { id: "ai", image: "/images/svc-ai.jpg", detail: "ai" }, // 405:1985
+  { id: "custom", image: "/images/svc-legacy.jpg", detail: "custom" }, // 405:1992
+] as const satisfies ReadonlyArray<{
+  id: string;
+  image: string;
+  detail: ServiceDetailId;
+}>;
 
 export type ServiceHighlightId = (typeof SERVICE_HIGHLIGHTS)[number]["id"];
 
 /**
  * The "Services We Offer" grid — Figma 405:2322 and siblings.
- * The artboard draws an 18-slot grid (3 x 6) but only the first card has
- * content; the rest are empty rectangles. Only the authored one is rendered
- * with content, and the remaining slots render as the empty cards they are.
- * Set SERVICE_OFFER_PLACEHOLDERS to 0 to hide them instead.
+ *
+ * The file draws 17 cards. Enterprise Software Development, Hire Software
+ * Developers and Software QA Testing were retired from the catalogue, so the
+ * grid is 14 — the same 14 that have long-form write-ups. Re-syncing this grid
+ * from Figma would bring the three back; this list is the authority.
+ *
+ * Every card now carries a `detail`, so the "DETAIL →" button resolves on all
+ * of them rather than on two out of seventeen.
+ *
+ * The Web and Mobile illustrations are the only two slots Figma holds as vector
+ * groups rather than image fills (405:2002 / 405:2120); they are rebuilt as SVG
+ * from the file's own path geometry.
  */
 export const SERVICE_OFFER_CARDS = [
-  { id: "custom", image: "/images/svc-card-custom.png" }, // 405:2322
-] as const;
+  { id: "custom", image: "/images/svc-card-custom-software.png", detail: "custom" },
+  { id: "web", image: "/images/svc-card-web-app.svg", detail: "web" },
+  { id: "mobile", image: "/images/svc-card-mobile-app.svg", detail: "mobile" },
+  { id: "ai", image: "/images/svc-card-ai-development.png", detail: "ai" },
+  { id: "product", image: "/images/svc-card-software-product.png", detail: "product" },
+  { id: "saas", image: "/images/svc-card-saas.png", detail: "saas" },
+  { id: "integration", image: "/images/svc-card-integration.png", detail: "integration" },
+  { id: "mvp", image: "/images/svc-card-mvp.png", detail: "mvp" },
+  { id: "poc", image: "/images/svc-card-poc.png", detail: "poc" },
+  { id: "devops", image: "/images/svc-card-devops.png", detail: "devops" },
+  { id: "cloud", image: "/images/svc-card-cloud-migration.png", detail: "cloud" },
+  { id: "backend", image: "/images/svc-card-backend.png", detail: "backend" },
+  { id: "frontend", image: "/images/svc-card-frontend.png", detail: "frontend" },
+  { id: "maintenance", image: "/images/svc-card-maintenance.png", detail: "maintenance" },
+] as const satisfies ReadonlyArray<{
+  id: string;
+  image: string;
+  detail?: ServiceDetailId;
+}>;
 
 export type ServiceOfferId = (typeof SERVICE_OFFER_CARDS)[number]["id"];
-
-export const SERVICE_OFFER_PLACEHOLDERS = 17;
 
 /**
  * "It requires :" points — Figma 405:2291-2293 with their icons.

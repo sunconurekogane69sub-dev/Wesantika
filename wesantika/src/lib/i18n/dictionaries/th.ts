@@ -44,7 +44,6 @@ export const th: PartialDictionary = {
       custom: "พัฒนาซอฟต์แวร์ตามความต้องการ",
       offshore: "ออฟชอร์และเอาต์ซอร์ส",
       ai: "พัฒนา AI",
-      qa: "การทดสอบ QA",
       infrastructure: "โครงสร้างพื้นฐาน",
     },
     cards: {
@@ -71,10 +70,6 @@ export const th: PartialDictionary = {
       saas: {
         title: "พัฒนาแอปพลิเคชัน SaaS",
         body: "สร้างแพลตฟอร์ม SaaS แบบหลายผู้เช่าที่ปลอดภัยด้วย AWS, Azure และ Kubernetes โดย Agile และ DevOps ช่วยให้ขยายตัวได้ สอดคล้องกับข้อกำหนด และออกสู่ตลาดเร็วขึ้น",
-      },
-      enterprise: {
-        title: "พัฒนาซอฟต์แวร์ระดับองค์กร",
-        body: "บริการพัฒนาซอฟต์แวร์ระดับองค์กรของเราตั้งอยู่บนความเข้าใจอย่างรอบด้านในความซับซ้อนของแต่ละอุตสาหกรรมและความก้าวหน้าทางเทคโนโลยีล่าสุด",
       },
       backend: {
         title: "พัฒนาระบบเบื้องหลัง",
@@ -162,6 +157,7 @@ export const th: PartialDictionary = {
   },
 
   servicesPage: {
+    detailLabel: "รายละเอียด",
     metaTitle: "บริการพัฒนาซอฟต์แวร์",
     metaDescription:
       "Wesantika ให้บริการพัฒนาซอฟต์แวร์แบบครบวงจร ด้วยโซลูชันที่ออกแบบเฉพาะเพื่อตอบโจทย์ธุรกิจของคุณ",

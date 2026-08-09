@@ -44,7 +44,6 @@ export const zhHantTW: PartialDictionary = {
       custom: "客製化軟體開發",
       offshore: "委外與離岸開發",
       ai: "AI 開發",
-      qa: "QA 測試",
       infrastructure: "基礎架構",
     },
     cards: {
@@ -71,10 +70,6 @@ export const zhHantTW: PartialDictionary = {
       saas: {
         title: "SaaS 應用程式開發",
         body: "運用 AWS、Azure 與 Kubernetes 打造安全的多租戶 SaaS 平台。敏捷與 DevOps 確保擴展性、法規遵循與更快的上市速度。",
-      },
-      enterprise: {
-        title: "企業級軟體開發",
-        body: "我們的企業軟體開發服務，建立在對產業複雜性的全面理解與最新技術進展之上。",
       },
       backend: {
         title: "後端開發",
@@ -160,6 +155,7 @@ export const zhHantTW: PartialDictionary = {
   },
 
   servicesPage: {
+    detailLabel: "詳細內容",
     metaTitle: "軟體開發服務",
     metaDescription:
       "Wesantika 提供全週期的軟體開發服務，以客製化方案滿足您獨特的業務需求。",
