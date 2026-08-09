@@ -11,6 +11,8 @@ export type ServiceTabCategory = {
     icon: string;
     title: string;
     body: string;
+    /** Absent on the cards with no long-form write-up behind them. */
+    detailHref?: string;
   }>;
 };
 
@@ -32,8 +34,10 @@ export type ServiceTabCategory = {
  */
 export function ServiceTabs({
   categories,
+  detailLabel,
 }: {
   categories: ReadonlyArray<ServiceTabCategory>;
+  detailLabel: string;
 }) {
   const [active, setActive] = useState(0);
   const baseId = useId();
@@ -117,6 +121,8 @@ export function ServiceTabs({
               icon={card.icon}
               title={card.title}
               body={card.body}
+              detailHref={card.detailHref}
+              detailLabel={detailLabel}
             />
           ))}
         </div>

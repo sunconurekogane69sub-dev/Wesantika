@@ -7,7 +7,11 @@ import { Nav } from "@/components/Nav";
 import { RfpDialog } from "@/components/RfpDialog";
 import { ServiceTabs } from "@/components/ServiceTabs";
 import { StickyContactRail } from "@/components/StickyContactRail";
-import { SERVICE_CARD_SETS, SERVICE_CATEGORY_IDS } from "@/lib/content";
+import {
+  SERVICE_CARD_SETS,
+  SERVICE_CATEGORY_IDS,
+  serviceDetailHref,
+} from "@/lib/content";
 import { getDictionary } from "@/lib/i18n";
 import { isLocale } from "@/lib/i18n/locales";
 
@@ -55,6 +59,7 @@ export default async function TopPage({
         </h2>
 
         <ServiceTabs
+          detailLabel={t.servicesPage.detailLabel}
           categories={SERVICE_CATEGORY_IDS.map((id) => ({
             id,
             label: t.services.categories[id],
@@ -63,6 +68,10 @@ export default async function TopPage({
               icon: card.icon,
               title: t.services.cards[card.id].title,
               body: t.services.cards[card.id].body,
+              detailHref:
+                "detail" in card
+                  ? serviceDetailHref(locale, card.detail)
+                  : undefined,
             })),
           }))}
         />

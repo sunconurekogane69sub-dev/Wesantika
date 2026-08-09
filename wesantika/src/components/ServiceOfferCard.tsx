@@ -16,10 +16,13 @@ import Link from "next/link";
  * English one and would otherwise push the image out of the card.
  *
  * Figma fills this slot #f7f7f7 (405:1986) but paints the same card white in
- * Group 108 (405:2329). White wins: the "DETAIL →" link measures 6.01:1 on it
- * against 4.67:1 on #f7f7f7, which only just clears the 4.5:1 that 20px
- * normal-weight text needs. The link is brand-ink rather than the file's
- * #036ae5 (5.00:1) for the same reason — same blue family, more headroom.
+ * Group 108 (405:2329). White wins: it is the ground the solid blue "DETAIL →"
+ * button was designed against on the highlight cards, and it keeps the card
+ * from competing with the button for attention.
+ *
+ * The card is taller than the 422px `min-h` now that the button is a 52px
+ * block rather than a line of text. That is why the height is a minimum and
+ * not fixed — all fourteen grow together, so the grid stays even.
  */
 export function ServiceOfferCard({
   title,
@@ -44,12 +47,20 @@ export function ServiceOfferCard({
       </h3>
 
       {detailHref ? (
+        /* The same 52px solid blue button the two highlight cards above the
+           grid use (586:806 / 586:808), so "DETAIL →" reads as one control
+           across the whole page. It was a bare text link here, which is why it
+           did not register as a button at all.
+
+           The label is bold where the file sets it regular: white on #0f84fd
+           measures 3.66:1, which only clears AA once the type counts as large,
+           and 20px needs to be bold to qualify. */
         <Link
           href={detailHref}
-          className="mt-[12px] self-start px-[26px] text-[20px] leading-[24px] font-normal whitespace-nowrap text-brand-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          className="mt-[16px] ml-[26px] inline-flex h-[52px] min-w-[130px] w-fit items-center justify-center gap-[6px] self-start rounded-btn bg-brand px-[20px] text-[20px] leading-[24px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink"
         >
           {detailLabel}
-          <span aria-hidden> →</span>
+          <span aria-hidden>→</span>
         </Link>
       ) : null}
 

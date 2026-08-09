@@ -58,36 +58,43 @@ export type ServiceCategoryId = (typeof SERVICE_CATEGORY_IDS)[number];
  *
  * Card ids are unique across every set so the dictionary can keep one flat
  * `services.cards` map instead of nesting by category.
+ *
+ * `detail` points at the long-form write-up the card's "DETAIL →" button opens.
+ * Twelve of the seventeen resolve. The five that do not — Legacy Modernization,
+ * Outsourcing, Offshore Teams, Generative AI Integration and IT Services — are
+ * the cards with no source page behind them, so they render without a button
+ * rather than with one that goes somewhere it does not belong. Give them a
+ * write-up in SERVICE_DETAIL_TOPICS and add `detail` here to light them up.
  */
 export const SERVICE_CARD_SETS = {
   custom: [
-    { id: "custom", icon: "/icons/icon-custom-software.svg" },
-    { id: "web", icon: "/icons/icon-web-app.svg" },
-    { id: "mobile", icon: "/icons/icon-mobile-app.svg" },
-    { id: "mvp", icon: "/icons/icon-mvp.svg" },
+    { id: "custom", icon: "/icons/icon-custom-software.svg", detail: "custom" },
+    { id: "web", icon: "/icons/icon-web-app.svg", detail: "web" },
+    { id: "mobile", icon: "/icons/icon-mobile-app.svg", detail: "mobile" },
+    { id: "mvp", icon: "/icons/icon-mvp.svg", detail: "mvp" },
     { id: "legacy", icon: "/icons/icon-legacy.svg" },
-    { id: "saas", icon: "/icons/icon-saas.svg" },
-    { id: "backend", icon: "/icons/icon-backend.svg" },
-    { id: "frontend", icon: "/icons/icon-frontend.svg" },
-    { id: "integration", icon: "/icons/icon-integration.svg" },
-    { id: "maintenance", icon: "/icons/icon-maintenance.svg" },
+    { id: "saas", icon: "/icons/icon-saas.svg", detail: "saas" },
+    { id: "backend", icon: "/icons/icon-backend.svg", detail: "backend" },
+    { id: "frontend", icon: "/icons/icon-frontend.svg", detail: "frontend" },
+    { id: "integration", icon: "/icons/icon-integration.svg", detail: "integration" },
+    { id: "maintenance", icon: "/icons/icon-maintenance.svg", detail: "maintenance" },
   ],
   offshore: [
     { id: "outsourcing", icon: "/icons/icon-outsourcing.svg" },
     { id: "offshoreTeams", icon: "/icons/icon-offshore.svg" },
   ],
   ai: [
-    { id: "aiDevelopment", icon: "/icons/icon-ai-development.svg" },
+    { id: "aiDevelopment", icon: "/icons/icon-ai-development.svg", detail: "ai" },
     { id: "generativeAi", icon: "/icons/icon-generative-ai.svg" },
   ],
   infrastructure: [
     { id: "itServices", icon: "/icons/icon-it-services.svg" },
-    { id: "devops", icon: "/icons/icon-devops.svg" },
-    { id: "cloudMigration", icon: "/icons/icon-cloud-migration.svg" },
+    { id: "devops", icon: "/icons/icon-devops.svg", detail: "devops" },
+    { id: "cloudMigration", icon: "/icons/icon-cloud-migration.svg", detail: "cloud" },
   ],
 } as const satisfies Record<
   ServiceCategoryId,
-  ReadonlyArray<{ id: string; icon: string }>
+  ReadonlyArray<{ id: string; icon: string; detail?: ServiceDetailId }>
 >;
 
 export type ServiceCardId =
