@@ -134,28 +134,79 @@ export type AiLabelId = (typeof AI_LABELS)[number]["id"];
    Services page — Figma 405:2302 (1672 x 9390)
    --------------------------------------------------------------------------- */
 
-/** Two large cards under the "Accelerate…" heading — Figma 405:1983 / 405:1990 */
-export const SERVICE_HIGHLIGHTS = [
-  { id: "ai", image: "/images/svc-ai.jpg", radius: 220 }, // 405:1985, r220
-  { id: "custom", image: "/images/svc-legacy.jpg", radius: 16 }, // 405:1992, r16
+/**
+ * Long-form service write-ups — Figma 586:813 and 586:1081.
+ *
+ * These are the only two topics with material so far. The slug is the URL
+ * segment under /services and the id keys into `serviceDetails` in the
+ * dictionary; adding a third is a matter of adding a row here plus its copy.
+ */
+export const SERVICE_DETAIL_TOPICS = [
+  { id: "ai", slug: "ai-development" }, // 586:813
+  { id: "custom", slug: "custom-software" }, // 586:1081
 ] as const;
+
+export type ServiceDetailId = (typeof SERVICE_DETAIL_TOPICS)[number]["id"];
+
+export const serviceDetailHref = (locale: string, id: ServiceDetailId) =>
+  `/${locale}/services/${
+    SERVICE_DETAIL_TOPICS.find((topic) => topic.id === id)!.slug
+  }`;
+
+/**
+ * Two large cards under the "Accelerate…" heading — Figma 586:1306 / 586:1298.
+ * Both were resized from ~497x574 to 420x485 and gained a "DETAIL →" button,
+ * which is the entry point to the long-form write-ups above.
+ */
+export const SERVICE_HIGHLIGHTS = [
+  { id: "ai", image: "/images/svc-ai.jpg", detail: "ai" }, // 405:1985
+  { id: "custom", image: "/images/svc-legacy.jpg", detail: "custom" }, // 405:1992
+] as const satisfies ReadonlyArray<{
+  id: string;
+  image: string;
+  detail: ServiceDetailId;
+}>;
 
 export type ServiceHighlightId = (typeof SERVICE_HIGHLIGHTS)[number]["id"];
 
 /**
- * The "Services We Offer" grid — Figma 405:2322 and siblings.
- * The artboard draws an 18-slot grid (3 x 6) but only the first card has
- * content; the rest are empty rectangles. Only the authored one is rendered
- * with content, and the remaining slots render as the empty cards they are.
- * Set SERVICE_OFFER_PLACEHOLDERS to 0 to hide them instead.
+ * The "Services We Offer" grid — Figma 405:2322 and siblings, 17 cards in a
+ * 3-column grid. All 17 are authored now; the empty placeholder slots are gone.
+ *
+ * `detail` is set only where a write-up actually exists. The file draws a
+ * "DETAIL →" button on every card, but 15 of them have nowhere to go, and a
+ * button that does nothing is worse than no button — so the two that resolve
+ * render it and the rest do not. Fill in `detail` as material arrives.
+ *
+ * The Web and Mobile illustrations are the only two slots Figma holds as vector
+ * groups rather than image fills (405:2002 / 405:2120); they are rebuilt as SVG
+ * from the file's own path geometry.
  */
 export const SERVICE_OFFER_CARDS = [
-  { id: "custom", image: "/images/svc-card-custom.png" }, // 405:2322
-] as const;
+  { id: "custom", image: "/images/svc-card-custom-software.png", detail: "custom" },
+  { id: "web", image: "/images/svc-card-web-app.svg" },
+  { id: "mobile", image: "/images/svc-card-mobile-app.svg" },
+  { id: "ai", image: "/images/svc-card-ai-development.png", detail: "ai" },
+  { id: "product", image: "/images/svc-card-software-product.png" },
+  { id: "enterprise", image: "/images/svc-card-enterprise.png" },
+  { id: "saas", image: "/images/svc-card-saas.png" },
+  { id: "hire", image: "/images/svc-card-hire-developers.png" },
+  { id: "qa", image: "/images/svc-card-qa-testing.png" },
+  { id: "integration", image: "/images/svc-card-integration.png" },
+  { id: "mvp", image: "/images/svc-card-mvp.png" },
+  { id: "poc", image: "/images/svc-card-poc.png" },
+  { id: "devops", image: "/images/svc-card-devops.png" },
+  { id: "cloud", image: "/images/svc-card-cloud-migration.png" },
+  { id: "backend", image: "/images/svc-card-backend.png" },
+  { id: "frontend", image: "/images/svc-card-frontend.png" },
+  { id: "maintenance", image: "/images/svc-card-maintenance.png" },
+] as const satisfies ReadonlyArray<{
+  id: string;
+  image: string;
+  detail?: ServiceDetailId;
+}>;
 
 export type ServiceOfferId = (typeof SERVICE_OFFER_CARDS)[number]["id"];
-
-export const SERVICE_OFFER_PLACEHOLDERS = 17;
 
 /**
  * "It requires :" points — Figma 405:2291-2293 with their icons.

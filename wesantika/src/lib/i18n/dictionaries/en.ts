@@ -249,6 +249,7 @@ export const en = {
 
   /** Services page — Figma 405:2302 */
   servicesPage: {
+    detailLabel: "DETAIL",
     metaTitle: "Software Development Services",
     metaDescription:
       "Wesantika delivers full-cycle software development services. Our custom solutions will meet your unique business needs.",
@@ -273,7 +274,71 @@ export const en = {
       cards: {
         custom: {
           title: "Custom Software Development",
-          body: "Our end-to-end software solution delivers tailored features, scalable performance, and full personalization. You will get the competitive advantage you deserve.",
+          body: "We tailor software development to your business needs, developing back-end, front-end, and custom integrations. Our solutions give your business an edge, helping you stay ahead in a fast-changing market.",
+        },
+        web: {
+          title: "Web Application Development",
+          body: "Define your business objectives, and we will craft a web application to achieve them. Our web development, agile project management, and web trend skills guarantee a high-ROI app that users will value. Our dedicated team ensures your web apps are equipped with modern, secure, and scalable solutions.",
+        },
+        mobile: {
+          title: "Mobile App Development",
+          body: "We conduct in-depth market research to create user-focused designs that help you stand out in a dynamic market. We build native and cross-platform applications designed for stable performance. Our strategy accelerates app launches, enhancing your competitive edge and fostering business growth.",
+        },
+        ai: {
+          title: "AI Development Services",
+          body: "The AI industry is still emerging, which makes in-house experts hard to find. We offer AI-integrated solutions to help you solve business challenges, automate tasks, and improve decision-making. Our support starts with a PoC or MVP to test ideas. This approach reduces risks and ensures success in the market.",
+        },
+        product: {
+          title: "Software Product Development",
+          body: "Our dedication to innovation and enhancement steers the process from concept to launch. The journey includes user-focused design and detailed features. Our process ensures your software is reliable. Support and maintenance continue after the launch, keeping your project running well.",
+        },
+        enterprise: {
+          title: "Enterprise Software Development",
+          body: "Enterprise software development must enhance how your business operates. Tailored solutions that boost efficiency and help your team work better are essential. Our focus is on aligning your software with your business goals, leading to improved operations and a stronger business.",
+        },
+        saas: {
+          title: "SaaS Application Development",
+          body: "Experienced vendors are essential for successfully delivering long-term and complex SaaS projects. Wesantika's seasoned engineers provide expert help, backed by over 12 years of experience. We create robust, intuitive SaaS solutions that empower modern businesses and drive the business forward with high-quality apps.",
+        },
+        hire: {
+          title: "Hire Software Developers",
+          body: "Our developers bring extensive experience from outsourcing environments, having participated in many global projects across various industries. Our team is adept at navigating challenges in any sector. Strong English skills and cultural knowledge help us interact with clients worldwide.",
+        },
+        qa: {
+          title: "Software QA Testing Services",
+          body: "Our QA team thoroughly tests every feature and function using a combination of automated and manual techniques. The team conducts stability checks during UAT before the release. Our QA engineers ensure high-quality software delivery on time, meeting global standards.",
+        },
+        integration: {
+          title: "Software Integration Services",
+          body: "Connect your apps, data, and devices with secure, scalable integrations - APIs, ERP/CRM, and cloud. Eliminate silos, automate workflows, and speed delivery.",
+        },
+        mvp: {
+          title: "MVP Software Development",
+          body: "MVP development helps you test your ideas quickly. We build only the most essential features. This lets you gather user feedback early. It saves time and helps refine your product without wasting resources.",
+        },
+        poc: {
+          title: "PoC Development Services",
+          body: "Our software development services deliver PoC development that proves your ideas' viability. We help you check before full development begins. This reduces risks and helps you decide the best path forward.",
+        },
+        devops: {
+          title: "DevOps Development Services",
+          body: "DevOps services connect development and operations. Our DevOps team accelerates software delivery and automates tasks to streamline workflows. By incorporating cutting-edge security tools, we greatly boost both efficiency and speed.",
+        },
+        cloud: {
+          title: "Cloud Migration Services",
+          body: "Moving your data and applications to the cloud is vital for modern software development. Cloud migration services help make this process smooth. Your data is secure, and your applications are ready for the cloud.",
+        },
+        backend: {
+          title: "Back-end Development Services",
+          body: "A robust back-end is crucial for your software. We focus on building strong server-side logic, incorporating advanced programming techniques to create efficient and reliable back-end systems. Database management gives your applications a solid foundation.",
+        },
+        frontend: {
+          title: "Front-End Development Services",
+          body: "We create user-friendly interfaces that excel in both aesthetics and functionality, designing eye-catching websites and responsive apps with a great UI. These interfaces keep users engaged and improve their experience.",
+        },
+        maintenance: {
+          title: "Software Maintenance and Support",
+          body: "Keeping your software up to date is essential. Our custom software development includes maintenance and support. Your applications stay in top shape so they can keep up with your changing business needs.",
         },
       },
     },
@@ -305,6 +370,117 @@ export const en = {
         "Modern Technology",
         "Reliable Quality & Security",
       ],
+    },
+  },
+  serviceDetails: {
+    ai: {
+      metaTitle: "AI Development Services",
+      metaDescription: "Our end-to-end menu of AI development services, from discovery and data engineering through LLM applications, MLOps and integration.",
+      eyebrow: "Services",
+      title: "Our AI Development Services",
+      intro: [
+        "Below is our end-to-end menu of artificial intelligence development services. Each service is structured to help decision-makers de-risk implementation while enabling fast delivery. If you need a full-cycle AI software development company for **PoC** → **MVP** → **production**, this is the typical engagement path.",
+      ],
+      cards: [
+        {
+          title: "AI Discovery & Feasibility",
+          body: "Our AI project discovery phase turns ideas into a buildable plan. We run use-case selection, ROI modeling, and data readiness assessment, then define acceptance criteria. Deliverables include requirements, KPI baselines, architecture, and a risk register that covers compliance, model risk, and integration dependencies.",
+        },
+        {
+          title: "Data Engineering for AI",
+          body: "Strong AI starts with reliable data pipelines. We handle data acquisition & preparation, training data preprocessing, governance, and feature pipelines, often including data audit and data quality validation checks. Deliverables include a data model, lineage documentation, validation rules, and scalable processing for ETL pipelines and big data workloads.",
+        },
+        {
+          title: "Custom ML Model Development",
+          body: "We build and validate machine learning models for forecasting, classification, recommendations, and anomaly detection. You receive transparent model performance reporting, training and validation artifacts, and explainability planning (XAI or white-box AI models when required). Deliverables include metrics, documentation, and deployment-ready model packages.",
+        },
+        {
+          title: "LLM Application Development",
+          body: "Our AI application development services focus on LLM products that work in real workflows: retrieval augmented generation (RAG), copilots, summarization, and content intelligence. We implement guardrails, prompt/version control, and evaluation harnesses for accuracy and hallucination control. Deliverables include test suites, security controls, and production app architecture.",
+        },
+        {
+          title: "Agentic Workflows (when appropriate)",
+          body: "Agentic AI development enables multi-step automation with tool use, approvals, and audit trails. We design agentic workflows with human-in-the-loop checkpoints, access controls, and rollback paths. Deliverables include workflow maps, permissions design, safety constraints, and operational runbooks for reliable execution.",
+        },
+        {
+          title: "MLOps / LLMOps & Productionization",
+          body: "We productionize with CI/CD, monitoring, drift detection, and model retraining and updates. This includes AIOps patterns and cloud and MLOps ecosystems such as MLflow and Kubeflow when appropriate. Deliverables include dashboards, alerting, runbooks, and operational support options so the system remains reliable and cost-controlled.",
+        },
+        {
+          title: "Integration & Modernization",
+          body: "AI fails when it's isolated. We integrate AI with your apps and data stack through APIs, event-driven workflows, and enterprise AI platforms. Deliverables include integration specifications, security controls (data encryption, identity), test plans, and change management support for teams adopting AI-powered business solutions.",
+        },
+      ],
+      cta: "Reach Out to Our Specialists",
+    },
+    custom: {
+      metaTitle: "Full-Stack Custom Software Development Services",
+      metaDescription: "From discovery and architecture through production support, our custom software development services cover the full lifecycle.",
+      eyebrow: "Services",
+      title: "Full-Stack Custom Software Development Services",
+      intro: [
+        "From discovery and architecture through production support, our custom software development services cover the full lifecycle. Each service below is a live capability staffed by senior engineers and tech leads, not a marketing line item.",
+        "Most clients start with one service and expand into custom software development solutions that span multiple disciplines - an AI feature delivered on top of an existing SaaS platform, or a legacy modernization paired with a new mobile front-end. We staff the right mix of seniors, mid-levels, and specialists for each phase, and we don't bill for ramp-up time we can't justify.",
+      ],
+      cards: [
+        {
+          title: "End-to-End Software Development",
+          body: "Requirements, **ui/ux design**, build, test, deploy, and maintain, with senior architects on every project.",
+        },
+        {
+          title: "AI Development Services",
+          body: "**Computer vision**, NLP, and machine learning and deep learning systems trained on your data and deployed to your cloud.",
+        },
+        {
+          title: "Generative AI Integration Services",
+          body: "LLM-powered features (chat, search, summarization) and **agentic AI** workflows with cost controls and prompt versioning.",
+        },
+        {
+          title: "Enterprise Custom Software Development",
+          body: "ERP, CRM, and back-office systems that integrate with your existing stack and business processes.",
+        },
+        {
+          title: "Web Application Development",
+          body: "React, Angular, and Vue web apps with WCAG 2.1 accessibility and performance budgets defined per project.",
+        },
+        {
+          title: "Mobile App Development",
+          body: "Native iOS/Android plus React Native and Flutter cross-platform apps.",
+        },
+        {
+          title: "MVP / PoC Development",
+          body: "Validate market fit through **software prototyping** and **product ideation** in 8-12 weeks, without burning runway on the wrong tech stack.",
+        },
+        {
+          title: "SaaS Application Development",
+          body: "Multi-tenant **cloud-based designs** on AWS, Azure, or GCP with usage-based billing built in.",
+        },
+        {
+          title: "Legacy Application Modernization",
+          body: "Incremental migration of **legacy systems** to cloud-native infrastructure. No big-bang rewrites, no frozen roadmaps.",
+        },
+        {
+          title: "API Development and Integration Services",
+          body: "REST, GraphQL, and gRPC APIs with rate limiting, versioning, and OpenAPI documentation.",
+        },
+        {
+          title: "Software Integration Services",
+          body: "API, ESB, and event-driven integrations across ERP, CRM, data warehouses, and identity providers.",
+        },
+        {
+          title: "Front-End Development",
+          body: "Accessible, responsive interfaces in React, Angular, or Vue with design-system handoff.",
+        },
+        {
+          title: "DevOps & Cloud Services",
+          body: "CI/CD pipelines, IaC, **cloud and multicloud** environments, and **post-deployment maintenance** for fast, reliable releases.",
+        },
+        {
+          title: "Software Maintenance and Support",
+          body: "24/7 monitoring, SLA-backed bug fixing, and update services on a fixed monthly fee.",
+        },
+      ],
+      cta: "Discuss Your Unique Needs",
     },
   },
 

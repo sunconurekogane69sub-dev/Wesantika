@@ -165,6 +165,7 @@ export const vi: PartialDictionary = {
   },
 
   servicesPage: {
+    detailLabel: "CHI TIẾT",
     metaTitle: "Dịch vụ phát triển phần mềm",
     metaDescription:
       "Wesantika cung cấp dịch vụ phát triển phần mềm trọn vòng đời, với các giải pháp riêng đáp ứng nhu cầu đặc thù của doanh nghiệp bạn.",

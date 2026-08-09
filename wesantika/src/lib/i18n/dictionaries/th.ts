@@ -162,6 +162,7 @@ export const th: PartialDictionary = {
   },
 
   servicesPage: {
+    detailLabel: "รายละเอียด",
     metaTitle: "บริการพัฒนาซอฟต์แวร์",
     metaDescription:
       "Wesantika ให้บริการพัฒนาซอฟต์แวร์แบบครบวงจร ด้วยโซลูชันที่ออกแบบเฉพาะเพื่อตอบโจทย์ธุรกิจของคุณ",

@@ -160,6 +160,7 @@ export const zhHantTW: PartialDictionary = {
   },
 
   servicesPage: {
+    detailLabel: "詳細內容",
     metaTitle: "軟體開發服務",
     metaDescription:
       "Wesantika 提供全週期的軟體開發服務，以客製化方案滿足您獨特的業務需求。",
