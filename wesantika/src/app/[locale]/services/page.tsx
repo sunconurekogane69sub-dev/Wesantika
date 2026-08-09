@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Icon } from "@/components/Icon";
 import { Nav } from "@/components/Nav";
+import { RfpDialog } from "@/components/RfpDialog";
 import {
   ServiceOfferCard,
   ServiceOfferPlaceholder,
@@ -211,12 +212,11 @@ export default async function ServicesPage({
                 </li>
               ))}
             </ul>
-            <a
-              href="#contact"
-              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px]"
-            >
-              {t.rfp.cta}
-            </a>
+            <RfpDialog
+              copy={t.rfpModal}
+              label={t.rfp.cta}
+              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
+            />
           </div>
           <div className="relative h-[260px] w-full sm:h-[340px] xl:h-auto xl:flex-1 xl:self-stretch">
             <Image

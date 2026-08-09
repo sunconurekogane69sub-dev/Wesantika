@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { AiProximityPanel } from "@/components/AiProximityPanel";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
+import { RfpDialog } from "@/components/RfpDialog";
 import { ServiceCard } from "@/components/ServiceCard";
 import { StickyContactRail } from "@/components/StickyContactRail";
 import { SERVICE_CARDS, SERVICE_CATEGORY_IDS } from "@/lib/content";
@@ -142,12 +143,11 @@ export default async function TopPage({
             </ul>
             {/* min-width, not a fixed 141px: the authored box left only ~8px of
                 side padding and clipped the label once rendered. */}
-            <a
-              href="#contact"
-              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px]"
-            >
-              {t.rfp.cta}
-            </a>
+            <RfpDialog
+              copy={t.rfpModal}
+              label={t.rfp.cta}
+              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
+            />
           </div>
 
           {/* self-stretch, not h-full: with the card free to grow there is no

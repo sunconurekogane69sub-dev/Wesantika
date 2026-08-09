@@ -433,6 +433,44 @@ export const en = {
     next: "Next",
   },
 
+  /** RFP modal — Figma 572:98 */
+  rfpModal: {
+    open: "Send Your RFP",
+    close: "Close",
+    headingLines: ["Your RFP, reviewed by experts", "in 24 hours"],
+    bodyLines: [
+      "AI-accelerated path from brief to working",
+      "prototype. Engineers, not sales.",
+    ],
+    checklist: [
+      "Clickable prototype of your core user flow",
+      "Workflow visualization mapping the full system",
+      "Architecture direction covering stack, integrations, and scale",
+      "Technical recommendation call with our engineering team",
+    ],
+    fields: {
+      name: "Name*",
+      phone: "Business Phone*",
+      company: "Company Name*",
+      email: "Email*",
+      brief: "Project Brief*",
+    },
+    chooseFile: "Choose file",
+    noFileChosen: "No file chosen",
+    submit: "Send RFP",
+    submitting: "Sending…",
+    sent: "Thanks — your RFP is on its way. We'll come back to you within 24 hours.",
+    previewLink: "View the delivered email",
+    errors: {
+      generic: "Something went wrong. Please try again.",
+      network: "Could not reach the server. Please check your connection.",
+      captchaMissing: "Please complete the verification below.",
+      captchaFailed: "Verification failed. Please try again.",
+      fileTooLarge: "That file is over the 10 MB limit.",
+      fileType: "That file type is not accepted.",
+    },
+  },
+
   rail: {
     email: "Email",
     telegram: "Telegram",

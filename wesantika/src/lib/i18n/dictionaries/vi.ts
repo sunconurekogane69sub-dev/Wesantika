@@ -285,6 +285,43 @@ export const vi: PartialDictionary = {
     next: "Sau",
   },
 
+  rfpModal: {
+    open: "Gửi yêu cầu",
+    close: "Đóng",
+    headingLines: ["Yêu cầu của bạn, được chuyên gia xem xét", "trong 24 giờ"],
+    bodyLines: [
+      "Lộ trình tăng tốc bằng AI, từ đề bài đến nguyên mẫu chạy được.",
+      "Làm việc với kỹ sư, không phải nhân viên bán hàng.",
+    ],
+    checklist: [
+      "Nguyên mẫu bấm được của luồng người dùng cốt lõi",
+      "Sơ đồ quy trình mô tả toàn bộ hệ thống",
+      "Định hướng kiến trúc gồm công nghệ, tích hợp và khả năng mở rộng",
+      "Buổi tư vấn kỹ thuật cùng đội ngũ kỹ sư của chúng tôi",
+    ],
+    fields: {
+      name: "Họ và tên*",
+      phone: "Điện thoại công việc*",
+      company: "Tên công ty*",
+      email: "Email*",
+      brief: "Mô tả dự án*",
+    },
+    chooseFile: "Chọn tệp",
+    noFileChosen: "Chưa chọn tệp nào",
+    submit: "Gửi yêu cầu",
+    submitting: "Đang gửi…",
+    sent: "Đã gửi — chúng tôi sẽ phản hồi trong vòng 24 giờ.",
+    previewLink: "Xem email đã gửi",
+    errors: {
+      generic: "Đã xảy ra lỗi. Vui lòng thử lại.",
+      network: "Không kết nối được tới máy chủ. Vui lòng kiểm tra đường truyền.",
+      captchaMissing: "Vui lòng hoàn tất phần xác minh bên dưới.",
+      captchaFailed: "Xác minh không thành công. Vui lòng thử lại.",
+      fileTooLarge: "Tệp vượt quá giới hạn 10 MB.",
+      fileType: "Không hỗ trợ định dạng tệp này.",
+    },
+  },
+
   rail: {
     email: "Email",
     telegram: "Telegram",

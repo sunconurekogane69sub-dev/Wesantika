@@ -368,6 +368,43 @@ export const ja: PartialDictionary = {
     next: "次へ",
   },
 
+  rfpModal: {
+    open: "RFPを送る",
+    close: "閉じる",
+    headingLines: ["専門家が24時間以内に", "あなたのRFPをレビューします"],
+    bodyLines: [
+      "要件書から動くプロトタイプまで、AIで加速。",
+      "営業ではなく、エンジニアが対応します。",
+    ],
+    checklist: [
+      "主要ユーザーフローの操作可能なプロトタイプ",
+      "システム全体を示すワークフロー図",
+      "技術スタック・連携・拡張性を含むアーキテクチャ方針",
+      "エンジニアリングチームによる技術提案のご説明",
+    ],
+    fields: {
+      name: "お名前*",
+      phone: "電話番号*",
+      company: "会社名*",
+      email: "メールアドレス*",
+      brief: "プロジェクト概要*",
+    },
+    chooseFile: "ファイルを選択",
+    noFileChosen: "ファイルが選択されていません",
+    submit: "RFPを送信",
+    submitting: "送信中…",
+    sent: "送信が完了しました。24時間以内にご連絡いたします。",
+    previewLink: "送信されたメールを確認する",
+    errors: {
+      generic: "問題が発生しました。もう一度お試しください。",
+      network: "サーバーに接続できませんでした。通信環境をご確認ください。",
+      captchaMissing: "下の認証を完了してください。",
+      captchaFailed: "認証に失敗しました。もう一度お試しください。",
+      fileTooLarge: "ファイルサイズが上限（10MB）を超えています。",
+      fileType: "この形式のファイルは受け付けていません。",
+    },
+  },
+
   rail: {
     email: "メール",
     telegram: "Telegram",

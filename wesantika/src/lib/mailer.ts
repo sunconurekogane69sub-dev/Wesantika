@@ -1,20 +1,21 @@
 import nodemailer, { type Transporter } from "nodemailer";
+import { env, envInt } from "./env";
 
 type Mailer = { transporter: Transporter; isTestAccount: boolean };
 
 let cached: Promise<Mailer> | null = null;
 
 async function create(): Promise<Mailer> {
-  const host = process.env.SMTP_HOST;
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
+  const host = env("SMTP_HOST");
+  const user = env("SMTP_USER");
+  const pass = env("SMTP_PASS");
 
   if (host && user && pass) {
     return {
       transporter: nodemailer.createTransport({
         host,
-        port: Number(process.env.SMTP_PORT ?? 587),
-        secure: process.env.SMTP_SECURE === "true",
+        port: envInt("SMTP_PORT", 587),
+        secure: env("SMTP_SECURE") === "true",
         auth: { user, pass },
       }),
       isTestAccount: false,

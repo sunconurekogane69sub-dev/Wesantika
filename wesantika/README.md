@@ -395,6 +395,61 @@ black, which would lose the dark part of the gradient.
 `favicon.ico` is a PNG wrapped in an ICO container (supported since IE11) rather
 than a legacy BMP-based icon.
 
+## RFP modal
+
+Figma `572:98` (976 × 700, 29px radius, photographic background). Opens from the
+"Send Your RFP" button on the Top, Services and Technologies pages — three
+server-rendered pages each drop in one `<RfpDialog>`, which carries both the
+trigger and the dialog.
+
+`src/components/RfpDialog.tsx` → `POST /api/rfp` → `src/lib/mailer.ts`
+
+| | |
+|---|---|
+| Fields | Name, Business Phone, Company Name, Email, Project Brief — all required |
+| Spam | Cloudflare Turnstile, verified server-side before any other work |
+| Attachment | optional, 10 MB cap, emailed as a real attachment |
+| Dialog | `aria-modal`, Escape, backdrop click, focus trap, scroll lock, focus returned to the trigger |
+
+**Turnstile** renders explicitly rather than via the script's automatic pass:
+the widget is created when the modal opens, which is after the script has
+already scanned the document. A spent token is reset on failure so a retry gets
+a fresh one.
+
+With the keys unset the app uses Cloudflare's documented **test keys**
+(`1x00000000000000000000AA` / `1x0000000000000000000000000000000AA`). The widget
+renders and the server-side `siteverify` call runs exactly as it will in
+production — only the key values change. Create a site at
+[dash.cloudflare.com → Turnstile](https://dash.cloudflare.com/?to=/:account/turnstile)
+and set `NEXT_PUBLIC_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY`.
+
+**`RFP_TO_EMAIL` is not set yet** — the address was cut off in the brief, so
+submissions currently fall back to `CONTACT_TO_EMAIL`, which is still the
+`.example` placeholder. Set it before launch.
+
+Verified end to end:
+
+```
+no captcha token          -> 400  {"error":"captcha_missing"}
+valid submission          -> 200  {"ok":true,"previewUrl":"https://ethereal.email/…"}
+missing required field    -> 422  {"error":"Company name is required."}
+invalid email             -> 422  {"error":"That email address looks invalid."}
+.pdf attachment           -> 200  (delivered as an attachment)
+disallowed type (.exe)    -> 415  {"error":"file_type"}
+11 MB file                -> 413  {"error":"file_too_large"}
+CRLF injected into a name -> 200  (stripped before it reaches a mail header)
+```
+
+### One trap worth knowing about
+
+`.env.example` declares every key with a blank value and `.env.local` is copied
+from it, so an unfilled key is `""` — not `undefined`. `??` keeps the empty
+string, which sent a **blank secret** to Cloudflare (every verification 400'd)
+and would have addressed mail to nobody. `src/lib/env.ts` now treats blank as
+unset, and every optional config read goes through it — the contact route and
+the mailer had the same latent bug, including `Number(SMTP_PORT ?? 587)`
+evaluating to port `0`.
+
 ## Contact form
 
 `src/components/ContactForm.tsx` → `POST /api/contact` → `src/lib/mailer.ts`

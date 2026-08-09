@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { env } from "@/lib/env";
 import { getMailer } from "@/lib/mailer";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const TO = process.env.CONTACT_TO_EMAIL ?? "contact@wesantika.example";
-const FROM = process.env.CONTACT_FROM_EMAIL ?? "no-reply@wesantika.example";
+const TO = env("CONTACT_TO_EMAIL") ?? "contact@wesantika.example";
+const FROM = env("CONTACT_FROM_EMAIL") ?? "no-reply@wesantika.example";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

@@ -279,6 +279,43 @@ export const zhHantTW: PartialDictionary = {
     next: "下一頁",
   },
 
+  rfpModal: {
+    open: "寄出需求規格書",
+    close: "關閉",
+    headingLines: ["您的需求規格書，由專家審視", "24 小時內回覆"],
+    bodyLines: [
+      "以 AI 加速，從需求直達可運作的原型。",
+      "由工程師對應，而非業務。",
+    ],
+    checklist: [
+      "核心使用者流程的可點擊原型",
+      "呈現整個系統的流程圖",
+      "涵蓋技術堆疊、整合與擴展性的架構方向",
+      "與工程團隊的技術建議會議",
+    ],
+    fields: {
+      name: "姓名*",
+      phone: "聯絡電話*",
+      company: "公司名稱*",
+      email: "電子郵件*",
+      brief: "專案說明*",
+    },
+    chooseFile: "選擇檔案",
+    noFileChosen: "尚未選擇檔案",
+    submit: "送出需求",
+    submitting: "傳送中…",
+    sent: "已送出，我們會在 24 小時內與您聯繫。",
+    previewLink: "檢視已寄出的郵件",
+    errors: {
+      generic: "發生問題，請再試一次。",
+      network: "無法連線至伺服器，請檢查您的網路連線。",
+      captchaMissing: "請先完成下方驗證。",
+      captchaFailed: "驗證失敗，請再試一次。",
+      fileTooLarge: "檔案超過 10 MB 上限。",
+      fileType: "不支援這種檔案格式。",
+    },
+  },
+
   rail: {
     email: "電子郵件",
     telegram: "Telegram",
