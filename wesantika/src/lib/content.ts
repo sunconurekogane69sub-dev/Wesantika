@@ -12,12 +12,37 @@ export const NAV_ITEMS = [
   { id: "about", href: "/about" },
   { id: "work", href: "/our-work" },
   { id: "technologies", href: "/technologies" },
-  { id: "blog", href: "/blog" },
+  // The Blog entry drawn at 180:585 is intentionally absent: the page was
+  // removed on request, and a nav label with no destination helps no one.
+  //
+  // Contact is deliberately *not* here either — it is the cyan pill at the end
+  // of the bar, which is the design's own treatment for it. Listing it twice
+  // would just make the bar longer.
 ] as const;
 
 export type NavId = (typeof NAV_ITEMS)[number]["id"];
 
-/** Right-edge sticky rail — Figma 180:600-622 */
+/**
+ * "What happens next" on the Contact page.
+ *
+ * ⚠ The wording of step 1 is a response-time commitment. It is written as one
+ * business day in the dictionaries because that is the ordinary B2B default,
+ * but nobody at Wesantika has confirmed it — see README's launch checklist.
+ */
+export const CONTACT_STEP_IDS = ["reply", "call", "proposal"] as const;
+
+export type ContactStepId = (typeof CONTACT_STEP_IDS)[number];
+
+/**
+ * Right-edge sticky rail — Figma 180:600-622.
+ *
+ * ⚠ LAUNCH BLOCKER: every href below is a placeholder. Figma supplied the four
+ * icons but no accounts, so these are guesses at the handle shape, not real
+ * destinations — `wa.me/00000000000` in particular resolves to a WhatsApp error
+ * page. The address uses `.example`, an RFC 2606 reserved TLD, so it cannot
+ * silently reach an inbox. Replace all four with the real accounts before
+ * launch; see the checklist in README.md.
+ */
 export const CONTACT_CHANNELS = [
   { id: "email", icon: "/icons/icon-mail.svg", href: "mailto:contact@wesantika.example" },
   { id: "telegram", icon: "/icons/icon-telegram.svg", href: "https://t.me/wesantika" },
@@ -135,15 +160,40 @@ export type AiLabelId = (typeof AI_LABELS)[number]["id"];
    --------------------------------------------------------------------------- */
 
 /**
- * Long-form service write-ups — Figma 586:813 and 586:1081.
+ * Long-form service write-ups. The slug is the URL segment under /services and
+ * the id keys into `serviceDetails` in the dictionary.
  *
- * These are the only two topics with material so far. The slug is the URL
- * segment under /services and the id keys into `serviceDetails` in the
- * dictionary; adding a third is a matter of adding a row here plus its copy.
+ * `ai` and `custom` come from Figma (586:813 / 586:1081). The other fifteen have
+ * no artboard: the design draws a "DETAIL →" button on all seventeen cards, so
+ * every card now has somewhere to go.
+ *
+ * On the copy: the client supplied a competitor's service pages as the source.
+ * Those pages were read for their *taxonomy* only — which sub-services belong
+ * under each heading, which is fact, not expression. Every sentence below is
+ * written for Wesantika and cross-checked against this repo's own technology
+ * stack (src/lib/tech-stack.ts) and case studies (src/lib/our-work.ts). No
+ * marketing copy was carried across; doing so would have been an infringement,
+ * and the Figma file already had that company's name left in it twice
+ * (250:1107, 405:1998), both since corrected.
  */
 export const SERVICE_DETAIL_TOPICS = [
   { id: "ai", slug: "ai-development" }, // 586:813
   { id: "custom", slug: "custom-software" }, // 586:1081
+  { id: "web", slug: "web-application-development" },
+  { id: "mobile", slug: "mobile-app-development" },
+  { id: "product", slug: "software-product-development" },
+  { id: "enterprise", slug: "enterprise-software-development" },
+  { id: "saas", slug: "saas-application-development" },
+  { id: "hire", slug: "hire-developers" },
+  { id: "qa", slug: "qa-testing" },
+  { id: "integration", slug: "software-integration" },
+  { id: "mvp", slug: "mvp-development" },
+  { id: "poc", slug: "poc-development" },
+  { id: "devops", slug: "devops-services" },
+  { id: "cloud", slug: "cloud-migration" },
+  { id: "backend", slug: "back-end-development" },
+  { id: "frontend", slug: "front-end-development" },
+  { id: "maintenance", slug: "software-maintenance-support" },
 ] as const;
 
 export type ServiceDetailId = (typeof SERVICE_DETAIL_TOPICS)[number]["id"];
@@ -173,10 +223,10 @@ export type ServiceHighlightId = (typeof SERVICE_HIGHLIGHTS)[number]["id"];
  * The "Services We Offer" grid — Figma 405:2322 and siblings, 17 cards in a
  * 3-column grid. All 17 are authored now; the empty placeholder slots are gone.
  *
- * `detail` is set only where a write-up actually exists. The file draws a
- * "DETAIL →" button on every card, but 15 of them have nowhere to go, and a
- * button that does nothing is worse than no button — so the two that resolve
- * render it and the rest do not. Fill in `detail` as material arrives.
+ * The file draws a "DETAIL →" button on every card, and all seventeen now
+ * resolve to a write-up. `detail` stays explicit rather than being inferred from
+ * `id`, so a new card cannot silently point at a page that does not exist —
+ * `ServiceOfferCard` renders the button only when `detail` is set.
  *
  * The Web and Mobile illustrations are the only two slots Figma holds as vector
  * groups rather than image fills (405:2002 / 405:2120); they are rebuilt as SVG
@@ -184,22 +234,22 @@ export type ServiceHighlightId = (typeof SERVICE_HIGHLIGHTS)[number]["id"];
  */
 export const SERVICE_OFFER_CARDS = [
   { id: "custom", image: "/images/svc-card-custom-software.png", detail: "custom" },
-  { id: "web", image: "/images/svc-card-web-app.svg" },
-  { id: "mobile", image: "/images/svc-card-mobile-app.svg" },
+  { id: "web", image: "/images/svc-card-web-app.svg", detail: "web" },
+  { id: "mobile", image: "/images/svc-card-mobile-app.svg", detail: "mobile" },
   { id: "ai", image: "/images/svc-card-ai-development.png", detail: "ai" },
-  { id: "product", image: "/images/svc-card-software-product.png" },
-  { id: "enterprise", image: "/images/svc-card-enterprise.png" },
-  { id: "saas", image: "/images/svc-card-saas.png" },
-  { id: "hire", image: "/images/svc-card-hire-developers.png" },
-  { id: "qa", image: "/images/svc-card-qa-testing.png" },
-  { id: "integration", image: "/images/svc-card-integration.png" },
-  { id: "mvp", image: "/images/svc-card-mvp.png" },
-  { id: "poc", image: "/images/svc-card-poc.png" },
-  { id: "devops", image: "/images/svc-card-devops.png" },
-  { id: "cloud", image: "/images/svc-card-cloud-migration.png" },
-  { id: "backend", image: "/images/svc-card-backend.png" },
-  { id: "frontend", image: "/images/svc-card-frontend.png" },
-  { id: "maintenance", image: "/images/svc-card-maintenance.png" },
+  { id: "product", image: "/images/svc-card-software-product.png", detail: "product" },
+  { id: "enterprise", image: "/images/svc-card-enterprise.png", detail: "enterprise" },
+  { id: "saas", image: "/images/svc-card-saas.png", detail: "saas" },
+  { id: "hire", image: "/images/svc-card-hire-developers.png", detail: "hire" },
+  { id: "qa", image: "/images/svc-card-qa-testing.png", detail: "qa" },
+  { id: "integration", image: "/images/svc-card-integration.png", detail: "integration" },
+  { id: "mvp", image: "/images/svc-card-mvp.png", detail: "mvp" },
+  { id: "poc", image: "/images/svc-card-poc.png", detail: "poc" },
+  { id: "devops", image: "/images/svc-card-devops.png", detail: "devops" },
+  { id: "cloud", image: "/images/svc-card-cloud-migration.png", detail: "cloud" },
+  { id: "backend", image: "/images/svc-card-backend.png", detail: "backend" },
+  { id: "frontend", image: "/images/svc-card-frontend.png", detail: "frontend" },
+  { id: "maintenance", image: "/images/svc-card-maintenance.png", detail: "maintenance" },
 ] as const satisfies ReadonlyArray<{
   id: string;
   image: string;
@@ -220,77 +270,6 @@ export const GLOBAL_TEAM_POINTS = [
 ] as const;
 
 export type GlobalTeamPointId = (typeof GLOBAL_TEAM_POINTS)[number]["id"];
-
-/* ---------------------------------------------------------------------------
-   Blog
-
-   This page has NO Figma artboard — the file only has the nav entry. Layout and
-   structure are designed here against the existing system, and the entries below
-   are sample content so the page renders meaningfully.
-
-   Everything user-visible lives in the dictionaries keyed by `slug`, so this
-   array is the only thing a CMS would need to replace.
-   --------------------------------------------------------------------------- */
-
-export type Article = {
-  slug: string;
-  /** category id — resolved through the dictionary */
-  category: string;
-  /** ISO date, formatted per locale at render time */
-  date: string;
-  image: string;
-  /** blog only */
-  readMinutes?: number;
-};
-
-export const BLOG_CATEGORIES = ["engineering", "ai", "design", "business"] as const;
-export type BlogCategoryId = (typeof BLOG_CATEGORIES)[number];
-
-/** Newest first — the first entry renders as the featured post. */
-export const BLOG_POSTS: readonly Article[] = [
-  {
-    slug: "prototype-in-24-hours",
-    category: "engineering",
-    date: "2026-08-01",
-    image: "/images/rfp-visual.png",
-    readMinutes: 6,
-  },
-  {
-    slug: "llmops-in-production",
-    category: "ai",
-    date: "2026-07-21",
-    image: "/images/ai-panel.png",
-    readMinutes: 9,
-  },
-  {
-    slug: "legacy-without-freezing",
-    category: "engineering",
-    date: "2026-07-08",
-    image: "/images/svc-legacy.jpg",
-    readMinutes: 7,
-  },
-  {
-    slug: "designing-for-five-locales",
-    category: "design",
-    date: "2026-06-24",
-    image: "/images/core-values.png",
-    readMinutes: 5,
-  },
-  {
-    slug: "offshore-teams-mistakes",
-    category: "business",
-    date: "2026-06-09",
-    image: "/images/svc-global.png",
-    readMinutes: 6,
-  },
-  {
-    slug: "retrieval-that-works",
-    category: "ai",
-    date: "2026-05-27",
-    image: "/images/svc-ai.jpg",
-    readMinutes: 8,
-  },
-];
 
 /** About Us narrative blocks — Figma 210:979-994 */
 export const ABOUT_BLOCK_IDS = [

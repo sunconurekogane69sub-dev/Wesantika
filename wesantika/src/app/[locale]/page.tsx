@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { AiProximityPanel } from "@/components/AiProximityPanel";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { RfpDialog } from "@/components/RfpDialog";
 import { ServiceTabs } from "@/components/ServiceTabs";
 import { StickyContactRail } from "@/components/StickyContactRail";
@@ -24,29 +25,22 @@ export default async function TopPage({
   return (
     <>
       <StickyContactRail labels={t.rail} />
+      <Nav locale={locale} nav={t.nav} />
+
+      <main id="main-content">
 
       {/* ---- Hero — 180:576 / 180:599 -------------------------------- */}
-      <section className="relative h-[620px] sm:h-[760px] xl:h-[941px]">
-        <Image
-          src="/images/top-hero.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
+      <PageHero
+          image="/images/top-hero.png"
+          // The photograph is darkest at the top; measured 3.6:1 for white
+          // there against 2.5:1 at the foot of the frame.
+          objectPosition="50% 0%"
+          size="home"
+          ink="white"
+          scrim
+          title={t.hero.title}
+          body={t.hero.subtitle}
         />
-        <Nav locale={locale} nav={t.nav} />
-        <div className="canvas relative h-full px-6 xl:px-0">
-          <div className="pt-[170px] sm:pt-[210px] xl:pt-[255px] xl:pl-[212px]">
-            <h1 className="max-w-[701px] text-[40px] leading-[1.2] font-bold text-white sm:text-[52px] xl:text-[64px] xl:leading-[77px]">
-              {t.hero.title}
-            </h1>
-            <p className="mt-[21px] max-w-[703px] text-[18px] leading-[26px] font-bold text-white xl:text-[24px] xl:leading-[29px]">
-              {t.hero.subtitle}
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* ---- Our Full-Range Services — 180:618-710 ------------------- */}
       <section className="canvas px-6 pt-[64px] xl:px-0 xl:pt-[88px]">
@@ -128,7 +122,7 @@ export default async function TopPage({
             <RfpDialog
               copy={t.rfpModal}
               label={t.rfp.cta}
-              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
+              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand-btn px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
             />
           </div>
 
@@ -146,6 +140,8 @@ export default async function TopPage({
           </div>
         </div>
       </section>
+
+      </main>
 
       <div className="mt-[80px] xl:mt-[107px]">
         <Footer strings={t.footer} />

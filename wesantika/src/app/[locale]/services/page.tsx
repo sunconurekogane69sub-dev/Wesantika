@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Icon } from "@/components/Icon";
 import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { RfpDialog } from "@/components/RfpDialog";
 import { ServiceOfferCard } from "@/components/ServiceOfferCard";
 import { StickyContactRail } from "@/components/StickyContactRail";
@@ -15,7 +16,8 @@ import {
   serviceDetailHref,
 } from "@/lib/content";
 import { getDictionary } from "@/lib/i18n";
-import { isLocale, LOCALE_CODES } from "@/lib/i18n/locales";
+import { isLocale } from "@/lib/i18n/locales";
+import { socialMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
   params,
@@ -29,12 +31,7 @@ export async function generateMetadata({
   return {
     title: t.servicesPage.metaTitle,
     description: t.servicesPage.metaDescription,
-    alternates: {
-      canonical: `/${locale}/services`,
-      languages: Object.fromEntries(
-        LOCALE_CODES.map((code) => [code, `/${code}/services`]),
-      ),
-    },
+    ...socialMetadata(locale, "/services"),
   };
 }
 
@@ -52,38 +49,34 @@ export default async function ServicesPage({
   return (
     <>
       <StickyContactRail labels={t.rail} />
+      <Nav locale={locale} nav={t.nav} />
+
+      <main id="main-content">
 
       {/* ---- Hero — 405:1949 / 405:1997-1998 / 405:1993 -------------- */}
-      <section className="relative h-[620px] sm:h-[780px] xl:h-[950px]">
-        <Image
-          src="/images/services-hero.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <Nav locale={locale} nav={t.nav} />
-        <div className="canvas relative h-full px-6 xl:px-0">
-          <div className="pt-[170px] sm:pt-[230px] xl:pt-[356px] xl:pl-[207px]">
-            {/* Both authored white (250:1106/1107) over the pale left side of the
-                photo — 2.8:1 even with a navy wash over it. Black measures
-                6.1:1 (headline) and 8.3:1 (body) unaided, so the wash is gone.
-                See `node scripts/ink-audit.mjs`. */}
-            <h1 className="max-w-[755px] text-[32px] leading-[1.2] font-bold text-black sm:text-[40px] xl:text-[48px] xl:leading-[58px]">
-              {s.hero.title}
-            </h1>
-            <p className="mt-[40px] max-w-[748px] text-[16px] leading-[24px] font-normal text-black xl:text-[20px]">
-              {s.hero.body}
-            </p>
-            <a
-              href="#contact"
-              className="mt-[48px] inline-flex h-[46px] min-w-[289px] items-center justify-center rounded-btn bg-brand px-[27px] text-[20px] leading-[24px] font-normal whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[60px]"
-            >
-              {s.hero.cta}
-            </a>
-          </div>
-        </div>
+      <PageHero
+          image="/images/services-hero.png"
+          objectPosition="50% 30%"
+          title={s.hero.title}
+          body={s.hero.body}
+        >
+          <Link
+            href={`/${locale}/contact`}
+            className="mt-[28px] inline-flex h-[48px] w-fit items-center justify-center rounded-btn bg-brand-btn px-[28px] text-[16px] leading-[24px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[32px]"
+          >
+            {s.hero.cta}
+          </Link>
+        </PageHero>
+
+      {/* The rest of the hero paragraph. It was a 334-character sub-head sat on
+          top of a heading and a CTA — eight lines of body copy inside a 560px
+          hero, which `npm run fit` showed overrunning in Vietnamese. The hero
+          keeps the opening claim; this is the remainder, in the body where it
+          belongs. */}
+      <section className="canvas px-6 pt-[56px] xl:px-[212px] xl:pt-[72px]">
+        <p className="max-w-[760px] text-[17px] leading-[28px] font-normal text-black/85 xl:text-[19px] xl:leading-[30px]">
+          {s.hero.bodyMore}
+        </p>
       </section>
 
       {/* ---- Accelerate — 405:1971 / 405:1983 / 405:1990 ------------- */}
@@ -119,7 +112,7 @@ export default async function ServicesPage({
                   and 20px needs to be bold to qualify. */}
               <Link
                 href={serviceDetailHref(locale, highlight.detail)}
-                className="relative mt-[17px] ml-[37px] inline-flex h-[52px] min-w-[130px] w-fit items-center justify-center rounded-btn bg-brand px-[16px] text-[20px] leading-[24px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink"
+                className="relative mt-[17px] ml-[37px] inline-flex h-[52px] min-w-[130px] w-fit items-center justify-center rounded-btn bg-brand-btn px-[16px] text-[20px] leading-[24px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink"
               >
                 {s.detailLabel}
                 <span aria-hidden>&nbsp;→</span>
@@ -229,7 +222,7 @@ export default async function ServicesPage({
             <RfpDialog
               copy={t.rfpModal}
               label={t.rfp.cta}
-              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
+              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand-btn px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
             />
           </div>
           <div className="relative h-[260px] w-full sm:h-[340px] xl:h-auto xl:flex-1 xl:self-stretch">
@@ -278,15 +271,17 @@ export default async function ServicesPage({
           </div>
 
           <div className="mt-[56px] flex justify-center xl:mt-[110px]">
-            <a
-              href="#contact"
-              className="inline-flex h-[46px] min-w-[300px] items-center justify-center rounded-btn border border-hairline bg-brand px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
+            <Link
+              href={`/${locale}/contact`}
+              className="inline-flex h-[46px] min-w-[300px] items-center justify-center rounded-btn border border-hairline bg-brand-btn px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
             >
               {s.why.cta}
-            </a>
+            </Link>
           </div>
         </div>
       </section>
+
+      </main>
 
       <Footer strings={t.footer} />
     </>

@@ -4,17 +4,12 @@ Implementation of the **Top**, **About Us**, **Services** and **Technologies**
 pages from the Figma file
 [Wesantika](https://www.figma.com/design/iexSBqWRZILgZ0R6SKKDgr/Wesantika)
 (`file key: iexSBqWRZILgZ0R6SKKDgr`, artboards `211:1002`, `210:1001`,
-`405:2302` and `508:66`), plus a **Blog** designed here — in five languages.
+`405:2302` and `508:66`), in five languages.
 
 The Services page is reached from the **Solution** nav entry and from the Top
 page's "See Service Details" button; the file has no separate "Services" nav
 item. Technologies is reached from the **Technologies** nav entry, which
 replaced Newsroom in the file.
-
-> **Blog has no Figma artboard.** The file only contains the nav entry. Its
-> layout, components and sample content are my design, built against the
-> existing system — it needs design review in a way the four designed pages do
-> not. See *Blog* below.
 
 ## Stack
 
@@ -79,13 +74,39 @@ under a locale segment:
 /ja/about       -> passes through
 ```
 
-All ten pages (5 locales × 2 pages) are statically prerendered via
-`generateStaticParams`. `<html lang>` is set per locale, and each page emits
-absolute `hreflang` alternates plus `x-default`. Set `NEXT_PUBLIC_SITE_URL` in
-production — crawlers ignore relative alternates.
+All 117 routes (5 locales × 5 pages, plus 17 service write-ups per locale) are
+prerendered via `generateStaticParams`, and `<html lang>` is set per locale.
 
 `dir` is hardcoded to `ltr`; all five locales are left-to-right. That attribute
 is where an RTL locale would hook in.
+
+### Metadata is built from one helper, on purpose
+
+`src/lib/metadata.ts` → `socialMetadata(locale, path)` returns `alternates`,
+`openGraph` and `twitter` together, and every page spreads it.
+
+That is not tidiness. **Next merges metadata shallowly**: a page that sets
+`alternates` replaces the layout's `alternates` outright, nested keys and all.
+A page declaring just a canonical URL therefore drops every `hreflang` link the
+layout set up — which is exactly what five pages here were doing. `openGraph`
+has the same trap.
+
+The helper deliberately omits `openGraph.title` and `openGraph.description`.
+When they are absent Next fills them from each page's own resolved title and
+description, then fills the Twitter card from the Open Graph values — so all 117
+pages get their own share card from one declaration. Setting them in the layout
+would instead stamp the site-level title onto every page.
+
+`src/lib/site.ts` resolves the absolute origin those tags need. `og:image` is
+`public/images/og.png`, 1200×630, rebuilt by `npm run og` from the brand logo
+over the navy gradient — no baked-in text, so it does not need five localised
+variants.
+
+Verify after any change to metadata:
+
+```
+curl -s localhost:3000/ja/about | grep -o '<meta[^>]*og:[^>]*>'
+```
 
 ### Catalogues
 
@@ -99,19 +120,40 @@ key, while arrays and strings replace wholesale, so a partly translated list can
 never come out half English. An empty string counts as "not translated" and
 falls back too.
 
-**Translation status**
+**Translation status — measured, not remembered**
 
-| Locale | Status |
-|---|---|
-| `en` | Complete (source) |
-| `ja` | Complete |
-| `zh-Hant-TW` · `th` · `vi` | Complete **except `about.blocks`** |
+```
+npm run i18n
+```
 
-`about.blocks` is the five long-form narrative sections on the About Us page.
-Those deliberately fall back to English: they are the copy that needs a human
-transcreation rather than a translation, and shipping unreviewed machine output
-as a company's mission statement is worse than shipping English. Drop the
-strings into the `about.blocks` key of the relevant file and they take effect
+An earlier hand-written table here claimed three locales were complete bar one
+section. They were at 47%. `scripts/i18n-coverage.mjs` walks the English
+catalogue and applies the same test `getDictionary` applies at runtime, so the
+number cannot drift from the truth again. It fails the build if a locale drops
+below its recorded floor, which stops a newly added English key from quietly
+diluting a locale.
+
+At the last run:
+
+| Locale | Covered | Falls back to English |
+|---|---|---|
+| `en` | source | — |
+| `ja` | 90.2% | 15 service write-ups (intro + cards), `about.blocks` |
+| `zh-Hant-TW` | 61.1% | 17 service write-ups, `about.blocks` |
+| `th` · `vi` | 60.8% | 17 service write-ups, `about.blocks` |
+
+Two gaps, both deliberate:
+
+- **`about.blocks`** — the five long-form narrative sections on About Us. These
+  need transcreation rather than translation; shipping unreviewed machine output
+  as a company's mission statement is worse than shipping English.
+- **`serviceDetails`** — the seventeen long-form service write-ups behind the
+  "DETAIL →" buttons, roughly 500 words each. That is ~25,000 words per locale
+  and the single largest remaining translation job. The card grids that link to
+  them *are* translated, so navigation is fully localised; only the write-ups
+  themselves fall back.
+
+Drop strings into the matching key of the relevant file and they take effect
 immediately — no code changes.
 
 **All non-English copy in this repo is machine-drafted and needs a native
@@ -332,49 +374,6 @@ and so on) are left as authored — the client confirmed these are partner
 companies and the projects were jointly developed. Verified: no `Sota`,
 `Saigon` or bare `Wesang` string reaches any rendered page.
 
-## Blog
-
-The page does not exist in Figma. It is built from the system the four designed
-pages establish — same type scale, same brand blue, same card radii and
-hairlines, same hero treatment (full-bleed image, navy scrim, white type at the
-212px inset) at a shorter height suited to a listing page.
-
-| | |
-|---|---|
-| Index | `/[locale]/blog` |
-| Article | `/[locale]/blog/[slug]` |
-| Listing | featured post + 3-column card grid |
-| Categories | Engineering · AI · Design · Business |
-
-`ArticleIndex` handles the featured entry, category filter and listing; its
-`variant` prop also supports a dated list layout, which is what a newsroom-style
-page would use.
-
-**Content**
-
-`BLOG_POSTS` in `src/lib/content.ts` holds only structure — slug, category, ISO
-date, image, read time. Every string lives in the dictionaries keyed by slug, so
-that array is the only thing a CMS would need to replace.
-
-**The 6 posts are sample content that I wrote.** They are plausible and on-topic,
-but they are not real articles and must be replaced before launch. Cover images
-are reused from the Figma exports rather than invented.
-
-Translation follows the pattern already in place: UI, categories and filters are
-translated for all five locales; article titles and excerpts are translated for
-Japanese; article bodies fall back to English everywhere. Translating sample
-copy further would be thrown away with the copy.
-
-**Dates** are formatted server-side with `Intl.DateTimeFormat` and passed to the
-client as strings, so no formatting runs during hydration. Note that Thai
-renders in the Buddhist era by default — `28 กรกฎาคม 2569` for 2026-07-28. That
-is locale-correct; `src/lib/date.ts` documents how to force Gregorian.
-
-**Not built:** pagination (unnecessary at 5–6 entries, and the filter is client
-state rather than a URL param for the same reason), author bylines, related
-articles, RSS, and a sitemap. The last two are worth adding now that there are 80
-URLs.
-
 ## Text colour over imagery
 
 **Ink is decided by measurement, not by the Figma value.** The file has
@@ -401,7 +400,7 @@ hero body ran from the pale left of the photo into the blue right-hand side, so
 | Ground | Ink | Scrim |
 |---|---|---|
 | Pale artwork (About, Services, Technologies heroes; Vision and Global bands) | black | none |
-| Dark artwork (Top hero, AI panel, Blog heroes) | white | only where the artwork is mixed |
+| Dark artwork (Top hero, AI panel) | white | only where the artwork is mixed |
 | Brand blue on a light ground | `--color-brand-ink` `#0b62bd` | — |
 
 `#0f84fd` reaches only 3.3:1 on the near-white bands it was used over, which
@@ -421,7 +420,7 @@ row, which was the actual failure. It now measures 5.1–8.4:1 on all five heroe
 
 > If you would rather keep the heroes completely clean, **dark nav type needs no
 > gradient at all** — it measures 5.5:1 on the Top hero and 11–12:1 on the other
-> three. Only the Blog heroes would keep white. Say the word and I will switch
+> three. Say the word and I will switch
 > it; white type was your brief, so it stays until you decide otherwise.
 
 Re-run `npm run ink` after any image or layout change. The regions are declared
@@ -678,30 +677,262 @@ Everything below is a deliberate change. Nothing else was altered.
   unclear and which overlaps the sticky rail) and `180:762` (an empty 48×48 frame
   with no contents).
 
-## Not built
+## Before launch
 
-Not designed yet, so not implemented. Nav entries for these render as inert text
-rather than links that go nowhere.
+Everything below is a placeholder that will ship broken. None of it can be
+filled in from the design file — each needs a real value from Wesantika.
 
-- Solution, Our Work, Newsroom, Blog, Contact pages
-- Service 1…N pages (the third artboard is still loose on the canvas, unframed)
-- Hover/focus/active states beyond the two specified interactions
-- Privacy Policy page (footer link is a placeholder)
-- `sitemap.xml` / `robots.txt` — worth adding now that there are ten localised
-  URLs
+| What | Where | Why it can't be guessed |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Vercel env, **all** environments | `NEXT_PUBLIC_*` is inlined at *build* time. Unset, canonical/`hreflang`/`og:image` fall back to `VERCEL_PROJECT_PRODUCTION_URL`, and failing that to `localhost:3000`. |
+| Four contact-rail links | `src/lib/content.ts` → `CONTACT_CHANNELS` | Figma gave icons, not accounts. `wa.me/00000000000` resolves to a WhatsApp error page; the Telegram and LINE handles are guesses at the shape. |
+| `CONTACT_TO_EMAIL`, `RFP_TO_EMAIL` | `.env` | Currently on `.example`, an RFC 2606 reserved TLD, so enquiries cannot reach anyone. |
+| SMTP credentials | `.env` | Without them the API provisions a disposable Ethereal mailbox — real SMTP, but nobody at Wesantika ever sees the mail. |
+| Turnstile key pair | `.env` | Cloudflare's "always passes" test keys are in use, so the RFP form has no actual spam protection. |
+| Privacy Policy | `src/components/Footer.tsx` | A legal document about how this company handles data. Held back rather than shipped pointing at `#`; restoring it is one `Link` once the text exists. |
+| "within one business day" | `contact.next.steps.reply` in all 5 dictionaries | A **response-time commitment** written into the Contact page. One business day is the ordinary B2B default, but nobody at Wesantika has confirmed Wesantika can meet it. Confirm or reword. |
 
 ## Still to do on the Services page
 
-- **Fifteen of the seventeen cards have no write-up.** The grid is fully
-  authored now, but only `custom` and `ai` have long-form material, so only
-  those two render a "DETAIL →" link. The file draws the button on a third card
-  (Web Application Development, `586:785`) as a sample of the pattern; it is not
-  rendered, because a button that goes nowhere is worse than no button. Add a
-  row to `SERVICE_DETAIL_TOPICS`, its copy under `serviceDetails`, and a
-  `detail:` key on the card in `SERVICE_OFFER_CARDS` and the link appears.
 - **The three "It requires" icons** (`405:2296`, `405:2297`, `405:2300`) are not
   exported — Figma's image API was rate limiting throughout. A neutral brand-blue
   marker stands in for them. They need one export run to replace.
+
+## Does the copy fit? `npm run fit`
+
+A hero is a box with a fixed height, and the copy inside it is five different
+lengths, because there are five locales — and the longest is never the one the
+layout was eyeballed against.
+
+That is exactly how the About Us hero came to overflow. `heroLead` is a
+240-character paragraph (272 in Vietnamese) set at the *heading* size. It fitted
+while the hero was 942px tall; at the 560px every interior hero now shares, nine
+lines of 48px type overran the section and spilled onto the content below.
+
+`scripts/fit-check.mjs` estimates rendered height per locale and fails if a
+block does not fit. It is deliberately pessimistic — average advance widths per
+script, no hyphenation, Thai combining marks counted as if they advanced (they
+do not) — so it over-predicts and complains before the browser does, which is
+the useful direction to be wrong in.
+
+It immediately found a second overflow nobody had reported: the **Technologies
+hero in Vietnamese**, at 480px in a 465px box, with English and Thai inside 15px
+of the same edge.
+
+| | worst locale, before | after |
+|---|---|---|
+| About | 465px+ (overflowing) | 225px of 465px |
+| Services | 420px | 270px |
+| Technologies | **480px (overflowing)** | 330px |
+
+### What changed
+
+**About Us.** `heroLead` is body copy, so it is set as body copy, and the page
+title moved up into the hero to be its heading. That also removed a real
+oddity: the hero used to hold a paragraph and the actual `h1` arrived *after*
+it, 64px and centred. The page now has one `h1`, in the hero, like the other
+four.
+
+Two more things on that page were the same fixed-pixel thinking:
+
+- The narrative blocks ran **16px across a 1273px measure** — about 160
+  characters a line, twice what is comfortable — at `leading-[19px]` (1.19) with
+  4px between paragraphs, so five paragraphs ran together into one grey mass.
+  Now 720px, 17/28, real spacing, and the pull quote looks like a pull quote.
+- The Vision band was a fixed 941px with its three parts pinned at `top-[123px]`
+  / `[211px]` / `[606px]`. Those numbers hold for exactly one string length. It
+  is normal flow now, so it cannot overflow and it sizes to whatever the longest
+  locale needs — and the ~240px of dead space at its foot is gone.
+
+**Services and Technologies.** Their heroes carried a whole paragraph as the
+sub-head — 334 and 466 characters — on top of a heading *and* a CTA button. Each
+is split at its first sentence: the hero keeps the opening claim, and the rest
+becomes `hero.bodyMore`, rendered as a lead paragraph directly beneath. No copy
+was lost and no new translation was needed. Thai has no sentence terminator, so
+its two break points are given explicitly in the split, each matching where the
+English sentence ends.
+
+## The polish pass
+
+Three things looked unfinished. None was a taste problem; all three were
+measurable, and the measurements are what drove the fixes.
+
+### Heroes: `src/components/PageHero.tsx`
+
+The six heroes were authored independently and had drifted apart in every
+dimension a reader notices:
+
+| | Top | About | Services | Tech | Our Work | Contact |
+|---|---|---|---|---|---|---|
+| height | 941 | 942 | 950 | 952 | 620 | 560 |
+| heading | 64 | 48 | 48 | 48 | 64 | 58 |
+| gutter | 212 | 213 | 207 | 217 | 212 | 212 |
+
+Technologies also positioned its copy with `xl:absolute top-[333px]
+left-[217px]` — a different mechanism from the other five. None of that was a
+decision; it accumulated. There are now **two** sizes: 760px for the landing
+page, 560px for every interior page. 941px was taller than the viewport of a
+1440×900 laptop, so an interior page opened on a photograph and nothing else.
+
+`objectPosition` is per-image and load-bearing. The six photographs all put the
+subject right and leave the left pale, but they disagree on where vertically,
+and the Figma exports (~1.8 aspect) crop very differently from the
+client-supplied art (1.50). Our Work is the clearest case — black copy measures
+**1.4:1** at `50% 50%` and **10.5:1** at `50% 0%`, because the artwork's middle
+band is a dark code editor. `npm run ink` models the exact crop, so a bad
+`objectPosition` fails the audit rather than shipping.
+
+#### One ground for all five interior heroes
+
+Unifying the CSS was not enough — the five still looked unrelated, because the
+*ground under the copy* was different on every one:
+
+| | what the copy actually sat on | black measured |
+|---|---|---|
+| About | sunset skyline, warm, balcony rail through it | 19.6:1 |
+| Services | clean pale blue | 17.2:1 |
+| Technologies | clean pale blue | 15.7:1 |
+| Our Work | **a browser mockup and a phone** | 10.0:1 |
+| Contact | clean pale blue | 19.2:1 |
+
+Contrast passed everywhere, so the audit was happy. That was never the problem:
+five different backdrops was, and the 10–20:1 spread is that difference in
+numbers. One page was warm-toned on a site whose other four are cool blue, and
+one had type sitting on UI furniture.
+
+So the copy always gets the same ground now. A white wash holds ~90% across the
+copy column and releases by 80% of the frame, so the photograph still arrives at
+full strength on the right — which is where all five put their subject. Black
+type, one ink, one field, every page. The five now measure **19.4–20.8:1**, a
+band tight enough that they read as one design.
+
+About also moved to `objectPosition: 50% 0%` — the sky rather than the skyline,
+which removes the one warm-toned hero.
+
+Below `xl` the copy runs the full width, where a left-to-right ramp would leave
+its right-hand end unwashed, so that breakpoint gets a flat wash instead.
+
+The wash is duplicated in `scripts/ink-audit.mjs` as the `pageWash` scrim so the
+audit measures what ships. **If you change one, change both.**
+
+One caveat worth knowing: `work-hero.png` is centre-weighted — its subject runs
+across the full frame — while the other four leave the left third empty. It is
+the one image the layout has to fight, and the wash is what makes it work. A
+right-weighted replacement would sit better.
+
+Two things that read as amateur are also gone: the Top hero's sub-head was
+**bold** purely so 24px would qualify as large text at 3.6:1 (a soft wash now
+buys the margin, so it is regular weight), and the Technologies heading and RFP
+body copy carried **hardcoded line breaks** from Figma, which broke at the wrong
+place in four of five languages.
+
+Hero images now render at `quality={90}`. They were being served at 75 —
+`quality` was silently coerced, because **Next 16 narrowed
+`images.qualities` from "anything" to `[75]`** and does not warn. On wide smooth
+gradients 75 bands visibly. Cost: 44KB → 62KB on one above-the-fold image.
+
+### The footer contact panel
+
+958px tall — taller than a 1440×900 viewport, for a footer. Now ~520px:
+
+- padding `156/100` → `88/88`
+- heading `36/44` → `30/38`; sub-head `20/24` → `17/26` (1.2 leading was cramped)
+- **fields pair up** — name/email and phone/company side by side from 640px, so
+  five stacked rows became two
+- input type `24px` → `16px`; 24px inputs read as display type, and they were
+  what forced the 52px rows and the 276px textarea
+- **labels are now visible.** They were `sr-only`, so the placeholder carried
+  the whole meaning: the moment you typed, the field stopped saying what it was,
+  and nothing marked which four were required
+- copyright line `24px` → `15px` — it was competing with page headings
+
+### The RFP modal
+
+- **It now opens.** It was `{open && <Modal/>}` — the panel appeared at full
+  size with no transition. It fades and lifts 8px over 200ms, and stays mounted
+  through the close so the exit animates too. `motion-reduce` drops to a fade.
+- **The background was a 52KB JPEG stretched to 204.756% height** at -93.380%
+  top with `brightness(1.52) contrast(1.3) saturate(1.19)` over it — Figma's
+  fill transform, reproduced faithfully. A photograph blown past 2× and pushed a
+  stop and a half brighter is soft, banded and washed out. It is a gradient now:
+  sharper at any size, no bytes, and *computable*, so the black pitch copy can
+  be checked arithmetically (15–19:1) instead of sampled off a photo.
+- Field borders were `#eaecf0` — **1.18:1**, so the inputs effectively had no
+  edge. WCAG 1.4.11 wants 3:1 for a control boundary; `#667085` gives 4.97:1.
+- Status messages sat directly on the artwork (white for success, pale salmon
+  for failure). They are chips now, readable regardless of what is behind them.
+- Columns were pinned at `439px + 389px` — numbers that added up to the old
+  976px panel and nothing else. The pitch column is fluid.
+
+### Primary buttons, site-wide
+
+White on `--color-brand` (`#0f84fd`) measures **3.66:1**. That clears AA only
+for large text — 24px, or 18.66px bold — and every primary button here is 16px
+bold, which is *under* the bold threshold. So every CTA on the site was
+technically short of AA. 18 fills moved to a new `--color-brand-btn`
+(`#0b62bd`, 6.01:1): the same hue one step down, which holds at any label size.
+Decorative uses of the brand blue are untouched.
+
+**To revert:** point `--color-brand-btn` at `--color-brand` in `globals.css`.
+Nothing else needs to change.
+
+## Contact page
+
+No Figma artboard exists for it; it was designed around one observation. The six
+"Contact Us" buttons scattered across the site all scrolled to the same footer
+form, so a company arriving with a signed-off RFP and a founder with an unnamed
+problem were funnelled into the same five fields. The page opens with **two
+front doors** and lets the visitor self-select — the RFP route reuses
+`RfpDialog` rather than duplicating its upload and Turnstile handling.
+
+All six CTAs now route to `/{locale}/contact` instead of `#contact`. The footer
+form stays on every other page and keeps its `id="contact"` anchor.
+
+Two things are suppressed on this page and both are deliberate:
+
+- **The footer form** (`<Footer withForm={false} />`) — two identical forms on
+  one page makes "Send Message" ambiguous in a screen reader's form list.
+- **`StickyContactRail`** — the four channels it hides behind hover are spelled
+  out in the sidebar, so the rail would only cover them up.
+
+`ContactForm` gained a `tone` prop rather than being forked: the footer sits on
+navy, this page on white. Field rhythm is identical in both, which is what keeps
+them reading as one form in two places.
+
+### The channel icons were invisible, twice over
+
+Under "Or reach us directly" the four icons rendered as nothing at all, for two
+independent reasons:
+
+1. They were served through **`next/image`, which refuses SVG** unless
+   `dangerouslyAllowSVG` is set. `src/components/Icon.tsx` exists precisely
+   because of that, and the rest of the site uses it.
+2. All four are authored **`fill="white"`** — they were drawn for the brand-blue
+   sticky rail. Even once loading, they were white on a white card.
+
+They now get the rail's own treatment: white glyph on a `brand-btn` disc
+(6.01:1, well past the 3:1 a graphic needs). The two places a visitor can reach
+these channels look like the same thing, because they are.
+
+### Brand colours on this page
+
+`--color-brand-tint` (`#eef5ff`, brand blue at ~7% over white) was added to the
+token set. The page had been reaching for an ad-hoc `#f4f8fd` because the
+palette had no tinted surface — every other page had been solving the same
+problem the same ad-hoc way. Black measures 19.1:1 on it and `brand-ink` 5.5:1.
+
+The "Send a message" card now sits on that tint with a brand border, so the two
+routes are not a coin toss, and the three section gutters moved from 160px to
+the 212px the hero and the rest of the site use.
+
+## Not built
+
+Not designed yet, so not implemented. The nav lists only pages that exist — an
+entry with no destination is removed rather than rendered inert, because
+`Nav` builds every `href` from the locale segment and a null one produced
+`/ennull`.
+
+- Hover/focus/active states beyond the two specified interactions
 
 ## Known content issues in the source file
 

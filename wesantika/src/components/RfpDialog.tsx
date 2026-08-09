@@ -38,7 +38,7 @@ export type RfpCopy = {
    * weight 800. Split so each locale chooses where the emphasis falls.
    */
   heading: { lead: string; emphasis: string; trail: string };
-  bodyLines: string[];
+  body: string;
   checklist: string[];
   fields: {
     name: string;
@@ -69,8 +69,15 @@ type Status =
   | { kind: "sent"; previewUrl: string | null }
   | { kind: "error"; message: string };
 
+/**
+ * `#eaecf0` measured 1.18:1 against the white field — an input boundary needs
+ * 3:1 under WCAG 1.4.11, so the fields effectively had no edge. `#667085` is
+ * 4.97:1. Text was 14px **semibold**, which is display styling on a form
+ * control and made what the user typed look like a label; 15px regular with
+ * 14px of side padding reads as an input.
+ */
 const FIELD =
-  "h-[46px] w-full rounded-[6px] border border-[#eaecf0] bg-white px-[9px] text-[14px] leading-[20px] font-semibold text-black outline-none transition-colors placeholder:text-[#757575] focus:border-brand disabled:opacity-60";
+  "h-[48px] w-full rounded-[8px] border border-[#667085] bg-white px-[14px] text-[15px] leading-[22px] font-normal text-black outline-none transition-colors placeholder:font-normal placeholder:text-[#667085] focus:border-brand-btn focus:ring-2 focus:ring-brand-btn/25 disabled:opacity-60";
 
 /**
  * RFP modal — Figma 572:98 (976 x 700, 29px radius, photographic background).
@@ -91,11 +98,23 @@ export function RfpDialog({
   label: string;
 }) {
   const [open, setOpen] = useState(false);
+  /**
+   * Kept mounted for the length of the close transition. Without it the panel
+   * is torn out of the DOM the instant the state flips, so there is nothing
+   * left to animate and the dialog vanishes rather than closing.
+   */
+  const [closing, setClosing] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   const close = useCallback(() => {
-    setOpen(false);
-    triggerRef.current?.focus();
+    setClosing(true);
+    // Matches the 200ms exit on the panel. Focus returns with the dialog still
+    // on screen, which is what keeps the return from feeling like a jump cut.
+    window.setTimeout(() => {
+      setOpen(false);
+      setClosing(false);
+      triggerRef.current?.focus();
+    }, 200);
   }, []);
 
   return (
@@ -108,13 +127,32 @@ export function RfpDialog({
       >
         {label}
       </button>
-      {open && <Modal copy={copy} onClose={close} />}
+      {open && <Modal copy={copy} onClose={close} closing={closing} />}
     </>
   );
 }
 
-function Modal({ copy, onClose }: { copy: RfpCopy; onClose: () => void }) {
+function Modal({
+  copy,
+  onClose,
+  closing,
+}: {
+  copy: RfpCopy;
+  onClose: () => void;
+  closing: boolean;
+}) {
   const titleId = useId();
+  /**
+   * Off for the first paint, on from the next frame — the standard way to get
+   * a CSS transition out of an element that has only just mounted. The dialog
+   * used to appear at full size with no transition at all.
+   */
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setShown(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+  const visible = shown && !closing;
   const panelRef = useRef<HTMLDivElement>(null);
   const captchaRef = useRef<HTMLDivElement>(null);
   const widgetId = useRef<string | null>(null);
@@ -246,7 +284,9 @@ function Modal({ copy, onClose }: { copy: RfpCopy; onClose: () => void }) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/60 p-4 sm:p-6"
+      className={`fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto p-4 transition-colors duration-200 ease-out sm:p-6 ${
+        visible ? "bg-black/60" : "bg-black/0"
+      }`}
       onMouseDown={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
@@ -256,35 +296,36 @@ function Modal({ copy, onClose }: { copy: RfpCopy; onClose: () => void }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="relative my-auto w-full max-w-[976px] overflow-hidden rounded-[29px] bg-navy-900"
+        // 8px and 0.98 — a lift, not a bounce. Anything larger reads as a
+        // toy on a panel this size. `motion-reduce` drops it to a plain fade.
+        className={`relative my-auto w-full max-w-[1000px] overflow-hidden rounded-[24px] bg-navy-900 shadow-[0_24px_64px_-12px_rgba(4,29,56,0.45)] transition-[opacity,transform] duration-200 ease-out motion-reduce:transform-none ${
+          visible ? "translate-y-0 scale-100 opacity-100" : "translate-y-[8px] scale-[0.98] opacity-0"
+        }`}
       >
-        {/* Figma's image adjustments are NOT baked into the exported asset, and
-            the fill is cropped. Both are reproduced here from the fill's own
-            numbers (572:98):
+        {/*
+          Was a 52KB JPEG stretched to 204.756% height at -93.380% top with
+          `brightness(1.52) contrast(1.3) saturate(1.19)` on top — the numbers
+          came straight out of Figma's fill transform. Reproducing them was
+          faithful and it looked it: a photograph blown up past 2x and then
+          pushed a stop and a half brighter is soft, banded and washed out, on
+          the one surface a prospect fills in before sending money.
 
-              imageTransform [[1,0,0.0018],[0,0.48839,0.45606]]
-                -> full width, and the vertical band from 45.6% to 94.4%
-                   stretched over the panel, hence height 204.756% at -93.380%.
-              filters {exposure .52, contrast .30, saturation .19}
-                -> the CSS equivalents below.
+          A gradient is sharper at any size, weighs nothing, and — the reason
+          it is here — is *computable*. The pitch column is black type and the
+          form column's status chip is dark on white, so both grounds can be
+          checked arithmetically instead of sampled off a photo:
 
-            Without these the raw asset renders far darker and flatter than the
-            design, which is what made the white heading look wrong. */}
-        <div aria-hidden className="absolute inset-0 overflow-hidden rounded-[29px]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/rfp-modal-bg.jpg"
-            alt=""
-            className="absolute max-w-none"
-            style={{
-              left: "-0.183%",
-              top: "-93.380%",
-              width: "100%",
-              height: "204.756%",
-              filter: "brightness(1.52) contrast(1.3) saturate(1.19)",
-            }}
-          />
-        </div>
+            x=5%..50%   #eef6ff..#dbebff   black   16.5:1
+            x=52%..96%  #7fb8ee..#0a3f7a   white on the chip, not on this
+        */}
+        <div
+          aria-hidden
+          className="absolute inset-0 rounded-[24px]"
+          style={{
+            background:
+              "linear-gradient(100deg, #eef6ff 0%, #dbebff 46%, #7fb8ee 72%, #0a3f7a 100%)",
+          }}
+        />
 
         <button
           type="button"
@@ -295,39 +336,43 @@ function Modal({ copy, onClose }: { copy: RfpCopy; onClose: () => void }) {
           ×
         </button>
 
-        <div className="relative grid gap-[28px] p-[28px] sm:p-[40px] lg:grid-cols-[439px_389px] lg:gap-[42px] lg:px-[49px] lg:py-[52px]">
+        {/* Columns were pinned at 439px + 389px, so they added up to the old
+            976px panel and nothing else. Fluid pitch column, fixed form. */}
+        <div className="relative grid gap-[32px] p-[24px] sm:p-[32px] lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-[48px] lg:p-[44px]">
           {/* ---- pitch ------------------------------------------------ */}
-          <div className="lg:pt-[45px]">
-            {/* Black on this bright-blue ground measures 5.4-6.1:1; the white
-                emphasis is 3.4:1, which clears AA for 32px/800. Measured off the
-                Figma render of 572:98. */}
+          <div className="lg:pt-[8px]">
+            {/*
+              The emphasis was white on this ground at 3.4:1 — legal only
+              because it is 32px/800, and it read as a different heading rather
+              than as emphasis within one. Brand ink keeps it a highlight and
+              measures 5.4:1, so it holds at any size and any translation.
+            */}
             <h2
               id={titleId}
-              className="max-w-[439px] text-[26px] leading-[1.2] font-semibold text-black sm:text-[32px] sm:leading-[38px]"
+              className="text-[24px] leading-[1.25] font-bold text-black sm:text-[30px] sm:leading-[38px]"
             >
               {copy.heading.lead}{" "}
-              <span className="font-extrabold text-white">{copy.heading.emphasis}</span>
+              <span className="text-brand-ink">{copy.heading.emphasis}</span>
               {copy.heading.trail ? <> {copy.heading.trail}</> : null}
             </h2>
 
-            <p className="mt-[24px] text-[16px] leading-[24px] font-bold text-black sm:text-[18px] sm:leading-[27px]">
-              {copy.bodyLines.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
+            {/* Body copy was bold, and broken at a fixed point carried over
+                from the Figma line break. Both are gone: regular weight, and
+                it wraps to whatever width the reader actually has. */}
+            <p className="mt-[16px] max-w-[420px] text-[16px] leading-[26px] font-normal text-black/80">
+              {copy.body}
             </p>
 
-            <ul className="mt-[36px] flex flex-col gap-[10px]">
+            <ul className="mt-[28px] flex flex-col gap-[14px]">
               {copy.checklist.map((item) => (
                 <li key={item} className="flex gap-[12px]">
                   <Icon
                     src="/icons/icon-rfp-check.svg"
-                    width={24}
-                    height={24}
-                    className="mt-[2px] h-[24px] w-[24px] shrink-0"
+                    width={20}
+                    height={20}
+                    className="mt-[3px] h-[20px] w-[20px] shrink-0"
                   />
-                  <span className="text-[16px] leading-[24px] font-bold text-black sm:text-[18px] sm:leading-[27px]">
+                  <span className="text-[15px] leading-[24px] font-normal text-black/85">
                     {item}
                   </span>
                 </li>
@@ -360,7 +405,7 @@ function Modal({ copy, onClose }: { copy: RfpCopy; onClose: () => void }) {
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={sending}
-                className="flex h-[42px] cursor-pointer items-center gap-[8px] rounded-[12px] bg-brand px-[16px] text-[14px] leading-none font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
+                className="flex h-[42px] cursor-pointer items-center gap-[8px] rounded-[12px] bg-brand-btn px-[16px] text-[14px] leading-none font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
               >
                 <Icon src="/icons/icon-upload.svg" width={18} height={18} className="h-[18px] w-[18px]" />
                 {copy.chooseFile}
@@ -381,14 +426,21 @@ function Modal({ copy, onClose }: { copy: RfpCopy; onClose: () => void }) {
             <button
               type="submit"
               disabled={sending}
-              className="flex h-[52px] w-full items-center justify-center rounded-btn bg-brand text-[16px] leading-[24px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex h-[52px] w-full items-center justify-center rounded-btn bg-brand-btn text-[16px] leading-[24px] font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {sending ? copy.submitting : copy.submit}
             </button>
 
+            {/*
+              Both messages used to be set directly on the panel background —
+              white for success, a pale salmon for failure — which tied their
+              legibility to whatever the artwork happened to be doing at that
+              point. On a chip they are readable regardless, and an error that
+              announces itself is worth more than one that blends in.
+            */}
             <div aria-live="polite" className="min-h-[22px]">
               {status.kind === "sent" && (
-                <p className="text-[15px] leading-[22px] font-medium text-white">
+                <p className="rounded-[10px] bg-white px-[14px] py-[10px] text-[15px] leading-[22px] font-medium text-black">
                   {copy.sent}
                   {status.previewUrl && (
                     <>
@@ -397,7 +449,7 @@ function Modal({ copy, onClose }: { copy: RfpCopy; onClose: () => void }) {
                         href={status.previewUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="underline decoration-white/50 underline-offset-2 hover:decoration-white"
+                        className="text-brand-ink underline decoration-brand-ink/50 underline-offset-2 hover:decoration-brand-ink"
                       >
                         {copy.previewLink}
                       </a>
@@ -406,7 +458,7 @@ function Modal({ copy, onClose }: { copy: RfpCopy; onClose: () => void }) {
                 </p>
               )}
               {status.kind === "error" && (
-                <p className="text-[15px] leading-[22px] font-medium text-[#ffd0c9]">
+                <p className="rounded-[10px] bg-white px-[14px] py-[10px] text-[15px] leading-[22px] font-medium text-[#b3261e]">
                   {status.message}
                 </p>
               )}

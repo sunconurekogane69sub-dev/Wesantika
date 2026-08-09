@@ -15,7 +15,13 @@ export function proxy(request: NextRequest) {
   const segments = pathname.split("/").filter(Boolean);
   const first = segments[0];
 
-  if (first && isLocale(first)) return NextResponse.next();
+  // Pass the resolved locale downstream. `not-found.tsx` cannot read route
+  // params, and it is the one page that has to render without them.
+  if (first && isLocale(first)) {
+    const headers = new Headers(request.headers);
+    headers.set("x-locale", first);
+    return NextResponse.next({ request: { headers } });
+  }
 
   if (first) {
     const canonical = resolveLocale(first);

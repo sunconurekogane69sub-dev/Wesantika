@@ -23,6 +23,21 @@
      `node scripts/ink-audit.mjs`. */
   --color-brand-ink: #0b62bd;
 
+  /* Primary button fill.
+     White on --color-brand measures 3.66:1. That clears AA only for text that
+     counts as large — 24px, or 18.66px bold — and every primary button on this
+     site is 16px bold, which is under the bold threshold. So every CTA was
+     technically short of AA. This is the same hue one step down, at 6.01:1, and
+     it holds at any label size.
+     Revert by pointing this at --color-brand; nothing else needs to change. */
+  --color-brand-btn: #0b62bd;
+
+  /* Brand blue laid over white at ~7%. The tinted surface the site kept
+     needing and did not have, so pages were reaching for ad-hoc greys and
+     one-off hexes like #f4f8fd instead. Black measures 18.4:1 on it and
+     --color-brand-ink 5.7:1, so both inks are safe here. */
+  --color-brand-tint: #eef5ff;
+
   /* Footer / form navies */
   --color-navy-950: #041d38; /* copyright bar */
   --color-navy-900: #062a52; /* footer panel */

@@ -24,7 +24,6 @@ export const vi: PartialDictionary = {
     about: "Về chúng tôi",
     work: "Dự án",
     technologies: "Công nghệ",
-    blog: "Blog",
     contact: "Liên hệ",
     openMenu: "Mở menu",
     languageLabel: "Đổi ngôn ngữ",
@@ -92,6 +91,38 @@ export const vi: PartialDictionary = {
         title: "Bảo trì và hỗ trợ phần mềm",
         body: "Giám sát 24/7, bảo trì chủ động và nâng cấp tính năng. Các giải pháp của chúng tôi đảm bảo SLA nghiêm ngặt về tính ổn định, bảo mật và hiệu năng dài hạn của hệ thống.",
       },
+      outsourcing: {
+        title: "Thuê ngoài phát triển phần mềm",
+        body: "Chúng tôi có năm mô hình thuê ngoài. Khi thuê ngoài phát triển phần mềm tại Việt Nam, bạn có thể tập trung vào hoạt động cốt lõi trong khi rút ngắn thời gian ra thị trường.",
+      },
+      offshoreTeams: {
+        title: "Giải pháp phát triển offshore",
+        body: "Phỏng vấn các lập trình viên hàng đầu ngay hôm nay. Đội ngũ của chúng tôi cung cấp dịch vụ phần mềm offshore chất lượng cao tại Việt Nam với chi phí hợp lý.",
+      },
+      aiDevelopment: {
+        title: "Dịch vụ phát triển AI",
+        body: "Kết hợp AI tiên tiến với học máy, chúng tôi xây dựng phần mềm thông minh giúp tinh gọn vận hành và nâng cao chất lượng ra quyết định, đưa doanh nghiệp của bạn đến hiệu quả và đổi mới.",
+      },
+      generativeAi: {
+        title: "Dịch vụ tích hợp AI tạo sinh",
+        body: "Tích hợp AI tạo sinh vào sản phẩm để tự động hóa quy trình. Chúng tôi cá nhân hóa trải nghiệm, giảm chi phí và mở rộng an toàn theo chuẩn tuân thủ doanh nghiệp.",
+      },
+      qaTesting: {
+        title: "Dịch vụ kiểm thử QA phần mềm",
+        body: "Kiểm thử thủ công và tự động với Selenium, Cypress và CI/CD. Phạm vi bao gồm chức năng, bảo mật và hiệu năng, giúp phát hành nhanh hơn và giảm rủi ro.",
+      },
+      itServices: {
+        title: "Dịch vụ CNTT",
+        body: "Chúng tôi đóng vai trò đối tác CNTT thuê ngoài trọn gói hoặc phần mở rộng chuyên môn cho đội ngũ của bạn, giảm thời gian gián đoạn, tối ưu hiệu năng và mang lại kết quả kinh doanh đo lường được.",
+      },
+      devops: {
+        title: "Dịch vụ phát triển DevOps",
+        body: "Kết hợp AI tiên tiến với học máy, chúng tôi xây dựng phần mềm thông minh giúp tinh gọn vận hành và nâng cao chất lượng ra quyết định, đưa doanh nghiệp của bạn đến hiệu quả và đổi mới.",
+      },
+      cloudMigration: {
+        title: "Dịch vụ di chuyển lên đám mây",
+        body: "Chuyển khối lượng công việc sang AWS, Azure và GCP theo chiến lược rehost, replatform và refactor. Chúng tôi bảo đảm gián đoạn tối thiểu, tuân thủ, tối ưu chi phí và khả năng mở rộng.",
+      },
     },
   },
 
@@ -124,6 +155,56 @@ export const vi: PartialDictionary = {
     ],
   },
 
+  contact: {
+    metaTitle: "Liên hệ",
+    metaDescription:
+      "Hãy cho chúng tôi biết bạn đang xây dựng điều gì. Gửi tin nhắn, dùng kênh liên hệ trực tiếp, hoặc gửi RFP - chúng tôi sẽ trả lời cụ thể, không phải bằng một tờ giới thiệu.",
+    heroTitle: "Hãy trao đổi về những gì bạn đang xây dựng",
+    heroBody:
+      "Dù bạn đã có bản đặc tả được phê duyệt hay mới chỉ có một vấn đề chưa gọi được tên, cuộc trao đổi đầu tiên vẫn giống nhau: điều gì cần đúng để việc này chạy được?",
+    paths: {
+      heading: "Hai cách bắt đầu",
+      message: {
+        title: "Gửi tin nhắn",
+        body: "Phù hợp cho trao đổi ban đầu - xác định phạm vi, đánh giá khả thi, hoặc một câu hỏi bạn muốn có câu trả lời thẳng thắn.",
+        cta: "Viết cho chúng tôi",
+      },
+      rfp: {
+        title: "Gửi RFP",
+        body: "Phù hợp khi yêu cầu, tiến độ và ngân sách đã rõ. Đính kèm tài liệu và chúng tôi sẽ phản hồi đúng theo đó.",
+        cta: "Gửi RFP của bạn",
+      },
+    },
+    form: {
+      heading: "Gửi tin nhắn cho chúng tôi",
+      body: "Bạn mô tả vấn đề càng rõ, phản hồi đầu tiên của chúng tôi càng hữu ích.",
+    },
+    channels: {
+      heading: "Hoặc liên hệ trực tiếp",
+      body: "Bạn bắt đầu từ kênh nào, chúng tôi trả lời ngay trên kênh đó.",
+    },
+    next: {
+      heading: "Điều gì diễn ra tiếp theo",
+      steps: {
+        reply: {
+          title: "Một kỹ sư đọc tin của bạn",
+          body: "Tin nhắn đến thẳng kỹ sư, không qua hàng chờ. Bạn sẽ nhận phản hồi trong vòng một ngày làm việc.",
+        },
+        call: {
+          title: "Một buổi trao đổi ngắn",
+          body: "Ba mươi phút để hiểu vấn đề, các ràng buộc, và liệu chúng tôi có phải đội ngũ phù hợp hay không.",
+        },
+        proposal: {
+          title: "Đề xuất bằng văn bản",
+          body: "Phạm vi, cách tiếp cận, cơ cấu đội ngũ và chi phí - bằng văn bản, để bạn có thể so sánh với bất kỳ bên nào khác.",
+        },
+      },
+    },
+    global: {
+      heading: "Chúng tôi làm việc xuyên múi giờ",
+      body: "Kỹ sư của chúng tôi ở nhiều thị trường và có giờ làm việc chồng lấn với châu Âu, châu Á và Bắc Mỹ. Hãy cho biết bạn ở đâu, chúng tôi sẽ làm việc theo giờ của bạn, không phải của chúng tôi.",
+    },
+  },
   footer: {
     heading:
       "Bạn đã sẵn sàng tăng tốc hành trình phát triển phần mềm của đội ngũ?",
@@ -171,7 +252,9 @@ export const vi: PartialDictionary = {
       "Wesantika cung cấp dịch vụ phát triển phần mềm trọn vòng đời, với các giải pháp riêng đáp ứng nhu cầu đặc thù của doanh nghiệp bạn.",
     hero: {
       title: "Dịch vụ phát triển phần mềm",
-      body: "Tại Wesantika, chúng tôi chuyên biến ý tưởng thành những sản phẩm phần mềm chất lượng cao. Chúng tôi cung cấp các giải pháp phát triển phần mềm được thiết kế theo nhu cầu của bạn, cùng chiến lược giá cạnh tranh giúp tiết kiệm chi phí. Với sự tận tâm và kinh nghiệm, cách làm của chúng tôi rút ngắn thời gian ra thị trường và giúp bạn khác biệt so với đối thủ.",
+      body: "Tại Wesantika, chúng tôi chuyên biến ý tưởng thành những sản phẩm phần mềm chất lượng cao.",
+      /** The rest of the original paragraph, rendered under the hero. */
+      bodyMore: "Chúng tôi cung cấp các giải pháp phát triển phần mềm được thiết kế theo nhu cầu của bạn, cùng chiến lược giá cạnh tranh giúp tiết kiệm chi phí. Với sự tận tâm và kinh nghiệm, cách làm của chúng tôi rút ngắn thời gian ra thị trường và giúp bạn khác biệt so với đối thủ.",
       cta: "Trao đổi về nhu cầu của bạn",
     },
     accelerate: {
@@ -189,6 +272,70 @@ export const vi: PartialDictionary = {
         custom: {
           title: "Phát triển phần mềm theo yêu cầu",
           body: "Giải pháp phần mềm toàn trình của chúng tôi mang lại các tính năng được thiết kế riêng, hiệu năng có khả năng mở rộng và mức độ cá nhân hoá hoàn toàn, giúp bạn có được lợi thế cạnh tranh xứng đáng.",
+        },
+        web: {
+          title: "Phát triển ứng dụng web",
+          body: "Hãy xác định mục tiêu kinh doanh, chúng tôi sẽ xây dựng ứng dụng web để đạt được mục tiêu đó. Năng lực phát triển web, quản trị dự án Agile và hiểu biết về xu hướng bảo đảm một ứng dụng có ROI cao mà người dùng thực sự trân trọng. Đội ngũ chuyên trách giúp ứng dụng của bạn hiện đại, an toàn và dễ mở rộng.",
+        },
+        mobile: {
+          title: "Phát triển ứng dụng di động",
+          body: "Chúng tôi nghiên cứu thị trường chuyên sâu để tạo ra thiết kế lấy người dùng làm trung tâm, giúp bạn nổi bật trong một thị trường biến động. Chúng tôi xây dựng ứng dụng native và đa nền tảng với hiệu năng ổn định. Chiến lược này rút ngắn thời gian ra mắt, củng cố lợi thế cạnh tranh và thúc đẩy tăng trưởng.",
+        },
+        ai: {
+          title: "Dịch vụ phát triển AI",
+          body: "Ngành AI vẫn đang định hình, khiến chuyên gia nội bộ rất khó tìm. Chúng tôi cung cấp giải pháp tích hợp AI để giải quyết bài toán kinh doanh, tự động hóa tác vụ và cải thiện việc ra quyết định. Chúng tôi bắt đầu bằng PoC hoặc MVP để kiểm chứng ý tưởng, giảm rủi ro và tăng khả năng thành công trên thị trường.",
+        },
+        product: {
+          title: "Phát triển sản phẩm phần mềm",
+          body: "Cam kết đổi mới và cải tiến dẫn dắt toàn bộ hành trình từ ý tưởng đến ra mắt. Quá trình bao gồm thiết kế lấy người dùng làm trung tâm và các tính năng được xây dựng kỹ lưỡng, bảo đảm phần mềm đáng tin cậy. Sau khi ra mắt, hỗ trợ và bảo trì vẫn tiếp tục để dự án vận hành trơn tru.",
+        },
+        enterprise: {
+          title: "Phát triển phần mềm doanh nghiệp",
+          body: "Phần mềm doanh nghiệp phải thực sự cải thiện cách doanh nghiệp vận hành. Những giải pháp được thiết kế riêng giúp tăng hiệu quả và hỗ trợ đội ngũ làm việc tốt hơn là điều thiết yếu. Chúng tôi tập trung gắn kết phần mềm với mục tiêu kinh doanh, dẫn đến vận hành tốt hơn và một doanh nghiệp vững vàng hơn.",
+        },
+        saas: {
+          title: "Phát triển ứng dụng SaaS",
+          body: "Các dự án SaaS phức tạp và dài hạn cần nhà cung cấp giàu kinh nghiệm mới triển khai thành công. Các kỹ sư kỳ cựu của Wesantika hỗ trợ chuyên sâu với hơn 12 năm kinh nghiệm. Chúng tôi tạo ra giải pháp SaaS vững chắc, trực quan, thúc đẩy doanh nghiệp hiện đại bằng những ứng dụng chất lượng cao.",
+        },
+        hire: {
+          title: "Thuê lập trình viên phần mềm",
+          body: "Lập trình viên của chúng tôi có kinh nghiệm dày dạn trong môi trường thuê ngoài, đã tham gia nhiều dự án toàn cầu thuộc nhiều ngành khác nhau. Đội ngũ thích ứng tốt với thách thức ở bất kỳ lĩnh vực nào. Tiếng Anh vững và hiểu biết văn hóa giúp chúng tôi làm việc thuận lợi với khách hàng trên toàn thế giới.",
+        },
+        qa: {
+          title: "Dịch vụ kiểm thử QA phần mềm",
+          body: "Đội QA của chúng tôi kiểm thử kỹ lưỡng từng tính năng và chức năng, kết hợp kỹ thuật tự động và thủ công. Đội ngũ thực hiện kiểm tra độ ổn định trong giai đoạn UAT trước khi phát hành. Kỹ sư QA bảo đảm phần mềm chất lượng cao được bàn giao đúng hạn, đạt chuẩn quốc tế.",
+        },
+        integration: {
+          title: "Dịch vụ tích hợp phần mềm",
+          body: "Kết nối ứng dụng, dữ liệu và thiết bị của bạn bằng các tích hợp an toàn, dễ mở rộng — API, ERP/CRM và đám mây. Xóa bỏ silo dữ liệu, tự động hóa quy trình và rút ngắn thời gian bàn giao.",
+        },
+        mvp: {
+          title: "Phát triển phần mềm MVP",
+          body: "Phát triển MVP giúp bạn kiểm chứng ý tưởng nhanh chóng. Chúng tôi chỉ xây dựng những tính năng thiết yếu nhất, nhờ đó bạn thu được phản hồi người dùng từ sớm, tiết kiệm thời gian và hoàn thiện sản phẩm mà không lãng phí nguồn lực.",
+        },
+        poc: {
+          title: "Dịch vụ phát triển PoC",
+          body: "Dịch vụ phát triển phần mềm của chúng tôi bao gồm PoC để chứng minh tính khả thi của ý tưởng. Chúng tôi giúp bạn kiểm chứng trước khi bước vào phát triển toàn diện, giảm rủi ro và giúp bạn chọn hướng đi phù hợp nhất.",
+        },
+        devops: {
+          title: "Dịch vụ phát triển DevOps",
+          body: "Dịch vụ DevOps kết nối phát triển với vận hành. Đội DevOps của chúng tôi tăng tốc bàn giao phần mềm và tự động hóa tác vụ để tinh gọn quy trình. Bằng việc đưa vào các công cụ bảo mật tiên tiến, chúng tôi nâng cao đáng kể cả hiệu quả lẫn tốc độ.",
+        },
+        cloud: {
+          title: "Dịch vụ di chuyển lên đám mây",
+          body: "Đưa dữ liệu và ứng dụng lên đám mây là bước thiết yếu của phát triển phần mềm hiện đại. Dịch vụ di chuyển lên đám mây giúp quá trình này diễn ra suôn sẻ. Dữ liệu của bạn được bảo mật và ứng dụng sẵn sàng cho môi trường đám mây.",
+        },
+        backend: {
+          title: "Dịch vụ phát triển back-end",
+          body: "Một back-end vững chắc là yếu tố then chốt của phần mềm. Chúng tôi tập trung xây dựng logic phía máy chủ mạnh mẽ, áp dụng kỹ thuật lập trình nâng cao để tạo ra hệ thống back-end hiệu quả và đáng tin cậy. Quản trị cơ sở dữ liệu tốt mang lại nền móng vững chắc cho ứng dụng của bạn.",
+        },
+        frontend: {
+          title: "Dịch vụ phát triển front-end",
+          body: "Chúng tôi tạo ra giao diện thân thiện, xuất sắc cả về thẩm mỹ lẫn công năng, thiết kế những website bắt mắt và ứng dụng responsive với UI chỉn chu. Những giao diện này giữ chân người dùng và cải thiện trải nghiệm của họ.",
+        },
+        maintenance: {
+          title: "Bảo trì và hỗ trợ phần mềm",
+          body: "Giữ cho phần mềm luôn được cập nhật là điều thiết yếu. Dịch vụ phát triển phần mềm theo yêu cầu của chúng tôi bao gồm bảo trì và hỗ trợ. Ứng dụng của bạn luôn ở trạng thái tốt nhất để bắt kịp nhu cầu kinh doanh đang thay đổi.",
         },
       },
     },
@@ -224,21 +371,6 @@ export const vi: PartialDictionary = {
 
   // UI translated; article copy is sample content and falls back to English.
 
-  blog: {
-    metaTitle: "Blog",
-    metaDescription:
-      "Ghi chép thực tế về kỹ thuật AI, nền tảng đám mây và việc xây dựng phần mềm cùng đội ngũ phân tán.",
-    heroTitle: "Blog",
-    heroBody:
-      "Ghi chép từ các kỹ sư của chúng tôi về AI ứng dụng, nền tảng đám mây, và điều thực sự diễn ra khi các đội ngũ phân tán cùng xây dựng phần mềm.",
-    featuredLabel: "Nổi bật",
-    allCategories: "Tất cả",
-    readMore: "Đọc bài viết",
-    back: "Quay lại Blog",
-    empty: "Chưa có bài viết nào trong mục này.",
-    readTime: "Đọc {minutes} phút",
-    categories: { engineering: "Kỹ thuật", ai: "AI", design: "Thiết kế", business: "Kinh doanh" },
-  },
 
   // `capabilities` (four long paragraphs) falls back to English, as elsewhere.
   technologies: {
@@ -246,8 +378,10 @@ export const vi: PartialDictionary = {
     metaDescription:
       "Các nhóm công nghệ chúng tôi dùng cho AI, back-end, front-end, phát triển ứng dụng, DevOps và đám mây — nền tảng để xây dựng hệ thống thông minh, dễ mở rộng.",
     hero: {
-      titleLines: ["Công nghệ phát triển", "phần mềm"],
-      body: "Với kinh nghiệm sâu rộng trong phát triển phần mềm, Wesantika đã xây dựng năng lực công nghệ vững chắc thông qua hợp tác với các đội ngũ đa quốc gia, startup và doanh nghiệp ở nhiều thị trường khác nhau. Chúng tôi liên tục tiếp nhận những tiến bộ mới nhất của AI và kỹ thuật phần mềm hiện đại, kết hợp góc nhìn toàn cầu với năng lực kỹ thuật chuyên sâu để phát triển các giải pháp thông minh, dễ mở rộng và chất lượng cao, đáp ứng những yêu cầu khắt khe của doanh nghiệp và ngành.",
+      title: "Công nghệ phát triển phần mềm",
+      body: "Với kinh nghiệm sâu rộng trong phát triển phần mềm, Wesantika đã xây dựng năng lực công nghệ vững chắc thông qua hợp tác với các đội ngũ đa quốc gia, startup và doanh nghiệp ở nhiều thị trường khác nhau.",
+      /** The rest of the original paragraph, rendered under the hero. */
+      bodyMore: "Chúng tôi liên tục tiếp nhận những tiến bộ mới nhất của AI và kỹ thuật phần mềm hiện đại, kết hợp góc nhìn toàn cầu với năng lực kỹ thuật chuyên sâu để phát triển các giải pháp thông minh, dễ mở rộng và chất lượng cao, đáp ứng những yêu cầu khắt khe của doanh nghiệp và ngành.",
       cta: "Trao đổi về nhu cầu của bạn",
     },
     stacksHeading:
@@ -293,10 +427,7 @@ export const vi: PartialDictionary = {
       emphasis: "24 giờ",
       trail: "",
     },
-    bodyLines: [
-      "Lộ trình tăng tốc bằng AI, từ đề bài đến nguyên mẫu chạy được.",
-      "Làm việc với kỹ sư, không phải nhân viên bán hàng.",
-    ],
+    body: "Lộ trình tăng tốc bằng AI, từ đề bài đến nguyên mẫu chạy được. Làm việc với kỹ sư, không phải nhân viên bán hàng.",
     checklist: [
       "Nguyên mẫu bấm được của luồng người dùng cốt lõi",
       "Sơ đồ quy trình mô tả toàn bộ hệ thống",
@@ -324,6 +455,17 @@ export const vi: PartialDictionary = {
       fileTooLarge: "Tệp vượt quá giới hạn 10 MB.",
       fileType: "Không hỗ trợ định dạng tệp này.",
     },
+  },
+
+  a11y: {
+    skipToContent: "Chuyển đến nội dung",
+  },
+
+  notFound: {
+    metaTitle: "Không tìm thấy trang",
+    title: "Trang này không tồn tại",
+    body: "Liên kết có thể đã cũ hoặc trang đã được chuyển. Bạn có thể thử các trang sau.",
+    home: "Về trang chủ",
   },
 
   rail: {

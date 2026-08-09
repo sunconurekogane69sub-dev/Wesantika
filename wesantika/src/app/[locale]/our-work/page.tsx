@@ -4,9 +4,11 @@ import { notFound } from "next/navigation";
 import { CaseStudyBrowser } from "@/components/CaseStudyBrowser";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { StickyContactRail } from "@/components/StickyContactRail";
 import { getDictionary } from "@/lib/i18n";
-import { isLocale, LOCALE_CODES } from "@/lib/i18n/locales";
+import { isLocale } from "@/lib/i18n/locales";
+import { socialMetadata } from "@/lib/metadata";
 
 export async function generateMetadata({
   params,
@@ -20,12 +22,7 @@ export async function generateMetadata({
   return {
     title: t.work.metaTitle,
     description: t.work.metaDescription,
-    alternates: {
-      canonical: `/${locale}/our-work`,
-      languages: Object.fromEntries(
-        LOCALE_CODES.map((code) => [code, `/${code}/our-work`]),
-      ),
-    },
+    ...socialMetadata(locale, "/our-work"),
   };
 }
 
@@ -50,24 +47,16 @@ export default async function OurWorkPage({
       <StickyContactRail labels={t.rail} />
       <Nav locale={locale} nav={t.nav} />
 
-      <section className="relative h-[460px] sm:h-[560px] xl:h-[620px]">
-        <Image
-          src="/images/vision-bg.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <div className="canvas relative flex h-full flex-col justify-center px-6 pt-[95px] xl:px-0 xl:pl-[212px]">
-          <h1 className="max-w-[760px] text-[36px] leading-[1.15] font-bold text-black sm:text-[48px] xl:text-[64px] xl:leading-[77px]">
-            {t.work.heroTitle}
-          </h1>
-          <p className="mt-[24px] max-w-[700px] text-[18px] leading-[28px] font-normal text-black xl:text-[20px]">
-            {t.work.heroBody}
-          </p>
-        </div>
-      </section>
+      <main id="main-content">
+
+      <PageHero
+        image="/images/work-hero.png"
+        // The artwork's middle band is a dark code editor: black copy measures
+        // 1.4:1 from 15% down, and 10.5:1 cropped from the top.
+        objectPosition="50% 0%"
+        title={t.work.heroTitle}
+        body={t.work.heroBody}
+      />
 
       <CaseStudyBrowser
         copy={{
@@ -83,6 +72,8 @@ export default async function OurWorkPage({
           next: t.work.next,
         }}
       />
+
+      </main>
 
       <Footer strings={t.footer} />
     </>

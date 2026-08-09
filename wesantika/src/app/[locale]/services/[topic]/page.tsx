@@ -8,6 +8,7 @@ import { StickyContactRail } from "@/components/StickyContactRail";
 import { SERVICE_DETAIL_TOPICS, type ServiceDetailId } from "@/lib/content";
 import { getDictionary } from "@/lib/i18n";
 import { isLocale, LOCALE_CODES } from "@/lib/i18n/locales";
+import { socialMetadata } from "@/lib/metadata";
 
 export function generateStaticParams() {
   return LOCALE_CODES.flatMap((locale) =>
@@ -31,12 +32,7 @@ export async function generateMetadata({
   return {
     title: d.metaTitle,
     description: d.metaDescription,
-    alternates: {
-      canonical: `/${locale}/services/${topic}`,
-      languages: Object.fromEntries(
-        LOCALE_CODES.map((code) => [code, `/${code}/services/${topic}`]),
-      ),
-    },
+    ...socialMetadata(locale, `/services/${topic}`),
   };
 }
 
@@ -112,12 +108,12 @@ export default async function ServiceDetailPage({
           <div className="mt-[56px] mb-[80px] flex justify-center xl:mt-[72px] xl:mb-[120px]">
             {/* Same reasoning as the DETAIL button: 18px white on #0f84fd is
                 3.66:1, so the label is bold to qualify as large text. */}
-            <a
-              href="#contact"
-              className="inline-flex h-[48px] items-center justify-center rounded-[8px] bg-brand px-[24px] text-[18px] leading-[24px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
+            <Link
+              href={`/${locale}/contact`}
+              className="inline-flex h-[48px] items-center justify-center rounded-[8px] bg-brand-btn px-[24px] text-[18px] leading-[24px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
             >
               {d.cta}
-            </a>
+            </Link>
           </div>
         </div>
       </main>

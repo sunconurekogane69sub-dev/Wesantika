@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import { Inter, Noto_Sans_JP, Noto_Sans_TC, Noto_Sans_Thai } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
+import { SkipLink } from "@/components/SkipLink";
 import { getDictionary } from "@/lib/i18n";
 import {
-  DEFAULT_LOCALE,
   getLocaleDefinition,
   isLocale,
   LOCALE_CODES,
   type FontKey,
 } from "@/lib/i18n/locales";
+import { socialMetadata } from "@/lib/metadata";
+import { SITE_URL } from "@/lib/site";
 
 /**
  * One CSS variable, four fonts. Only the class for the active locale's script is
@@ -62,19 +64,11 @@ export async function generateMetadata({
   const dict = getDictionary(locale);
 
   return {
-    // hreflang and canonical must be absolute URLs to be honoured by crawlers.
-    metadataBase: new URL(
-      process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-    ),
+    // hreflang, canonical and og:image must be absolute URLs to be honoured.
+    metadataBase: new URL(SITE_URL),
     title: { default: dict.meta.siteTitle, template: "%s | Wesantika" },
     description: dict.meta.siteDescription,
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        ...Object.fromEntries(LOCALE_CODES.map((code) => [code, `/${code}`])),
-        "x-default": `/${DEFAULT_LOCALE}`,
-      },
-    },
+    ...socialMetadata(locale, ""),
   };
 }
 
@@ -90,10 +84,16 @@ export default async function LocaleLayout({
 
   const definition = getLocaleDefinition(locale);
 
+  const t = getDictionary(locale);
+
   return (
     // All five locales are left-to-right; `dir` is where an RTL locale would hook in.
     <html lang={locale} dir="ltr" className={FONT_CLASS[definition.font]}>
-      <body className="overflow-x-hidden">{children}</body>
+      <body className="overflow-x-hidden">
+        {/* First focusable element in the document — it only works from here. */}
+        <SkipLink label={t.a11y.skipToContent} />
+        {children}
+      </body>
     </html>
   );
 }

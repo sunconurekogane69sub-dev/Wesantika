@@ -93,6 +93,27 @@ const scrims = {
   servicesHero: (x, y, w) => ({ colour: NAVY, alpha: lerp3(x / w, 0.7, 0.4, 0.05) }),
   /** Stronger wash on the designed-here Blog heroes. */
   pageHero: (x, y, w) => ({ colour: NAVY, alpha: lerp3(x / w, 0.85, 0.6, 0.3) }),
+  /**
+   * PageHero's optional dark wash, used only by the Top hero — the one place
+   * white type sits on a photograph. Gone by mid-frame, where the subject is.
+   */
+  heroWash: (x, y, w) => ({ colour: [0, 0, 0], alpha: lerp3(x / w, 0.35, 0.15, 0) }),
+  /**
+   * PageHero's white wash, on every interior hero. Held across the copy column
+   * so all five share one ground, then released so the photograph arrives at
+   * full strength on the right. Mirrors the gradient in PageHero.tsx exactly —
+   * if one changes, change both.
+   */
+  pageWash: (x, y, w) => {
+    const t = x / w;
+    const alpha =
+      t < 0.45
+        ? 0.93 - (0.93 - 0.88) * (t / 0.45)
+        : t < 0.8
+          ? 0.88 * (1 - (t - 0.45) / 0.35)
+          : 0;
+    return { colour: [255, 255, 255], alpha };
+  },
   none: () => ({ colour: [0, 0, 0], alpha: 0 }),
 };
 const lerp3 = (t, a, b, c) => (t < 0.5 ? a + (b - a) * (t / 0.5) : b + (c - b) * ((t - 0.5) / 0.5));
@@ -101,19 +122,31 @@ const lerp3 = (t, a, b, c) => (t < 0.5 ? a + (b - a) * (t / 0.5) : b + (c - b) *
    Declared in the CSS section coordinates actually used at xl, not in Figma
    coordinates — this measures what ships.                                  */
 const REGIONS = [
-  // --- Top page hero (211:1002) -----------------------------------------
-  { page: "Top", what: "nav strip", image: "images/top-hero.png", section: [1672, 941],
-    box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
-  { page: "Top", what: "H1", image: "images/top-hero.png", section: [1672, 941],
-    box: [212, 255, 701, 154], ink: "white", scrim: "none", size: 64 },
-  { page: "Top", what: "subhead", image: "images/top-hero.png", section: [1672, 941],
-    box: [212, 422, 703, 87], ink: "white", scrim: "none", size: 24, bold: true },
+  // --- Heroes -----------------------------------------------------------
+  // All six now render through <PageHero>, so the geometry below is one of two
+  // shapes rather than six. Boxes are deliberately larger than any single
+  // translation's copy block: the copy is vertically centred, so its exact
+  // extent moves with the text, and a box that only covered English would stop
+  // measuring the ground Thai actually lands on.
+  //
+  //   home  1672x760, copy column 680 wide from x=212
+  //   page  1672x560, copy column 620 wide from x=212
+  //
+  // `objectY` mirrors each hero's object-position, chosen by measurement.
 
-  // --- About Us hero (210:1001) -----------------------------------------
-  { page: "About", what: "nav strip", image: "images/about-hero.png", section: [1672, 942],
-    box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
-  { page: "About", what: "lead", image: "images/about-hero.png", section: [1672, 942],
-    box: [213, 286, 800, 290], ink: "black", scrim: "none", size: 48 },
+  { page: "Top", what: "nav strip", image: "images/top-hero.png", section: [1672, 760],
+    objectY: 0, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
+  { page: "Top", what: "H1", image: "images/top-hero.png", section: [1672, 760],
+    objectY: 0, box: [212, 280, 680, 150], ink: "white", scrim: "heroWash", size: 60 },
+  // No longer bold. It was bold only so 24px would qualify as large text at
+  // 3.6:1; the wash buys the margin, so the sub-head can be regular weight.
+  { page: "Top", what: "subhead", image: "images/top-hero.png", section: [1672, 760],
+    objectY: 0, box: [212, 440, 680, 120], ink: "white", scrim: "heroWash", size: 22 },
+
+  { page: "About", what: "nav strip", image: "images/about-hero.png", section: [1672, 560],
+    objectY: 0, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
+  { page: "About", what: "lead", image: "images/about-hero.png", section: [1672, 560],
+    objectY: 0, box: [212, 180, 620, 290], ink: "black", scrim: "pageWash", size: 48 },
 
   // --- About Us vision band (210:978) -----------------------------------
   { page: "About", what: "vision label", image: "images/vision-bg.png", section: [1672, 941],
@@ -123,13 +156,12 @@ const REGIONS = [
   { page: "About", what: "vision body", image: "images/vision-bg.png", section: [1672, 941],
     box: [213, 606, 551, 90], ink: "black", scrim: "none", size: 24 },
 
-  // --- Services hero (405:1949) -----------------------------------------
-  { page: "Services", what: "nav strip", image: "images/services-hero.png", section: [1672, 950],
-    box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
-  { page: "Services", what: "H1", image: "images/services-hero.png", section: [1672, 950],
-    box: [207, 356, 755, 58], ink: "black", scrim: "none", size: 48 },
-  { page: "Services", what: "body", image: "images/services-hero.png", section: [1672, 950],
-    box: [207, 454, 748, 96], ink: "black", scrim: "none", size: 20 },
+  { page: "Services", what: "nav strip", image: "images/services-hero.png", section: [1672, 560],
+    objectY: 0.3, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
+  { page: "Services", what: "H1", image: "images/services-hero.png", section: [1672, 560],
+    objectY: 0.3, box: [212, 180, 620, 130], ink: "black", scrim: "pageWash", size: 48 },
+  { page: "Services", what: "body", image: "images/services-hero.png", section: [1672, 560],
+    objectY: 0.3, box: [212, 310, 620, 160], ink: "black", scrim: "pageWash", size: 19 },
 
   // --- Services global band (405:2287) ----------------------------------
   { page: "Services", what: "global heading", image: "images/svc-global.png", section: [1672, 917],
@@ -139,41 +171,34 @@ const REGIONS = [
   { page: "Services", what: "global points", image: "images/svc-global.png", section: [1672, 917],
     box: [241, 502, 372, 180], ink: "brandInk", scrim: "none", size: 32 },
 
-  // --- Technologies hero (477:33) ---------------------------------------
-  { page: "Technologies", what: "nav strip", image: "images/tech-hero.png", section: [1672, 952],
-    box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
-  { page: "Technologies", what: "H1", image: "images/tech-hero.png", section: [1672, 952],
-    box: [217, 333, 568, 116], ink: "black", scrim: "none", size: 48 },
-  { page: "Technologies", what: "body", image: "images/tech-hero.png", section: [1672, 952],
-    box: [217, 506, 700, 120], ink: "black", scrim: "none", size: 20 },
+  { page: "Technologies", what: "nav strip", image: "images/tech-hero.png", section: [1672, 560],
+    objectY: 0.15, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
+  { page: "Technologies", what: "H1", image: "images/tech-hero.png", section: [1672, 560],
+    objectY: 0.15, box: [212, 180, 620, 130], ink: "black", scrim: "pageWash", size: 48 },
+  { page: "Technologies", what: "body", image: "images/tech-hero.png", section: [1672, 560],
+    objectY: 0.15, box: [212, 310, 620, 160], ink: "black", scrim: "pageWash", size: 19 },
 
-  // --- Our Work hero (no artboard; built on vision-bg) -------------------
-  { page: "Our Work", what: "nav strip", image: "images/vision-bg.png", section: [1672, 620],
-    box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
-  { page: "Our Work", what: "H1", image: "images/vision-bg.png", section: [1672, 620],
-    box: [212, 250, 760, 90], ink: "black", scrim: "none", size: 64 },
-  { page: "Our Work", what: "body", image: "images/vision-bg.png", section: [1672, 620],
-    box: [212, 358, 700, 60], ink: "black", scrim: "none", size: 20 },
+  // The artwork's middle band is a dark code editor: black measures 1.4:1
+  // across objectY 0.30-0.70 and 10.4:1 here.
+  { page: "Our Work", what: "nav strip", image: "images/work-hero.png", section: [1672, 560],
+    objectY: 0, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
+  { page: "Our Work", what: "H1", image: "images/work-hero.png", section: [1672, 560],
+    objectY: 0, box: [212, 180, 620, 130], ink: "black", scrim: "pageWash", size: 48 },
+  { page: "Our Work", what: "body", image: "images/work-hero.png", section: [1672, 560],
+    objectY: 0, box: [212, 310, 620, 160], ink: "black", scrim: "pageWash", size: 19 },
+
+  { page: "Contact", what: "nav strip", image: "images/contact-hero.png", section: [1672, 560],
+    objectY: 0.3, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
+  { page: "Contact", what: "H1", image: "images/contact-hero.png", section: [1672, 560],
+    objectY: 0.3, box: [212, 180, 620, 130], ink: "black", scrim: "pageWash", size: 48 },
+  { page: "Contact", what: "body", image: "images/contact-hero.png", section: [1672, 560],
+    objectY: 0.3, box: [212, 310, 620, 160], ink: "black", scrim: "pageWash", size: 19 },
 
   // --- AI Innovation panel (180:752) ------------------------------------
   { page: "Top", what: "AI labels", image: "images/ai-panel.png", section: [1564, 1006],
     box: [130, 100, 1200, 800], ink: "white", scrim: "none", size: 20, bold: true },
 
-  // --- Blog hero (designed here) ----------------------------------------
-  { page: "Blog", what: "nav strip", image: "images/ai-panel.png", section: [1672, 720],
-    box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
-  { page: "Blog", what: "title", image: "images/ai-panel.png", section: [1672, 720],
-    box: [212, 250, 900, 90], ink: "white", scrim: "pageHero", size: 64 },
-  { page: "Blog", what: "body", image: "images/ai-panel.png", section: [1672, 720],
-    box: [212, 380, 720, 60], ink: "white", scrim: "pageHero", size: 20 },
 
-  // --- Blog article heroes: the widest-ranging covers -------------------
-  { page: "Blog article", what: "title / rfp-visual", image: "images/rfp-visual.png", section: [1672, 600],
-    box: [212, 240, 900, 90], ink: "white", scrim: "pageHero", size: 64 },
-  { page: "Blog article", what: "title / core-values", image: "images/core-values.png", section: [1672, 600],
-    box: [212, 240, 900, 90], ink: "white", scrim: "pageHero", size: 64 },
-  { page: "Blog article", what: "title / svc-global", image: "images/svc-global.png", section: [1672, 600],
-    box: [212, 240, 900, 90], ink: "white", scrim: "pageHero", size: 64 },
 ];
 
 const BRAND = parse("#0f84fd");
@@ -181,11 +206,19 @@ const BRAND_INK = parse("#0b62bd");
 const inkColour = (name) =>
   name === "brand" ? BRAND : name === "brandInk" ? BRAND_INK : INK[name];
 
-/** object-cover mapping from section coordinates to source pixels. */
-function sampler(img, sectionW, sectionH) {
+/**
+ * object-cover mapping from section coordinates to source pixels.
+ *
+ * `objectY` is the vertical half of object-position as a fraction: 0 is
+ * `object-top`, 0.5 `object-center` (the default), 1 `object-bottom`. It is not
+ * cosmetic — on a tall photo cropped into a wide band it decides which third of
+ * the artwork sits behind the copy, and the Our Work hero passes at 0 and fails
+ * at 0.5 by a factor of six.
+ */
+function sampler(img, sectionW, sectionH, objectY = 0.5) {
   const scale = Math.max(sectionW / img.w, sectionH / img.h);
   const dispW = img.w * scale, dispH = img.h * scale;
-  const offX = (dispW - sectionW) / 2, offY = (dispH - sectionH) / 2;
+  const offX = (dispW - sectionW) / 2, offY = (dispH - sectionH) * objectY;
   return (sx, sy) => {
     const px = Math.round(((sx + offX) / dispW) * img.w);
     const py = Math.round(((sy + offY) / dispH) * img.h);
@@ -208,7 +241,7 @@ for (const r of REGIONS) {
   const img = cache.get(path);
 
   const [sw, sh] = r.section;
-  const at = sampler(img, sw, sh);
+  const at = sampler(img, sw, sh, r.objectY);
   const scrim = scrims[r.scrim];
 
   // Composite the scrim per pixel, then take the worst 10% of samples — an

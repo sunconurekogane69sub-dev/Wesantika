@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CheckMark } from "@/components/CheckMark";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
+import { PageHero } from "@/components/PageHero";
 import { RfpDialog } from "@/components/RfpDialog";
 import { StickyContactRail } from "@/components/StickyContactRail";
 import { getDictionary } from "@/lib/i18n";
-import { isLocale, LOCALE_CODES } from "@/lib/i18n/locales";
+import { isLocale } from "@/lib/i18n/locales";
+import { socialMetadata } from "@/lib/metadata";
 import { TECH_SECTIONS, type TechSection } from "@/lib/tech-stack";
 
 export async function generateMetadata({
@@ -22,12 +25,7 @@ export async function generateMetadata({
   return {
     title: t.technologies.metaTitle,
     description: t.technologies.metaDescription,
-    alternates: {
-      canonical: `/${locale}/technologies`,
-      languages: Object.fromEntries(
-        LOCALE_CODES.map((code) => [code, `/${code}/technologies`]),
-      ),
-    },
+    ...socialMetadata(locale, "/technologies"),
   };
 }
 
@@ -50,50 +48,38 @@ export default async function TechnologiesPage({
       <StickyContactRail labels={t.rail} />
       <Nav locale={locale} nav={t.nav} />
 
+      <main id="main-content">
+
       {/* ---- Hero — 477:33 / 423:2389 / 423:2388 / 478:36 ------------
           No scrim over the artwork: this hero is pale on the left and the
           headline is authored black, which measures 18:1 there. The nav's own
           140px gradient still carries the white nav type at 5.1:1. */}
-      <section className="relative h-[560px] sm:h-[700px] xl:h-[952px]">
-        <Image
-          src="/images/tech-hero.png"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        {/* Absolute at xl so the three blocks land on the exact rows the file
-            gives them (333 / 506 / 769) — this hero's contrast depends on where
-            the type sits over the artwork, so the offsets are not decorative. */}
-        <div className="canvas relative h-full px-6 pt-[160px] sm:pt-[200px] xl:px-0 xl:pt-0">
-          <h1 className="text-[34px] leading-[1.2] font-bold text-black sm:text-[40px] xl:absolute xl:top-[333px] xl:left-[217px] xl:max-w-[568px] xl:text-[48px] xl:leading-[58px]">
-            {tech.hero.titleLines.map((line) => (
-              <span key={line} className="block">
-                {line}
-              </span>
-            ))}
-          </h1>
-          {/* Authored white (423:2388) but sitting on the pale side of the
-              artwork. Black, and narrowed from the authored 886px: at full
-              width the line ran into the blue right-hand side of the photo,
-              where black drops to 3.8:1. At 700px it stays on the pale ground
-              at 9.6:1. See `node scripts/ink-audit.mjs`. */}
-          <p className="mt-[34px] max-w-[700px] text-[16px] leading-[24px] font-normal text-black xl:absolute xl:top-[506px] xl:left-[217px] xl:mt-0 xl:text-[20px]">
-            {tech.hero.body}
-          </p>
-          <a
-            href="#contact"
-            className="mt-[48px] inline-flex h-[46px] min-w-[289px] items-center justify-center rounded-btn bg-brand px-[27px] text-[20px] leading-[24px] font-normal whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:absolute xl:top-[769px] xl:left-[210px] xl:mt-0"
+      <PageHero
+          image="/images/tech-hero.png"
+          objectPosition="50% 15%"
+          title={tech.hero.title}
+          body={tech.hero.body}
+        >
+          <Link
+            href={`/${locale}/contact`}
+            className="mt-[28px] inline-flex h-[48px] w-fit items-center justify-center rounded-btn bg-brand-btn px-[28px] text-[16px] leading-[24px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[32px]"
           >
             {tech.hero.cta}
-          </a>
-        </div>
+          </Link>
+        </PageHero>
+
+      {/* The rest of the hero paragraph. At 466 characters (480 in Vietnamese)
+          it was the longest sub-head on the site, and `npm run fit` showed it
+          overrunning the 560px hero. The hero keeps the opening claim; this is
+          the remainder, in the body where it belongs. */}
+      <section className="canvas px-6 pt-[56px] xl:px-[212px] xl:pt-[72px]">
+        <p className="max-w-[760px] text-[17px] leading-[28px] font-normal text-black/85 xl:text-[19px] xl:leading-[30px]">
+          {tech.hero.bodyMore}
+        </p>
       </section>
 
       {/* ---- Stacks heading + capabilities — 421:2387 / 421:2386 ----- */}
-      {/* The taller hero closes the gap to this heading: 1011 - 952 = 59. */}
-      <section className="canvas px-6 pt-[70px] xl:px-0 xl:pt-[59px]">
+      <section className="canvas px-6 pt-[70px] xl:px-0 xl:pt-[72px]">
         <h2 className="max-w-[652px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:pl-[210px] xl:text-[48px] xl:leading-[58px]">
           {tech.stacksHeading}
         </h2>
@@ -145,7 +131,7 @@ export default async function TechnologiesPage({
               <RfpDialog
               copy={t.rfpModal}
               label={t.rfp.cta}
-              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
+              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand-btn px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
             />
             </div>
             <div className="relative h-[260px] w-full sm:h-[340px] xl:h-auto xl:flex-1 xl:self-stretch">
@@ -163,6 +149,8 @@ export default async function TechnologiesPage({
         <TechStackSection heading={headings.devops} section={section("devops")} spacing={103} />
         <TechStackSection heading={headings.cloud} section={section("cloud")} />
       </div>
+
+      </main>
 
       <Footer strings={t.footer} />
     </>

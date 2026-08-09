@@ -23,6 +23,8 @@ export type LocaleDefinition = {
   code: string;
   /** English name, for aria labels */
   englishName: string;
+  /** Open Graph locale (og:locale uses language_TERRITORY, not BCP 47) */
+  ogLocale: string;
   /** endonym, shown in the switcher */
   nativeName: string;
   /** compact form shown in the nav, matching the design's "EN" */
@@ -36,6 +38,7 @@ export type LocaleDefinition = {
 export const LOCALES = [
   {
     code: "en",
+    ogLocale: "en_US",
     englishName: "English",
     nativeName: "English",
     short: "EN",
@@ -44,6 +47,7 @@ export const LOCALES = [
   },
   {
     code: "ja",
+    ogLocale: "ja_JP",
     englishName: "Japanese",
     nativeName: "日本語",
     short: "日本語",
@@ -52,6 +56,7 @@ export const LOCALES = [
   },
   {
     code: "zh-Hant-TW",
+    ogLocale: "zh_TW",
     englishName: "Chinese (Traditional, Taiwan)",
     nativeName: "繁體中文",
     short: "繁中",
@@ -60,6 +65,7 @@ export const LOCALES = [
   },
   {
     code: "th",
+    ogLocale: "th_TH",
     englishName: "Thai",
     nativeName: "ไทย",
     short: "ไทย",
@@ -68,6 +74,7 @@ export const LOCALES = [
   },
   {
     code: "vi",
+    ogLocale: "vi_VN",
     englishName: "Vietnamese",
     nativeName: "Tiếng Việt",
     short: "VI",

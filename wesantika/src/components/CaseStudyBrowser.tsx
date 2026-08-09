@@ -181,7 +181,7 @@ function Chip({
       aria-pressed={active}
       className={`h-[36px] cursor-pointer rounded-full px-[16px] text-[14px] leading-none font-semibold transition-colors ${
         active
-          ? "bg-brand text-white"
+          ? "bg-brand-btn text-white"
           : "bg-[#e5e7ef] text-[#565c69] hover:bg-[#d8dbe6] hover:text-black"
       }`}
     >
@@ -264,7 +264,7 @@ function Pagination({
             onClick={() => onChange(p)}
             aria-current={p === page ? "page" : undefined}
             className={`h-[40px] min-w-[40px] cursor-pointer rounded-full text-[14px] leading-none font-semibold transition-colors ${
-              p === page ? "bg-brand text-white" : "text-black hover:bg-black/[0.06]"
+              p === page ? "bg-brand-btn text-white" : "text-black hover:bg-black/[0.06]"
             }`}
           >
             {p}

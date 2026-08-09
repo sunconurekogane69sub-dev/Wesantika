@@ -24,7 +24,6 @@ export const zhHantTW: PartialDictionary = {
     about: "關於我們",
     work: "服務案例",
     technologies: "技術",
-    blog: "部落格",
     contact: "聯絡我們",
     openMenu: "開啟選單",
     languageLabel: "切換語言",
@@ -92,6 +91,38 @@ export const zhHantTW: PartialDictionary = {
         title: "軟體維運與支援",
         body: "提供全天候監控、主動維護與功能升級。我們以嚴謹的 SLA 確保系統穩定性、安全性與長期效能。",
       },
+      outsourcing: {
+        title: "軟體開發委外",
+        body: "我們提供五種委外合作模式。將軟體開發委外至越南，您可以專注於核心業務，同時加速產品上市。",
+      },
+      offshoreTeams: {
+        title: "離岸開發方案",
+        body: "立即面試頂尖工程師。我們在越南以合理成本提供高品質的離岸軟體開發服務。",
+      },
+      aiDevelopment: {
+        title: "AI 開發服務",
+        body: "我們結合前沿 AI 與機器學習，打造能精簡營運流程、強化決策品質的智慧軟體，讓您的業務邁向高效與創新。",
+      },
+      generativeAi: {
+        title: "生成式 AI 整合服務",
+        body: "將生成式 AI 導入您的產品以自動化工作流程。我們打造個人化體驗、降低成本，並在符合企業法規的前提下安全擴展。",
+      },
+      qaTesting: {
+        title: "軟體 QA 測試服務",
+        body: "以 Selenium、Cypress 與 CI/CD 提供人工與自動化 QA。測試涵蓋功能、安全與效能，加快發布並降低風險。",
+      },
+      itServices: {
+        title: "IT 服務",
+        body: "我們可作為您完全委外的 IT 夥伴，或成為團隊的專業延伸，減少停機、最佳化效能並帶來可衡量的業務成果。",
+      },
+      devops: {
+        title: "DevOps 開發服務",
+        body: "我們結合前沿 AI 與機器學習，打造能精簡營運流程、強化決策品質的智慧軟體，讓您的業務邁向高效與創新。",
+      },
+      cloudMigration: {
+        title: "雲端遷移服務",
+        body: "以 rehost、replatform 與 refactor 策略，將工作負載遷移至 AWS、Azure 與 GCP。我們確保最短停機時間、法規遵循、成本效益與可擴展性。",
+      },
     },
   },
 
@@ -124,6 +155,56 @@ export const zhHantTW: PartialDictionary = {
     ],
   },
 
+  contact: {
+    metaTitle: "聯絡我們",
+    metaDescription:
+      "告訴我們您正在打造什麼。傳送訊息、使用直接聯絡管道，或提交 RFP——我們回覆的是具體答案，不是制式簡介。",
+    heroTitle: "聊聊您正在打造的專案",
+    heroBody:
+      "無論您手上已有拍板定案的規格書，或只是還說不清楚的難題，第一次對話都一樣：要讓這件事成立，有哪些前提必須成立？",
+    paths: {
+      heading: "兩種聯絡方式",
+      message: {
+        title: "傳送訊息",
+        body: "適合初期洽談——範疇界定、可行性評估，或任何您想得到直接答案的問題。",
+        cta: "與我們聯繫",
+      },
+      rfp: {
+        title: "提交 RFP",
+        body: "適合需求、時程與預算都已明確的情況。附上文件，我們會針對內容具體回覆。",
+        cta: "送出 RFP",
+      },
+    },
+    form: {
+      heading: "傳送訊息給我們",
+      body: "您對問題描述得越清楚，我們的第一封回覆就越有價值。",
+    },
+    channels: {
+      heading: "或直接聯絡我們",
+      body: "您從哪個管道開始，我們就在那個管道回覆。",
+    },
+    next: {
+      heading: "接下來會發生什麼",
+      steps: {
+        reply: {
+          title: "由工程師親自閱讀",
+          body: "您的訊息會直接送到工程師手上，而非客服佇列。一個工作天內回覆。",
+        },
+        call: {
+          title: "30 分鐘的需求釐清",
+          body: "用 30 分鐘了解問題、限制條件，以及我們是否是合適的人選。",
+        },
+        proposal: {
+          title: "書面提案",
+          body: "範疇、做法、團隊組成與費用，全部形諸文字，讓您能與其他廠商並列比較。",
+        },
+      },
+    },
+    global: {
+      heading: "我們跨時區運作",
+      body: "我們的工程師分布於多個市場，工作時間與歐洲、亞洲及北美重疊。告訴我們您在哪裡，我們配合您的時間，而不是我們的。",
+    },
+  },
   footer: {
     heading: "準備好讓團隊的軟體開發再上一層樓了嗎？",
     subtitle: "與 Wesantika 一起釋放潛力、達成更多。今天就開始。",
@@ -166,7 +247,9 @@ export const zhHantTW: PartialDictionary = {
       "Wesantika 提供全週期的軟體開發服務，以客製化方案滿足您獨特的業務需求。",
     hero: {
       title: "軟體開發服務",
-      body: "在 Wesantika，我們專注於將想法轉化為高品質的軟體產品。我們提供量身打造的軟體開發方案，並以具競爭力的定價策略協助您節省成本。憑藉投入與經驗，我們的做法能加快您的上市速度，讓您在競爭中脫穎而出。",
+      body: "在 Wesantika，我們專注於將想法轉化為高品質的軟體產品。",
+      /** The rest of the original paragraph, rendered under the hero. */
+      bodyMore: "我們提供量身打造的軟體開發方案，並以具競爭力的定價策略協助您節省成本。憑藉投入與經驗，我們的做法能加快您的上市速度，讓您在競爭中脫穎而出。",
       cta: "與我們談談您的需求",
     },
     accelerate: {
@@ -184,6 +267,70 @@ export const zhHantTW: PartialDictionary = {
         custom: {
           title: "客製化軟體開發",
           body: "我們的端到端軟體方案提供量身打造的功能、可擴展的效能與完整的客製化，讓您取得應有的競爭優勢。",
+        },
+        web: {
+          title: "網頁應用程式開發",
+          body: "請定義您的業務目標，我們將打造能達成目標的網頁應用程式。我們的網頁開發能力、敏捷專案管理與對趨勢的掌握，確保交付使用者真正重視的高投報應用。專屬團隊讓您的網頁應用具備現代化、安全且可擴展的架構。",
+        },
+        mobile: {
+          title: "行動應用程式開發",
+          body: "我們進行深入的市場研究，打造以使用者為核心的設計，助您在多變的市場中脫穎而出。我們建置效能穩定的原生與跨平台應用程式，這套策略能加速上架、強化競爭優勢並帶動業務成長。",
+        },
+        ai: {
+          title: "AI 開發服務",
+          body: "AI 產業仍在快速成形，內部專才難尋。我們提供整合 AI 的解決方案，協助您解決業務難題、自動化任務並提升決策品質。合作通常從 PoC 或 MVP 開始驗證構想，藉此降低風險並確保市場成功。",
+        },
+        product: {
+          title: "軟體產品開發",
+          body: "我們對創新與精進的堅持，貫穿從概念到上線的每一步。過程涵蓋以使用者為核心的設計與細緻的功能規劃，確保軟體穩定可靠。上線之後，支援與維運持續進行，讓您的產品長期順暢運作。",
+        },
+        enterprise: {
+          title: "企業級軟體開發",
+          body: "企業軟體開發必須真正改善業務的運作方式。能提升效率、讓團隊更順暢協作的客製方案不可或缺。我們專注於讓軟體與業務目標一致，帶來更好的營運表現與更強健的企業體質。",
+        },
+        saas: {
+          title: "SaaS 應用程式開發",
+          body: "長期且複雜的 SaaS 專案，需要經驗豐富的夥伴才能順利交付。Wesantika 的資深工程師以超過 12 年的經驗提供專業協助，打造穩健且直覺的 SaaS 方案，以高品質應用推動現代企業前進。",
+        },
+        hire: {
+          title: "招募軟體工程師",
+          body: "我們的工程師具備豐富的委外專案經驗，參與過各產業的眾多國際專案，善於處理各領域的挑戰。紮實的英語能力與跨文化理解，讓我們能順暢地與全球客戶協作。",
+        },
+        qa: {
+          title: "軟體 QA 測試服務",
+          body: "我們的 QA 團隊結合自動化與人工測試，徹底檢驗每項功能。發布前於 UAT 階段執行穩定性檢查。QA 工程師確保軟體如期交付，品質達到國際標準。",
+        },
+        integration: {
+          title: "系統整合服務",
+          body: "以安全且可擴展的整合連結您的應用、資料與裝置——涵蓋 API、ERP/CRM 與雲端。消除資料孤島、自動化流程並加快交付。",
+        },
+        mvp: {
+          title: "MVP 軟體開發",
+          body: "MVP 開發讓您快速驗證構想。我們只打造最核心的功能，讓您及早取得使用者回饋，節省時間並在不浪費資源的前提下打磨產品。",
+        },
+        poc: {
+          title: "PoC 開發服務",
+          body: "我們的軟體開發服務提供 PoC 開發，用以驗證構想的可行性。在全面開發啟動前先行確認，降低風險，協助您判斷最合適的前進路徑。",
+        },
+        devops: {
+          title: "DevOps 開發服務",
+          body: "DevOps 服務串接開發與維運。我們的 DevOps 團隊加速軟體交付、以自動化精簡工作流程，並導入前沿的安全工具，大幅提升效率與速度。",
+        },
+        cloud: {
+          title: "雲端遷移服務",
+          body: "將資料與應用遷移至雲端，是現代軟體開發的關鍵一步。雲端遷移服務讓這個過程平順進行，確保資料安全、應用完備地迎向雲端。",
+        },
+        backend: {
+          title: "後端開發服務",
+          body: "穩健的後端是軟體的關鍵。我們專注於建構強韌的伺服器端邏輯，運用進階程式技術打造高效可靠的後端系統，並以完善的資料庫管理為應用奠定堅實基礎。",
+        },
+        frontend: {
+          title: "前端開發服務",
+          body: "我們打造兼顧美感與功能的易用介面，設計吸睛的網站與具備優異 UI 的響應式應用，讓使用者持續投入並獲得更好的體驗。",
+        },
+        maintenance: {
+          title: "軟體維運與支援",
+          body: "讓軟體保持在最新狀態至關重要。我們的客製化軟體開發涵蓋維運與支援，讓您的應用始終處於最佳狀態，跟上不斷變化的業務需求。",
         },
       },
     },
@@ -219,21 +366,6 @@ export const zhHantTW: PartialDictionary = {
 
   // UI translated; article copy is sample content and falls back to English.
 
-  blog: {
-    metaTitle: "部落格",
-    metaDescription:
-      "關於 AI 工程、雲端平台，以及與分散團隊一起開發軟體的現場筆記。",
-    heroTitle: "部落格",
-    heroBody:
-      "我們的工程師談應用 AI、雲端平台，以及分散團隊共同開發軟體時真正會發生的事。",
-    featuredLabel: "精選",
-    allCategories: "全部",
-    readMore: "閱讀文章",
-    back: "返回部落格",
-    empty: "此分類目前尚無文章。",
-    readTime: "閱讀約 {minutes} 分鐘",
-    categories: { engineering: "工程", ai: "AI", design: "設計", business: "商業" },
-  },
 
   // `capabilities` (four long paragraphs) falls back to English, as elsewhere.
   technologies: {
@@ -241,8 +373,10 @@ export const zhHantTW: PartialDictionary = {
     metaDescription:
       "涵蓋 AI、後端、前端、應用程式開發、DevOps 與雲端的技術堆疊 — 我們用來打造智慧且可擴展系統的工具。",
     hero: {
-      titleLines: ["軟體開發", "技術"],
-      body: "憑藉豐富的軟體開發經驗，Wesantika 透過與多國團隊、新創與各類市場企業的合作，累積了深厚的技術專業。我們持續導入 AI 與現代軟體工程的最新進展，結合全球視野與紮實的技術能力，開發出智慧、可擴展且高品質的解決方案，滿足嚴苛的業務與產業需求。",
+      title: "軟體開發技術",
+      body: "憑藉豐富的軟體開發經驗，Wesantika 透過與多國團隊、新創與各類市場企業的合作，累積了深厚的技術專業。",
+      /** The rest of the original paragraph, rendered under the hero. */
+      bodyMore: "我們持續導入 AI 與現代軟體工程的最新進展，結合全球視野與紮實的技術能力，開發出智慧、可擴展且高品質的解決方案，滿足嚴苛的業務與產業需求。",
       cta: "與我們談談您的需求",
     },
     stacksHeading: "滿足各類企業需求的頂尖軟體開發技術堆疊",
@@ -287,10 +421,7 @@ export const zhHantTW: PartialDictionary = {
       emphasis: "24 小時內",
       trail: "完成審視",
     },
-    bodyLines: [
-      "以 AI 加速，從需求直達可運作的原型。",
-      "由工程師對應，而非業務。",
-    ],
+    body: "以 AI 加速，從需求直達可運作的原型。由工程師對應，而非業務。",
     checklist: [
       "核心使用者流程的可點擊原型",
       "呈現整個系統的流程圖",
@@ -318,6 +449,17 @@ export const zhHantTW: PartialDictionary = {
       fileTooLarge: "檔案超過 10 MB 上限。",
       fileType: "不支援這種檔案格式。",
     },
+  },
+
+  a11y: {
+    skipToContent: "跳至主要內容",
+  },
+
+  notFound: {
+    metaTitle: "找不到頁面",
+    title: "這個頁面不存在",
+    body: "連結可能已失效，或頁面已移動。您可以試試以下頁面。",
+    home: "返回首頁",
   },
 
   rail: {

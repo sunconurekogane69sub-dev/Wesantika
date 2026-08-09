@@ -21,7 +21,6 @@ export const en = {
     about: "About Us",
     work: "Our Work",
     technologies: "Technologies",
-    blog: "Blog",
     contact: "Contact Us",
     openMenu: "Toggle navigation",
     languageLabel: "Change language",
@@ -154,6 +153,56 @@ export const en = {
     ],
   },
 
+  contact: {
+    metaTitle: "Contact Us",
+    metaDescription:
+      "Tell us what you are building. Send a message, open a direct channel, or submit an RFP - and we will come back with a real answer, not a brochure.",
+    heroTitle: "Let's talk about what you're building",
+    heroBody:
+      "Whether you have a signed-off specification or a problem you cannot yet name, the first conversation is the same: what needs to be true for this to work?",
+    paths: {
+      heading: "Two ways in",
+      message: {
+        title: "Send a message",
+        body: "Best for early conversations - scoping, feasibility, or a question you want a straight answer to.",
+        cta: "Write to us",
+      },
+      rfp: {
+        title: "Submit an RFP",
+        body: "Best when requirements, timeline and budget are already defined. Attach the document and we will respond against it.",
+        cta: "Send your RFP",
+      },
+    },
+    form: {
+      heading: "Send us a message",
+      body: "The more you can tell us about the problem, the more useful our first reply will be.",
+    },
+    channels: {
+      heading: "Or reach us directly",
+      body: "We answer on whichever channel you start on.",
+    },
+    next: {
+      heading: "What happens next",
+      steps: {
+        reply: {
+          title: "A human reads it",
+          body: "Your message goes to an engineer, not a queue. Expect a reply within one business day.",
+        },
+        call: {
+          title: "A short scoping call",
+          body: "Thirty minutes to understand the problem, the constraints, and whether we are the right people for it.",
+        },
+        proposal: {
+          title: "A written proposal",
+          body: "Scope, approach, team shape and cost - in writing, so you can compare it against anyone else's.",
+        },
+      },
+    },
+    global: {
+      heading: "We work across time zones",
+      body: "Our engineers sit in multiple markets and overlap with European, Asian and North American working hours. Tell us where you are and we will meet you inside your day, not ours.",
+    },
+  },
   footer: {
     heading: "Ready to Supercharge Your Team's Software Development Journey?",
     subtitle:
@@ -257,7 +306,9 @@ export const en = {
       // Figma 405:1998 reads "At Saigon Technology…" — a competitor's name left
       // in the copy. Corrected here; it still needs fixing in the source file.
       title: "Software Development Services",
-      body: "At Wesantika, we specialize in transforming ideas into top-notch software products. We offer software development solutions tailored to your needs, leveraging competitive pricing strategies to drive cost savings. With our dedication and experience, our approach accelerates your time-to-market and sets you apart from the competition.",
+      body: "At Wesantika, we specialize in transforming ideas into top-notch software products.",
+      /** The rest of the original paragraph, rendered under the hero. */
+      bodyMore: "We offer software development solutions tailored to your needs, leveraging competitive pricing strategies to drive cost savings. With our dedication and experience, our approach accelerates your time-to-market and sets you apart from the competition.",
       cta: "Let's discuss your needs",
     },
     accelerate: {
@@ -482,104 +533,593 @@ export const en = {
       ],
       cta: "Discuss Your Unique Needs",
     },
+
+    web: {
+      metaTitle: "Web Application Development Services",
+      metaDescription:
+        "Secure, scalable web applications built with React, Angular and Vue on .NET, Java, Python and Node back ends.",
+      eyebrow: "Services",
+      title: "Our Web Application Development Services",
+      intro: [
+        "We build web applications that hold up under real load and real users - not demos that fall over the first time traffic arrives. Every engagement starts by agreeing what the application must do on its worst day, then designing backwards from that.",
+        "Front end and back end are staffed as one team. That sounds obvious and is unusually rare: most delays we inherit come from a contract boundary drawn between the two, where each side is technically finished and the product still does not work.",
+      ],
+      cards: [
+        {
+          title: "Custom Web Application Development",
+          body: "Line-of-business applications built to your workflow rather than bent around a product's assumptions. **React, Angular or Vue** on the front, **.NET, Java, Python or Node** behind it.",
+        },
+        {
+          title: "Web Portals & Self-Service",
+          body: "Customer, partner and employee portals with **role-based access**, audit trails and SSO. The permission model is designed first, because retrofitting one is a rewrite.",
+        },
+        {
+          title: "Progressive Web Apps",
+          body: "**Installable, offline-capable** web apps for teams working in warehouses, clinics and vehicles where the network is not a given.",
+        },
+        {
+          title: "Responsive & Accessible Front Ends",
+          body: "Interfaces that work on the devices your users actually carry, built to **WCAG AA** and verified by measurement rather than assumed.",
+        },
+        {
+          title: "API Design & Integration",
+          body: "**REST, GraphQL and event-driven** interfaces, plus the connections to the ERP, CRM and payment systems the application has to live alongside.",
+        },
+        {
+          title: "Performance & Load Engineering",
+          body: "Profiling, caching strategy, query tuning and **load baselines** established before launch, so capacity is a number rather than a hope.",
+        },
+      ],
+      cta: "Discuss Your Web Application",
+    },
+
+    mobile: {
+      metaTitle: "Mobile App Development Services",
+      metaDescription:
+        "Native and cross-platform iOS and Android apps in Swift, Kotlin, React Native and Flutter, from prototype to store release.",
+      eyebrow: "Services",
+      title: "Our Mobile App Development Services",
+      intro: [
+        "Native or cross-platform is a decision with consequences, not a preference. We make it with you early, against your performance needs, device features and how many releases a year you intend to ship - and we will say when cross-platform is the wrong answer.",
+        "Store release is treated as part of the build, not a task that appears after it. Review guidelines, entitlements, privacy manifests and staged rollout are planned in the first sprint, which is where most first-time submissions are actually lost.",
+      ],
+      cards: [
+        {
+          title: "iOS & Android Native",
+          body: "**Swift and Kotlin** where platform APIs, performance or hardware access make native the honest choice.",
+        },
+        {
+          title: "Cross-Platform Development",
+          body: "**React Native and Flutter** for products where a shared codebase genuinely pays - typically content, commerce and workflow apps.",
+        },
+        {
+          title: "Mobile UX & Prototyping",
+          body: "Journey mapping and **clickable prototypes** tested with real users before a line of production code is written.",
+        },
+        {
+          title: "Offline-First & Sync",
+          body: "**Local-first data with conflict resolution** for field teams, logistics and clinical settings where connectivity drops.",
+        },
+        {
+          title: "AI & IoT-Connected Apps",
+          body: "On-device and cloud inference, plus **BLE and MQTT** device connectivity for products where the phone is a controller, not just a screen.",
+        },
+        {
+          title: "Release & Post-Launch Support",
+          body: "Store submission, **staged rollout, crash analytics** and the OS-version maintenance that keeps an app shippable for years.",
+        },
+      ],
+      cta: "Discuss Your Mobile Product",
+    },
+
+    product: {
+      metaTitle: "Software Product Development Services",
+      metaDescription:
+        "End-to-end product development from idea validation and architecture through launch, iteration and long-term ownership.",
+      eyebrow: "Services",
+      title: "Our Software Product Development Services",
+      intro: [
+        "Product development is different from project delivery. There is no fixed scope to sign off against - only a hypothesis, a market, and a series of decisions that get cheaper the earlier you make them. We staff for that: senior engineers who can argue about scope, not only implement it.",
+        "We work in the open. You see the same board, the same metrics and the same problems we do, because a product team that hides its uncertainty from its client makes worse decisions than one that does not.",
+      ],
+      cards: [
+        {
+          title: "Product Discovery & Feasibility",
+          body: "Stakeholder interviews, **feature prioritisation** and a scoped roadmap that says what you are not building as clearly as what you are.",
+        },
+        {
+          title: "Architecture & Technical Strategy",
+          body: "Stack selection, **data model and integration boundaries** chosen for where the product is going, not only where it starts.",
+        },
+        {
+          title: "UX & Interface Design",
+          body: "Research-led design and a **component system** the engineering team can actually build against, in your brand.",
+        },
+        {
+          title: "Agile Delivery",
+          body: "Two-week increments with working software at the end of each. **In-sprint QA**, so 'done' means shippable.",
+        },
+        {
+          title: "Product Modernisation",
+          body: "Bringing an existing product back to a state where features can ship again - **incrementally, without freezing the roadmap**.",
+        },
+        {
+          title: "Scale & Long-Term Ownership",
+          body: "Capacity planning, observability and the **SLA-backed support** that keeps a maturing product stable while it keeps changing.",
+        },
+      ],
+      cta: "Discuss Your Product",
+    },
+
+    enterprise: {
+      metaTitle: "Enterprise Software Development Services",
+      metaDescription:
+        "Enterprise platforms built for compliance, integration and scale, with the governance large organisations require.",
+      eyebrow: "Services",
+      title: "Our Enterprise Software Development Services",
+      intro: [
+        "Enterprise software is rarely hard because the features are hard. It is hard because of everything the system must respect: existing data, existing processes, existing obligations, and a change-control regime that does not bend for a delivery date.",
+        "We plan around those constraints from the first week rather than discovering them at UAT. That means security review, integration contracts and data ownership are on the schedule alongside the features.",
+      ],
+      cards: [
+        {
+          title: "Enterprise Platform Development",
+          body: "Multi-tenant, **role-aware platforms** with the audit trails and configurability that large organisations need to operate them.",
+        },
+        {
+          title: "ERP & CRM Extension",
+          body: "Building on top of **SAP, Dynamics and Salesforce** where the standard product stops short, without forking it beyond upgrade.",
+        },
+        {
+          title: "Legacy Modernisation",
+          body: "Moving aging systems to **cloud-native architecture a slice at a time** - no big-bang migration, no frozen roadmap, no production outage.",
+        },
+        {
+          title: "Security & Compliance Engineering",
+          body: "**Threat modelling, access control and evidence trails** designed for the standard you actually report against.",
+        },
+        {
+          title: "Data Platforms & Reporting",
+          body: "Warehousing, **ETL/ELT pipelines** and reporting layers that give one answer to a question instead of four.",
+        },
+        {
+          title: "Governance & Handover",
+          body: "Architecture decision records, runbooks and **structured knowledge transfer** so your team can own what we built.",
+        },
+      ],
+      cta: "Discuss Your Enterprise Programme",
+    },
+
+    saas: {
+      metaTitle: "SaaS Application Development Services",
+      metaDescription:
+        "Multi-tenant SaaS platforms with billing, provisioning and compliance built in from the first release.",
+      eyebrow: "Services",
+      title: "Our SaaS Application Development Services",
+      intro: [
+        "The parts of a SaaS product that decide whether it can scale are rarely the parts that get demoed. Tenancy model, billing, provisioning and permissions are structural: cheap to design early and expensive to change once customers are on the platform.",
+        "So we design those first, then build features on top of them. It is a slower first month and a considerably faster second year.",
+      ],
+      cards: [
+        {
+          title: "SaaS Architecture & Tenancy",
+          body: "Choosing and building the **isolation model** - shared, siloed or hybrid - against your compliance needs and unit economics.",
+        },
+        {
+          title: "Billing & Subscription Management",
+          body: "Plans, metering, trials, proration and dunning, with **revenue events** you can actually reconcile.",
+        },
+        {
+          title: "Onboarding & Provisioning",
+          body: "**Self-service signup, tenant provisioning and SSO** so sales does not depend on an engineer being available.",
+        },
+        {
+          title: "Third-Party Integrations",
+          body: "The connectors customers ask about in procurement, plus a **webhook and API surface** partners can build on.",
+        },
+        {
+          title: "Reliability & Observability",
+          body: "**AWS, Azure and Kubernetes** deployments with the monitoring and error budgets behind a credible uptime commitment.",
+        },
+        {
+          title: "Ongoing Support & Iteration",
+          body: "Release trains, **feature flags** and staged rollout, so shipping to a live customer base stops being an event.",
+        },
+      ],
+      cta: "Discuss Your SaaS Platform",
+    },
+
+    hire: {
+      metaTitle: "Hire Dedicated Developers",
+      metaDescription:
+        "Senior engineers who join your team, your standards and your standups - not a black box behind an account manager.",
+      eyebrow: "Services",
+      title: "Hire Dedicated Developers",
+      intro: [
+        "Most disappointing offshore engagements fail structurally, not technically. The team is set up to receive specifications rather than own outcomes, context arrives stripped from tickets, and questions travel through an account manager. Good engineers produce mediocre software under those conditions.",
+        "We staff the opposite way. Our engineers join your standups, see your customer feedback, and are expected to push back on requirements they think are wrong.",
+      ],
+      cards: [
+        {
+          title: "Dedicated Development Teams",
+          body: "A standing team with its own tech lead, working your backlog under **your definition of done**.",
+        },
+        {
+          title: "Team Augmentation",
+          body: "Individual engineers embedded into your existing team, **reporting to your leads** rather than around them.",
+        },
+        {
+          title: "Specialist Roles",
+          body: "AI/ML engineers, data engineers, DevOps, QA automation and **solution architects** for the gaps that are hardest to hire for.",
+        },
+        {
+          title: "Timezone Overlap",
+          body: "Working hours arranged for **real overlap with your team** - four hours is plenty when the team has enough context to decide without asking.",
+        },
+        {
+          title: "Vetting & Onboarding",
+          body: "Every engineer holds a degree in IT or engineering and is **technically assessed by our own seniors** before being proposed.",
+        },
+        {
+          title: "Scaling Up & Down",
+          body: "Adding or releasing capacity on a **defined notice period**, without renegotiating the whole engagement.",
+        },
+      ],
+      cta: "Talk to Us About Your Team",
+    },
+
+    qa: {
+      metaTitle: "QA & Software Testing Services",
+      metaDescription:
+        "Manual and automated testing, performance and security validation, embedded in delivery rather than bolted on at the end.",
+      eyebrow: "Services",
+      title: "Our QA & Testing Services",
+      intro: [
+        "Testing at the end of a project finds the cheapest bugs late and the expensive ones never. We put QA inside the sprint, where a defect costs an afternoon instead of a release.",
+        "What we automate is a deliberate choice, not a target. Automating an unstable interface produces a suite nobody trusts, and a suite nobody trusts is worse than no suite at all.",
+      ],
+      cards: [
+        {
+          title: "Test Strategy & Planning",
+          body: "Risk-based coverage that puts effort where **failure actually costs something**, with entry and exit criteria agreed up front.",
+        },
+        {
+          title: "Manual & Exploratory Testing",
+          body: "Structured exploration by testers who understand the domain - **the only reliable way to find what nobody specified**.",
+        },
+        {
+          title: "Test Automation",
+          body: "**Selenium, Playwright and Cypress** suites built at the layer that stays stable, integrated into CI so results arrive with the pull request.",
+        },
+        {
+          title: "API & Integration Testing",
+          body: "Contract and end-to-end validation across services with **Postman and REST Assured**, including the failure paths.",
+        },
+        {
+          title: "Performance & Load Testing",
+          body: "**Baselines, soak tests and capacity limits** measured before launch, so scaling decisions are informed by numbers.",
+        },
+        {
+          title: "Security Testing",
+          body: "**OWASP-aligned** vulnerability assessment and dependency scanning as part of the pipeline, not an annual event.",
+        },
+      ],
+      cta: "Discuss Your QA Needs",
+    },
+
+    integration: {
+      metaTitle: "Software Integration Services",
+      metaDescription:
+        "Connecting ERP, CRM, cloud and legacy systems with APIs, event streams and middleware that survive change.",
+      eyebrow: "Services",
+      title: "Our Software Integration Services",
+      intro: [
+        "Integration work is where undocumented assumptions surface. Two systems each behave correctly on their own and disagree about what a customer is, when a day ends, or whether a cancelled order still counts. Most of the effort is resolving that, not moving data.",
+        "We design integrations to fail safely and visibly. A silent integration is worse than a broken one, because nobody finds out until the numbers have been wrong for a quarter.",
+      ],
+      cards: [
+        {
+          title: "API Development & Integration",
+          body: "**REST, GraphQL and gRPC** interfaces with versioning and contracts, so a change on one side does not break the other.",
+        },
+        {
+          title: "Enterprise Application Integration",
+          body: "Connecting **ERP, CRM and HR systems** into a coherent flow, with one agreed source of truth per entity.",
+        },
+        {
+          title: "Legacy System Integration",
+          body: "Bringing **SOAP, file-drop and database-level** interfaces into a modern architecture without rewriting the system behind them.",
+        },
+        {
+          title: "Event-Driven & Real-Time",
+          body: "**Kafka and message queues** for the cases where data has to move as it happens, with replay and idempotency designed in.",
+        },
+        {
+          title: "Data Integration & Migration",
+          body: "**ETL/ELT pipelines**, reconciliation and cutover planning, including how you verify nothing was lost.",
+        },
+        {
+          title: "Regulated Interfaces",
+          body: "**HL7/FHIR, EDI and payment** integrations built to the standard and the audit expectations that come with it.",
+        },
+      ],
+      cta: "Discuss Your Integration",
+    },
+
+    mvp: {
+      metaTitle: "MVP Development Services",
+      metaDescription:
+        "A working first version built to test the riskiest assumption, on architecture that survives if the answer is yes.",
+      eyebrow: "Services",
+      title: "Our MVP Development Services",
+      intro: [
+        "An MVP is an experiment with a budget. Its job is to answer one question that cannot be answered by discussion - usually whether anyone will actually use the thing. Everything not serving that question is deferred, deliberately and on the record.",
+        "We build MVPs on architecture that can survive success. Throwaway prototypes are cheaper right up until the moment the experiment works and the team has to start again.",
+      ],
+      cards: [
+        {
+          title: "Scope & Hypothesis Definition",
+          body: "Naming the **riskiest assumption** and agreeing the evidence that would settle it, before deciding what to build.",
+        },
+        {
+          title: "Feature Prioritisation",
+          body: "**MoSCoW and Kano** applied honestly, with an explicit not-now list so deferred scope is deferred rather than forgotten.",
+        },
+        {
+          title: "Prototype & Validation",
+          body: "**Clickable prototypes** tested with real users, which regularly kills features before they cost anything.",
+        },
+        {
+          title: "Web & Mobile MVP Build",
+          body: "A working product in **weeks, not quarters** - real architecture, real data, real deployment.",
+        },
+        {
+          title: "AI-Enabled MVP",
+          body: "Validating **LLM and ML features** with cost controls and evaluation in place, so the demo and production behave the same.",
+        },
+        {
+          title: "Measure, Iterate, Scale",
+          body: "Instrumentation from day one, then **hardening the parts that earned it** rather than everything at once.",
+        },
+      ],
+      cta: "Discuss Your MVP",
+    },
+
+    poc: {
+      metaTitle: "Proof of Concept Development Services",
+      metaDescription:
+        "Short, focused builds that answer a technical feasibility question with evidence instead of opinion.",
+      eyebrow: "Services",
+      title: "Our Proof of Concept Services",
+      intro: [
+        "A PoC exists to retire risk. It answers one technical question - can this integrate, will it perform, is the data good enough - and it is finished the moment the question is answered, not when it looks presentable.",
+        "We keep them to two to eight weeks and end with a written decision pack: what we tried, what happened, and what we would do differently at full scale. A PoC that produces only a working demo has wasted half its value.",
+      ],
+      cards: [
+        {
+          title: "Technical Feasibility PoC",
+          body: "Building **the riskiest path first** to find out whether the approach holds, while it is still cheap to change.",
+        },
+        {
+          title: "AI & Data Feasibility",
+          body: "Testing whether your **data is actually sufficient** for the model you have in mind - the question that decides most AI projects.",
+        },
+        {
+          title: "Integration Spikes",
+          body: "Proving a connection to a **third-party or legacy system** end to end before it becomes a dependency in a plan.",
+        },
+        {
+          title: "Performance Baselines",
+          body: "**Measured throughput and latency** under representative load, so capacity assumptions stop being guesses.",
+        },
+        {
+          title: "Compliance & Data-Handling Proofs",
+          body: "Demonstrating that a design can meet **residency, retention and access** obligations before it is built on.",
+        },
+        {
+          title: "Decision Pack & Handover",
+          body: "Findings, risks and a **recommended path to MVP** - written up so the decision survives the people who made it.",
+        },
+      ],
+      cta: "Discuss Your Proof of Concept",
+    },
+
+    devops: {
+      metaTitle: "DevOps Services",
+      metaDescription:
+        "CI/CD, infrastructure as code and observability that make releases routine instead of an event.",
+      eyebrow: "Services",
+      title: "Our DevOps Services",
+      intro: [
+        "The measure of a DevOps engagement is not how many tools are running. It is whether an engineer can ship a small change on a Friday without a meeting - and whether you would know within minutes if it went wrong.",
+        "We work towards that on your existing stack. Replacing a pipeline that people understand with a better one they do not is a common and expensive mistake.",
+      ],
+      cards: [
+        {
+          title: "CI/CD Pipelines",
+          body: "**Jenkins, GitHub Actions and GitLab CI** pipelines with real quality gates, so merging is the risky step rather than deploying.",
+        },
+        {
+          title: "Infrastructure as Code",
+          body: "**Terraform and CloudFormation** so environments are reproducible and drift is visible instead of discovered.",
+        },
+        {
+          title: "Containers & Orchestration",
+          body: "**Docker and Kubernetes** sized to what you actually run - including advising against Kubernetes when it is not warranted.",
+        },
+        {
+          title: "Observability",
+          body: "**Metrics, structured logs and tracing** wired to alerts that correspond to user-visible problems, not to CPU graphs.",
+        },
+        {
+          title: "Release Engineering",
+          body: "**Blue-green and canary rollout**, feature flags and a rollback that has been rehearsed rather than assumed.",
+        },
+        {
+          title: "Security in the Pipeline",
+          body: "**Secrets management, dependency and image scanning** as pipeline stages, so problems surface at commit time.",
+        },
+      ],
+      cta: "Discuss Your Delivery Pipeline",
+    },
+
+    cloud: {
+      metaTitle: "Cloud Migration Services",
+      metaDescription:
+        "Assessment, migration and optimisation across AWS, Azure and Google Cloud, planned around continuity.",
+      eyebrow: "Services",
+      title: "Our Cloud Migration Services",
+      intro: [
+        "Most cloud migrations disappoint for the same reason: the workload moved but nothing about it changed, so the bill went up and the architecture stayed brittle. Lift-and-shift is sometimes the right first step - it is rarely the right last one.",
+        "We plan migrations around continuity. Every wave has a rollback, a validation step, and a defined answer to what happens if the cutover window closes with work unfinished.",
+      ],
+      cards: [
+        {
+          title: "Assessment & Migration Strategy",
+          body: "Application inventory, dependency mapping and a **wave plan** with a business case per workload rather than one for the programme.",
+        },
+        {
+          title: "Application Migration",
+          body: "Rehost, replatform or refactor, **chosen per workload** on cost, risk and how much life the application has left.",
+        },
+        {
+          title: "Database Migration",
+          body: "**Schema conversion, replication and cutover** with reconciliation, including the read-only window and how you shorten it.",
+        },
+        {
+          title: "Cloud-Native Rearchitecture",
+          body: "Managed services, **autoscaling and event-driven** patterns for the workloads where the economics justify the change.",
+        },
+        {
+          title: "Cost Optimisation",
+          body: "Rightsizing, commitment planning and **per-service cost attribution**, so spend is attached to something you can act on.",
+        },
+        {
+          title: "Post-Migration Operations",
+          body: "**Monitoring, backup, DR testing** and the runbooks your team needs to operate the platform after we step back.",
+        },
+      ],
+      cta: "Discuss Your Migration",
+    },
+
+    backend: {
+      metaTitle: "Back-End Development Services",
+      metaDescription:
+        "APIs, data models and services built for correctness under load, in .NET, Java, Python and Node.",
+      eyebrow: "Services",
+      title: "Our Back-End Development Services",
+      intro: [
+        "Back-end work is where correctness is decided. A front end can be redesigned in a sprint; a data model that got the domain wrong is felt for years, in every feature built on top of it.",
+        "So we spend disproportionate time on the model and the contracts before writing services against them - and we would rather have that argument in week one than in year two.",
+      ],
+      cards: [
+        {
+          title: "API & Service Development",
+          body: "**REST, GraphQL and gRPC** services with versioning, pagination and error semantics that clients can rely on.",
+        },
+        {
+          title: "Data Modelling & Databases",
+          body: "**PostgreSQL, SQL Server, MySQL and MongoDB** schemas designed around real access patterns, with indexing and migrations planned.",
+        },
+        {
+          title: "Mobile & Web Back Ends",
+          body: "**Auth, sync, push and offline reconciliation** for the client applications the service exists to support.",
+        },
+        {
+          title: "Distributed & Event-Driven Systems",
+          body: "**Kafka and RabbitMQ** architectures with idempotency, retries and dead-letter handling designed rather than discovered.",
+        },
+        {
+          title: "Cloud Back Ends",
+          body: "**Serverless and containerised** services on AWS, Azure and Google Cloud, sized to your traffic profile.",
+        },
+        {
+          title: "Back-End Testing & Hardening",
+          body: "Contract tests, load tests and **OWASP-aligned** security review, run in the pipeline.",
+        },
+      ],
+      cta: "Discuss Your Back End",
+    },
+
+    frontend: {
+      metaTitle: "Front-End Development Services",
+      metaDescription:
+        "Fast, accessible interfaces in React, Angular and Vue, built on a design system your team can extend.",
+      eyebrow: "Services",
+      title: "Our Front-End Development Services",
+      intro: [
+        "Front-end quality is measured by users, not by frameworks: how quickly the page becomes usable, whether it works with a keyboard, whether it holds together at the sizes people actually browse at.",
+        "We build against those measures. Accessibility and performance budgets are set at the start and checked in CI, because both are nearly impossible to retrofit once a component library has spread through a product.",
+      ],
+      cards: [
+        {
+          title: "React, Angular & Vue Development",
+          body: "Production front ends in the framework your team can maintain - **including keeping the one you already have**.",
+        },
+        {
+          title: "Design Systems & Components",
+          body: "A documented **component library with tokens**, so the tenth screen costs a fraction of the first.",
+        },
+        {
+          title: "Accessibility Engineering",
+          body: "**WCAG AA** built in and verified - contrast measured rather than eyeballed, keyboard paths tested, semantics checked.",
+        },
+        {
+          title: "Performance Engineering",
+          body: "**Core Web Vitals budgets**, bundle discipline, image strategy and rendering choices made against measurement.",
+        },
+        {
+          title: "SSR, SSG & Progressive Enhancement",
+          body: "**Next.js and Nuxt** rendering strategies chosen per route for SEO, speed and resilience when scripts fail.",
+        },
+        {
+          title: "Front-End Modernisation",
+          body: "Migrating aging front ends **incrementally**, running old and new side by side rather than stopping feature work.",
+        },
+      ],
+      cta: "Discuss Your Front End",
+    },
+
+    maintenance: {
+      metaTitle: "Software Maintenance & Support Services",
+      metaDescription:
+        "Senior-led ownership of software already in production - stable, secure and still shippable as it ages.",
+      eyebrow: "Services",
+      title: "Our Software Maintenance & Support Services",
+      intro: [
+        "Maintenance is usually staffed as the least interesting work and then handed the highest-consequence system. We staff it the other way around: taking over a codebase you did not write and keeping it shippable is senior work.",
+        "The goal is not only uptime. It is that the system is still changeable in three years - which means paying down technical debt continuously rather than declaring bankruptcy on it later.",
+      ],
+      cards: [
+        {
+          title: "Corrective Maintenance",
+          body: "**SLA-backed defect resolution** with root-cause analysis, so the same incident does not return under a new ticket.",
+        },
+        {
+          title: "Adaptive Maintenance",
+          body: "Keeping pace with **OS, browser, API and dependency changes** before they become outages.",
+        },
+        {
+          title: "Perfective Maintenance",
+          body: "**Performance, usability and cost improvements** driven by what production telemetry actually shows.",
+        },
+        {
+          title: "Preventive Maintenance",
+          body: "**Technical debt reduction, test coverage and dependency upgrades** on a schedule rather than in a crisis.",
+        },
+        {
+          title: "24/7 Monitoring & Incident Response",
+          body: "**Alerting, on-call and post-incident review**, with the runbooks kept current by the people who use them.",
+        },
+        {
+          title: "Takeover & Knowledge Transfer",
+          body: "Structured handover of an unfamiliar codebase - **architecture mapping, risk register and documentation** produced as we go.",
+        },
+      ],
+      cta: "Discuss Your Support Needs",
+    },
   },
 
-  /**
-   * Blog — no Figma artboard exists for this page.
-   * The entries below are SAMPLE CONTENT so the layout renders meaningfully.
-   * Replace them (or swap BLOG_POSTS for a CMS) before launch.
-   */
-  blog: {
-    metaTitle: "Blog",
-    metaDescription:
-      "Field notes on AI engineering, cloud platforms and building software with distributed teams.",
-    heroTitle: "Blog",
-    heroBody:
-      "Field notes from our engineers on applied AI, cloud platforms, and what actually happens when distributed teams build software together.",
-    featuredLabel: "Featured",
-    allCategories: "All",
-    readMore: "Read article",
-    back: "Back to Blog",
-    empty: "No articles in this category yet.",
-    /** {minutes} is replaced at render time. */
-    readTime: "{minutes} min read",
-    categories: {
-      engineering: "Engineering",
-      ai: "AI",
-      design: "Design",
-      business: "Business",
-    },
-    items: {
-      "prototype-in-24-hours": {
-        title: "How we turn an RFP into a working prototype in 24 hours",
-        excerpt:
-          "Not a mockup and not a demo script — a clickable prototype running on real architecture. Here is what makes the deadline possible, and what we deliberately leave out.",
-        body: [
-          "We offer to turn a full brief into a working prototype in a single day. People assume this means a clickable mockup with hardcoded data. It does not, and the difference is the whole point.",
-          "What makes the deadline possible is narrowing scope to one flow. We pick the single user journey that carries the most risk — usually the one nobody can describe precisely — and build that end to end on real architecture. Everything else is deliberately left as a stub. A prototype that covers ten flows shallowly teaches you nothing; one flow built properly surfaces every assumption that was wrong.",
-          "The second thing that makes it possible is that we do not start from zero. Authentication, deployment, observability and the project skeleton are already solved. The day is spent on the part that is specific to the client, not on scaffolding.",
-          "What we leave out is equally deliberate: no design polish beyond the system defaults, no edge cases, no performance work. Judging us on the build means judging the architecture and the thinking, not the pixels.",
-        ],
-      },
-      "llmops-in-production": {
-        title: "LLMOps in production: what breaks after the demo",
-        excerpt:
-          "The demo works. Then the prompt changes, the model version moves, costs triple, and nobody can say which change caused what. The fixes are unglamorous.",
-        body: [
-          "Almost every AI feature demos well. The interesting failures happen in the weeks afterwards, and they are remarkably consistent across projects.",
-          "The first is that nobody can tell whether a change helped. Someone edits a prompt, the output looks better on the three examples they tried, and it ships. Two weeks later a different case has regressed and there is no way to know when. The fix is an evaluation set built from real traffic before the first prompt change, not after the first incident.",
-          "The second is silent model drift. A provider updates a model behind the same name and behaviour shifts underneath you. Pinning versions explicitly and treating a version bump as a deployment — with the same evaluation gate as a code change — removes an entire class of mystery.",
-          "The third is cost. Costs are almost never distributed the way teams assume: a small number of code paths usually account for most of the spend, and they are rarely the ones anyone was watching. Per-feature attribution turns a scary aggregate number into a short list of things to fix.",
-          "None of this is sophisticated. It is versioning, measurement and tracing — the same disciplines that made ordinary software deployable, applied to a component that happens to be non-deterministic.",
-        ],
-      },
-      "legacy-without-freezing": {
-        title: "Modernising legacy systems without freezing the roadmap",
-        excerpt:
-          "The big-bang rewrite fails for reasons that have nothing to do with technology. Incremental migration is slower on paper and faster in practice.",
-        body: [
-          "Legacy modernisation projects fail in a recognisable pattern. A rewrite is scoped, the roadmap freezes so the two systems do not diverge, the rewrite takes longer than planned, and the business spends a year unable to ship anything while competitors do.",
-          "The technology is rarely the reason. The reason is that the plan required the organisation to stop, and organisations cannot stop for a year.",
-          "Incremental migration inverts this. New capability is built in the new architecture, existing capability moves across a slice at a time, and the two run side by side behind a routing layer for as long as necessary. Each slice is independently shippable and independently reversible. The roadmap never freezes because there is never a moment where the system is half-migrated and unusable.",
-          "It is genuinely slower measured in total engineering hours, and considerably faster measured in time-to-value. It also fails safely: if priorities change midway, you are left with a partially modernised system that works, rather than an abandoned rewrite that does not.",
-        ],
-      },
-      "designing-for-five-locales": {
-        title: "Designing one interface for five locales",
-        excerpt:
-          "German is long, Thai has no spaces, and Inter has no CJK glyphs at all. The constraints show up in the layout long before they show up in the translation file.",
-        body: [
-          "Supporting multiple languages is usually treated as a translation task. Most of the work is actually layout, and it needs to happen before any copy is written.",
-          "Text length is the obvious constraint and the easiest to handle: give every string room to grow, never size a container to its English content, and avoid fixed-width buttons. The failure mode is not ugly wrapping, it is clipped text that nobody notices because nobody on the team reads that language.",
-          "Typography is the constraint teams miss. A single webfont almost never covers a multi-script product. Inter is excellent for Latin and covers Vietnamese, but it has no Japanese, Chinese or Thai glyphs whatsoever — the browser silently falls back to whatever the operating system offers, and the design falls apart on exactly the locales nobody tests. Loading a script-appropriate font per locale is not a refinement; it is the difference between a working page and a broken one.",
-          "Line breaking is the third. Thai has no spaces between words, and CJK breaks on characters rather than word boundaries. Layouts that depend on predictable wrapping — a two-line heading, a label that must not wrap — need explicit line control rather than a hope that the browser guesses well.",
-        ],
-      },
-      "offshore-teams-mistakes": {
-        title: "What most companies get wrong about offshore teams",
-        excerpt:
-          "The problem is almost never skill or timezone. It is treating the team as a supplier receiving specifications rather than as engineers who own outcomes.",
-        body: [
-          "When an offshore engagement disappoints, the explanation offered is usually timezone or skill. In our experience it is almost always neither.",
-          "The failure is structural: the team is set up to receive specifications rather than to own outcomes. Work arrives as tickets stripped of context, questions travel through an account manager, and engineers are measured on throughput. Under those conditions even excellent engineers produce mediocre software, because the information needed to make good decisions never reaches the people making them.",
-          "The teams that work are set up the opposite way. They join the same standups, see the same customer feedback, and are expected to push back on requirements they think are wrong. The relationship looks less like a vendor arrangement and more like a team that happens to be in another building.",
-          "Timezone overlap matters, but far less than people expect — four hours is plenty when the team has enough context to make decisions without asking. It matters enormously when they do not.",
-        ],
-      },
-      "retrieval-that-works": {
-        title: "Retrieval that actually works: notes from enterprise search",
-        excerpt:
-          "Vector search over chunked documents is where most enterprise RAG projects start and stall. The gap between demo and useful is mostly unglamorous data work.",
-        body: [
-          "Enterprise search projects tend to follow the same arc. Documents are chunked, embedded and indexed, the demo answers three prepared questions impressively, and then real users arrive and find it unreliable.",
-          "The most common cause is that the chunks are wrong. Fixed-size splitting cuts tables in half, separates headings from the content they describe, and produces fragments that are individually meaningless. Chunking along the document's actual structure — sections, tables, list items — usually improves results more than any change to the model.",
-          "The second cause is that pure vector similarity is a poor match for how people search internally. Employees search for exact identifiers: a part number, a policy code, a customer name. Embeddings are bad at exact matches by design. Hybrid retrieval — keyword and vector together — fixes a category of failure that no amount of embedding tuning will.",
-          "The third is that permissions are usually retrofitted, which is both a security problem and a quality one. Filtering results after retrieval means the ranking was computed over documents the user cannot see, so the results they do get are worse than they should be.",
-          "None of this is about model choice. It is data modelling, and it is where the time goes.",
-        ],
-      },
-    },
-  },
 
   /** Technologies page — Figma 508:66 */
   technologies: {
@@ -588,8 +1128,10 @@ export const en = {
       "Our technology stacks across AI, back-end, front-end, app development, DevOps and cloud — the tools we use to build intelligent, scalable systems.",
     hero: {
       /** Authored as two explicit lines (423:2389). */
-      titleLines: ["Software Development", "Technologies"],
-      body: "With extensive experience in software development, Wesantika has built strong technological expertise through collaboration with multinational teams, startups, and enterprises across diverse markets. We continuously embrace the latest advancements in AI and modern software engineering, combining global perspectives with deep technical capabilities to develop intelligent, scalable, and high-quality solutions that meet demanding business and industry requirements.",
+      title: "Software Development Technologies",
+      body: "With extensive experience in software development, Wesantika has built strong technological expertise through collaboration with multinational teams, startups, and enterprises across diverse markets.",
+      /** The rest of the original paragraph, rendered under the hero. */
+      bodyMore: "We continuously embrace the latest advancements in AI and modern software engineering, combining global perspectives with deep technical capabilities to develop intelligent, scalable, and high-quality solutions that meet demanding business and industry requirements.",
       cta: "Let's discuss your needs",
     },
     stacksHeading:
@@ -650,10 +1192,7 @@ export const en = {
       emphasis: "24 hours",
       trail: "",
     },
-    bodyLines: [
-      "AI-accelerated path from brief to working",
-      "prototype. Engineers, not sales.",
-    ],
+    body: "AI-accelerated path from brief to working prototype. Engineers, not sales.",
     checklist: [
       "Clickable prototype of your core user flow",
       "Workflow visualization mapping the full system",
@@ -681,6 +1220,17 @@ export const en = {
       fileTooLarge: "That file is over the 10 MB limit.",
       fileType: "That file type is not accepted.",
     },
+  },
+
+  a11y: {
+    skipToContent: "Skip to content",
+  },
+
+  notFound: {
+    metaTitle: "Page not found",
+    title: "This page does not exist",
+    body: "The link may be out of date, or the page may have moved. These are the places worth trying.",
+    home: "Back to home",
   },
 
   rail: {

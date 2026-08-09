@@ -138,14 +138,14 @@ export function Nav({
           {/* The cyan pill sits on a blue hero in the transparent state, so it
               gains a white edge there. The border is always present and merely
               turns transparent when solid, keeping the geometry stable. */}
-          <a
-            href="#contact"
+          <Link
+            href={href("/contact")}
             className={`flex h-[35px] min-w-[115px] items-center justify-center rounded-pill-nav border bg-brand-cta px-[14px] text-[16px] leading-[19px] font-normal whitespace-nowrap text-white transition-all duration-300 ease-out hover:opacity-90 ${
               solid ? "border-transparent" : "border-white"
             }`}
           >
             {nav.contact}
-          </a>
+          </Link>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
