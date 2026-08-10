@@ -31,6 +31,8 @@ export const ja: PartialDictionary = {
 
   services: {
     heading: "提供サービス",
+      /** Rendered in the brand colour; must be a substring of heading. */
+      headingAccent: "サービス",
     cta: "サービス詳細を見る",
     categories: {
       custom: "カスタムソフトウェア開発",

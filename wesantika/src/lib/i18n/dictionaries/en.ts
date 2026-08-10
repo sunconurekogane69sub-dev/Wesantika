@@ -35,6 +35,8 @@ export const en = {
 
   services: {
     heading: "Our Full-Range Services",
+      /** Rendered in the brand colour; must be a substring of heading. */
+      headingAccent: "Services",
     cta: "See Service Details",
     categories: {
       custom: "Custom Software Development",

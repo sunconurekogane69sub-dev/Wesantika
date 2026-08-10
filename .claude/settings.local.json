@@ -102,7 +102,11 @@
       "Bash(awk '{print \"  svc-award.png \"$5\" bytes\"}')",
       "Bash(curl -s \"http://localhost:3121/en\")",
       "Bash(python -m json.tool)",
-      "Bash(curl -s \"http://localhost:3121/en/contact\")"
+      "Bash(curl -s \"http://localhost:3121/en/contact\")",
+      "Bash(cp \"/D/HOME.jpg\" public/images/home-hero.jpg)",
+      "Bash(cp \"D:/HOME.jpg\" public/images/home-hero.jpg)",
+      "Bash(awk '{print \"  home-hero.jpg \"$5\" bytes\"}')",
+      "Bash(python -c \"import sys,json;d=json.load\\(sys.stdin\\);print\\('  ',{k:\\('<url>' if k=='previewUrl' and d[k] else d[k]\\) for k in d}\\)\")"
     ]
   }
 }

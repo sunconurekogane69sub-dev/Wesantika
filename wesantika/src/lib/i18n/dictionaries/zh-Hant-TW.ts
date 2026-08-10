@@ -38,6 +38,8 @@ export const zhHantTW: PartialDictionary = {
 
   services: {
     heading: "完整服務範圍",
+      /** Rendered in the brand colour; must be a substring of heading. */
+      headingAccent: "服務",
     cta: "查看服務詳情",
     categories: {
       custom: "客製化軟體開發",

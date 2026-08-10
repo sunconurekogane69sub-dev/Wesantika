@@ -37,18 +37,19 @@ const LOCALES = [
  * The constrained regions. Geometry mirrors PageHero's `SIZE` table at xl,
  * minus the 95px the fixed nav occupies.
  *
- *   home  760px tall, 680px measure
- *   page  560px tall, 620px measure
+ * The landing hero is full-screen, so the box to check is its **floor** — a
+ * landscape phone at the 520px clamp, not a desktop window. Checking the tall
+ * case would pass almost anything.
  */
-const HOME = { height: 760 - 95, measure: 680 };
+const HOME = { height: 520 - 95, measure: 720 };
 const PAGE = { height: 560 - 95, measure: 620 };
 
 const REGIONS = [
   {
     page: "Top", box: HOME,
     parts: [
-      { path: "hero.title", size: 60, leading: 66 },
-      { path: "hero.subtitle", size: 22, leading: 32, marginTop: 26 },
+      { path: "hero.title", size: 68, leading: 74 },
+      { path: "hero.subtitle", size: 22, leading: 34, marginTop: 28 },
     ],
   },
   {

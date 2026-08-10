@@ -28,9 +28,27 @@ import Image from "next/image";
  * Every value here is measured — `npm run ink` models this exact crop and
  * fails the build if the copy stops clearing WCAG on its ground.
  */
-type HeroSize = "home" | "page";
+type HeroSize = "full" | "home" | "page";
 
 const SIZE = {
+  /**
+   * Full screen, for the landing page.
+   *
+   * `100svh`, not `100vh`. On mobile browsers `vh` is the viewport *with the
+   * address bar hidden*, so a `100vh` hero is taller than what you can actually
+   * see, and its bottom — a CTA, usually — sits under the browser chrome until
+   * you scroll. `svh` is the smallest viewport state and always fits.
+   *
+   * `max-h` caps it so the hero cannot become absurd on a tall desktop window,
+   * and `min-h` keeps the copy from being crushed on a landscape phone.
+   */
+  full: {
+    section: "h-[100svh] min-h-[520px] max-h-[1000px]",
+    title:
+      "text-[38px] leading-[1.12] sm:text-[52px] xl:text-[68px] xl:leading-[1.08]",
+    body: "mt-[22px] text-[17px] leading-[28px] sm:text-[19px] xl:mt-[28px] xl:text-[22px] xl:leading-[34px]",
+    measure: "max-w-[720px]",
+  },
   home: {
     section: "h-[560px] sm:h-[660px] xl:h-[760px]",
     title:
@@ -100,9 +118,22 @@ export function PageHero({
       />
 
       {scrim && (
+        /*
+          The full-screen hero gets a stronger wash than the fixed-height one,
+          and not for taste. Its height is the viewport's, so the crop is not
+          constant: at the 520px floor the copy sits on deep navy sky and white
+          measures 4.8:1, but at the 1000px ceiling the same copy has slid down
+          onto the bright city and it measures 3.97:1 — under AA. The ramp below
+          carries the worst case to 5.7:1, so the hero is legible on a landscape
+          phone and a tall desktop window alike.
+        */
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-r from-black/35 via-black/15 to-transparent"
+          className={
+            size === "full"
+              ? "absolute inset-0 bg-gradient-to-r from-black/55 via-black/35 to-black/5"
+              : "absolute inset-0 bg-gradient-to-r from-black/35 via-black/15 to-transparent"
+          }
         />
       )}
 

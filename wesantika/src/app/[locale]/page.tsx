@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AiProximityPanel } from "@/components/AiProximityPanel";
+import { AccentedHeading } from "@/components/AccentedHeading";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { PageHero } from "@/components/PageHero";
@@ -29,13 +30,15 @@ export default async function TopPage({
 
       <main id="main-content">
 
-      {/* ---- Hero — 180:576 / 180:599 -------------------------------- */}
+      {/* ---- Hero — 180:576 / 180:599 --------------------------------
+          Full screen on request, and the client-supplied HOME artwork replaces
+          the Figma export. `objectPosition` is measured, not chosen: the sky at
+          the top of this photograph is deep navy and the city at the foot is
+          bright, so white type wants the upper band. */}
       <PageHero
-          image="/images/top-hero.png"
-          // The photograph is darkest at the top; measured 3.6:1 for white
-          // there against 2.5:1 at the foot of the frame.
+          image="/images/home-hero.jpg"
           objectPosition="50% 0%"
-          size="home"
+          size="full"
           ink="white"
           scrim
           title={t.hero.title}
@@ -44,9 +47,15 @@ export default async function TopPage({
 
       {/* ---- Our Full-Range Services — 180:618-710 ------------------- */}
       <section className="canvas px-6 pt-[64px] xl:px-0 xl:pt-[88px]">
-        <h2 className="text-[28px] leading-[36px] font-bold text-brand xl:pl-[212px] xl:text-[36px] xl:leading-[44px]">
-          {t.services.heading}
-        </h2>
+        {/* Ink for the phrase, brand for the one word. It used to be brand
+            throughout, which made the whole line read as a label rather than a
+            heading. Brand blue is 3.3:1 on white — fine here, because at 28px
+            and up it counts as large text. */}
+        <AccentedHeading
+          text={t.services.heading}
+          accent={t.services.headingAccent}
+          className="text-[28px] leading-[36px] font-bold text-black xl:pl-[212px] xl:text-[36px] xl:leading-[44px]"
+        />
 
         <ServiceTabs
           categories={SERVICE_CATEGORY_IDS.map((id) => ({

@@ -38,6 +38,8 @@ export const th: PartialDictionary = {
 
   services: {
     heading: "บริการครบวงจรของเรา",
+      /** Rendered in the brand colour; must be a substring of heading. */
+      headingAccent: "บริการ",
     cta: "ดูรายละเอียดบริการ",
     categories: {
       custom: "พัฒนาซอฟต์แวร์ตามความต้องการ",

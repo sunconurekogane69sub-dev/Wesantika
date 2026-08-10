@@ -38,6 +38,8 @@ export const vi: PartialDictionary = {
 
   services: {
     heading: "Dịch vụ toàn diện",
+      /** Rendered in the brand colour; must be a substring of heading. */
+      headingAccent: "Dịch vụ",
     cta: "Xem chi tiết dịch vụ",
     categories: {
       custom: "Phát triển phần mềm theo yêu cầu",

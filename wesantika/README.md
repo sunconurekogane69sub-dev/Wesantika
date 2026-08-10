@@ -685,9 +685,9 @@ filled in from the design file — each needs a real value from Wesantika.
 | What | Where | Why it can't be guessed |
 | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Vercel env, **all** environments | `NEXT_PUBLIC_*` is inlined at *build* time. Unset, canonical/`hreflang`/`og:image` fall back to `VERCEL_PROJECT_PRODUCTION_URL`, and failing that to `localhost:3000`. |
-| Four contact-rail links | `src/lib/content.ts` → `CONTACT_CHANNELS` | Figma gave icons, not accounts. `wa.me/00000000000` resolves to a WhatsApp error page; the Telegram and LINE handles are guesses at the shape. |
-| `CONTACT_TO_EMAIL`, `RFP_TO_EMAIL` | `.env` | Currently on `.example`, an RFC 2606 reserved TLD, so enquiries cannot reach anyone. |
-| SMTP credentials | `.env` | Without them the API provisions a disposable Ethereal mailbox — real SMTP, but nobody at Wesantika ever sees the mail. |
+| ~~Four contact-rail links~~ | done | Real accounts supplied and in place — see below. |
+| ~~`CONTACT_TO_EMAIL`~~ | done | `lh.smartcoding@gmail.com`, and it is the code-level fallback too. |
+| SMTP credentials | `.env` | **The one thing still missing.** Without them the API provisions a disposable Ethereal mailbox — real SMTP, and the send genuinely succeeds, but the mail lands in a throwaway inbox nobody at Wesantika reads. |
 | Turnstile key pair | `.env` | Cloudflare's "always passes" test keys are in use, so the RFP form has no actual spam protection. |
 | Privacy Policy | `src/components/Footer.tsx` | A legal document about how this company handles data. Held back rather than shipped pointing at `#`; restoring it is one `Link` once the text exists. |
 | "within one business day" | `contact.next.steps.reply` in all 5 dictionaries | A **response-time commitment** written into the Contact page. One business day is the ordinary B2B default, but nobody at Wesantika has confirmed Wesantika can meet it. Confirm or reword. |
@@ -934,6 +934,48 @@ independent reasons:
 They now get the rail's own treatment: white glyph on a `brand-btn` disc
 (6.01:1, well past the 3:1 a graphic needs). The two places a visitor can reach
 these channels look like the same thing, because they are.
+
+### Contact channels
+
+The four real accounts, in `src/lib/content.ts` → `CONTACT_CHANNELS`, replacing
+the placeholders (one of which, `wa.me/00000000000`, resolved to a WhatsApp
+error page):
+
+| | |
+|---|---|
+| Email | `lh.smartcoding@gmail.com` |
+| Telegram | `t.me/senior_engineer1` |
+| WhatsApp | `+81 90-3035-4697` |
+| LINE | `lin.ee/xINWk75` |
+
+The WhatsApp entry carries **two** forms and needs to: `wa.me` takes E.164 with
+no `+`, spaces or dashes — `819030354697` — and fails silently on anything else,
+so the human-readable `+81 90-3035-4697` lives in `display` for the one place it
+is shown as text.
+
+Enquiries deliver to the same address, and it is now the *code-level* fallback in
+both API routes as well as the env default. That inverts the old behaviour on
+purpose: while no real mailbox existed, `.example` made an unconfigured
+deployment fail loudly, which was right. Now one exists, a deployment that
+forgets `CONTACT_TO_EMAIL` should still deliver rather than drop enquiries.
+
+**Verified end to end**, not assumed:
+
+```
+POST /api/contact  (JSON)         -> {"ok":true,"previewUrl":…}
+POST /api/rfp      (multipart)    -> {"ok":true,"previewUrl":…}
+```
+
+and the delivered RFP message was fetched back and checked to contain the
+attachment filename, the form fields, and the real recipient. The guards were
+tested by trying to break them:
+
+| attempt | response |
+|---|---|
+| 11 MB file (10 MB limit) | `file_too_large` |
+| `.exe` attachment | `file_type` |
+| no captcha token | `captcha_missing` |
+| malformed email | rejected with a message |
 
 ### The head office
 

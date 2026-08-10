@@ -36,18 +36,40 @@ export type ContactStepId = (typeof CONTACT_STEP_IDS)[number];
 /**
  * Right-edge sticky rail — Figma 180:600-622.
  *
- * ⚠ LAUNCH BLOCKER: every href below is a placeholder. Figma supplied the four
- * icons but no accounts, so these are guesses at the handle shape, not real
- * destinations — `wa.me/00000000000` in particular resolves to a WhatsApp error
- * page. The address uses `.example`, an RFC 2606 reserved TLD, so it cannot
- * silently reach an inbox. Replace all four with the real accounts before
- * launch; see the checklist in README.md.
+ * These are the real accounts, supplied by Wesantika. They replace the four
+ * placeholders that used to sit here, one of which (`wa.me/00000000000`)
+ * resolved to a WhatsApp error page.
+ *
+ * The WhatsApp number is `+81 90-3035-4697`. `wa.me` takes it in E.164 with no
+ * `+`, spaces or dashes — `819030354697` — and silently fails on anything else,
+ * which is why the human-readable form is kept separately in `display` for the
+ * one place it is shown as text.
  */
 export const CONTACT_CHANNELS = [
-  { id: "email", icon: "/icons/icon-mail.svg", href: "mailto:contact@wesantika.example" },
-  { id: "telegram", icon: "/icons/icon-telegram.svg", href: "https://t.me/wesantika" },
-  { id: "whatsapp", icon: "/icons/icon-whatsapp.svg", href: "https://wa.me/00000000000" },
-  { id: "line", icon: "/icons/icon-line.svg", href: "https://line.me/ti/p/~wesantika" },
+  {
+    id: "email",
+    icon: "/icons/icon-mail.svg",
+    href: "mailto:lh.smartcoding@gmail.com",
+    display: "lh.smartcoding@gmail.com",
+  },
+  {
+    id: "telegram",
+    icon: "/icons/icon-telegram.svg",
+    href: "https://t.me/senior_engineer1",
+    display: "@senior_engineer1",
+  },
+  {
+    id: "whatsapp",
+    icon: "/icons/icon-whatsapp.svg",
+    href: "https://wa.me/819030354697",
+    display: "+81 90-3035-4697",
+  },
+  {
+    id: "line",
+    icon: "/icons/icon-line.svg",
+    href: "https://lin.ee/xINWk75",
+    display: "lin.ee/xINWk75",
+  },
 ] as const;
 
 export type ChannelId = (typeof CONTACT_CHANNELS)[number]["id"];

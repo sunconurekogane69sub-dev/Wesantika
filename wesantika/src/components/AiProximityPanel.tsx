@@ -7,8 +7,23 @@ import type { Dictionary } from "@/lib/i18n";
 
 /** How far the cursor's influence reaches, in panel design px. */
 const INFLUENCE_RADIUS = 300;
-/** Scale applied to a label the cursor sits directly on. */
-const MAX_SCALE = 1.6;
+
+/**
+ * The label rises as the cursor nears it. This is the movement the eye reads,
+ * so it carries most of the effect.
+ */
+const MAX_LIFT = 16;
+/**
+ * And leans towards the cursor horizontally. Small — enough that the row feels
+ * like it is responding to you, not enough to disturb the composition.
+ */
+const MAX_LEAN = 12;
+/**
+ * Scale is now a supporting move rather than the whole gesture. It used to run
+ * to 1.6, which is a lot of zoom and read as a magnifier passing over a
+ * photograph; at 1.12 it just firms up the label that is being pointed at.
+ */
+const MAX_SCALE = 1.12;
 
 const BASE_TRANSFORM = "translate(-50%, -50%) scale(1)";
 
@@ -24,13 +39,19 @@ const BASE_TRANSFORM = "translate(-50%, -50%) scale(1)";
  * "Advanced AI Engineering" onto three lines instead of two, and which also
  * keeps the layout predictable once the labels are translated.
  *
- * Labels magnify as the cursor approaches, weighted by distance. The lower-left
- * item is deliberately inert: it reads as the section's own label rather than one
- * of the capabilities.
+ * **The gesture is a slide, not a zoom.** As the cursor approaches, a label
+ * lifts, leans towards the pointer, firms up very slightly, and grows an
+ * underline that wipes in from the left. All four are driven by one eased
+ * proximity value, so they arrive together and leave together.
+ *
+ * The lower-left item is deliberately inert — no movement, no underline, no
+ * pointer cursor. It reads as the section's own label rather than one of the
+ * capabilities.
  */
 export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"] }) {
   const surfaceRef = useRef<HTMLDivElement>(null);
   const labelsRef = useRef<Array<HTMLSpanElement | null>>([]);
+  const rulesRef = useRef<Array<HTMLSpanElement | null>>([]);
   const [fit, setFit] = useState(1);
 
   // Fit the design stage to whatever width the section gives us.
@@ -46,7 +67,7 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
     return () => observer.disconnect();
   }, []);
 
-  // Distance-weighted magnification.
+  // Distance-weighted slide + underline.
   useEffect(() => {
     const surface = surfaceRef.current;
     if (!surface) return;
@@ -65,11 +86,16 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
 
       AI_LABELS.forEach((label, index) => {
         const el = labelsRef.current[index];
+        const rule = rulesRef.current[index];
         if (!el || label.fixed) return;
 
         if (!pointer) {
           el.style.transform = BASE_TRANSFORM;
           el.style.zIndex = "10";
+          if (rule) {
+            rule.style.transform = "scaleX(0)";
+            rule.style.opacity = "0";
+          }
           return;
         }
 
@@ -79,10 +105,25 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
 
         const t = Math.max(0, 1 - distance / INFLUENCE_RADIUS);
         const eased = t * t * (3 - 2 * t); // smoothstep
+
+        // Lean is signed by which side the cursor is on, and clamped so a
+        // pointer far off to one side does not fling the label across the panel.
+        const lean =
+          Math.max(-1, Math.min(1, (px - label.cx) / INFLUENCE_RADIUS)) *
+          MAX_LEAN *
+          eased;
+        const lift = -MAX_LIFT * eased;
         const scale = 1 + (MAX_SCALE - 1) * eased;
 
-        el.style.transform = `translate(-50%, -50%) scale(${scale.toFixed(4)})`;
+        el.style.transform =
+          `translate(calc(-50% + ${lean.toFixed(2)}px), calc(-50% + ${lift.toFixed(2)}px))` +
+          ` scale(${scale.toFixed(4)})`;
         el.style.zIndex = String(10 + Math.round(eased * 20));
+
+        if (rule) {
+          rule.style.transform = `scaleX(${eased.toFixed(3)})`;
+          rule.style.opacity = eased.toFixed(3);
+        }
       });
     };
 
@@ -148,7 +189,10 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
               className={`absolute z-10 block text-center font-bold text-white [text-shadow:0_1px_8px_rgb(0_0_0/0.28)]${
                 label.fixed
                   ? ""
-                  : " transition-transform duration-100 ease-out will-change-transform"
+                  : // cursor-pointer on request. The labels are not links, so
+                    // this is the one place the site promises interactivity it
+                    // does not have — see the note in README.
+                    " cursor-pointer transition-transform duration-150 ease-out will-change-transform"
               }`}
             >
               {lines.map((line) => (
@@ -156,6 +200,25 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
                   {line}
                 </span>
               ))}
+
+              {/*
+                The underline. `scaleX` from a left origin, so it wipes in rather
+                than fading, and it is driven by the same eased value as the
+                slide — that is what makes the two read as one gesture.
+
+                Inside the label, so it inherits the lift and the lean and
+                travels with the text instead of being left behind.
+              */}
+              {!label.fixed && (
+                <span
+                  aria-hidden
+                  ref={(el) => {
+                    rulesRef.current[index] = el;
+                  }}
+                  className="mt-[6px] block h-[2px] origin-left rounded-full bg-white opacity-0 transition-[transform,opacity] duration-150 ease-out will-change-transform"
+                  style={{ transform: "scaleX(0)" }}
+                />
+              )}
             </span>
           );
         })}

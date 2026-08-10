@@ -6,8 +6,16 @@ import { getMailer } from "@/lib/mailer";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const TO = env("RFP_TO_EMAIL") ?? env("CONTACT_TO_EMAIL") ?? "contact@wesantika.example";
-const FROM = env("CONTACT_FROM_EMAIL") ?? "no-reply@wesantika.example";
+/**
+ * Fallbacks are the real mailbox, not a `.example` placeholder.
+ *
+ * The placeholder was deliberate while no real address existed: it made an
+ * unconfigured deployment fail loudly. Now that one exists, the safer default is
+ * the opposite — a deployment that forgets `CONTACT_TO_EMAIL` should still
+ * deliver, rather than drop enquiries into a domain that cannot receive them.
+ */
+const TO = env("RFP_TO_EMAIL") ?? env("CONTACT_TO_EMAIL") ?? "lh.smartcoding@gmail.com";
+const FROM = env("CONTACT_FROM_EMAIL") ?? "lh.smartcoding@gmail.com";
 
 /**
  * Cloudflare's documented "always passes" test secret. Real deployments set

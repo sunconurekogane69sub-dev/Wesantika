@@ -17,9 +17,11 @@
  * A region passes if its declared ink clears its threshold. The script also
  * reports the alternative ink so a better choice is obvious when one exists.
  *
- * JPEG sources are skipped — there is no JPEG decoder here. The two affected
- * regions (Services highlight cards) sit on the white upper area of their
- * photos and were checked by eye.
+ * JPEGs are decoded through `sharp`, which Next already depends on for image
+ * optimisation. They used to be skipped for want of a decoder, which meant the
+ * two Services highlight cards — and then the landing hero, once it became a
+ * photograph — were "checked by eye". If sharp is ever unavailable the script
+ * falls back to skipping them and says so, rather than reporting a false pass.
  */
 import { readFileSync } from "node:fs";
 import { inflateSync } from "node:zlib";
@@ -27,6 +29,13 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+
+let sharp = null;
+try {
+  ({ default: sharp } = await import("sharp"));
+} catch {
+  // left null; JPEG regions are skipped and counted below
+}
 
 /* ---------- PNG ---------------------------------------------------------- */
 function decodePng(file) {
@@ -65,6 +74,17 @@ function decodePng(file) {
   return { w, h, bpp, data: out };
 }
 
+/* ---------- JPEG ---------------------------------------------------------
+   Returned in the same shape as decodePng so the sampler does not care which
+   format it is looking at.                                                  */
+async function decodeJpeg(file) {
+  const { data, info } = await sharp(file)
+    .removeAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  return { w: info.width, h: info.height, bpp: info.channels, data };
+}
+
 /* ---------- colour ------------------------------------------------------- */
 const srgb = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
 const lum = ([r, g, b]) => 0.2126 * srgb(r) + 0.7152 * srgb(g) + 0.0722 * srgb(b);
@@ -98,6 +118,15 @@ const scrims = {
    * white type sits on a photograph. Gone by mid-frame, where the subject is.
    */
   heroWash: (x, y, w) => ({ colour: [0, 0, 0], alpha: lerp3(x / w, 0.35, 0.15, 0) }),
+  /**
+   * The full-screen variant of the same wash. Stronger because that hero's
+   * height is the viewport's, so its crop is not constant — see the note in
+   * PageHero.tsx. Mirrors that gradient exactly; change one, change both.
+   */
+  heroWashFull: (x, y, w) => ({
+    colour: [0, 0, 0],
+    alpha: lerp3(x / w, 0.55, 0.35, 0.05),
+  }),
   /**
    * PageHero's white wash, on every interior hero. Held across the copy column
    * so all five share one ground, then released so the photograph arrives at
@@ -134,14 +163,21 @@ const REGIONS = [
   //
   // `objectY` mirrors each hero's object-position, chosen by measurement.
 
-  { page: "Top", what: "nav strip", image: "images/top-hero.png", section: [1672, 760],
+  // The landing hero is full-screen, so its height is the viewport's, not a
+  // constant. Both ends of the clamp are measured: a landscape phone at the
+  // 520px floor and a tall desktop window at the 1000px ceiling crop the
+  // photograph very differently, and a region that only checked one of them
+  // would miss the other.
+  { page: "Top", what: "nav strip", image: "images/home-hero.jpg", section: [1672, 900],
     objectY: 0, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
-  { page: "Top", what: "H1", image: "images/top-hero.png", section: [1672, 760],
-    objectY: 0, box: [212, 280, 680, 150], ink: "white", scrim: "heroWash", size: 60 },
-  // No longer bold. It was bold only so 24px would qualify as large text at
-  // 3.6:1; the wash buys the margin, so the sub-head can be regular weight.
-  { page: "Top", what: "subhead", image: "images/top-hero.png", section: [1672, 760],
-    objectY: 0, box: [212, 440, 680, 120], ink: "white", scrim: "heroWash", size: 22 },
+  { page: "Top", what: "H1 (short viewport)", image: "images/home-hero.jpg", section: [1672, 520],
+    objectY: 0, box: [212, 150, 720, 190], ink: "white", scrim: "heroWashFull", size: 68 },
+  { page: "Top", what: "body (short viewport)", image: "images/home-hero.jpg", section: [1672, 520],
+    objectY: 0, box: [212, 340, 720, 130], ink: "white", scrim: "heroWashFull", size: 22 },
+  { page: "Top", what: "H1 (tall viewport)", image: "images/home-hero.jpg", section: [1672, 1000],
+    objectY: 0, box: [212, 390, 720, 190], ink: "white", scrim: "heroWashFull", size: 68 },
+  { page: "Top", what: "body (tall viewport)", image: "images/home-hero.jpg", section: [1672, 1000],
+    objectY: 0, box: [212, 580, 720, 130], ink: "white", scrim: "heroWashFull", size: 22 },
 
   { page: "About", what: "nav strip", image: "images/about-hero.png", section: [1672, 560],
     objectY: 0, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
@@ -235,9 +271,12 @@ let failures = 0, checked = 0, skipped = 0;
 let currentPage = "";
 
 for (const r of REGIONS) {
-  if (r.image.endsWith(".jpg")) { skipped++; continue; }
+  const isJpeg = /\.jpe?g$/.test(r.image);
+  if (isJpeg && !sharp) { skipped++; continue; }
   const path = join(ROOT, "public", r.image);
-  if (!cache.has(path)) cache.set(path, decodePng(path));
+  if (!cache.has(path)) {
+    cache.set(path, isJpeg ? await decodeJpeg(path) : decodePng(path));
+  }
   const img = cache.get(path);
 
   const [sw, sh] = r.section;
