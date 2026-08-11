@@ -760,15 +760,29 @@ a navy bar — the last thing on the page and the least considered thing on it.
 Which is what makes it the right place for a flourish: nothing depends on it, so
 it can carry decoration that would be noise anywhere else.
 
-**A decorative face per script.** Neither is used anywhere else on the site, so
-neither can leak into the reading experience.
+**The typeface is the site's own** — Inter for English, Noto Sans JP for
+Japanese, each locale's existing face for the rest, at weight 500. A pair of
+decorative display faces (Unbounded and Shippori Mincho) were tried here and
+taken back out: they made the line a separate object on the page rather than the
+end of it.
 
-| | face | why |
+The decoration is carried by everything *except* the typeface, which is the more
+durable way to do it — nothing here depends on a font loading, and it costs no
+extra bytes. Removing the two faces took **254 `@font-face` declarations** out of
+the stylesheet.
+
+**Tracking does most of the work**, per script:
+
+| | tracking | |
 |---|---|---|
-| `en` | Unbounded, uppercase, 0.22em | Wide geometric display face; at this size with open tracking it reads deliberate rather than loud |
-| `vi` | Unbounded, 0.16em | Unbounded carries the Vietnamese subset |
-| `ja` | **Shippori Mincho**, 0.16em | A *mincho* — a Japanese serif. One line of mincho in a wholly sans-serif site is the strongest contrast the script offers, and unmistakably Japanese in a way a gothic face is not |
-| `zh-Hant-TW` · `th` | their Noto face | Ornaments only. Neither has a decorative option here that would not read as costume |
+| `en` | 0.22em, uppercase | Opens Latin caps out into something deliberate |
+| `vi` | 0.16em | |
+| `ja` | 0.16em | Already set on a full em box; 0.22em would pull the line apart |
+| `zh-Hant-TW` | 0.14em | |
+| `th` | 0.08em | Least of all — Thai marks belong to the letter they sit on |
+
+Weight 500, not 400: at 11–13px with this much tracking the strokes thin out and
+the line starts to look faded rather than fine.
 
 **The colour is a sheen, and it is measured.** A gradient sweeps the line over
 14s: `#e8f2ff → #7dd3fc → #ffffff → #7dd3fc → #e8f2ff`. Every stop was checked
