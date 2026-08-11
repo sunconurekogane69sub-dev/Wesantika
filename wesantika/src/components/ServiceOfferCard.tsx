@@ -39,14 +39,14 @@ export function ServiceOfferCard({
       tabIndex={0}
       className="group relative flex min-h-[422px] w-full flex-col rounded-[16px] border-[3px] border-brand bg-white outline-none"
     >
-      <h3 className="px-[26px] pt-[47px] text-[20px] leading-[24px] font-bold text-black">
+      <h3 className="px-[26px] pt-[47px] text-[20px] leading-[30px] font-bold text-black">
         {title}
       </h3>
 
       {detailHref ? (
         <Link
           href={detailHref}
-          className="mt-[12px] self-start px-[26px] text-[20px] leading-[24px] font-normal whitespace-nowrap text-brand-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          className="mt-[12px] self-start px-[26px] text-[20px] leading-[30px] font-normal whitespace-nowrap text-brand-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
         >
           {detailLabel}
           <span aria-hidden> →</span>
@@ -67,7 +67,7 @@ export function ServiceOfferCard({
           sizes="(max-width: 1280px) 100vw, 364px"
           className="rounded-[8px] object-cover shadow-[0_4px_4px_rgb(0_0_0/0.25)] transition-opacity duration-300 ease-out group-hover:opacity-0 group-focus-within:opacity-0"
         />
-        <p className="absolute inset-0 flex items-center overflow-y-auto px-[31px] text-[16px] leading-[22px] font-medium text-black opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-within:opacity-100">
+        <p className="absolute inset-0 flex items-center overflow-y-auto px-[31px] text-[16px] leading-[26px] font-medium text-black opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-within:opacity-100">
           {body}
         </p>
       </div>

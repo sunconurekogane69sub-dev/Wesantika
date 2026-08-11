@@ -48,21 +48,48 @@
   /* Card + button hairline: #000000 at 30% */
   --color-hairline: rgb(0 0 0 / 0.3);
 
-  /* Type scale — Inter, 7 sizes, line-heights as authored */
+  /* Display face for headings, text face for everything else.
+     Latin and Vietnamese get Manrope; Japanese, Chinese and Thai fall straight
+     through to their Noto face, because Manrope has none of those glyphs. One
+     stack, correct in all five locales. */
+  --font-display:
+    var(--font-heading), var(--font-app), ui-sans-serif, system-ui, sans-serif;
+
+  /* ---------------------------------------------------------------------
+     Type scale.
+
+     The scale lifted from Figma had a single line-height ratio applied to
+     every step — 16/19, 20/24, 24/29, 32/39, 36/44, 48/58, 64/77 — all of
+     them 1.19-1.22. That is one number used seven times, and it is why 46
+     separate places on this site set body copy at a ratio meant for a
+     headline. Line-height has to *fall* as size rises: long lines of small
+     text need air between them to find the next line, a 64px headline does
+     not and looks unglued if it gets it.
+
+     Tracking moves the other way — negative at display sizes, where default
+     spacing reads loose, and none at text sizes. Applied to Latin only;
+     see the :lang rules below.
+     --------------------------------------------------------------------- */
+  --text-caption: 13px;
+  --text-caption--line-height: 20px; /* 1.54 */
+  --text-small: 15px;
+  --text-small--line-height: 24px; /* 1.60 */
   --text-body: 16px;
-  --text-body--line-height: 19px;
-  --text-lead: 20px;
-  --text-lead--line-height: 24px;
-  --text-h5: 24px;
-  --text-h5--line-height: 29px;
+  --text-body--line-height: 26px; /* 1.63 */
+  --text-lead: 19px;
+  --text-lead--line-height: 30px; /* 1.58 */
+  --text-h6: 22px;
+  --text-h6--line-height: 30px; /* 1.36 */
+  --text-h5: 26px;
+  --text-h5--line-height: 34px; /* 1.31 */
   --text-h4: 32px;
-  --text-h4--line-height: 39px;
-  --text-h3: 36px;
-  --text-h3--line-height: 44px;
+  --text-h4--line-height: 40px; /* 1.25 */
+  --text-h3: 38px;
+  --text-h3--line-height: 46px; /* 1.21 */
   --text-h2: 48px;
-  --text-h2--line-height: 58px;
+  --text-h2--line-height: 56px; /* 1.17 */
   --text-h1: 64px;
-  --text-h1--line-height: 77px;
+  --text-h1--line-height: 70px; /* 1.09 */
 
   /* Radii as authored */
   --radius-pill-nav: 4px;
@@ -91,6 +118,58 @@
     color: #000;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Inter and Manrope are both variable fonts with an optical size axis;
+       without this the browser never uses it. */
+    font-optical-sizing: auto;
+    /* Inter ships contextual alternates that fix a handful of awkward pairs. */
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  /* Headings take the display face. CJK and Thai fall through it to their Noto
+     face automatically, since Manrope carries no glyphs for those scripts. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+
+  /*
+    Optical tracking, Latin only.
+
+    Default spacing is drawn for text sizes, so it reads loose above ~28px —
+    which is most of the headings here, up to the 68px hero. Negative tracking
+    is *wrong* for the other three scripts: Japanese and Chinese are already set
+    on a tight em box, and Thai stacks vowel and tone marks that collide when
+    the advance is pulled in. `:lang()` keeps it where it belongs.
+  */
+  :where(html[lang="en"], html[lang="vi"]) :is(h1, h2, h3) {
+    letter-spacing: -0.02em;
+  }
+  :where(html[lang="en"], html[lang="vi"]) h1 {
+    letter-spacing: -0.025em;
+  }
+
+  /*
+    Thai needs *more* leading than Latin at the same size, for the same reason
+    it must not be tracked in: มี and ที่ stack up to two marks above the base
+    letter and one below, and at the ratios used here they touch the line above.
+  */
+  :where(html[lang="th"]) body {
+    line-height: 1.75;
+  }
+
+  /*
+    Headings balance across their lines instead of leaving one word stranded on
+    the last; paragraphs avoid a single-word final line. Both degrade to normal
+    wrapping where unsupported, so there is nothing to guard.
+  */
+  :is(h1, h2, h3, h4) {
+    text-wrap: balance;
+  }
+  p,
+  li {
+    text-wrap: pretty;
   }
 
   /* Keyboard focus is not specified in the design; this is the accessible

@@ -80,7 +80,7 @@ export default async function TechnologiesPage({
 
       {/* ---- Stacks heading + capabilities — 421:2387 / 421:2386 ----- */}
       <section className="canvas px-6 pt-[70px] xl:px-0 xl:pt-[72px]">
-        <h2 className="max-w-[652px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:pl-[210px] xl:text-[48px] xl:leading-[58px]">
+        <h2 className="max-w-[652px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:pl-[210px] xl:text-[48px] xl:leading-[56px]">
           {tech.stacksHeading}
         </h2>
 
@@ -109,17 +109,17 @@ export default async function TechnologiesPage({
         <section className="canvas px-6 pt-[100px] xl:px-[193px] xl:pt-[179px]">
           <div className="flex flex-col overflow-hidden rounded-panel border border-brand bg-white xl:min-h-[435px] xl:flex-row">
             <div className="px-8 py-10 xl:w-[631px] xl:shrink-0 xl:py-[46px] xl:pr-[24px] xl:pl-[58px]">
-              <h2 className="max-w-[710px] text-[28px] leading-[36px] font-bold text-brand xl:text-[36px] xl:leading-[44px]">
+              <h2 className="max-w-[710px] text-[28px] leading-[36px] font-bold text-brand xl:text-[36px] xl:leading-[42px]">
                 {tech.rfp.heading}
               </h2>
-              <p className="mt-[24px] max-w-[598px] text-[16px] leading-[19px] font-bold text-black xl:mt-[30px]">
+              <p className="mt-[24px] max-w-[598px] text-[16px] leading-[26px] font-normal text-black/85 xl:mt-[30px]">
                 {tech.rfp.body}
               </p>
               <ul className="mt-[30px] flex flex-col gap-[19px] xl:mt-[36px]">
                 {t.rfp.checklist.map((item) => (
                   <li
                     key={item}
-                    className="flex gap-[10px] text-[16px] leading-[19px] font-bold text-black"
+                    className="flex gap-[10px] text-[16px] leading-[26px] font-normal text-black/85"
                   >
                     <span aria-hidden className="text-brand">
                       ✓
@@ -131,7 +131,7 @@ export default async function TechnologiesPage({
               <RfpDialog
               copy={t.rfpModal}
               label={t.rfp.cta}
-              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand-btn px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
+              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand-btn px-[20px] text-[16px] leading-[26px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
             />
             </div>
             <div className="relative h-[260px] w-full sm:h-[340px] xl:h-auto xl:flex-1 xl:self-stretch">

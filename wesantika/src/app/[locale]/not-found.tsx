@@ -28,10 +28,10 @@ export default async function NotFound() {
       <Nav locale={locale} nav={t.nav} alwaysSolid />
 
       <main id="main-content" className="canvas px-6 pt-[180px] pb-[120px] xl:px-[212px]">
-        <p className="text-[16px] leading-[19px] font-bold tracking-wide text-brand-ink uppercase">
+        <p className="text-[16px] leading-[26px] font-bold tracking-wide text-brand-ink uppercase">
           404
         </p>
-        <h1 className="mt-[16px] max-w-[760px] text-[36px] leading-[1.15] font-bold text-black sm:text-[48px] xl:text-[64px] xl:leading-[77px]">
+        <h1 className="mt-[16px] max-w-[760px] text-[36px] leading-[1.15] font-bold text-black sm:text-[48px] xl:text-[64px] xl:leading-[70px]">
           {t.notFound.title}
         </h1>
         <p className="mt-[24px] max-w-[640px] text-[18px] leading-[28px] text-black/75 xl:text-[20px]">
@@ -42,7 +42,7 @@ export default async function NotFound() {
           <li>
             <Link
               href={`/${locale}`}
-              className="inline-flex h-[46px] items-center rounded-btn bg-brand-btn px-[24px] text-[16px] leading-[19px] font-bold text-white transition-opacity hover:opacity-90"
+              className="inline-flex h-[46px] items-center rounded-btn bg-brand-btn px-[24px] text-[16px] leading-[26px] font-bold text-white transition-opacity hover:opacity-90"
             >
               {t.notFound.home}
             </Link>
@@ -53,7 +53,7 @@ export default async function NotFound() {
               <li key={item.id}>
                 <Link
                   href={`/${locale}${item.href}`}
-                  className="inline-flex h-[46px] items-center rounded-btn border border-hairline bg-white px-[24px] text-[16px] leading-[19px] font-bold text-black transition-colors hover:border-brand hover:text-brand"
+                  className="inline-flex h-[46px] items-center rounded-btn border border-hairline bg-white px-[24px] text-[16px] leading-[26px] font-bold text-black transition-colors hover:border-brand hover:text-brand"
                 >
                   {t.nav[item.id]}
                 </Link>

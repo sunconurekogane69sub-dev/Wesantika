@@ -71,13 +71,13 @@ export default async function ServiceDetailPage({
         <div className="mx-auto max-w-[1140px] pt-[56px] xl:pt-[88px]">
           <Link
             href={`/${locale}/services`}
-            className="text-[16px] leading-[19px] font-bold text-brand-ink underline-offset-4 hover:underline"
+            className="text-[16px] leading-[26px] font-bold text-brand-ink underline-offset-4 hover:underline"
           >
             <span aria-hidden>← </span>
             {d.eyebrow}
           </Link>
 
-          <h1 className="mt-[20px] max-w-[750px] text-[30px] leading-[1.2] font-semibold text-black sm:text-[36px] xl:text-[40px] xl:leading-[48px]">
+          <h1 className="mt-[20px] max-w-[750px] text-[30px] leading-[1.2] font-semibold text-black sm:text-[36px] xl:text-[40px] xl:leading-[46px]">
             {d.title}
           </h1>
 
@@ -97,7 +97,7 @@ export default async function ServiceDetailPage({
                 key={card.title}
                 className="flex flex-col rounded-[8px] border border-hairline bg-white px-[26px] py-[28px]"
               >
-                <h2 className="text-[18px] leading-[24px] font-semibold text-[#212529]">
+                <h2 className="text-[18px] leading-[28px] font-semibold text-[#212529]">
                   {card.title}
                 </h2>
                 <p className="mt-[16px] text-[16px] leading-[24px] font-normal text-[#525252]">
@@ -112,7 +112,7 @@ export default async function ServiceDetailPage({
                 3.66:1, so the label is bold to qualify as large text. */}
             <Link
               href={`/${locale}/contact`}
-              className="inline-flex h-[48px] items-center justify-center rounded-[8px] bg-brand-btn px-[24px] text-[18px] leading-[24px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
+              className="inline-flex h-[48px] items-center justify-center rounded-[8px] bg-brand-btn px-[24px] text-[18px] leading-[28px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
             >
               {d.cta}
             </Link>

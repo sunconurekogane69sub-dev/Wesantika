@@ -77,7 +77,7 @@ export default async function ContactPage({
         {/* ---------- two ways in ---------- */}
         <section className="w-full bg-white">
           <div className="canvas px-6 pt-[72px] pb-[16px] xl:px-[212px] xl:pt-[88px]">
-            <h2 className="text-[28px] leading-[34px] font-bold text-black xl:text-[36px] xl:leading-[44px]">
+            <h2 className="text-[28px] leading-[36px] font-bold text-black xl:text-[36px] xl:leading-[42px]">
               {c.paths.heading}
             </h2>
 
@@ -93,7 +93,7 @@ export default async function ContactPage({
                 </p>
                 <a
                   href="#message"
-                  className="mt-[24px] inline-flex h-[46px] w-fit items-center justify-center rounded-btn bg-brand-btn px-[24px] text-[16px] leading-[19px] font-bold text-white transition-opacity hover:opacity-90"
+                  className="mt-[24px] inline-flex h-[46px] w-fit items-center justify-center rounded-btn bg-brand-btn px-[24px] text-[16px] leading-[26px] font-bold text-white transition-opacity hover:opacity-90"
                 >
                   {c.paths.message.cta}
                 </a>
@@ -109,7 +109,7 @@ export default async function ContactPage({
                 <RfpDialog
                   copy={t.rfpModal}
                   label={c.paths.rfp.cta}
-                  className="mt-[24px] inline-flex h-[46px] w-fit cursor-pointer items-center justify-center rounded-btn border border-brand bg-white px-[24px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-brand-ink transition-colors hover:bg-brand-btn hover:text-white"
+                  className="mt-[24px] inline-flex h-[46px] w-fit cursor-pointer items-center justify-center rounded-btn border border-brand bg-white px-[24px] text-[16px] leading-[26px] font-bold whitespace-nowrap text-brand-ink transition-colors hover:bg-brand-btn hover:text-white"
                 />
               </article>
             </div>
@@ -120,7 +120,7 @@ export default async function ContactPage({
         <section id="message" className="w-full scroll-mt-[95px] bg-white">
           <div className="canvas grid gap-[48px] px-6 pt-[64px] pb-[80px] xl:grid-cols-[minmax(0,1fr)_380px] xl:gap-[80px] xl:px-[212px]">
             <div>
-              <h2 className="text-[28px] leading-[34px] font-bold text-black xl:text-[36px] xl:leading-[44px]">
+              <h2 className="text-[28px] leading-[36px] font-bold text-black xl:text-[36px] xl:leading-[42px]">
                 {c.form.heading}
               </h2>
               <p className="mt-[12px] text-[16px] leading-[24px] text-black/75">
@@ -171,7 +171,7 @@ export default async function ContactPage({
                             className="h-[22px] w-[22px] object-contain"
                           />
                         </span>
-                        <span className="text-[16px] leading-[19px] font-bold text-black">
+                        <span className="text-[16px] leading-[26px] font-bold text-black">
                           {t.rail[channel.id]}
                         </span>
                         <span
@@ -199,7 +199,7 @@ export default async function ContactPage({
                 — see the note in src/lib/content.ts.
               */}
               <address className="mt-[32px] block rounded-[12px] border border-hairline bg-white p-[24px] not-italic">
-                <h3 className="text-[18px] leading-[24px] font-bold text-black">
+                <h3 className="text-[18px] leading-[28px] font-bold text-black">
                   {c.office.heading}
                 </h3>
                 <p className="mt-[10px] text-[15px] leading-[24px] text-black/80">
@@ -221,7 +221,7 @@ export default async function ContactPage({
               </address>
 
               <div className="mt-[16px] rounded-[12px] bg-brand-tint p-[24px]">
-                <h3 className="text-[18px] leading-[24px] font-bold text-black">
+                <h3 className="text-[18px] leading-[28px] font-bold text-black">
                   {c.global.heading}
                 </h3>
                 <p className="mt-[10px] text-[15px] leading-[23px] text-black/75">
@@ -235,7 +235,7 @@ export default async function ContactPage({
         {/* ---------- what happens next ---------- */}
         <section className="w-full bg-navy-900">
           <div className="canvas px-6 py-[80px] xl:px-[212px] xl:py-[96px]">
-            <h2 className="text-[28px] leading-[34px] font-bold text-white xl:text-[36px] xl:leading-[44px]">
+            <h2 className="text-[28px] leading-[36px] font-bold text-white xl:text-[36px] xl:leading-[42px]">
               {c.next.heading}
             </h2>
 
@@ -248,11 +248,11 @@ export default async function ContactPage({
                         order, so it is hidden rather than read out twice. */}
                     <span
                       aria-hidden
-                      className="text-[16px] leading-[19px] font-bold text-brand-cta"
+                      className="text-[16px] leading-[26px] font-bold text-brand-cta"
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="mt-[12px] text-[20px] leading-[26px] font-bold text-white">
+                    <h3 className="mt-[12px] text-[20px] leading-[30px] font-bold text-white">
                       {step.title}
                     </h3>
                     <p className="mt-[10px] text-[16px] leading-[24px] text-white/80">

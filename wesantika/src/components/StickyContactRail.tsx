@@ -45,7 +45,7 @@ export function StickyContactRail({ labels }: { labels: Dictionary["rail"] }) {
                 className="h-[34px] w-[34px]"
               />
             </span>
-            <span className="ml-[11px] whitespace-nowrap text-[16px] leading-[19px] font-bold">
+            <span className="ml-[11px] whitespace-nowrap text-[16px] leading-[26px] font-bold">
               {label}
             </span>
           </a>

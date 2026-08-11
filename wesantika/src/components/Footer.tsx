@@ -60,7 +60,7 @@ export function Footer({
 
                   Not translated — see the note in src/lib/content.ts. */}
               <address className="mt-[24px] block not-italic xl:mt-[28px]">
-                <p className="text-[13px] leading-[16px] font-bold tracking-[0.02em] text-white/70">
+                <p className="text-[13px] leading-[20px] font-bold tracking-[0.02em] text-white/70">
                   {office.heading}
                 </p>
                 <p className="mt-[8px] text-[15px] leading-[24px] font-normal text-white/85">

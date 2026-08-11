@@ -78,7 +78,7 @@ export function LocaleSwitcher({
           className={`transition-[filter] duration-300 ease-out ${solid ? "" : KNOCKOUT}`}
         />
         <span
-          className={`text-[16px] leading-[19px] font-bold whitespace-nowrap transition-colors duration-300 ease-out ${
+          className={`text-[16px] leading-[26px] font-bold whitespace-nowrap transition-colors duration-300 ease-out ${
             solid ? "text-black" : "text-white"
           }`}
         >

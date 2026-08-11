@@ -55,7 +55,7 @@ const TONES: Record<
   },
 };
 
-const LABEL = "block text-[13px] leading-[16px] font-bold tracking-[0.02em]";
+const LABEL = "block text-[13px] leading-[20px] font-bold tracking-[0.02em]";
 
 export function ContactForm({
   strings,
@@ -146,7 +146,7 @@ export function ContactForm({
       <button
         type="submit"
         disabled={sending}
-        className="mt-[4px] flex h-[48px] w-full items-center justify-center rounded-btn bg-brand-btn px-[24px] text-[16px] leading-[19px] font-bold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-fit sm:min-w-[200px]"
+        className="mt-[4px] flex h-[48px] w-full items-center justify-center rounded-btn bg-brand-btn px-[24px] text-[16px] leading-[26px] font-bold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-fit sm:min-w-[200px]"
       >
         {sending ? strings.submitting : strings.submit}
       </button>

@@ -81,7 +81,7 @@ export default async function ServicesPage({
 
       {/* ---- Accelerate — 405:1971 / 405:1983 / 405:1990 ------------- */}
       <section className="canvas px-6 pt-[80px] xl:px-0 xl:pt-[126px]">
-        <h2 className="mx-auto max-w-[1021px] text-center text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:text-[48px] xl:leading-[58px]">
+        <h2 className="mx-auto max-w-[1021px] text-center text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:text-[48px] xl:leading-[56px]">
           {s.accelerate.heading}
         </h2>
 
@@ -112,7 +112,7 @@ export default async function ServicesPage({
                   and 20px needs to be bold to qualify. */}
               <Link
                 href={serviceDetailHref(locale, highlight.detail)}
-                className="relative mt-[17px] ml-[37px] inline-flex h-[52px] min-w-[130px] w-fit items-center justify-center rounded-btn bg-brand-btn px-[16px] text-[20px] leading-[24px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink"
+                className="relative mt-[17px] ml-[37px] inline-flex h-[52px] min-w-[130px] w-fit items-center justify-center rounded-btn bg-brand-btn px-[16px] text-[20px] leading-[30px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink"
               >
                 {s.detailLabel}
                 <span aria-hidden>&nbsp;→</span>
@@ -124,10 +124,10 @@ export default async function ServicesPage({
 
       {/* ---- Services We Offer — 405:1981 / 405:2322 ---------------- */}
       <section className="canvas px-6 pt-[100px] xl:px-0 xl:pt-[190px]">
-        <h2 className="mx-auto max-w-[975px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:pl-[117px] xl:text-[48px] xl:leading-[58px]">
+        <h2 className="mx-auto max-w-[975px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:pl-[117px] xl:text-[48px] xl:leading-[56px]">
           {s.offer.heading}
         </h2>
-        <p className="mx-auto mt-[24px] max-w-[1209px] text-[18px] leading-[24px] font-bold text-black xl:pl-[0px] xl:text-[20px]">
+        <p className="mx-auto mt-[24px] max-w-[860px] text-[18px] leading-[28px] font-normal text-black/85 xl:pl-[0px] xl:text-[20px]">
           {s.offer.subtitle}
         </p>
 
@@ -160,10 +160,10 @@ export default async function ServicesPage({
         />
         <div className="canvas relative px-6 py-[80px] xl:h-full xl:px-0 xl:py-0">
           <div className="xl:absolute xl:top-[111px] xl:left-[150px] xl:max-w-[760px]">
-            <h2 className="max-w-[623px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:text-[48px] xl:leading-[58px]">
+            <h2 className="max-w-[623px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:text-[48px] xl:leading-[56px]">
               {s.global.heading}
             </h2>
-            <p className="mt-[24px] max-w-[695px] text-[18px] leading-[24px] font-normal text-black xl:mt-[31px] xl:text-[20px]">
+            <p className="mt-[24px] max-w-[695px] text-[18px] leading-[28px] font-normal text-black xl:mt-[31px] xl:text-[20px]">
               {s.global.intro}
             </p>
             <p className="mt-[36px] text-[20px] leading-[29px] font-bold text-black xl:mt-[52px] xl:text-[24px]">
@@ -189,7 +189,7 @@ export default async function ServicesPage({
               ))}
             </ul>
 
-            <p className="mt-[36px] max-w-[654px] text-[18px] leading-[24px] font-normal text-black xl:mt-[55px] xl:text-[20px]">
+            <p className="mt-[36px] max-w-[654px] text-[18px] leading-[28px] font-normal text-black xl:mt-[55px] xl:text-[20px]">
               {s.global.outro}
             </p>
           </div>
@@ -200,17 +200,17 @@ export default async function ServicesPage({
       <section className="canvas px-6 pt-[80px] xl:px-[150px] xl:pt-[133px]">
         <div className="flex flex-col overflow-hidden rounded-panel border border-brand bg-white xl:min-h-[435px] xl:flex-row">
           <div className="px-8 py-10 xl:w-[631px] xl:shrink-0 xl:py-[46px] xl:pr-[24px] xl:pl-[58px]">
-            <h2 className="max-w-[710px] text-[28px] leading-[36px] font-bold text-brand xl:text-[36px] xl:leading-[44px]">
+            <h2 className="max-w-[710px] text-[28px] leading-[36px] font-bold text-brand xl:text-[36px] xl:leading-[42px]">
               {t.rfp.heading}
             </h2>
-            <p className="mt-[24px] max-w-[598px] text-[16px] leading-[19px] font-bold text-black xl:mt-[30px]">
+            <p className="mt-[24px] max-w-[598px] text-[16px] leading-[26px] font-normal text-black/85 xl:mt-[30px]">
               {t.rfp.body}
             </p>
             <ul className="mt-[30px] flex flex-col gap-[19px] xl:mt-[36px]">
               {t.rfp.checklist.map((item) => (
                 <li
                   key={item}
-                  className="flex gap-[10px] text-[16px] leading-[19px] font-bold text-black"
+                  className="flex gap-[10px] text-[16px] leading-[26px] font-normal text-black/85"
                 >
                   <span aria-hidden className="text-brand">
                     ✓
@@ -222,7 +222,7 @@ export default async function ServicesPage({
             <RfpDialog
               copy={t.rfpModal}
               label={t.rfp.cta}
-              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand-btn px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
+              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand-btn px-[20px] text-[16px] leading-[26px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
             />
           </div>
           <div className="relative h-[260px] w-full sm:h-[340px] xl:h-auto xl:flex-1 xl:self-stretch">
@@ -260,7 +260,7 @@ export default async function ServicesPage({
       */}
       <section className="mt-[80px] w-full bg-brand-tint xl:mt-[120px]">
         <div className="canvas px-6 py-[72px] xl:px-[212px] xl:py-[104px]">
-          <h2 className="text-[32px] leading-[1.15] font-bold text-black sm:text-[40px] xl:text-[48px] xl:leading-[58px]">
+          <h2 className="text-[32px] leading-[1.15] font-bold text-black sm:text-[40px] xl:text-[48px] xl:leading-[56px]">
             {s.why.heading}
           </h2>
 
@@ -292,7 +292,7 @@ export default async function ServicesPage({
           <div className="mt-[48px] flex justify-center xl:mt-[64px]">
             <Link
               href={`/${locale}/contact`}
-              className="inline-flex h-[48px] min-w-[280px] items-center justify-center rounded-btn bg-brand-btn px-[28px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
+              className="inline-flex h-[48px] min-w-[280px] items-center justify-center rounded-btn bg-brand-btn px-[28px] text-[16px] leading-[26px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
             >
               {s.why.cta}
             </Link>

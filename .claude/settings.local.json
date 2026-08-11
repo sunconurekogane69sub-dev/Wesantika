@@ -106,7 +106,10 @@
       "Bash(cp \"/D/HOME.jpg\" public/images/home-hero.jpg)",
       "Bash(cp \"D:/HOME.jpg\" public/images/home-hero.jpg)",
       "Bash(awk '{print \"  home-hero.jpg \"$5\" bytes\"}')",
-      "Bash(python -c \"import sys,json;d=json.load\\(sys.stdin\\);print\\('  ',{k:\\('<url>' if k=='previewUrl' and d[k] else d[k]\\) for k in d}\\)\")"
+      "Bash(python -c \"import sys,json;d=json.load\\(sys.stdin\\);print\\('  ',{k:\\('<url>' if k=='previewUrl' and d[k] else d[k]\\) for k in d}\\)\")",
+      "Bash(curl -s \"http://localhost:3126/en\")",
+      "Bash(awk '{print $1, $2}')",
+      "Bash(sort -n -k1.1)"
     ]
   }
 }

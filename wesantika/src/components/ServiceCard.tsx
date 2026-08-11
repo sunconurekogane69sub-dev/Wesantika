@@ -26,9 +26,9 @@ export function ServiceCard({
           height={30}
           className="mt-[3px] h-[30px] w-[30px] shrink-0 object-contain"
         />
-        <h3 className="text-[20px] leading-[24px] font-bold text-black">{title}</h3>
+        <h3 className="text-[20px] leading-[30px] font-bold text-black">{title}</h3>
       </div>
-      <p className="mt-[11px] text-[16px] leading-[19px] font-medium text-black">{body}</p>
+      <p className="mt-[11px] text-[16px] leading-[26px] font-medium text-black">{body}</p>
     </article>
   );
 }

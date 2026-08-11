@@ -81,7 +81,7 @@ export function ServiceTabs({
               tabIndex={selected ? 0 : -1}
               onClick={() => setActive(index)}
               onKeyDown={onKeyDown}
-              className={`relative cursor-pointer pl-[12px] text-left text-[20px] leading-[24px] font-bold transition-colors hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand ${
+              className={`relative cursor-pointer pl-[12px] text-left text-[20px] leading-[30px] font-bold transition-colors hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand ${
                 selected ? "text-black" : "text-black/55"
               }`}
             >

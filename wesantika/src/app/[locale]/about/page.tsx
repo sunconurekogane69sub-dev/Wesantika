@@ -133,12 +133,12 @@ export default async function AboutPage({
         <div className="canvas relative px-6 py-[80px] xl:px-[212px] xl:py-[120px]">
           {/* brand-ink, not brand: 20px normal needs 4.5:1 and #0f84fd only
               reaches 3.3:1 on this near-white band. */}
-          <p className="text-[18px] leading-[24px] font-bold text-brand-ink xl:text-[20px]">
+          <p className="text-[18px] leading-[28px] font-bold text-brand-ink xl:text-[20px]">
             {t.about.vision.label}
           </p>
           <span aria-hidden className="mt-[8px] block h-[4px] w-[49px] bg-brand" />
 
-          <h2 className="mt-[32px] max-w-[760px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:mt-[40px] xl:text-[48px] xl:leading-[58px]">
+          <h2 className="mt-[32px] max-w-[760px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:mt-[40px] xl:text-[48px] xl:leading-[56px]">
             {t.about.vision.statement}
           </h2>
 

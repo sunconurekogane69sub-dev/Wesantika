@@ -54,7 +54,7 @@ export default async function TopPage({
         <AccentedHeading
           text={t.services.heading}
           accent={t.services.headingAccent}
-          className="text-[28px] leading-[36px] font-bold text-black xl:pl-[212px] xl:text-[36px] xl:leading-[44px]"
+          className="text-[28px] leading-[36px] font-bold text-black xl:pl-[212px] xl:text-[36px] xl:leading-[42px]"
         />
 
         <ServiceTabs
@@ -73,7 +73,7 @@ export default async function TopPage({
         <div className="mt-[80px] flex justify-center xl:mt-[130px]">
           <Link
             href={`/${locale}/services`}
-            className="flex h-[48px] min-w-[200px] items-center justify-center rounded-card border border-hairline bg-white px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-black transition-colors hover:border-brand hover:text-brand"
+            className="flex h-[48px] min-w-[200px] items-center justify-center rounded-card border border-hairline bg-white px-[20px] text-[16px] leading-[26px] font-bold whitespace-nowrap text-black transition-colors hover:border-brand hover:text-brand"
           >
             {t.services.cta}
           </Link>
@@ -82,10 +82,10 @@ export default async function TopPage({
 
       {/* ---- AI Innovation — 180:725-761 ----------------------------- */}
       <section className="canvas px-6 pt-[100px] xl:px-0 xl:pt-[155px]">
-        <h2 className="mx-auto max-w-[1019px] text-center text-[34px] leading-[1.2] font-bold text-black sm:text-[48px] xl:text-[64px] xl:leading-[77px]">
+        <h2 className="mx-auto max-w-[1019px] text-center text-[34px] leading-[1.2] font-bold text-black sm:text-[48px] xl:text-[64px] xl:leading-[70px]">
           {t.ai.heading}
         </h2>
-        <p className="mx-auto mt-[27px] max-w-[1102px] text-center text-[18px] leading-[26px] font-normal text-black xl:text-[20px] xl:leading-[24px]">
+        <p className="mx-auto mt-[27px] max-w-[1102px] text-center text-[18px] leading-[26px] font-normal text-black xl:text-[20px] xl:leading-[30px]">
           {t.ai.subtitle}
         </p>
         <div className="mt-[60px] xl:mt-[114px] xl:px-[54px]">
@@ -107,17 +107,17 @@ export default async function TopPage({
               right gap, so the checklist rows keep their authored line breaks and
               no longer run under the image. */}
           <div className="px-8 py-10 xl:w-[631px] xl:shrink-0 xl:py-[46px] xl:pr-[24px] xl:pl-[58px]">
-            <h2 className="max-w-[710px] text-[28px] leading-[36px] font-bold text-brand xl:text-[36px] xl:leading-[44px]">
+            <h2 className="max-w-[710px] text-[28px] leading-[36px] font-bold text-brand xl:text-[36px] xl:leading-[42px]">
               {t.rfp.heading}
             </h2>
-            <p className="mt-[24px] max-w-[598px] text-[16px] leading-[19px] font-bold text-black xl:mt-[30px]">
+            <p className="mt-[24px] max-w-[598px] text-[16px] leading-[26px] font-normal text-black/85 xl:mt-[30px]">
               {t.rfp.body}
             </p>
             <ul className="mt-[30px] flex flex-col gap-[19px] xl:mt-[36px]">
               {t.rfp.checklist.map((item) => (
                 <li
                   key={item}
-                  className="flex gap-[10px] text-[16px] leading-[19px] font-bold text-black"
+                  className="flex gap-[10px] text-[16px] leading-[26px] font-normal text-black/85"
                 >
                   <span aria-hidden className="text-brand">
                     ✓
@@ -131,7 +131,7 @@ export default async function TopPage({
             <RfpDialog
               copy={t.rfpModal}
               label={t.rfp.cta}
-              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand-btn px-[20px] text-[16px] leading-[19px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
+              className="mt-[28px] inline-flex h-[46px] min-w-[141px] items-center justify-center rounded-btn border border-hairline bg-brand-btn px-[20px] text-[16px] leading-[26px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[31px] cursor-pointer"
             />
           </div>
 

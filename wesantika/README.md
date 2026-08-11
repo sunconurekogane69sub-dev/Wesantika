@@ -698,6 +698,71 @@ filled in from the design file — each needs a real value from Wesantika.
   exported — Figma's image API was rate limiting throughout. A neutral brand-blue
   marker stands in for them. They need one export run to replace.
 
+## Typography — `npm run typography`
+
+### The scale had one line-height ratio for every size
+
+That is the whole story. Figma's scale read:
+
+```
+16/19 = 1.19   20/24 = 1.20   24/29 = 1.21   32/39 = 1.22
+36/44 = 1.22   48/58 = 1.21   64/77 = 1.20
+```
+
+Seven steps, one number. But line-height has to **fall as size rises** — a long
+line of 16px text needs air between the lines for the eye to find the next one;
+a 64px headline does not, and looks unglued if it gets it. A single ratio cannot
+be right at both ends, and here it was tuned for the headline, so **46 separate
+places set body copy at a headline's line-height.** `16px / leading-[19px]`
+alone appeared 26 times.
+
+The scale in `globals.css` now descends: 1.63 at 16px down to 1.09 at 64px.
+Every one of the 46 usages was corrected. `npm run typography` pairs sizes with
+leadings *within the same breakpoint* — so `text-[30px] … xl:leading-[58px]` is
+not misread as a 1.93 ratio — and fails if body copy drops below 1.40 again.
+
+Worth knowing: the old ratio was not only ugly. At 1.19, **Thai clips** — มี and
+ที่ stack up to two marks above the base letter and one below, and they touched
+the line above.
+
+### A display face
+
+Headings are set in **Manrope**, body in Inter. Inter is a fine text face and a
+slightly anonymous display one; at 48–68px its neutrality reads as absence
+rather than restraint. Manrope is geometric with humanist detailing, so it gives
+the headings a voice without fighting Inter underneath them.
+
+One stack covers all five locales — `--font-heading, --font-app, …`. Manrope
+carries Latin and Vietnamese; Japanese, Chinese and Thai fall through it to
+their Noto face automatically, because it has no glyphs for them.
+
+**To revert to a single family:** drop `--font-heading` from `--font-display` in
+`globals.css`. Nothing else changes.
+
+### Everything else in the base layer
+
+- **Optical tracking, Latin only.** −0.02em on `h1`–`h3`, −0.025em on `h1`.
+  There was none anywhere before, and default spacing is drawn for text sizes,
+  so it reads loose above ~28px. It is scoped with `:lang()` because negative
+  tracking is *wrong* for the other three scripts — CJK is already set on a
+  tight em box, and pulling Thai in makes its stacked marks collide.
+- **Thai gets more leading** (1.75), for the same reason it must not be tracked.
+- `text-wrap: balance` on headings, `pretty` on paragraphs — no stranded last
+  words. Both degrade to normal wrapping, so there is nothing to guard.
+- `font-optical-sizing: auto` — both faces are variable with an optical size
+  axis, and without this the browser never uses it.
+- `font-feature-settings: "cv11", "ss01"` and `-moz-osx-font-smoothing`.
+
+### Bold was doing the work of hierarchy
+
+69 usages of `font-bold` against 19 of `font-normal`. Where everything is bold,
+nothing is emphasised. Seven genuine paragraphs — the RFP pitch and its
+checklist on three pages, and the Services sub-head — are now regular weight at
+85% black. Buttons, nav items, labels and pull quotes stay bold, because there
+the weight is doing a job.
+
+The Services sub-head also came down from a **1209px measure** to 860px.
+
 ## Is it actually on the page? `npm run smoke`
 
 ```

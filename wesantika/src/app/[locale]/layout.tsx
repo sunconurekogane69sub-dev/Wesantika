@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Sans_JP, Noto_Sans_TC, Noto_Sans_Thai } from "next/font/google";
+import {
+  Inter,
+  Manrope,
+  Noto_Sans_JP,
+  Noto_Sans_TC,
+  Noto_Sans_Thai,
+} from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { OrganizationSchema } from "@/components/OrganizationSchema";
@@ -42,6 +48,27 @@ const notoThai = Noto_Sans_Thai({
   variable: "--font-app",
   display: "swap",
   preload: false,
+});
+
+/**
+ * Display face for headings.
+ *
+ * Inter is a fine text face and a slightly anonymous display one — at 48-68px
+ * its neutrality reads as absence rather than restraint. Manrope is geometric
+ * with humanist detailing, which gives the headings a voice without fighting
+ * Inter underneath them, and it carries Latin and Vietnamese. Japanese, Chinese
+ * and Thai fall through it to their Noto face automatically, because it has no
+ * glyphs for them.
+ *
+ * Loaded on every locale so the variable is always defined; the three CJK/Thai
+ * locales simply never resolve a glyph from it. To revert to a single family,
+ * drop `--font-heading` from `--font-display` in globals.css.
+ */
+const manrope = Manrope({
+  subsets: ["latin", "latin-ext", "vietnamese"],
+  weight: ["600", "700", "800"],
+  variable: "--font-heading",
+  display: "swap",
 });
 
 const FONT_CLASS: Record<FontKey, string> = {
@@ -89,7 +116,7 @@ export default async function LocaleLayout({
 
   return (
     // All five locales are left-to-right; `dir` is where an RTL locale would hook in.
-    <html lang={locale} dir="ltr" className={FONT_CLASS[definition.font]}>
+    <html lang={locale} dir="ltr" className={`${manrope.variable} ${FONT_CLASS[definition.font]}`}>
       <body className="overflow-x-hidden">
         {/* First focusable element in the document — it only works from here. */}
         <SkipLink label={t.a11y.skipToContent} />

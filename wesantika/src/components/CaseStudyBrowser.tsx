@@ -86,7 +86,7 @@ export function CaseStudyBrowser({ copy }: { copy: BrowserCopy }) {
         value={query}
         onChange={(e) => reset(setQuery)(e.target.value)}
         placeholder={copy.searchPlaceholder}
-        className="h-[52px] w-full max-w-[560px] rounded-full border border-hairline bg-white px-[24px] text-[16px] leading-[20px] text-black outline-none transition-colors placeholder:text-black/45 focus:border-brand"
+        className="h-[52px] w-full max-w-[560px] rounded-full border border-hairline bg-white px-[24px] text-[16px] leading-[26px] text-black outline-none transition-colors placeholder:text-black/45 focus:border-brand"
       />
 
       {/* ---- filters ------------------------------------------------ */}
@@ -213,7 +213,7 @@ function Card({ study }: { study: CaseStudy }) {
             </span>
           ))}
         </div>
-        <h3 className="mt-[12px] text-[16px] leading-[22px] font-semibold text-[#101624]">
+        <h3 className="mt-[12px] text-[16px] leading-[26px] font-semibold text-[#101624]">
           {study.title}
         </h3>
       </div>
