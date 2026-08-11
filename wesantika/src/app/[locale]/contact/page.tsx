@@ -266,7 +266,7 @@ export default async function ContactPage({
         </section>
       </main>
 
-      <Footer strings={t.footer} office={t.contact.office} withForm={false} />
+      <Footer strings={t.footer} office={t.contact.office} locale={locale} withForm={false} />
     </>
   );
 }

@@ -120,7 +120,7 @@ export default async function ServiceDetailPage({
         </div>
       </main>
 
-      <Footer strings={t.footer} office={t.contact.office} />
+      <Footer strings={t.footer} office={t.contact.office} locale={locale} />
     </>
   );
 }

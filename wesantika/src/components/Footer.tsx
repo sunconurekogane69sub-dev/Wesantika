@@ -1,6 +1,8 @@
 import { HEAD_OFFICE } from "@/lib/content";
+import type { Locale } from "@/lib/i18n/locales";
 import type { Dictionary } from "@/lib/i18n";
 import { ContactForm } from "./ContactForm";
+import { Copyright } from "./Copyright";
 
 /**
  * Footer — Figma 180:727 (Top) / 210:931 (About Us). Identical on both pages.
@@ -11,8 +13,11 @@ import { ContactForm } from "./ContactForm";
 export function Footer({
   strings,
   office,
+  locale,
   withForm = true,
 }: {
+  /** The copyright line picks its decorative face by script. */
+  locale: Locale;
   strings: Dictionary["footer"];
   /** Only the label is translated; the address itself never is. */
   office: Dictionary["contact"]["office"];
@@ -80,13 +85,17 @@ export function Footer({
         </div>
       )}
 
+      {/* A hairline of brand light where the panel meets the copyright bar. The
+          two navies are close enough that the seam read as a printing error;
+          this makes it a deliberate edge. */}
+      <div
+        aria-hidden
+        className="h-px w-full bg-gradient-to-r from-transparent via-brand-cta/40 to-transparent"
+      />
+
       <div className="w-full bg-navy-950">
-        <div className="canvas flex flex-col gap-2 px-6 py-[26px] sm:flex-row sm:items-center sm:justify-between xl:px-[212px]">
-          {/* 24px for a copyright line was competing with the page's own
-              headings. 15px is what a legal line is meant to be. */}
-          <p className="text-[15px] leading-[22px] font-normal text-white/70">
-            {strings.copyright}
-          </p>
+        <div className="canvas flex flex-col gap-2 px-6 py-[30px] sm:flex-row sm:items-center sm:justify-between xl:px-[212px]">
+          <Copyright text={strings.copyright} locale={locale} />
           {/*
             The design puts a "Privacy Policy" link here. It has no destination,
             and a privacy policy is a legal document about how this company

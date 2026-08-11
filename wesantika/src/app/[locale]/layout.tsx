@@ -5,6 +5,8 @@ import {
   Noto_Sans_JP,
   Noto_Sans_TC,
   Noto_Sans_Thai,
+  Shippori_Mincho,
+  Unbounded,
 } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
@@ -71,6 +73,39 @@ const manrope = Manrope({
   display: "swap",
 });
 
+/**
+ * Decorative faces, used for exactly one line: the copyright.
+ *
+ * A copyright notice is the last thing on the page and usually the least
+ * considered — which is what makes it the right place for a flourish. Neither
+ * face is used anywhere else, so neither can leak into the reading experience.
+ *
+ * Unbounded is a contemporary geometric display face: wide, confident, and at
+ * small sizes with open tracking it reads as deliberate rather than loud. It
+ * carries Latin *and Vietnamese*, so English and Vietnamese both get it.
+ *
+ * Shippori Mincho is a mincho — a Japanese serif. Setting one line of mincho in
+ * a wholly sans-serif site is the strongest decorative contrast available in
+ * Japanese, and unmistakably Japanese in a way a gothic face is not.
+ *
+ * Chinese and Thai keep their Noto face and take the ornaments only: there is no
+ * decorative face for either that would not look like a costume.
+ */
+const unbounded = Unbounded({
+  subsets: ["latin", "latin-ext", "vietnamese"],
+  weight: ["300", "400"],
+  variable: "--font-deco-latin",
+  display: "swap",
+  preload: false,
+});
+const shippori = Shippori_Mincho({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-deco-jp",
+  display: "swap",
+  preload: false,
+});
+
 const FONT_CLASS: Record<FontKey, string> = {
   latin: inter.variable,
   jp: notoJP.variable,
@@ -116,7 +151,7 @@ export default async function LocaleLayout({
 
   return (
     // All five locales are left-to-right; `dir` is where an RTL locale would hook in.
-    <html lang={locale} dir="ltr" className={`${manrope.variable} ${FONT_CLASS[definition.font]}`}>
+    <html lang={locale} dir="ltr" className={`${manrope.variable} ${unbounded.variable} ${shippori.variable} ${FONT_CLASS[definition.font]}`}>
       <body className="overflow-x-hidden">
         {/* First focusable element in the document — it only works from here. */}
         <SkipLink label={t.a11y.skipToContent} />

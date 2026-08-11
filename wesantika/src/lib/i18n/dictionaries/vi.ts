@@ -231,7 +231,7 @@ export const vi: PartialDictionary = {
     errorGeneric: "Đã xảy ra lỗi. Vui lòng thử lại.",
     errorNetwork:
       "Không kết nối được tới máy chủ. Vui lòng kiểm tra đường truyền của bạn.",
-    copyright: "© 2026 Wesantika. All Rights Reserved.",
+    copyright: "© 2026 Wesantika | Đã đăng ký bản quyền",
     privacy: "Chính sách bảo mật",
   },
 

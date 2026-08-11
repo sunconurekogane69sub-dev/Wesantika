@@ -753,6 +753,49 @@ their Noto face automatically, because it has no glyphs for them.
   axis, and without this the browser never uses it.
 - `font-feature-settings: "cv11", "ss01"` and `-moz-osx-font-smoothing`.
 
+### The copyright line
+
+`src/components/Copyright.tsx`. It was 15px of `text-white/70` in the corner of
+a navy bar — the last thing on the page and the least considered thing on it.
+Which is what makes it the right place for a flourish: nothing depends on it, so
+it can carry decoration that would be noise anywhere else.
+
+**A decorative face per script.** Neither is used anywhere else on the site, so
+neither can leak into the reading experience.
+
+| | face | why |
+|---|---|---|
+| `en` | Unbounded, uppercase, 0.22em | Wide geometric display face; at this size with open tracking it reads deliberate rather than loud |
+| `vi` | Unbounded, 0.16em | Unbounded carries the Vietnamese subset |
+| `ja` | **Shippori Mincho**, 0.16em | A *mincho* — a Japanese serif. One line of mincho in a wholly sans-serif site is the strongest contrast the script offers, and unmistakably Japanese in a way a gothic face is not |
+| `zh-Hant-TW` · `th` | their Noto face | Ornaments only. Neither has a decorative option here that would not read as costume |
+
+**The colour is a sheen, and it is measured.** A gradient sweeps the line over
+14s: `#e8f2ff → #7dd3fc → #ffffff → #7dd3fc → #e8f2ff`. Every stop was checked
+against the `#041d38` bar — 15.0:1, 10.2:1, 17.0:1 — so no frame of the
+animation drops under AA. That matters more than usual here: this is legal text,
+and it has to stay readable at the moment it is least eye-catching.
+
+The gradient lives inside `@supports (background-clip: text)`. That rule needs
+`color: transparent` to show at all, and a browser with one and not the other
+would render an **invisible copyright notice**. `#e8f2ff` is the base state; the
+gradient only ever replaces it where it is known to work.
+
+**Ornaments.** A hairline fades in from each edge and closes on a small brand
+diamond with a soft glow, centring the line instead of leaving it stranded
+against a margin. Above the bar, a brand hairline marks the seam between the two
+navies — `#062a52` and `#041d38` are close enough that the join read as a
+printing error rather than an edge.
+
+Tracking opens up only from `sm`: flat 0.22em across 38 uppercase characters
+needs ~374px, and a 360px phone offers 312px inside the gutter. There is no
+`whitespace-nowrap` either — tracked type is wide, and a line that cannot wrap
+can only overflow.
+
+**The copyright was also English in all five locales.** It is localised now:
+`無断転載を禁じます`, `版權所有`, `สงวนลิขสิทธิ์`, `Đã đăng ký bản quyền` — which is
+what gave the Japanese decorative treatment anything to decorate.
+
 ### Bold was doing the work of hierarchy
 
 69 usages of `font-bold` against 19 of `font-normal`. Where everything is bold,

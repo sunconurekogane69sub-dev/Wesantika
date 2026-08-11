@@ -180,6 +180,53 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+   The copyright line.
+
+   Every colour below was measured against the #041d38 bar it sits on:
+   #e8f2ff is 15.0:1, #7dd3fc 10.2:1, #ffffff 17.0:1. So the sheen can sweep
+   across the whole line without any part of it dropping under AA — which
+   matters, because this is legal text and it has to stay readable at the
+   moment it is least eye-catching.
+
+   The gradient is applied inside `@supports`. `background-clip: text` needs
+   `color: transparent` to show, and a browser that has one without the other
+   would render an invisible copyright notice. The solid colour is the base
+   state; the gradient only ever replaces it where it is known to work.
+   --------------------------------------------------------------------------- */
+@layer components {
+  .copyright-ink {
+    color: #e8f2ff;
+  }
+
+  @supports (background-clip: text) or (-webkit-background-clip: text) {
+    .copyright-ink {
+      background-image: linear-gradient(
+        100deg,
+        #e8f2ff 0%,
+        #7dd3fc 26%,
+        #ffffff 50%,
+        #7dd3fc 74%,
+        #e8f2ff 100%
+      );
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: copyright-sheen 14s linear infinite;
+    }
+  }
+
+  @keyframes copyright-sheen {
+    from {
+      background-position: 0% 50%;
+    }
+    to {
+      background-position: 220% 50%;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

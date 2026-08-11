@@ -75,7 +75,7 @@ export default async function OurWorkPage({
 
       </main>
 
-      <Footer strings={t.footer} office={t.contact.office} />
+      <Footer strings={t.footer} office={t.contact.office} locale={locale} />
     </>
   );
 }

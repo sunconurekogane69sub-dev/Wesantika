@@ -228,7 +228,7 @@ export const th: PartialDictionary = {
     previewLink: "ดูอีเมลที่ส่งไป",
     errorGeneric: "เกิดข้อผิดพลาด กรุณาลองอีกครั้ง",
     errorNetwork: "ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่อของคุณ",
-    copyright: "© 2026 Wesantika. All Rights Reserved.",
+    copyright: "© 2026 Wesantika | สงวนลิขสิทธิ์",
     privacy: "นโยบายความเป็นส่วนตัว",
   },
 

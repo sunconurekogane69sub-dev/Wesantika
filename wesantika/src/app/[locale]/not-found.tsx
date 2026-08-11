@@ -62,7 +62,7 @@ export default async function NotFound() {
         </ul>
       </main>
 
-      <Footer strings={t.footer} office={t.contact.office} />
+      <Footer strings={t.footer} office={t.contact.office} locale={locale} />
     </>
   );
 }

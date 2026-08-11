@@ -302,7 +302,7 @@ export default async function ServicesPage({
 
       </main>
 
-      <Footer strings={t.footer} office={t.contact.office} />
+      <Footer strings={t.footer} office={t.contact.office} locale={locale} />
     </>
   );
 }

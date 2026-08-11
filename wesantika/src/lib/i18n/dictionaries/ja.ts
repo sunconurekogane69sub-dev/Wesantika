@@ -221,7 +221,7 @@ export const ja: PartialDictionary = {
     previewLink: "送信されたメールを確認する",
     errorGeneric: "問題が発生しました。もう一度お試しください。",
     errorNetwork: "サーバーに接続できませんでした。通信環境をご確認ください。",
-    copyright: "© 2026 Wesantika. All Rights Reserved.",
+    copyright: "© 2026 Wesantika ｜ 無断転載を禁じます",
     privacy: "プライバシーポリシー",
   },
 
