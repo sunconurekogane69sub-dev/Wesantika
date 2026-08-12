@@ -227,6 +227,10 @@ export const zhHantTW: PartialDictionary = {
     previewLink: "檢視已寄出的郵件",
     errorGeneric: "發生問題，請再試一次。",
     errorNetwork: "無法連線至伺服器，請檢查您的網路連線。",
+    /** Footer link-column headings. */
+    navHeading: "網站導覽",
+    servicesHeading: "服務項目",
+    channelsHeading: "聯絡方式",
     copyright: "© 2026 Wesantika ｜ 版權所有",
     privacy: "隱私權政策",
   },

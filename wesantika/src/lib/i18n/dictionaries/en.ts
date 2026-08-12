@@ -226,6 +226,10 @@ export const en = {
     previewLink: "View the delivered email",
     errorGeneric: "Something went wrong. Please try again.",
     errorNetwork: "Could not reach the server. Please check your connection.",
+    /** Footer link-column headings. */
+    navHeading: "Explore",
+    servicesHeading: "Services",
+    channelsHeading: "Reach us",
     copyright: "© 2026 Wesantika. All Rights Reserved.",
     privacy: "Privacy Policy",
   },

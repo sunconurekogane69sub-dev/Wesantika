@@ -258,51 +258,82 @@ export default async function ServicesPage({
         Four across on two rows fills the width the photograph freed, and every
         claim is legible at a glance rather than something to scroll past.
       */}
-      <section className="mt-[80px] w-full bg-brand-tint xl:mt-[120px]">
-        <div className="canvas px-6 py-[72px] xl:px-[212px] xl:py-[104px]">
-          <h2 className="text-[32px] leading-[1.15] font-bold text-black sm:text-[40px] xl:text-[48px] xl:leading-[56px]">
-            {s.why.heading}
-          </h2>
+      {/*
+        Second pass on this section. The card grid was an improvement on the wall
+        of 40px type, but it had two problems of its own:
 
-          <ul className="mt-[36px] grid gap-[16px] sm:grid-cols-2 xl:mt-[48px] xl:grid-cols-4">
-            {s.why.items.map((item) => (
+          - **Eight identical check discs.** The brand disc is the site's icon
+            idiom — the Contact channels use it, and so do the timeline steps —
+            and repeating it eight times with the same glyph turned a meaningful
+            mark into wallpaper. The discs are gone from here and reserved for
+            where they distinguish one thing from another.
+          - **Eight sparse cards.** Each held a three-word label in a 24px-padded
+            box, so most of the section was padding. Eight bare claims read
+            better dense than spread out — a specification, not eight posters.
+
+        It is now the same composition as the Contact page's timeline: the
+        heading holds one column and the content the other. Two sections built
+        the same way is a language; two built differently is an accident.
+      */}
+      <section className="mt-[80px] w-full bg-brand-tint xl:mt-[120px]">
+        <div className="canvas grid gap-[40px] px-6 py-[72px] xl:grid-cols-[minmax(0,360px)_minmax(0,1fr)] xl:gap-[96px] xl:px-[212px] xl:py-[104px]">
+          <div className="xl:pt-[6px]">
+            <span
+              aria-hidden
+              className="block h-[3px] w-[44px] rounded-full bg-brand"
+            />
+            <h2 className="mt-[20px] text-[30px] leading-[1.15] font-bold text-black sm:text-[36px] xl:text-[42px] xl:leading-[50px]">
+              {s.why.heading}
+            </h2>
+
+            <Link
+              href={`/${locale}/contact`}
+              className="mt-[28px] inline-flex h-[48px] w-fit items-center justify-center rounded-btn bg-brand-btn px-[28px] text-[16px] leading-[26px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[36px]"
+            >
+              {s.why.cta}
+            </Link>
+          </div>
+
+          {/* Two columns of four, divided by hairlines rather than boxed. The
+              rule between rows is what makes eight short claims scan as a list
+              instead of eight fragments. */}
+          <ul className="grid grid-cols-1 gap-x-[48px] sm:grid-cols-2">
+            {s.why.items.map((item, index) => (
               <li
                 key={item}
-                className="flex flex-col gap-[16px] rounded-[16px] bg-white p-[24px] transition-shadow duration-200 hover:shadow-[0_10px_28px_-10px_rgb(6_42_82/0.22)]"
+                className="group flex items-center gap-[14px] border-t border-black/10 py-[18px] first:border-t-0 sm:[&:nth-child(2)]:border-t-0"
               >
-                {/* Brand disc, white glyph — the same treatment as the Contact
-                    page's channel list and the sticky rail, so an icon means
-                    the same thing everywhere. The blue original measures only
-                    3.34:1 on a tint disc; white on brand-btn is 6.01:1. */}
-                <span className="flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full bg-brand-btn">
-                  <Icon
-                    src="/icons/icon-check-white.svg"
-                    width={22}
-                    height={22}
-                    className="h-[22px] w-[22px]"
-                  />
+                {/* A small brand chevron rather than a disc: it marks the item
+                    without competing with the label, and at 12px it reads as
+                    punctuation. The index is decorative — the list conveys
+                    membership, and these are not ranked. */}
+                <span
+                  aria-hidden
+                  // brand-ink at 50% measured 2.17:1 on the tint — too faint to read.
+                  // Full ink is 5.47:1; the 12px size keeps it subordinate to the
+                  // label without leaning on opacity to do it.
+                  className="text-[12px] leading-none font-bold text-brand-ink"
+                >
+                  {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="text-[17px] leading-[26px] font-bold text-black">
+                <span className="h-[6px] w-[6px] shrink-0 rotate-45 bg-brand" aria-hidden />
+                <span className="text-[16px] leading-[24px] font-bold text-black xl:text-[17px] xl:leading-[26px]">
                   {item}
                 </span>
               </li>
             ))}
           </ul>
-
-          <div className="mt-[48px] flex justify-center xl:mt-[64px]">
-            <Link
-              href={`/${locale}/contact`}
-              className="inline-flex h-[48px] min-w-[280px] items-center justify-center rounded-btn bg-brand-btn px-[28px] text-[16px] leading-[26px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
-            >
-              {s.why.cta}
-            </Link>
-          </div>
         </div>
       </section>
 
       </main>
 
-      <Footer strings={t.footer} office={t.contact.office} locale={locale} />
+      <Footer
+        strings={t.footer}
+        office={t.contact.office}
+        nav={t.nav} rail={t.rail} serviceTitles={t.serviceDetails}
+        locale={locale}
+      />
     </>
   );
 }

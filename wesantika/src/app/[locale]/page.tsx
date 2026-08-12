@@ -9,7 +9,11 @@ import { PageHero } from "@/components/PageHero";
 import { RfpDialog } from "@/components/RfpDialog";
 import { ServiceTabs } from "@/components/ServiceTabs";
 import { StickyContactRail } from "@/components/StickyContactRail";
-import { SERVICE_CARD_SETS, SERVICE_CATEGORY_IDS } from "@/lib/content";
+import {
+  SERVICE_CARD_SETS,
+  SERVICE_CATEGORY_IDS,
+  serviceCardHref,
+} from "@/lib/content";
 import { getDictionary } from "@/lib/i18n";
 import { isLocale } from "@/lib/i18n/locales";
 
@@ -64,6 +68,7 @@ export default async function TopPage({
               icon: card.icon,
               title: t.services.cards[card.id].title,
               body: t.services.cards[card.id].body,
+              href: serviceCardHref(locale, card.id),
             })),
           }))}
         />
@@ -151,7 +156,12 @@ export default async function TopPage({
       </main>
 
       <div className="mt-[80px] xl:mt-[107px]">
-        <Footer strings={t.footer} office={t.contact.office} locale={locale} />
+        <Footer
+        strings={t.footer}
+        office={t.contact.office}
+        nav={t.nav} rail={t.rail} serviceTitles={t.serviceDetails}
+        locale={locale}
+      />
       </div>
     </>
   );

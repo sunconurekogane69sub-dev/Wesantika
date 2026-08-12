@@ -152,7 +152,12 @@ export default async function TechnologiesPage({
 
       </main>
 
-      <Footer strings={t.footer} office={t.contact.office} locale={locale} />
+      <Footer
+        strings={t.footer}
+        office={t.contact.office}
+        nav={t.nav} rail={t.rail} serviceTitles={t.serviceDetails}
+        locale={locale}
+      />
     </>
   );
 }

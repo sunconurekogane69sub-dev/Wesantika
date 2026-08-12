@@ -231,6 +231,10 @@ export const vi: PartialDictionary = {
     errorGeneric: "Đã xảy ra lỗi. Vui lòng thử lại.",
     errorNetwork:
       "Không kết nối được tới máy chủ. Vui lòng kiểm tra đường truyền của bạn.",
+    /** Footer link-column headings. */
+    navHeading: "Khám phá",
+    servicesHeading: "Dịch vụ",
+    channelsHeading: "Liên hệ",
     copyright: "© 2026 Wesantika | Đã đăng ký bản quyền",
     privacy: "Chính sách bảo mật",
   },

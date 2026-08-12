@@ -1,4 +1,12 @@
-import { HEAD_OFFICE } from "@/lib/content";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  CONTACT_CHANNELS,
+  HEAD_OFFICE,
+  HEAD_OFFICE_MAP_URL,
+  NAV_ITEMS,
+  serviceDetailHref,
+} from "@/lib/content";
 import type { Locale } from "@/lib/i18n/locales";
 import type { Dictionary } from "@/lib/i18n";
 import { ContactForm } from "./ContactForm";
@@ -9,10 +17,45 @@ import { Copyright } from "./Copyright";
  *
  * One fix applied: the heading is #000000 in Figma, sitting on the #062a52 navy
  * panel, which makes it unreadable. It is white here.
+ *
+ * **It carries navigation now.** It previously had none at all — a pitch, a
+ * form, an address and a copyright line, and no way to get anywhere. That is the
+ * first thing a footer is for: it is where people look when the page they are on
+ * has not answered their question, and on a site of 122 routes behind five
+ * locale prefixes it is also how a crawler finds the depth.
+ *
+ * Three columns, chosen to match how the site is actually shaped:
+ *
+ *   Explore    every page that exists, from NAV_ITEMS plus Contact
+ *   Services   six of the seventeen write-ups — the ones a visitor is most
+ *              likely to be looking for, since linking all seventeen would make
+ *              the footer taller than the pages above it
+ *   Reach us   the four real channels, and the head office on a map
+ *
+ * Every label is already translated. The nav labels come from `nav`, the service
+ * titles from `serviceTitles`, the channel names from `rail` — so this added no
+ * new copy to five dictionaries beyond the three column headings.
  */
+
+/**
+ * The six service write-ups surfaced in the footer. Ordered by how commonly they
+ * are the reason someone arrives, not alphabetically.
+ */
+const FOOTER_SERVICES = [
+  "custom",
+  "ai",
+  "web",
+  "mobile",
+  "cloud",
+  "qa",
+] as const;
+
 export function Footer({
   strings,
   office,
+  nav,
+  rail,
+  serviceTitles,
   locale,
   withForm = true,
 }: {
@@ -21,6 +64,12 @@ export function Footer({
   strings: Dictionary["footer"];
   /** Only the label is translated; the address itself never is. */
   office: Dictionary["contact"]["office"];
+  /** Reused for the Explore column — already translated, so no new copy. */
+  nav: Dictionary["nav"];
+  /** Channel names for the Reach us column. */
+  rail: Dictionary["rail"];
+  /** Service write-up titles, for the Services column. */
+  serviceTitles: Dictionary["serviceDetails"];
   /**
    * The Contact page carries its own form, and two identical forms on one page
    * is worse than one — it makes "Send Message" ambiguous in a screen reader's
@@ -28,6 +77,10 @@ export function Footer({
    */
   withForm?: boolean;
 }) {
+  const linkClass =
+    "text-[15px] leading-[26px] text-white/70 transition-colors hover:text-white focus-visible:text-white";
+  const headingClass =
+    "text-[13px] leading-[20px] font-bold tracking-[0.08em] text-brand-cta uppercase";
   return (
     // scroll-mt clears the now-fixed 95px nav when #contact is jumped to.
     <footer id="contact" className="w-full scroll-mt-[95px]">
@@ -84,6 +137,115 @@ export function Footer({
           </div>
         </div>
       )}
+
+      {/* ---------- navigation ----------
+          Three columns on the same navy as the panel above, separated by a
+          hairline rather than a colour change: this is the same surface, a
+          different job. */}
+      <div className="w-full bg-navy-900">
+        <div className="canvas px-6 xl:px-[212px]">
+          <div className="h-px w-full bg-white/10" aria-hidden />
+
+          <nav
+            aria-label={strings.navHeading}
+            className="grid gap-[36px] py-[48px] sm:grid-cols-2 xl:grid-cols-[1fr_1.2fr_1fr_auto] xl:gap-[48px] xl:py-[56px]"
+          >
+            <div>
+              <h2 className={headingClass}>{strings.navHeading}</h2>
+              <ul className="mt-[16px] flex flex-col gap-[6px]">
+                {NAV_ITEMS.map((item) => (
+                  <li key={item.id}>
+                    <Link
+                      href={`/${locale}${item.href === "/" ? "" : item.href}`}
+                      className={linkClass}
+                    >
+                      {nav[item.id]}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link href={`/${locale}/contact`} className={linkClass}>
+                    {nav.contact}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h2 className={headingClass}>{strings.servicesHeading}</h2>
+              <ul className="mt-[16px] flex flex-col gap-[6px]">
+                {FOOTER_SERVICES.map((id) => (
+                  <li key={id}>
+                    <Link href={serviceDetailHref(locale, id)} className={linkClass}>
+                      {serviceTitles[id].eyebrow}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    href={`/${locale}/services`}
+                    className={`${linkClass} font-bold text-white/85`}
+                  >
+                    {nav.solution}
+                    <span aria-hidden> →</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h2 className={headingClass}>{strings.channelsHeading}</h2>
+              <ul className="mt-[16px] flex flex-col gap-[6px]">
+                {CONTACT_CHANNELS.map((channel) => {
+                  const external = !channel.href.startsWith("mailto:");
+                  return (
+                    <li key={channel.id}>
+                      <a
+                        href={channel.href}
+                        {...(external
+                          ? { target: "_blank", rel: "noreferrer" }
+                          : {})}
+                        className={linkClass}
+                      >
+                        {rail[channel.id]}
+                      </a>
+                    </li>
+                  );
+                })}
+                <li>
+                  <a
+                    href={HEAD_OFFICE_MAP_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={linkClass}
+                  >
+                    {office.mapLink}
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* The wordmark closes the footer. `logo-bright.png` is the one with
+                a genuinely transparent background — the other is opaque white,
+                which is why it cannot go on navy. */}
+            <div className="sm:col-span-2 xl:col-span-1 xl:justify-self-end">
+              <Link
+                href={`/${locale}`}
+                className="relative block h-[27px] w-[109px]"
+                aria-label="Wesantika"
+              >
+                <Image
+                  src="/images/logo-bright.png"
+                  alt="Wesantika"
+                  fill
+                  sizes="109px"
+                  className="object-contain"
+                />
+              </Link>
+            </div>
+          </nav>
+        </div>
+      </div>
 
       {/* A hairline of brand light where the panel meets the copyright bar. The
           two navies are close enough that the seam read as a printing error;

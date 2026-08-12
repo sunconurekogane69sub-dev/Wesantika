@@ -11,6 +11,8 @@ export type ServiceTabCategory = {
     icon: string;
     title: string;
     body: string;
+    /** Where the card opens — see serviceCardHref. */
+    href: string;
   }>;
 };
 
@@ -117,6 +119,7 @@ export function ServiceTabs({
               icon={card.icon}
               title={card.title}
               body={card.body}
+              href={card.href}
             />
           ))}
         </div>

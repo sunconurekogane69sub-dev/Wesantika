@@ -232,32 +232,74 @@ export default async function ContactPage({
           </div>
         </section>
 
-        {/* ---------- what happens next ---------- */}
-        <section className="w-full bg-navy-900">
-          <div className="canvas px-6 py-[80px] xl:px-[212px] xl:py-[96px]">
-            <h2 className="text-[28px] leading-[36px] font-bold text-white xl:text-[36px] xl:leading-[42px]">
-              {c.next.heading}
-            </h2>
+        {/*
+          ---------- what happens next ----------
 
-            <ol className="mt-[40px] grid gap-[32px] md:grid-cols-3">
+          Was three columns of numeral-title-body. Three columns is a list, and
+          this is a *sequence* — the reader needs to see that step two follows
+          step one, which a grid of equals cannot say.
+
+          So it is a timeline: one line, three nodes on it, heading alongside.
+          The line does the work the layout could not, and reading down it is the
+          same motion as time passing.
+
+          Card borders were the other option and they were measured out. On this
+          navy, an edge subtle enough to look considered lands at 1.3-1.7:1 —
+          under the 3:1 that WCAG asks of a boundary. Rather than force a heavy
+          outline, the definition comes from the line, the discs and the fill.
+        */}
+        <section className="relative w-full overflow-hidden bg-navy-900">
+          {/* Depth, cheaply: one soft brand glow off the top-right corner. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-[30%] -right-[10%] h-[600px] w-[600px] rounded-full opacity-[0.18] blur-[120px]"
+            style={{ background: "radial-gradient(circle, #00aef7 0%, transparent 70%)" }}
+          />
+
+          <div className="canvas relative grid gap-[48px] px-6 py-[80px] xl:grid-cols-[minmax(0,400px)_minmax(0,1fr)] xl:gap-[100px] xl:px-[212px] xl:py-[112px]">
+            <div className="xl:pt-[6px]">
+              <span
+                aria-hidden
+                className="block h-[3px] w-[44px] rounded-full bg-brand-cta"
+              />
+              <h2 className="mt-[20px] text-[28px] leading-[36px] font-bold text-white xl:text-[36px] xl:leading-[42px]">
+                {c.next.heading}
+              </h2>
+            </div>
+
+            {/* `relative` anchors the line; the line is drawn once for the whole
+                list rather than per item, so it cannot break between them. */}
+            <ol className="relative flex flex-col gap-[36px] xl:gap-[44px]">
+              {/* Runs from the centre of the first disc to the centre of the
+                  last, then fades — so it arrives somewhere instead of running
+                  off the bottom of the section. */}
+              <span
+                aria-hidden
+                className="absolute top-[22px] bottom-[22px] left-[21px] w-[2px] bg-gradient-to-b from-brand-cta/70 via-brand-cta/40 to-brand-cta/0"
+              />
+
               {CONTACT_STEP_IDS.map((id, index) => {
                 const step = c.next.steps[id];
                 return (
-                  <li key={id}>
+                  <li key={id} className="relative flex gap-[20px] sm:gap-[26px]">
                     {/* The numeral is decorative — the <ol> already conveys
-                        order, so it is hidden rather than read out twice. */}
+                        order, so it is hidden rather than read out twice.
+                        Brand disc, white glyph: the same idiom as the channel
+                        list above and the Why-choose grid on Services. */}
                     <span
                       aria-hidden
-                      className="text-[16px] leading-[26px] font-bold text-brand-cta"
+                      className="relative z-10 flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full bg-brand-btn text-[15px] leading-none font-bold text-white shadow-[0_0_0_6px_rgb(6_42_82)]"
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <h3 className="mt-[12px] text-[20px] leading-[30px] font-bold text-white">
-                      {step.title}
-                    </h3>
-                    <p className="mt-[10px] text-[16px] leading-[24px] text-white/80">
-                      {step.body}
-                    </p>
+                    <div className="pt-[8px]">
+                      <h3 className="text-[20px] leading-[28px] font-bold text-white xl:text-[22px] xl:leading-[30px]">
+                        {step.title}
+                      </h3>
+                      <p className="mt-[10px] max-w-[560px] text-[16px] leading-[26px] text-white/80">
+                        {step.body}
+                      </p>
+                    </div>
                   </li>
                 );
               })}
@@ -266,7 +308,13 @@ export default async function ContactPage({
         </section>
       </main>
 
-      <Footer strings={t.footer} office={t.contact.office} locale={locale} withForm={false} />
+      <Footer
+        strings={t.footer}
+        office={t.contact.office}
+        nav={t.nav} rail={t.rail} serviceTitles={t.serviceDetails}
+        locale={locale}
+        withForm={false}
+      />
     </>
   );
 }

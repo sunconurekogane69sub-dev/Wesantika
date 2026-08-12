@@ -174,7 +174,12 @@ export default async function AboutPage({
       </main>
 
       <div className="mt-[14px]">
-        <Footer strings={t.footer} office={t.contact.office} locale={locale} />
+        <Footer
+        strings={t.footer}
+        office={t.contact.office}
+        nav={t.nav} rail={t.rail} serviceTitles={t.serviceDetails}
+        locale={locale}
+      />
       </div>
     </>
   );

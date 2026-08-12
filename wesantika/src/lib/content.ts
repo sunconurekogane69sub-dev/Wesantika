@@ -75,6 +75,49 @@ export const CONTACT_CHANNELS = [
 export type ChannelId = (typeof CONTACT_CHANNELS)[number]["id"];
 
 /**
+ * Which service write-up each Top-page service card opens.
+ *
+ * The cards were inert `<article>` elements. Giving them a pointer cursor
+ * without a destination would repeat the mistake already noted on the AI
+ * Innovation labels — promising interactivity that is not there — so each card
+ * is a link, and this is where it goes.
+ *
+ * Eleven ids are the same on both sides. The rest are the same service under a
+ * different name (`aiDevelopment` and `generativeAi` are both the AI write-up;
+ * `outsourcing` and `offshoreTeams` are both Hire Developers). Two have no
+ * honest match — `legacy` and `itServices` are covered across several write-ups
+ * rather than by one — so they fall back to the Services index, which is a real
+ * page and a sensible answer to "tell me more".
+ */
+export const SERVICE_CARD_DETAIL: Record<string, ServiceDetailId | null> = {
+  custom: "custom",
+  web: "web",
+  mobile: "mobile",
+  mvp: "mvp",
+  saas: "saas",
+  enterprise: "enterprise",
+  backend: "backend",
+  frontend: "frontend",
+  integration: "integration",
+  maintenance: "maintenance",
+  devops: "devops",
+  aiDevelopment: "ai",
+  generativeAi: "ai",
+  qaTesting: "qa",
+  cloudMigration: "cloud",
+  outsourcing: "hire",
+  offshoreTeams: "hire",
+  legacy: null,
+  itServices: null,
+};
+
+/** Where a service card points, falling back to the Services index. */
+export function serviceCardHref(locale: string, cardId: string): string {
+  const topic = SERVICE_CARD_DETAIL[cardId];
+  return topic ? serviceDetailHref(locale, topic) : `/${locale}/services`;
+}
+
+/**
  * Head office.
  *
  * This lives here rather than in the dictionaries **on purpose**. An address is
