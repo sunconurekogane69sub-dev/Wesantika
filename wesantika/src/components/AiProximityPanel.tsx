@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { HeroVideo } from "./HeroVideo";
 import { useEffect, useRef, useState } from "react";
 import { AI_LABELS, AI_PANEL } from "@/lib/content";
@@ -9,22 +8,27 @@ import type { Dictionary } from "@/lib/i18n";
 /** How far the cursor's influence reaches, in panel design px. */
 const INFLUENCE_RADIUS = 300;
 
+/** The label rises as the cursor nears it — the movement the eye reads first. */
+const MAX_LIFT = 28;
+/** And leans towards the pointer, so the row feels like it is tracking you. */
+const MAX_LEAN = 20;
+/** Scale supports the lift rather than replacing it. */
+const MAX_SCALE = 1.38;
+
 /**
- * The label rises as the cursor nears it. This is the movement the eye reads,
- * so it carries most of the effect.
+ * Resting opacity of a label the cursor is nowhere near.
+ *
+ * This is what turns proximity into a *spotlight*: the focused label does not
+ * only grow, everything else recedes, and the contrast between the two is what
+ * the eye actually registers. Prominence by subtraction as well as addition.
+ *
+ * 0.70 is not a taste value. Labels are 20px bold, so they need 3.0:1, and
+ * against the worst case there is — a pure white video frame under the scrim —
+ * 0.70 measures 3.23:1 and full white measures 4.74:1. Dimming further reads
+ * better and stops passing: at the old 45% scrim even 0.80 fell to 2.74:1,
+ * which is why the scrim went to 55% in the same change.
  */
-const MAX_LIFT = 16;
-/**
- * And leans towards the cursor horizontally. Small — enough that the row feels
- * like it is responding to you, not enough to disturb the composition.
- */
-const MAX_LEAN = 12;
-/**
- * Scale is now a supporting move rather than the whole gesture. It used to run
- * to 1.6, which is a lot of zoom and read as a magnifier passing over a
- * photograph; at 1.12 it just firms up the label that is being pointed at.
- */
-const MAX_SCALE = 1.12;
+const REST_OPACITY = 0.7;
 
 const BASE_TRANSFORM = "translate(-50%, -50%) scale(1)";
 
@@ -93,6 +97,8 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
         if (!pointer) {
           el.style.transform = BASE_TRANSFORM;
           el.style.zIndex = "10";
+          el.style.opacity = String(REST_OPACITY);
+          el.style.textShadow = "0 2px 10px rgb(0 0 0 / 0.30)";
           if (rule) {
             rule.style.transform = "scaleX(0)";
             rule.style.opacity = "0";
@@ -120,6 +126,12 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
           `translate(calc(-50% + ${lean.toFixed(2)}px), calc(-50% + ${lift.toFixed(2)}px))` +
           ` scale(${scale.toFixed(4)})`;
         el.style.zIndex = String(10 + Math.round(eased * 20));
+        el.style.opacity = (REST_OPACITY + (1 - REST_OPACITY) * eased).toFixed(3);
+        // The glow arrives with the lift rather than as a separate hover state,
+        // so the label reads as lit rather than as merely bigger.
+        el.style.textShadow =
+          `0 2px 10px rgb(0 0 0 / ${(0.3 + 0.25 * eased).toFixed(2)}), ` +
+          `0 0 ${(18 * eased).toFixed(1)}px rgb(0 174 247 / ${(0.75 * eased).toFixed(2)})`;
 
         if (rule) {
           rule.style.transform = `scaleX(${eased.toFixed(3)})`;
@@ -141,6 +153,16 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
       schedule();
     };
 
+    // Paint the resting state once on mount. Without this the labels render at
+    // full opacity from the JSX and only drop to REST_OPACITY on the first
+    // pointer move — a visible pop the moment the cursor enters the section.
+    //
+    // It also has to happen *here* rather than in the JSX, because this effect
+    // returns early under prefers-reduced-motion. A reduced-motion visitor gets
+    // no dimming at all, which is right: with no interaction to light a label
+    // back up, a permanently dimmed label is just a worse label.
+    schedule();
+
     surface.addEventListener("pointermove", onMove);
     surface.addEventListener("pointerleave", onLeave);
     return () => {
@@ -156,13 +178,9 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
       className="relative w-full overflow-hidden rounded-hero-panel"
       style={{ aspectRatio: `${AI_PANEL.width} / ${AI_PANEL.height}` }}
     >
-      <Image
-        src="/images/ai-panel.png"
-        alt=""
-        fill
-        sizes="(max-width: 1672px) 100vw, 1564px"
-        className="object-cover"
-      />
+      {/* Video only here too. The dark ground stands in until the first frame,
+          and the scrim over it means the transition is barely a change. */}
+      <div aria-hidden className="absolute inset-0 bg-shell-950" />
       <HeroVideo
         src="/video/ai-panel.mp4"
         objectPosition="50% 50%"
@@ -175,14 +193,15 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
         Every label here is 20px bold (one is 32px), which puts them over the
         18.66px-bold line and so under the 3.0:1 large-text threshold rather than
         4.5:1. White at 3.0:1 needs the ground no lighter than mid-grey, and a
-        45% black veil delivers 3.36:1 against the worst case there is — a pure
-        white video frame. Since no decoder here can read the clip's frames, that
+        55% black veil delivers 4.74:1 for a lit label and 3.23:1 for a resting
+        one against the worst case there is — a pure white video frame. Since no decoder here can read the clip's frames, that
         worst-case guarantee is the only kind worth having.
 
-        45% and not 60%: 60% would be needed for body-size text and would bury
-        the artwork. The labels being bold is what buys the lighter veil.
+        It went 45% -> 55% when the labels started dimming at rest. At 45% a
+        resting label measured 2.74:1, under the line; the extra veil is what
+        pays for the spotlight.
       */}
-      <div aria-hidden className="absolute inset-0 bg-black/45" />
+      <div aria-hidden className="absolute inset-0 bg-black/55" />
 
       <div
         className="absolute top-0 left-0 origin-top-left"
@@ -213,7 +232,7 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
                   : // cursor-pointer on request. The labels are not links, so
                     // this is the one place the site promises interactivity it
                     // does not have — see the note in README.
-                    " cursor-pointer transition-transform duration-150 ease-out will-change-transform"
+                    " cursor-pointer transition-[transform,opacity] duration-200 ease-out will-change-transform"
               }`}
             >
               {lines.map((line) => (
@@ -236,7 +255,7 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
                   ref={(el) => {
                     rulesRef.current[index] = el;
                   }}
-                  className="mt-[6px] block h-[2px] origin-left rounded-full bg-white opacity-0 transition-[transform,opacity] duration-150 ease-out will-change-transform"
+                  className="mt-[8px] block h-[3px] origin-left rounded-full bg-brand-cta opacity-0 transition-[transform,opacity] duration-150 ease-out will-change-transform"
                   style={{ transform: "scaleX(0)" }}
                 />
               )}

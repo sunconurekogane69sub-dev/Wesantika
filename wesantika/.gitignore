@@ -5,3 +5,7 @@ out
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts
+
+# faststart.mjs keeps the pre-relocation file next to the rewritten one.
+# They are 20-30MB each and only useful locally.
+*.mp4.orig

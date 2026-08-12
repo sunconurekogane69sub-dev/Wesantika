@@ -94,25 +94,37 @@ export function PageHero({
 
   return (
     <section className={`relative ${s.section}`}>
-      <Image
-        src={image}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        // 90 rather than Next's default 75: these are wide, smooth blue
-        // gradients, and 75 puts visible banding across the sky on every one of
-        // them. The extra bytes land on a single above-the-fold image.
-        quality={90}
-        className="object-cover"
-        style={{ objectPosition }}
-      />
+      {/*
+        Video only, on request — the stills no longer render behind it.
 
-      {video && (
-        <HeroVideo
-          src={video}
-          objectPosition={objectPosition}
-          className="absolute inset-0 h-full w-full object-cover"
+        `image` is still a required prop and still the right value to pass: it is
+        what `scripts/ink-audit.mjs` measures each hero's copy against, and it is
+        what the non-video hero (Contact) actually shows. It is simply not drawn
+        on the five that have a clip.
+
+        Before the first frame decodes there is a flat dark ground rather than
+        nothing. With the black gradient over the top it is indistinguishable
+        from a dark frame, so the hero is never a hole — just dark for a moment.
+      */}
+      {video ? (
+        <>
+          <div aria-hidden className="absolute inset-0 bg-shell-950" />
+          <HeroVideo
+            src={video}
+            objectPosition={objectPosition}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </>
+      ) : (
+        <Image
+          src={image}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          quality={90}
+          className="object-cover"
+          style={{ objectPosition }}
         />
       )}
 

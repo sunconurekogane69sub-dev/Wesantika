@@ -82,15 +82,27 @@ export default async function ServicesPage({
       </section>
 
       {/* ---- Accelerate — 405:1971 / 405:1983 / 405:1990 ------------- */}
-      <section className="canvas px-6 pt-[80px] xl:px-0 xl:pt-[126px]">
-        <h2 className="mx-auto max-w-[1021px] text-center text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:text-[48px] xl:leading-[56px]">
+      {/*
+        Was the one centred composition on a page where everything else — hero,
+        intro, offer, global, why — is left-aligned on the 212px gutter. One
+        section breaking the column system is what "the text positioning is all
+        over the place" looks like from the outside, so it now sits where the
+        rest of the page sits, under the same brand rule the Why section uses.
+      */}
+      <section className="canvas px-6 pt-[80px] xl:px-[212px] xl:pt-[140px]">
+        <span
+          aria-hidden
+          className="block h-[3px] w-[44px] rounded-full bg-brand"
+        />
+        <h2 className="mt-[20px] max-w-[1021px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:text-[44px] xl:leading-[52px]">
           {s.accelerate.heading}
         </h2>
 
-        {/* 420 x 485 with a 190px gutter — 586:1306 / 586:1298, down from the
-            ~497 x 574 the file used to draw. The gutter only opens up at xl;
-            190px between two cards is a full column on a laptop. */}
-        <div className="mx-auto mt-[60px] grid max-w-[1030px] gap-[40px] md:grid-cols-2 xl:mt-[126px] xl:gap-[190px]">
+        {/* The authored gutter between the two cards was 190px — a full column
+            on a laptop, and a hole once the section moved onto the site gutter.
+            40px matches the offer grid below, so the two grids read as one
+            system rather than two. */}
+        <div className="mt-[44px] grid gap-[40px] md:grid-cols-2 xl:mt-[56px]">
           {/* These two sit directly above the seventeen offer cards, so they
               take the same resting state: a 1px hairline rather than 3px of
               saturated brand, going brand on hover. Leaving them at 3px while
@@ -142,15 +154,15 @@ export default async function ServicesPage({
       </section>
 
       {/* ---- Services We Offer — 405:1981 / 405:2322 ---------------- */}
-      <section className="canvas px-6 pt-[100px] xl:px-0 xl:pt-[190px]">
-        <h2 className="mx-auto max-w-[975px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:pl-[117px] xl:text-[48px] xl:leading-[56px]">
+      <section className="canvas px-6 pt-[100px] xl:px-[212px] xl:pt-[150px]">
+        <h2 className="max-w-[975px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:text-[44px] xl:leading-[52px]">
           {s.offer.heading}
         </h2>
-        <p className="mx-auto mt-[24px] max-w-[860px] text-[18px] leading-[28px] font-normal text-black/85 xl:pl-[0px] xl:text-[20px]">
+        <p className="mt-[20px] max-w-[860px] text-[17px] leading-[28px] font-normal text-black/85 xl:text-[19px] xl:leading-[30px]">
           {s.offer.subtitle}
         </p>
 
-        <div className="mt-[52px] grid gap-x-[59px] gap-y-[65px] sm:grid-cols-2 xl:grid-cols-3 xl:pr-[189px] xl:pl-[258px]">
+        <div className="mt-[44px] grid gap-[28px] sm:grid-cols-2 xl:mt-[56px] xl:grid-cols-3">
           {SERVICE_OFFER_CARDS.map((card) => (
             <ServiceOfferCard
               key={card.id}
@@ -169,54 +181,70 @@ export default async function ServicesPage({
       </section>
 
       {/* ---- Global Engineering Teams — 405:2286 --------------------- */}
-      <section className="relative mt-[100px] xl:mt-[264px] xl:h-[917px]">
+      {/*
+        A fixed 917px band with its content pinned at `top-[111px] left-[150px]`
+        — the last of the Figma-coordinate layouts on this page, and the same
+        fragility already removed from About and Technologies. Those numbers hold
+        for one string length; the German-length locales here are Vietnamese and
+        Thai, and either could have run past the bottom of the band with nothing
+        to stop them.
+
+        Normal flow, the 212px site gutter, and the three "It requires" points
+        laid out across the width instead of stacked at 32px — they are three
+        short labels, not three paragraphs, and stacking them made the section
+        far taller than it needed to be.
+      */}
+      <section className="relative mt-[100px] xl:mt-[160px]">
         <Image
           src="/images/svc-global.png"
           alt=""
           fill
           sizes="100vw"
+          quality={90}
           className="object-cover object-center"
         />
-        <div className="canvas relative px-6 py-[80px] xl:h-full xl:px-0 xl:py-0">
-          <div className="xl:absolute xl:top-[111px] xl:left-[150px] xl:max-w-[760px]">
-            <h2 className="max-w-[623px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:text-[48px] xl:leading-[56px]">
+        <div className="canvas relative px-6 py-[80px] xl:px-[212px] xl:py-[112px]">
+          <div className="max-w-[760px]">
+            <h2 className="text-[30px] leading-[1.18] font-bold text-black sm:text-[38px] xl:text-[44px] xl:leading-[52px]">
               {s.global.heading}
             </h2>
-            <p className="mt-[24px] max-w-[695px] text-[18px] leading-[28px] font-normal text-black xl:mt-[31px] xl:text-[20px]">
+            <p className="mt-[22px] text-[17px] leading-[28px] font-normal text-black/85 xl:text-[19px] xl:leading-[30px]">
               {s.global.intro}
             </p>
-            <p className="mt-[36px] text-[20px] leading-[29px] font-bold text-black xl:mt-[52px] xl:text-[24px]">
-              {s.global.requiresLead}
-            </p>
-            <p className="text-[20px] leading-[29px] font-bold text-black xl:text-[24px]">
-              {s.global.requiresLabel}
-            </p>
-
-            <ul className="mt-[24px] flex flex-col gap-[28px]">
-              {GLOBAL_TEAM_POINTS.map((point) => (
-                <li key={point.id} className="flex items-center gap-[24px]">
-                  <Icon
-                    src={point.icon}
-                    width={point.w}
-                    height={point.h}
-                    className="h-[40px] w-[44px] shrink-0 object-contain xl:h-[50px] xl:w-[54px]"
-                  />
-                  <span className="text-[24px] leading-[1.2] font-bold text-brand-ink xl:text-[32px] xl:leading-[39px]">
-                    {s.global.points[point.id]}
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            <p className="mt-[36px] max-w-[654px] text-[18px] leading-[28px] font-normal text-black xl:mt-[55px] xl:text-[20px]">
-              {s.global.outro}
-            </p>
           </div>
+
+          <p className="mt-[40px] text-[19px] leading-[30px] font-bold text-black xl:mt-[52px] xl:text-[22px] xl:leading-[32px]">
+            {s.global.requiresLead}{" "}
+            <span className="text-brand-ink">{s.global.requiresLabel}</span>
+          </p>
+
+          <ul className="mt-[28px] grid gap-[20px] sm:grid-cols-3 xl:mt-[32px] xl:gap-[24px]">
+            {GLOBAL_TEAM_POINTS.map((point) => (
+              <li
+                key={point.id}
+                className="flex items-center gap-[16px] rounded-[14px] border border-hairline bg-white/80 px-[20px] py-[18px] backdrop-blur-sm"
+              >
+                <Icon
+                  src={point.icon}
+                  width={point.w}
+                  height={point.h}
+                  className="h-[38px] w-[42px] shrink-0 object-contain"
+                />
+                <span className="text-[17px] leading-[26px] font-bold text-black xl:text-[19px] xl:leading-[28px]">
+                  {s.global.points[point.id]}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-[36px] max-w-[760px] text-[17px] leading-[28px] font-normal text-black/85 xl:mt-[44px] xl:text-[19px] xl:leading-[30px]">
+            {s.global.outro}
+          </p>
         </div>
       </section>
 
       {/* ---- Send Your RFP — 405:1910 (same card as the Top page) ---- */}
-      <section className="canvas px-6 pt-[80px] xl:px-[150px] xl:pt-[133px]">
+      <section className="canvas px-6 pt-[80px] xl:px-[212px] xl:pt-[120px]">
         <div className="flex flex-col overflow-hidden rounded-panel border border-brand bg-white xl:min-h-[435px] xl:flex-row">
           <div className="px-8 py-10 xl:w-[631px] xl:shrink-0 xl:py-[46px] xl:pr-[24px] xl:pl-[58px]">
             <h2 className="max-w-[710px] text-[28px] leading-[36px] font-bold text-brand xl:text-[36px] xl:leading-[42px]">

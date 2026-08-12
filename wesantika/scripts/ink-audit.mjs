@@ -17,6 +17,12 @@
  * A region passes if its declared ink clears its threshold. The script also
  * reports the alternative ink so a better choice is obvious when one exists.
  *
+ * Five of the six heroes now render video with no still behind them, so the
+ * image each hero region names is a **proxy** rather than what is displayed. That
+ * is still worth measuring — it is the closest available sample of the artwork —
+ * but the actual guarantee comes from the gradient, which holds white type at
+ * 5.74:1 against a pure white ground and therefore against any frame at all.
+ *
  * JPEGs are decoded through `sharp`, which Next already depends on for image
  * optimisation. They used to be skipped for want of a decoder, which meant the
  * two Services highlight cards — and then the landing hero, once it became a
@@ -134,6 +140,8 @@ const scrims = {
           : 0;
     return { colour: [0, 0, 0], alpha };
   },
+  /** The AI panel's flat veil. Mirrors `bg-black/55` in AiProximityPanel. */
+  aiPanel: () => ({ colour: [0, 0, 0], alpha: 0.55 }),
   none: () => ({ colour: [0, 0, 0], alpha: 0 }),
 };
 const lerp3 = (t, a, b, c) => (t < 0.5 ? a + (b - a) * (t / 0.5) : b + (c - b) * ((t - 0.5) / 0.5));
@@ -159,16 +167,20 @@ const REGIONS = [
   // 520px floor and a tall desktop window at the 1000px ceiling crop the
   // photograph very differently, and a region that only checked one of them
   // would miss the other.
-  { page: "Top", what: "nav strip", image: "images/home-hero.jpg", section: [1672, 900],
-    objectY: 0, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
-  { page: "Top", what: "H1 (short viewport)", image: "images/home-hero.jpg", section: [1672, 520],
-    objectY: 0, box: [212, 150, 720, 190], ink: "white", scrim: "heroGradient", size: 68 },
-  { page: "Top", what: "body (short viewport)", image: "images/home-hero.jpg", section: [1672, 520],
-    objectY: 0, box: [212, 340, 720, 130], ink: "white", scrim: "heroGradient", size: 22 },
-  { page: "Top", what: "H1 (tall viewport)", image: "images/home-hero.jpg", section: [1672, 1000],
-    objectY: 0, box: [212, 390, 720, 190], ink: "white", scrim: "heroGradient", size: 68 },
-  { page: "Top", what: "body (tall viewport)", image: "images/home-hero.jpg", section: [1672, 1000],
-    objectY: 0, box: [212, 580, 720, 130], ink: "white", scrim: "heroGradient", size: 22 },
+  // Video hero. `ground` rather than `image`: the still is dead code on this
+  // page — PageHero only draws it when no clip was passed — so the .jpg below
+  // would be measuring a picture that never reaches a reader. White is the
+  // brightest frame the clip could ever cut to.
+  { page: "Top", what: "nav strip", ground: "#ffffff", section: [1672, 900],
+    box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
+  { page: "Top", what: "H1 (short viewport)", ground: "#ffffff", section: [1672, 520],
+    box: [212, 150, 720, 190], ink: "white", scrim: "heroGradient", size: 68 },
+  { page: "Top", what: "body (short viewport)", ground: "#ffffff", section: [1672, 520],
+    box: [212, 340, 720, 130], ink: "white", scrim: "heroGradient", size: 22 },
+  { page: "Top", what: "H1 (tall viewport)", ground: "#ffffff", section: [1672, 1000],
+    box: [212, 390, 720, 190], ink: "white", scrim: "heroGradient", size: 68 },
+  { page: "Top", what: "body (tall viewport)", ground: "#ffffff", section: [1672, 1000],
+    box: [212, 580, 720, 130], ink: "white", scrim: "heroGradient", size: 22 },
 
   { page: "About", what: "nav strip", image: "images/about-hero.png", section: [1672, 560],
     objectY: 0, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
@@ -183,12 +195,13 @@ const REGIONS = [
   { page: "About", what: "vision body", image: "images/vision-bg.png", section: [1672, 941],
     box: [213, 606, 551, 90], ink: "black", scrim: "none", size: 24 },
 
-  { page: "Services", what: "nav strip", image: "images/services-hero.png", section: [1672, 560],
-    objectY: 0.3, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
-  { page: "Services", what: "H1", image: "images/services-hero.png", section: [1672, 560],
-    objectY: 0.3, box: [212, 180, 620, 130], ink: "white", scrim: "heroGradient", size: 48 },
-  { page: "Services", what: "body", image: "images/services-hero.png", section: [1672, 560],
-    objectY: 0.3, box: [212, 310, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
+  // Video hero — see the note on Top.
+  { page: "Services", what: "nav strip", ground: "#ffffff", section: [1672, 560],
+    box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
+  { page: "Services", what: "H1", ground: "#ffffff", section: [1672, 560],
+    box: [212, 180, 620, 130], ink: "white", scrim: "heroGradient", size: 48 },
+  { page: "Services", what: "body", ground: "#ffffff", section: [1672, 560],
+    box: [212, 310, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
 
   // --- Services global band (405:2287) ----------------------------------
   { page: "Services", what: "global heading", image: "images/svc-global.png", section: [1672, 917],
@@ -198,21 +211,21 @@ const REGIONS = [
   { page: "Services", what: "global points", image: "images/svc-global.png", section: [1672, 917],
     box: [241, 502, 372, 180], ink: "brandInk", scrim: "none", size: 32 },
 
-  { page: "Technologies", what: "nav strip", image: "images/tech-hero.png", section: [1672, 560],
-    objectY: 0.15, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
-  { page: "Technologies", what: "H1", image: "images/tech-hero.png", section: [1672, 560],
-    objectY: 0.15, box: [212, 180, 620, 130], ink: "white", scrim: "heroGradient", size: 48 },
-  { page: "Technologies", what: "body", image: "images/tech-hero.png", section: [1672, 560],
-    objectY: 0.15, box: [212, 310, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
+  // Video hero — see the note on Top.
+  { page: "Technologies", what: "nav strip", ground: "#ffffff", section: [1672, 560],
+    box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
+  { page: "Technologies", what: "H1", ground: "#ffffff", section: [1672, 560],
+    box: [212, 180, 620, 130], ink: "white", scrim: "heroGradient", size: 48 },
+  { page: "Technologies", what: "body", ground: "#ffffff", section: [1672, 560],
+    box: [212, 310, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
 
-  // The artwork's middle band is a dark code editor: black measures 1.4:1
-  // across objectY 0.30-0.70 and 10.4:1 here.
-  { page: "Our Work", what: "nav strip", image: "images/work-hero.png", section: [1672, 560],
-    objectY: 0, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
-  { page: "Our Work", what: "H1", image: "images/work-hero.png", section: [1672, 560],
-    objectY: 0, box: [212, 180, 620, 130], ink: "white", scrim: "heroGradient", size: 48 },
-  { page: "Our Work", what: "body", image: "images/work-hero.png", section: [1672, 560],
-    objectY: 0, box: [212, 310, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
+  // Video hero — see the note on Top.
+  { page: "Our Work", what: "nav strip", ground: "#ffffff", section: [1672, 560],
+    box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
+  { page: "Our Work", what: "H1", ground: "#ffffff", section: [1672, 560],
+    box: [212, 180, 620, 130], ink: "white", scrim: "heroGradient", size: 48 },
+  { page: "Our Work", what: "body", ground: "#ffffff", section: [1672, 560],
+    box: [212, 310, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
 
   { page: "Contact", what: "nav strip", image: "images/contact-hero.png", section: [1672, 560],
     objectY: 0.3, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
@@ -221,9 +234,27 @@ const REGIONS = [
   { page: "Contact", what: "body", image: "images/contact-hero.png", section: [1672, 560],
     objectY: 0.3, box: [212, 310, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
 
-  // --- AI Innovation panel (180:752) ------------------------------------
-  { page: "Top", what: "AI labels", image: "images/ai-panel.png", section: [1564, 1006],
-    box: [130, 100, 1200, 800], ink: "white", scrim: "none", size: 20, bold: true },
+  /* --- AI Innovation panel (180:752) ------------------------------------
+
+     Also video, also under a scrim, and now also *dimmed*: labels rest at 70%
+     opacity and light to 100% as the pointer nears. Three regions, because
+     "does the panel pass" has three different answers:
+
+       rest    the state every label is in when nobody is pointing at it, and
+               therefore the one almost every reader sees
+       near    a neighbour partway through the transition
+       lit     the label under the cursor
+
+     `rest` is the binding one. If the spotlight ever costs more than the scrim
+     pays for, this is the line that turns red.                              */
+  { page: "Top", what: "AI labels (rest)", ground: "#ffffff", section: [1564, 1006],
+    box: [130, 100, 1200, 800], ink: "white", scrim: "aiPanel", inkAlpha: 0.7,
+    size: 20, bold: true },
+  { page: "Top", what: "AI labels (near)", ground: "#ffffff", section: [1564, 1006],
+    box: [130, 100, 1200, 800], ink: "white", scrim: "aiPanel", inkAlpha: 0.85,
+    size: 20, bold: true },
+  { page: "Top", what: "AI labels (lit)", ground: "#ffffff", section: [1564, 1006],
+    box: [130, 100, 1200, 800], ink: "white", scrim: "aiPanel", size: 20, bold: true },
 
 
 ];
@@ -257,21 +288,47 @@ function sampler(img, sectionW, sectionH, objectY = 0.5) {
 
 const threshold = (r) => (r.size >= 24 || (r.size >= 18.66 && r.bold) ? 3.0 : 4.5);
 
+/**
+ * Composite translucent ink onto the ground it sits on.
+ *
+ * A label at `opacity: 0.7` is not white — it is 70% white over whatever is
+ * behind it, and measuring the ink at full strength reports a ratio the reader
+ * never sees. The AI panel's resting labels are the only place this applies.
+ */
+const over = (ink, ground, alpha) =>
+  alpha === undefined ? ink : ink.map((v, i) => v * alpha + ground[i] * (1 - alpha));
+
 const cache = new Map();
 let failures = 0, checked = 0, skipped = 0;
 let currentPage = "";
 
 for (const r of REGIONS) {
-  const isJpeg = /\.jpe?g$/.test(r.image);
-  if (isJpeg && !sharp) { skipped++; continue; }
-  const path = join(ROOT, "public", r.image);
-  if (!cache.has(path)) {
-    cache.set(path, isJpeg ? await decodeJpeg(path) : decodePng(path));
-  }
-  const img = cache.get(path);
-
   const [sw, sh] = r.section;
-  const at = sampler(img, sw, sh, r.objectY);
+
+  /*
+    Two kinds of region now.
+
+    `image` regions sample a still that actually ships. `ground` regions sample
+    a flat colour instead, and exist because four heroes and the AI panel render
+    **video** — nothing here can decode an H.264 frame, and measuring the still
+    that used to sit behind it reports a guarantee for a picture no reader sees.
+    A pure-white ground is the worst case any frame can be, so a region that
+    passes on it passes on every frame of the clip, including a cut to white.
+  */
+  let at;
+  if (r.ground) {
+    const flat = parse(r.ground);
+    at = () => flat;
+  } else {
+    const isJpeg = /\.jpe?g$/.test(r.image);
+    if (isJpeg && !sharp) { skipped++; continue; }
+    const path = join(ROOT, "public", r.image);
+    if (!cache.has(path)) {
+      cache.set(path, isJpeg ? await decodeJpeg(path) : decodePng(path));
+    }
+    at = sampler(cache.get(path), sw, sh, r.objectY);
+  }
+
   const scrim = scrims[r.scrim];
 
   // Composite the scrim per pixel, then take the worst 10% of samples — an
@@ -288,13 +345,14 @@ for (const r of REGIONS) {
   }
   if (samples.length === 0) continue;
 
-  const ink = inkColour(r.ink);
-  samples.sort((a, b) => contrast(ink, a) - contrast(ink, b));
+  const inkBase = inkColour(r.ink);
+  const score = (bg) => contrast(over(inkBase, bg, r.inkAlpha), bg);
+  samples.sort((a, b) => score(a) - score(b));
   const worst = samples[Math.floor(samples.length * 0.1)];
   const mean = samples
     .reduce((acc, s) => acc.map((v, i) => v + s[i] / samples.length), [0, 0, 0]);
 
-  const got = contrast(ink, worst);
+  const got = score(worst);
   const need = threshold(r);
   const pass = got >= need;
   checked++;

@@ -158,7 +158,7 @@ export function Footer({
                 {NAV_ITEMS.map((item) => (
                   <li key={item.id}>
                     <Link
-                      href={`/${locale}${item.href === "/" ? "" : item.href}`}
+                      href={`/${locale}${item.href}`}
                       className={linkClass}
                     >
                       {nav[item.id]}

@@ -12,7 +12,9 @@
     "fit": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/fit-check.mjs",
     "smoke": "node scripts/smoke.mjs",
     "typography": "node scripts/type-audit.mjs",
-    "media": "node scripts/media-check.mjs"
+    "media": "node scripts/media-check.mjs",
+    "faststart": "node scripts/faststart.mjs",
+    "mp4:verify": "node scripts/mp4-verify.mjs"
   },
   "dependencies": {
     "next": "^16.3.0",

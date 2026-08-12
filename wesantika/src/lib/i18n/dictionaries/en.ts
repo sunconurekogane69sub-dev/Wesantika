@@ -16,7 +16,6 @@ export const en = {
   },
 
   nav: {
-    top: "Top",
     solution: "Solution",
     about: "About Us",
     work: "Our Work",

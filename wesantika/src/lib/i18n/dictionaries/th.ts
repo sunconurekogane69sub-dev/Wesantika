@@ -19,7 +19,6 @@ export const th: PartialDictionary = {
   },
 
   nav: {
-    top: "หน้าแรก",
     solution: "โซลูชัน",
     about: "เกี่ยวกับเรา",
     work: "ผลงานของเรา",

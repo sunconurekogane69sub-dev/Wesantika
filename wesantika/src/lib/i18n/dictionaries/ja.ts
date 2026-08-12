@@ -12,7 +12,6 @@ export const ja: PartialDictionary = {
   },
 
   nav: {
-    top: "トップ",
     solution: "ソリューション",
     about: "会社概要",
     work: "実績",

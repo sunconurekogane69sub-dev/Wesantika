@@ -5,7 +5,11 @@
  */
 
 export const NAV_ITEMS = [
-  { id: "top", href: "/" },
+  // No "Top" entry. It was a second link to the same destination as the logo,
+  // which every page already carries in the same bar — and on the home page it
+  // was a nav item pointing at the page you were already on. The logo is the
+  // conventional way home and it is not going anywhere.
+  //
   // "Solution" is the nav entry the Services artboard belongs under; the file
   // has no separate "Services" nav item.
   { id: "solution", href: "/services" },

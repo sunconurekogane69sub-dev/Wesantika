@@ -19,7 +19,6 @@ export const zhHantTW: PartialDictionary = {
   },
 
   nav: {
-    top: "首頁",
     solution: "解決方案",
     about: "關於我們",
     work: "服務案例",

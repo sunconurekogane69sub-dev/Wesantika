@@ -19,7 +19,6 @@ export const vi: PartialDictionary = {
   },
 
   nav: {
-    top: "Trang chủ",
     solution: "Giải pháp",
     about: "Về chúng tôi",
     work: "Dự án",

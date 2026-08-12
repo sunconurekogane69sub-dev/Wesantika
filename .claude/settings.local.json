@@ -118,7 +118,11 @@
       "Bash(cp __TRACKED_VAR__/Solution.mp4 public/video/services-hero.mp4)",
       "Bash(cp __TRACKED_VAR__/Technologies.mp4 public/video/technologies-hero.mp4)",
       "Bash(cp '__TRACKED_VAR__/AI innovation.mp4' public/video/ai-panel.mp4)",
-      "Bash(awk 'NR>1{printf \"  %-28s %6.1f MB\\\\n\",$9,$5/1048576}')"
+      "Bash(awk 'NR>1{printf \"  %-28s %6.1f MB\\\\n\",$9,$5/1048576}')",
+      "Bash(echo \"  --- exit: $? ---\")",
+      "Bash(grep -E \"image=|video=|page.tsx-|PageHero$\")",
+      "Bash(npx --yes kill-port 3000)",
+      "Bash(powershell -NoProfile -Command 'Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }')"
     ]
   }
 }

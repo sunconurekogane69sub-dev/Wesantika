@@ -85,16 +85,47 @@ export default async function TopPage({
         </div>
       </section>
 
-      {/* ---- AI Innovation — 180:725-761 ----------------------------- */}
-      <section className="canvas px-6 pt-[100px] xl:px-0 xl:pt-[155px]">
-        <h2 className="mx-auto max-w-[1019px] text-center text-[34px] leading-[1.2] font-bold text-black sm:text-[48px] xl:text-[64px] xl:leading-[70px]">
-          {t.ai.heading}
-        </h2>
-        <p className="mx-auto mt-[27px] max-w-[1102px] text-center text-[18px] leading-[26px] font-normal text-black xl:text-[20px] xl:leading-[30px]">
-          {t.ai.subtitle}
-        </p>
-        <div className="mt-[60px] xl:mt-[114px] xl:px-[54px]">
-          <AiProximityPanel labels={t.ai.labels} />
+      {/*
+        ---- AI Innovation — 180:725-761 -----------------------------
+
+        This is the page's signature section and it was not reading as one. It
+        sat on white, in the same canvas, with the same centred heading as every
+        other section — so the most distinctive thing on the site was formatted
+        exactly like the least distinctive.
+
+        It is now the one dark band on an otherwise white page. Nothing about the
+        panel changed to achieve that; the *ground* did. A full-bleed dark
+        section between two white ones is the oldest trick there is for saying
+        "this one matters", and it costs nothing but a background colour.
+
+        The panel also goes edge to edge inside it — it was inset at
+        `xl:px-[54px]`, which framed the one element that should not be framed.
+      */}
+      <section className="relative mt-[100px] w-full overflow-hidden bg-shell-950 xl:mt-[155px]">
+        {/* One soft brand glow, as on the Contact timeline. Depth, cheaply. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-[20%] left-[50%] h-[700px] w-[900px] -translate-x-1/2 rounded-full opacity-[0.16] blur-[140px]"
+          style={{ background: "radial-gradient(circle, #00aef7 0%, transparent 70%)" }}
+        />
+
+        <div className="canvas relative px-6 pt-[80px] pb-[80px] xl:px-[54px] xl:pt-[104px] xl:pb-[104px]">
+          <div className="mx-auto max-w-[900px] text-center">
+            <span
+              aria-hidden
+              className="mx-auto block h-[3px] w-[44px] rounded-full bg-brand-cta"
+            />
+            <h2 className="mt-[22px] text-[32px] leading-[1.15] font-bold text-white sm:text-[44px] xl:text-[56px] xl:leading-[64px]">
+              {t.ai.heading}
+            </h2>
+            <p className="mx-auto mt-[20px] max-w-[760px] text-[17px] leading-[28px] font-normal text-white/75 xl:text-[19px] xl:leading-[30px]">
+              {t.ai.subtitle}
+            </p>
+          </div>
+
+          <div className="mt-[48px] xl:mt-[72px]">
+            <AiProximityPanel labels={t.ai.labels} />
+          </div>
         </div>
       </section>
 

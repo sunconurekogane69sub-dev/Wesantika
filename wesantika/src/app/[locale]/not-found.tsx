@@ -47,9 +47,9 @@ export default async function NotFound() {
               {t.notFound.home}
             </Link>
           </li>
-          {destinations
-            .filter((item) => item.href !== "/")
-            .map((item) => (
+          {/* No filter for the home link any more: NAV_ITEMS no longer contains
+              one, and the "back to home" button above already covers it. */}
+          {destinations.map((item) => (
               <li key={item.id}>
                 <Link
                   href={`/${locale}${item.href}`}

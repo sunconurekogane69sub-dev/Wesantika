@@ -3,33 +3,50 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * A looping background video for a hero, with the poster frame as the fallback.
+ * A looping background video for a hero. **There is no still image behind it.**
  *
- * Four things this has to get right, none of which a bare `<video autoplay>`
- * does:
+ * The stills were removed on request: heroes are video only. What stands in
+ * before the first frame decodes is a flat dark ground, which the black gradient
+ * over the top makes indistinguishable from a dark frame — so the hero is never
+ * a hole, it is just dark for a moment.
  *
- * 1. **`prefers-reduced-motion`, and viewport width.** A looping clip behind a
- *    headline is exactly the continuous movement that setting exists to stop,
- *    and on a narrow screen it is also 19-31MB nobody asked for. Either gate
- *    shows the poster and never requests the file.
+ * ---------------------------------------------------------------------------
+ * The bug this file has now had twice, written down so it is not had a third
+ * time: **the video was not playing at all.**
+ *
+ * The previous version did this:
+ *
+ *     el.src = src;
+ *     el.load();
+ *     void el.play().catch(() => {});
+ *
+ * `load()` aborts any pending play promise. Calling it and then `play()` in the
+ * same tick means `play()` is rejected — and the `.catch(() => {})` swallowed
+ * the rejection, so the failure was completely silent. The still stayed up
+ * forever and it looked like a loading problem.
+ *
+ * Two corrections:
+ *
+ *  - **No `load()`.** Assigning `.src` already invokes the resource selection
+ *    algorithm. `load()` adds nothing except the abort.
+ *  - **Play on `canplay`, not immediately.** A media element with
+ *    `readyState === HAVE_NOTHING` has nothing to play yet, so the first attempt
+ *    is a race. `autoplay` is also set imperatively, which is the path browsers
+ *    treat as the well-trodden one for muted background video.
+ * ---------------------------------------------------------------------------
+ *
+ * The rest of what this has to get right, none of which a bare
+ * `<video autoplay>` does:
+ *
+ * 1. **`prefers-reduced-motion`.** A looping clip behind a headline is exactly
+ *    the continuous movement that setting exists to stop. The file still loads
+ *    and the first frame still shows; it simply never plays.
  * 2. **`muted` and `playsInline`.** Without both, mobile Safari refuses to
  *    autoplay and iOS takes the video fullscreen on play.
- * 3. **Autoplay can still be refused** — by a battery saver, a data-saver mode,
- *    or a browser policy. `play()` returns a promise; if it rejects, the poster
- *    stays and nothing looks broken.
- * 4. **It is decoration.** `aria-hidden`, and nothing in the hero's meaning
- *    depends on it.
+ * 3. **Autoplay can still be refused** — battery saver, data saver, or policy.
+ *    The loaded first frame stays on screen, so a refusal degrades to a still.
+ * 4. **It is decoration.** `aria-hidden`, and nothing depends on it.
  */
-/**
- * Below this width the video is never requested and the poster stands in.
- *
- * Not a design choice — a cost one. These clips are stock-download originals at
- * 12-16 Mbps, and the three page heroes are 19-31MB each. On a phone that is a
- * measurable amount of somebody's data allowance spent on decoration they will
- * have scrolled past before it starts. Desktop-only hero video is the standard
- * mitigation and it is the only one available without an encoder.
- */
-const MIN_WIDTH = 1024;
 
 export function HeroVideo({
   src,
@@ -38,70 +55,66 @@ export function HeroVideo({
 }: {
   src: string;
   /**
-   * Must match the still underneath, exactly.
-   *
-   * This was missing, and it was the whole bug behind "the static image appears
-   * briefly". The `<Image>` beneath was cropped at its measured position — the
-   * Our Work hero at `50% 0%`, About at `50% 50%` — while the video defaulted to
-   * centre. So the first frame of playback landed on a different crop and the
-   * hero visibly jumped. It was never a loading delay; it was a position shift.
+   * Must match the still underneath, exactly. When it did not, the still was
+   * cropped at its measured position while the video defaulted to centre, and
+   * the hero visibly jumped on the first frame of playback.
    */
   objectPosition: string;
   className?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
-  const [play, setPlay] = useState(false);
-  /** Flipped on the `playing` event, so the fade starts when frames do. */
+  /** Flipped on `loadeddata` — the first decodable frame, playing or paused. */
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const wide = window.matchMedia(`(min-width: ${MIN_WIDTH}px)`);
-    const apply = () => setPlay(!motion.matches && wide.matches);
-    apply();
-    motion.addEventListener("change", apply);
-    wide.addEventListener("change", apply);
-    return () => {
-      motion.removeEventListener("change", apply);
-      wide.removeEventListener("change", apply);
-    };
-  }, []);
-
-  useEffect(() => {
     const el = ref.current;
-    if (!el || !play) return;
+    if (!el) return;
 
-    // The source is assigned here rather than rendered as a `<source>` child.
-    // Adding a child to a `<video>` after mount does not make the browser fetch
-    // it — the spec only re-runs resource selection on `load()` — so a
-    // conditionally rendered `<source>` produces a video element that never
-    // plays and a poster that never moves.
+    /*
+      The width gate is gone.
+
+      It existed so phones would fall back to the still rather than pull 19-31MB.
+      With the still removed the fallback no longer exists, so gating by width
+      would leave a phone looking at an empty hero — which is worse than the data
+      cost it was avoiding. The cost is real and unchanged; the fix for it is an
+      encoder, not a media query. `npm run media` stays red until then.
+    */
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    el.muted = true;
+    el.preload = "auto";
+    // Under reduced motion the file still loads and the first frame still
+    // shows — it simply never plays. A frozen frame is not motion, and it is
+    // the only way to honour the setting now that there is no still beneath.
+    el.autoplay = !reduced;
+
+    const start = () => {
+      if (reduced) return;
+      // A rejection here means the browser refused — battery saver, data saver,
+      // policy. The first frame is already showing, so it degrades to a still.
+      void el.play().catch(() => {});
+    };
+
+    el.addEventListener("canplay", start);
+    // Assigning src runs resource selection on its own. No load() — see above.
     el.src = src;
-    el.load();
+    if (el.readyState >= 2) start();
 
-    // Autoplay can still be refused: battery saver, data saver, or policy.
-    // The poster is already showing, so a rejection needs no handling.
-    void el.play().catch(() => {});
-  }, [play, src]);
+    return () => el.removeEventListener("canplay", start);
+  }, [src]);
 
   return (
     <video
       ref={ref}
       aria-hidden
-      // No `poster`. The still is already rendered underneath as a real
-      // `<Image>` — with priority, sizing and format negotiation — so a poster
-      // here would be the same picture decoded a second time, and it would be
-      // the thing that flashes.
-      muted
       loop
+      muted
       playsInline
-      onPlaying={() => setVisible(true)}
-      // No `src` and no `preload` until the effect has confirmed both gates,
-      // so a phone or a reduced-motion user never requests the file at all.
+      onLoadedData={() => setVisible(true)}
+      // No `poster`. There is no still layer any more — a poster would be a
+      // second decode of a picture nobody asked to see.
       preload="none"
       style={{ objectPosition }}
-      // Fades up over the still rather than replacing it. With the crop now
-      // identical on both, the dissolve has nothing to reveal but motion.
       className={`${className} transition-opacity duration-700 ease-out ${
         visible ? "opacity-100" : "opacity-0"
       }`}
