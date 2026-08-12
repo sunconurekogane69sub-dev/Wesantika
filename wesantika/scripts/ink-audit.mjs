@@ -114,34 +114,25 @@ const scrims = {
   /** Stronger wash on the designed-here Blog heroes. */
   pageHero: (x, y, w) => ({ colour: NAVY, alpha: lerp3(x / w, 0.85, 0.6, 0.3) }),
   /**
-   * PageHero's optional dark wash, used only by the Top hero — the one place
-   * white type sits on a photograph. Gone by mid-frame, where the subject is.
+   * PageHero's gradient — black, falling away to the right, on all six heroes.
+   *
+   * Set against the worst possible ground rather than against these particular
+   * images, because one of the six is now a video and no decoder here can read
+   * its frames. Over pure white, white type scores 3.95:1 at alpha 0.50, 4.74:1
+   * at 0.55 and 5.74:1 at 0.60 — so the ramp holds 0.60 all the way across the
+   * copy column and the guarantee stops depending on what is behind it.
+   *
+   * Mirrors the gradient in PageHero.tsx exactly. Change one, change both.
    */
-  heroWash: (x, y, w) => ({ colour: [0, 0, 0], alpha: lerp3(x / w, 0.35, 0.15, 0) }),
-  /**
-   * The full-screen variant of the same wash. Stronger because that hero's
-   * height is the viewport's, so its crop is not constant — see the note in
-   * PageHero.tsx. Mirrors that gradient exactly; change one, change both.
-   */
-  heroWashFull: (x, y, w) => ({
-    colour: [0, 0, 0],
-    alpha: lerp3(x / w, 0.55, 0.35, 0.05),
-  }),
-  /**
-   * PageHero's white wash, on every interior hero. Held across the copy column
-   * so all five share one ground, then released so the photograph arrives at
-   * full strength on the right. Mirrors the gradient in PageHero.tsx exactly —
-   * if one changes, change both.
-   */
-  pageWash: (x, y, w) => {
+  heroGradient: (x, y, w) => {
     const t = x / w;
     const alpha =
-      t < 0.45
-        ? 0.93 - (0.93 - 0.88) * (t / 0.45)
-        : t < 0.8
-          ? 0.88 * (1 - (t - 0.45) / 0.35)
+      t < 0.5
+        ? 0.78 + (0.6 - 0.78) * (t / 0.5)
+        : t < 0.85
+          ? 0.6 * (1 - (t - 0.5) / 0.35)
           : 0;
-    return { colour: [255, 255, 255], alpha };
+    return { colour: [0, 0, 0], alpha };
   },
   none: () => ({ colour: [0, 0, 0], alpha: 0 }),
 };
@@ -171,18 +162,18 @@ const REGIONS = [
   { page: "Top", what: "nav strip", image: "images/home-hero.jpg", section: [1672, 900],
     objectY: 0, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
   { page: "Top", what: "H1 (short viewport)", image: "images/home-hero.jpg", section: [1672, 520],
-    objectY: 0, box: [212, 150, 720, 190], ink: "white", scrim: "heroWashFull", size: 68 },
+    objectY: 0, box: [212, 150, 720, 190], ink: "white", scrim: "heroGradient", size: 68 },
   { page: "Top", what: "body (short viewport)", image: "images/home-hero.jpg", section: [1672, 520],
-    objectY: 0, box: [212, 340, 720, 130], ink: "white", scrim: "heroWashFull", size: 22 },
+    objectY: 0, box: [212, 340, 720, 130], ink: "white", scrim: "heroGradient", size: 22 },
   { page: "Top", what: "H1 (tall viewport)", image: "images/home-hero.jpg", section: [1672, 1000],
-    objectY: 0, box: [212, 390, 720, 190], ink: "white", scrim: "heroWashFull", size: 68 },
+    objectY: 0, box: [212, 390, 720, 190], ink: "white", scrim: "heroGradient", size: 68 },
   { page: "Top", what: "body (tall viewport)", image: "images/home-hero.jpg", section: [1672, 1000],
-    objectY: 0, box: [212, 580, 720, 130], ink: "white", scrim: "heroWashFull", size: 22 },
+    objectY: 0, box: [212, 580, 720, 130], ink: "white", scrim: "heroGradient", size: 22 },
 
   { page: "About", what: "nav strip", image: "images/about-hero.png", section: [1672, 560],
     objectY: 0, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
   { page: "About", what: "lead", image: "images/about-hero.png", section: [1672, 560],
-    objectY: 0, box: [212, 180, 620, 290], ink: "black", scrim: "pageWash", size: 48 },
+    objectY: 0, box: [212, 180, 620, 290], ink: "white", scrim: "heroGradient", size: 48 },
 
   // --- About Us vision band (210:978) -----------------------------------
   { page: "About", what: "vision label", image: "images/vision-bg.png", section: [1672, 941],
@@ -195,9 +186,9 @@ const REGIONS = [
   { page: "Services", what: "nav strip", image: "images/services-hero.png", section: [1672, 560],
     objectY: 0.3, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
   { page: "Services", what: "H1", image: "images/services-hero.png", section: [1672, 560],
-    objectY: 0.3, box: [212, 180, 620, 130], ink: "black", scrim: "pageWash", size: 48 },
+    objectY: 0.3, box: [212, 180, 620, 130], ink: "white", scrim: "heroGradient", size: 48 },
   { page: "Services", what: "body", image: "images/services-hero.png", section: [1672, 560],
-    objectY: 0.3, box: [212, 310, 620, 160], ink: "black", scrim: "pageWash", size: 19 },
+    objectY: 0.3, box: [212, 310, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
 
   // --- Services global band (405:2287) ----------------------------------
   { page: "Services", what: "global heading", image: "images/svc-global.png", section: [1672, 917],
@@ -210,25 +201,25 @@ const REGIONS = [
   { page: "Technologies", what: "nav strip", image: "images/tech-hero.png", section: [1672, 560],
     objectY: 0.15, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
   { page: "Technologies", what: "H1", image: "images/tech-hero.png", section: [1672, 560],
-    objectY: 0.15, box: [212, 180, 620, 130], ink: "black", scrim: "pageWash", size: 48 },
+    objectY: 0.15, box: [212, 180, 620, 130], ink: "white", scrim: "heroGradient", size: 48 },
   { page: "Technologies", what: "body", image: "images/tech-hero.png", section: [1672, 560],
-    objectY: 0.15, box: [212, 310, 620, 160], ink: "black", scrim: "pageWash", size: 19 },
+    objectY: 0.15, box: [212, 310, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
 
   // The artwork's middle band is a dark code editor: black measures 1.4:1
   // across objectY 0.30-0.70 and 10.4:1 here.
   { page: "Our Work", what: "nav strip", image: "images/work-hero.png", section: [1672, 560],
     objectY: 0, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
   { page: "Our Work", what: "H1", image: "images/work-hero.png", section: [1672, 560],
-    objectY: 0, box: [212, 180, 620, 130], ink: "black", scrim: "pageWash", size: 48 },
+    objectY: 0, box: [212, 180, 620, 130], ink: "white", scrim: "heroGradient", size: 48 },
   { page: "Our Work", what: "body", image: "images/work-hero.png", section: [1672, 560],
-    objectY: 0, box: [212, 310, 620, 160], ink: "black", scrim: "pageWash", size: 19 },
+    objectY: 0, box: [212, 310, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
 
   { page: "Contact", what: "nav strip", image: "images/contact-hero.png", section: [1672, 560],
     objectY: 0.3, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
   { page: "Contact", what: "H1", image: "images/contact-hero.png", section: [1672, 560],
-    objectY: 0.3, box: [212, 180, 620, 130], ink: "black", scrim: "pageWash", size: 48 },
+    objectY: 0.3, box: [212, 180, 620, 130], ink: "white", scrim: "heroGradient", size: 48 },
   { page: "Contact", what: "body", image: "images/contact-hero.png", section: [1672, 560],
-    objectY: 0.3, box: [212, 310, 620, 160], ink: "black", scrim: "pageWash", size: 19 },
+    objectY: 0.3, box: [212, 310, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
 
   // --- AI Innovation panel (180:752) ------------------------------------
   { page: "Top", what: "AI labels", image: "images/ai-panel.png", section: [1564, 1006],

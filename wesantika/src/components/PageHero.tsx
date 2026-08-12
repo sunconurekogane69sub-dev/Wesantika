@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { HeroVideo } from "./HeroVideo";
 
 /**
  * The one hero on the site.
@@ -67,39 +68,29 @@ const SIZE = {
 
 export function PageHero({
   image,
+  video,
   objectPosition,
   size = "page",
   title,
   body,
-  ink = "black",
-  scrim = false,
   titleAs: Title = "h1",
   children,
 }: {
+  /** Also the video's poster frame, and the fallback under reduced motion. */
   image: string;
+  /** Optional looping background video, layered over the poster image. */
+  video?: string;
   /** CSS object-position. Chosen per image by measurement, not by eye. */
   objectPosition: string;
   size?: HeroSize;
   title: string;
   body?: string;
-  /** Measured against the artwork by scripts/ink-audit.mjs. */
-  ink?: "black" | "white";
-  /**
-   * A soft left-to-right dark wash, for the one hero that sets white type over
-   * a photograph. Without it white measures 3.6:1 there, which only clears AA
-   * because the sub-head was set **bold** to qualify as large text — and bold
-   * body copy is one of the things that reads as amateur. 12% black is enough
-   * to reach 4.5:1; this ramps from 35% so the margin is real, and it is gone
-   * by the middle of the frame, which is where the photograph's subject is.
-   */
-  scrim?: boolean;
   /** About's hero lead is not the page's h1 — that heading sits below it. */
   titleAs?: "h1" | "p";
   /** A CTA, rendered under the body copy. */
   children?: React.ReactNode;
 }) {
   const s = SIZE[size];
-  const text = ink === "white" ? "text-white" : "text-black";
 
   return (
     <section className={`relative ${s.section}`}>
@@ -117,66 +108,54 @@ export function PageHero({
         style={{ objectPosition }}
       />
 
-      {scrim && (
-        /*
-          The full-screen hero gets a stronger wash than the fixed-height one,
-          and not for taste. Its height is the viewport's, so the crop is not
-          constant: at the 520px floor the copy sits on deep navy sky and white
-          measures 4.8:1, but at the 1000px ceiling the same copy has slid down
-          onto the bright city and it measures 3.97:1 — under AA. The ramp below
-          carries the worst case to 5.7:1, so the hero is legible on a landscape
-          phone and a tall desktop window alike.
-        */
-        <div
-          aria-hidden
-          className={
-            size === "full"
-              ? "absolute inset-0 bg-gradient-to-r from-black/55 via-black/35 to-black/5"
-              : "absolute inset-0 bg-gradient-to-r from-black/35 via-black/15 to-transparent"
-          }
+      {video && (
+        <HeroVideo
+          src={video}
+          poster={image}
+          className="absolute inset-0 h-full w-full object-cover"
         />
       )}
 
-      {size === "page" && (
-        <>
-          {/*
-            The five interior heroes had identical CSS and still looked
-            unrelated, because the *ground under the copy* was different on
-            every one: About's copy sat on a sunset skyline (warm, with the
-            balcony rail cutting through it), Our Work's sat directly on a
-            browser mockup and a phone, and the other three sat on clean pale
-            blue. Contrast passed everywhere — that was never the problem. Five
-            different backdrops was.
+      {/*
+        One treatment for all six heroes: white type on a black gradient falling
+        away to the right.
 
-            So the copy always gets the same ground. The wash holds ~90% white
-            across the copy column, then releases by 80% so the photograph still
-            arrives at full strength on the right, which is where all five put
-            their subject. Black type, one ink, on one field, on every page.
+        The strength is not a taste decision — it is what makes the type legible
+        over content that cannot be measured. Five of these images are pale
+        enough that white on them unaided is around 1.5:1, and the Our Work hero
+        is now a video whose frames no decoder here can read.
 
-            Below xl the copy runs the full width, so the ramp would leave its
-            right-hand end unwashed — that breakpoint gets a flat wash instead.
-          */}
-          <div aria-hidden className="absolute inset-0 bg-white/85 xl:hidden" />
-          <div
-            aria-hidden
-            className="absolute inset-0 hidden xl:block"
-            style={{
-              background:
-                "linear-gradient(to right, rgb(255 255 255 / 0.93) 0%, rgb(255 255 255 / 0.88) 45%, rgb(255 255 255 / 0) 80%)",
-            }}
-          />
-        </>
-      )}
+        So the ramp is set against the **worst possible ground, pure white**:
+
+          alpha 0.50  ->  3.95:1   fails AA
+          alpha 0.55  ->  4.74:1   passes, no margin
+          alpha 0.60  ->  5.74:1   passes with margin      <- held across the copy
+          alpha 0.78  ->  9.9:1                            <- at the left edge
+
+        The copy column ends at roughly 50% of the frame, so it never sees less
+        than 0.60 and the guarantee holds whatever is behind it — a bright frame,
+        a dark one, or a photograph nobody has audited. Past 50% the gradient
+        releases so the artwork still arrives at full strength on the right,
+        which is where all six put their subject.
+      */}
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to right, rgb(0 0 0 / 0.78) 0%, rgb(0 0 0 / 0.60) 50%, rgb(0 0 0 / 0) 85%)",
+        }}
+      />
 
       {/* One vertical mechanism for all six: centre the copy in the band below
           the fixed 95px nav. The old `pt-[255px] / [286px] / [356px]` stacks
           each needed re-tuning at every breakpoint. */}
       <div className="canvas relative flex h-full flex-col justify-center px-6 pt-[95px] xl:px-[212px]">
-        <Title className={`${s.measure} ${s.title} font-bold ${text}`}>
+        <Title className={`${s.measure} ${s.title} font-bold text-white`}>
           {title}
         </Title>
         {body && (
-          <p className={`${s.measure} ${s.body} font-normal ${text}`}>{body}</p>
+          <p className={`${s.measure} ${s.body} font-normal text-white`}>{body}</p>
         )}
         {children}
       </div>

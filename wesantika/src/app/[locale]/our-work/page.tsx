@@ -49,11 +49,18 @@ export default async function OurWorkPage({
 
       <main id="main-content">
 
+      {/* The one hero backed by video. `work-hero.png` stays as the poster: it
+          carries the first paint, and it is what shows under
+          `prefers-reduced-motion`, where the video is never fetched at all.
+
+          object-position no longer has to dodge anything. It used to be pinned
+          to the top because the artwork's middle band is a dark code editor and
+          black copy over it measured 1.4:1 — with white type on the black
+          gradient that constraint is gone, so the frame is centred. */}
       <PageHero
         image="/images/work-hero.png"
-        // The artwork's middle band is a dark code editor: black copy measures
-        // 1.4:1 from 15% down, and 10.5:1 cropped from the top.
-        objectPosition="50% 0%"
+        video="/video/work-hero.mp4"
+        objectPosition="50% 50%"
         title={t.work.heroTitle}
         body={t.work.heroBody}
       />

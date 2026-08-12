@@ -109,7 +109,10 @@
       "Bash(python -c \"import sys,json;d=json.load\\(sys.stdin\\);print\\('  ',{k:\\('<url>' if k=='previewUrl' and d[k] else d[k]\\) for k in d}\\)\")",
       "Bash(curl -s \"http://localhost:3126/en\")",
       "Bash(awk '{print $1, $2}')",
-      "Bash(sort -n -k1.1)"
+      "Bash(sort -n -k1.1)",
+      "Bash(mkdir -p public/video)",
+      "Bash(cp \"/d/Users/ralph/Documents/wesantica video/Create_a_premium_cinematic_he.mp4\" public/video/work-hero.mp4)",
+      "Bash(awk 'NR>1{print \"  \"$9\" \"$5\" bytes\"}')"
     ]
   }
 }

@@ -58,10 +58,11 @@ export default async function AboutPage({
       */}
       <PageHero
         image="/images/about-hero.png"
-        // Cropped from the top: the sky. The centre crop put the copy on the
-        // sunset skyline, which was the one warm-toned hero ground on a site
-        // whose other four are cool blue, and the balcony rail ran through it.
-        objectPosition="50% 0%"
+        // Back to the centre crop. It was moved to the top so black copy could
+        // sit on the pale sky; with white type on the black gradient the ground
+        // no longer decides the crop, so the frame can be chosen for the picture
+        // — which is the skyline and the sunset, not the empty sky above them.
+        objectPosition="50% 50%"
         title={t.about.title}
         body={t.about.heroLead}
       />

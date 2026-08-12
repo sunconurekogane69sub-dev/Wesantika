@@ -39,8 +39,6 @@ export default async function TopPage({
           image="/images/home-hero.jpg"
           objectPosition="50% 0%"
           size="full"
-          ink="white"
-          scrim
           title={t.hero.title}
           body={t.hero.subtitle}
         />
