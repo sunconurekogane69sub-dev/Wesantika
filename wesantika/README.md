@@ -1019,6 +1019,52 @@ Decorative uses of the brand blue are untouched.
 **To revert:** point `--color-brand-btn` at `--color-brand` in `globals.css`.
 Nothing else needs to change.
 
+## Our Work — the case-study copy
+
+Each of the 70 cards now carries a description. They were titles and service
+tags alone, which read as a list rather than a body of work.
+
+**What the source actually contained.** Title and tags. Nothing else — no
+industry, client type, technology list, project notes, outcome, or prior
+description. `industries` is empty on all 70. So every description is written
+from those two fields, and **nothing in them asserts a fact the card did not
+already carry.** Where a card's only source was a product name (`Token Stand`,
+`Moneylion`, `Viewty`, `EZ Wallet`, `Pace Art NFT`, `Medicount`, `Asset Genius`,
+`BondLingo`, `Travala`, `OAT Wallet`, `Wesantika Finance`) the description states
+what was delivered and the engineering shape the tags imply, then stops. Those
+eleven are the ones to revisit first if someone who worked on them can supply
+detail.
+
+They are **English only**, in `our-work.ts` alongside the titles rather than in
+the dictionaries — the same treatment the titles already had. Putting 70 new keys
+in the dictionaries would have left 280 English fallbacks and pushed four locales
+below their coverage floors. Localising later means moving them; the note in the
+file says so.
+
+Six titles were corrected: `Salesforce Commercial Cloud` → **Commerce Cloud**
+(the actual product name), two shouting-caps titles, `Smart house and building`,
+a title carrying its own filename-style suffix, and one that opened with
+"Wesantika:" for work described as the company's own.
+
+**Search now covers the descriptions**, not just titles. With 70 cards, most of
+what someone would type — "warehouse", "wallet", "migration", "valuation" — is
+in the prose rather than the name.
+
+### The drafting was checked, not eyeballed
+
+Three passes, each because a check failed:
+
+| pass | what the check found |
+|---|---|
+| 1 | Mean 37 words against the 40–80 target, and **26 of 70 opened with "A" or "An"** — the uniform sentence shape to avoid |
+| 2 | Verb-led and at length, but `Built`/`Developed`/`Delivered` covered **66%** of entries |
+| 3 | Verb spread widened — then a narrowed scan found **9 descriptions that repeated their own opening verb** ("Built … built as", "Extended … extending"), the find-and-replace tell |
+
+Final state: mean 48 words, none under 25 or over 100, 25 distinct opening verbs,
+0 verb echoes, 0 of the banned phrases. The one remaining repeated phrase is
+`super-app-for-drivers` — "software used while working … software used at a
+desk" — which is parallelism carrying the contrast, so it stays.
+
 ## Contact page
 
 No Figma artboard exists for it; it was designed around one observation. The six

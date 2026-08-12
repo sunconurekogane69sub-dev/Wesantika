@@ -60,7 +60,12 @@ export function CaseStudyBrowser({ copy }: { copy: BrowserCopy }) {
     return CASE_STUDIES.filter((c) => {
       if (service && !c.tags.includes(service)) return false;
       if (industry && !c.industries.includes(industry)) return false;
-      if (q && !c.title.toLowerCase().includes(q)) return false;
+      // Search covers the description too, not only the title. With 70 cards,
+      // most of what a visitor would search for — "warehouse", "wallet",
+      // "migration", "valuation" — is in the prose rather than the name.
+      if (q && !`${c.title} ${c.description}`.toLowerCase().includes(q)) {
+        return false;
+      }
       return true;
     });
   }, [query, service, industry]);
@@ -213,9 +218,16 @@ function Card({ study }: { study: CaseStudy }) {
             </span>
           ))}
         </div>
-        <h3 className="mt-[12px] text-[16px] leading-[26px] font-semibold text-[#101624]">
+        <h3 className="mt-[12px] text-[16px] leading-[24px] font-semibold text-[#101624]">
           {study.title}
         </h3>
+        {/* The card was a title and nothing else — 70 of them, which read as a
+            list rather than a body of work. The description is what makes the
+            grid worth scanning. It is written from the title and the tags, so it
+            never claims more than the card already carried. */}
+        <p className="mt-[10px] text-[14px] leading-[23px] font-normal text-[#4a5163]">
+          {study.description}
+        </p>
       </div>
     </article>
   );
