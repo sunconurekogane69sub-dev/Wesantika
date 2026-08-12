@@ -89,11 +89,24 @@ export default async function ServicesPage({
             ~497 x 574 the file used to draw. The gutter only opens up at xl;
             190px between two cards is a full column on a laptop. */}
         <div className="mx-auto mt-[60px] grid max-w-[1030px] gap-[40px] md:grid-cols-2 xl:mt-[126px] xl:gap-[190px]">
+          {/* These two sit directly above the seventeen offer cards, so they
+              take the same resting state: a 1px hairline rather than 3px of
+              saturated brand, going brand on hover. Leaving them at 3px while
+              the grid below moved to 1px would have read as an oversight.
+
+              The whole card is the link, as with the offer cards. The button
+              becomes a styled span — a `<Link>` inside a `<Link>` is invalid,
+              and the card was already the obvious target. */}
           {SERVICE_HIGHLIGHTS.map((highlight) => (
-            <div
+            <Link
               key={highlight.id}
-              className="relative flex min-h-[420px] flex-col overflow-hidden rounded-[16px] border-[3px] border-brand bg-white xl:min-h-[485px]"
+              href={serviceDetailHref(locale, highlight.detail)}
+              className="group relative flex min-h-[420px] flex-col overflow-hidden rounded-[16px] border border-hairline bg-white outline-none transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-[3px] hover:border-brand hover:shadow-[0_18px_40px_-16px_rgb(6_42_82/0.28)] focus-visible:-translate-y-[3px] focus-visible:border-brand focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-brand-ink motion-reduce:hover:translate-y-0 xl:min-h-[485px]"
             >
+              <span
+                aria-hidden
+                className="absolute inset-x-[-1px] top-[-1px] z-10 h-[3px] origin-left scale-x-0 rounded-t-[16px] bg-brand transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100"
+              />
               <Image
                 src={highlight.image}
                 alt=""
@@ -102,22 +115,26 @@ export default async function ServicesPage({
                 className="object-contain object-bottom"
               />
               {/* Both source photos are white at the top, so the black label
-                  and the button below it read cleanly where they are placed. */}
-              <h3 className="relative px-[37px] pt-[61px] text-[24px] leading-[1.2] font-bold text-black xl:text-[28px] xl:leading-[34px]">
+                  and the affordance below it read cleanly where they sit. */}
+              <h3 className="relative px-[37px] pt-[54px] text-[24px] leading-[1.2] font-bold text-black transition-colors duration-200 group-hover:text-brand-ink xl:text-[28px] xl:leading-[34px]">
                 {s.accelerate.highlights[highlight.id]}
               </h3>
-              {/* 130 x 52 blue button — 586:806 / 586:808. The label is bold
-                  where the file sets it regular: white on #0f84fd measures
-                  3.66:1, which clears AA only once the type counts as large,
-                  and 20px needs to be bold to qualify. */}
-              <Link
-                href={serviceDetailHref(locale, highlight.detail)}
-                className="relative mt-[17px] ml-[37px] inline-flex h-[52px] min-w-[130px] w-fit items-center justify-center rounded-btn bg-brand-btn px-[16px] text-[20px] leading-[30px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink"
+              {/* Was a 130x52 solid brand button (586:806 / 586:808). On a card
+                  that is now itself the target, a filled button is a second
+                  control competing with the first. The label carries the brand
+                  colour instead — 6.01:1 on white at any size. */}
+              <span
+                aria-hidden
+                className="relative mt-[16px] ml-[37px] inline-flex w-fit items-baseline text-[17px] leading-[26px] font-bold text-brand-ink xl:text-[18px]"
               >
-                {s.detailLabel}
-                <span aria-hidden>&nbsp;→</span>
-              </Link>
-            </div>
+                <span className="border-b border-brand-ink/0 transition-colors duration-200 group-hover:border-brand-ink/60">
+                  {s.detailLabel}
+                </span>
+                <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-[5px]">
+                  {" →"}
+                </span>
+              </span>
+            </Link>
           ))}
         </div>
       </section>
