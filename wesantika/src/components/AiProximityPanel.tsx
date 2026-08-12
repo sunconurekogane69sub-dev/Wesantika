@@ -165,7 +165,7 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
       />
       <HeroVideo
         src="/video/ai-panel.mp4"
-        poster="/images/ai-panel.png"
+        objectPosition="50% 50%"
         className="absolute inset-0 h-full w-full object-cover"
       />
 

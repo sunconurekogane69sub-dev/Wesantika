@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AiProximityPanel } from "@/components/AiProximityPanel";
 import { AccentedHeading } from "@/components/AccentedHeading";
+import { CheckMark } from "@/components/CheckMark";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { PageHero } from "@/components/PageHero";
@@ -123,9 +124,10 @@ export default async function TopPage({
                   key={item}
                   className="flex gap-[10px] text-[16px] leading-[26px] font-normal text-black/85"
                 >
-                  <span aria-hidden className="text-brand">
-                    ✓
-                  </span>
+                  {/* Was the literal character U+2713, whose shape came from whatever
+                      font the reader happens to have. `icon-check.svg` is the
+                      same mark, drawn once. */}
+                  <CheckMark className="mt-[3px] h-[18px] w-[18px] shrink-0" />
                   {item}
                 </li>
               ))}

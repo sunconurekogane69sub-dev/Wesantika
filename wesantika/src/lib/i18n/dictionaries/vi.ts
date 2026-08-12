@@ -31,9 +31,9 @@ export const vi: PartialDictionary = {
   },
 
   hero: {
-    title: "Phần mềm hiện đại. Tăng trưởng thực chất.",
+    title: "Phần mềm trụ được vào ngày tệ nhất.",
     subtitle:
-      "Chúng tôi thiết kế và xây dựng phần mềm ứng dụng AI, nền tảng đám mây và hệ thống số giúp doanh nghiệp đổi mới, vận hành hiệu quả và mở rộng một cách tự tin.",
+      "Kỹ thuật phần mềm AI, đám mây và phát triển theo yêu cầu, cho những đội cần một hệ thống chạy thật chứ không phải nguyên mẫu. Mỗi dự án bắt đầu từ các ràng buộc, rồi thiết kế lùi từ đó.",
   },
 
   services: {

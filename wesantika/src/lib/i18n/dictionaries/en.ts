@@ -28,9 +28,9 @@ export const en = {
   },
 
   hero: {
-    title: "Modern Software. Real Business Growth.",
+    title: "Software that works on its worst day.",
     subtitle:
-      "We design and build AI-powered software, cloud platforms, and digital systems that help businesses innovate, operate efficiently, and scale with confidence.",
+      "AI, cloud and custom software engineering for teams who need a production system, not a prototype. Every engagement starts with the constraints — then we design backwards from them.",
   },
 
   services: {

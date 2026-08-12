@@ -51,9 +51,8 @@ export default async function TechnologiesPage({
       <main id="main-content">
 
       {/* ---- Hero — 477:33 / 423:2389 / 423:2388 / 478:36 ------------
-          No scrim over the artwork: this hero is pale on the left and the
-          headline is authored black, which measures 18:1 there. The nav's own
-          140px gradient still carries the white nav type at 5.1:1. */}
+          White type on the black gradient every hero now shares, over the
+          Technologies clip with the still as its base. Measured 7.4 / 7.3:1. */}
       <PageHero
           image="/images/tech-hero.png"
           video="/video/technologies-hero.mp4"
@@ -79,19 +78,34 @@ export default async function TechnologiesPage({
         </p>
       </section>
 
-      {/* ---- Stacks heading + capabilities — 421:2387 / 421:2386 ----- */}
-      <section className="canvas px-6 pt-[70px] xl:px-0 xl:pt-[72px]">
-        <h2 className="max-w-[652px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:pl-[210px] xl:text-[48px] xl:leading-[56px]">
-          {tech.stacksHeading}
-        </h2>
+      {/*
+        ---- Stacks heading + capabilities — 421:2387 / 421:2386 -----
 
-        {/* The checked paragraphs sit right of centre in the file: marks at
-            x=612, text at x=646. */}
-        <ul className="mt-[48px] flex flex-col gap-[28px] xl:mt-[79px] xl:pl-[612px]">
+        The heading sat at `pl-210` and its own capability list at `pl-612` —
+        a 400px gulf between a heading and the paragraphs belonging to it,
+        reproduced faithfully from the file's "right of centre" placement. On a
+        wide screen it read as two unrelated blocks with a hole between them.
+
+        Same two-column composition as the Contact timeline and the Why Choose
+        band: heading in one column, content in the other, both on the 212px
+        site gutter. Three sections built the same way is a system.
+      */}
+      <section className="canvas grid gap-[40px] px-6 pt-[70px] xl:grid-cols-[minmax(0,420px)_minmax(0,1fr)] xl:gap-[80px] xl:px-[212px] xl:pt-[88px]">
+        <div className="xl:pt-[6px]">
+          <span
+            aria-hidden
+            className="block h-[3px] w-[44px] rounded-full bg-brand"
+          />
+          <h2 className="mt-[20px] text-[28px] leading-[1.18] font-bold text-black sm:text-[34px] xl:text-[38px] xl:leading-[46px]">
+            {tech.stacksHeading}
+          </h2>
+        </div>
+
+        <ul className="flex flex-col gap-[24px]">
           {tech.capabilities.map((paragraph) => (
-            <li key={paragraph.slice(0, 40)} className="flex gap-[6px]">
-              <CheckMark className="mt-[-3px] shrink-0" />
-              <p className="max-w-[805px] text-[16px] leading-[24px] font-normal text-black">
+            <li key={paragraph.slice(0, 40)} className="flex gap-[14px]">
+              <CheckMark className="mt-[2px] shrink-0" />
+              <p className="max-w-[720px] text-[16px] leading-[26px] font-normal text-black/85 xl:text-[17px] xl:leading-[28px]">
                 {paragraph}
               </p>
             </li>
@@ -100,15 +114,18 @@ export default async function TechnologiesPage({
       </section>
 
       {/* ---- Technology stacks on the light band — 482:143 ----------- */}
-      <div className="mt-[70px] w-full bg-[#f7f7f7] pt-[75px] pb-[186px] xl:mt-[100px]">
+      {/* Was `bg-[#f7f7f7]` — an ad-hoc *warm* neutral on a site that is cool blue
+          throughout, the same fault the Services band had. And `pb-[186px]`, which
+          is a Figma coordinate rather than a spacing decision. */}
+      <div className="mt-[80px] w-full bg-brand-tint pt-[72px] pb-[96px] xl:mt-[104px] xl:pt-[88px] xl:pb-[112px]">
         <TechStackSection heading={headings.ai} section={section("ai")} />
         <TechStackSection heading={headings.backend} section={section("backend")} />
         <TechStackSection heading={headings.frontend} section={section("frontend")} />
         <TechStackSection heading={headings.app} section={section("app")} />
 
         {/* ---- Pick Your Stack — 507:128 ---------------------------- */}
-        <section className="canvas px-6 pt-[100px] xl:px-[193px] xl:pt-[179px]">
-          <div className="flex flex-col overflow-hidden rounded-panel border border-brand bg-white xl:min-h-[435px] xl:flex-row">
+        <section className="canvas px-6 pt-[88px] xl:px-[212px] xl:pt-[120px]">
+          <div className="flex flex-col overflow-hidden rounded-panel border border-hairline bg-white xl:min-h-[435px] xl:flex-row">
             <div className="px-8 py-10 xl:w-[631px] xl:shrink-0 xl:py-[46px] xl:pr-[24px] xl:pl-[58px]">
               <h2 className="max-w-[710px] text-[28px] leading-[36px] font-bold text-brand xl:text-[36px] xl:leading-[42px]">
                 {tech.rfp.heading}
@@ -122,9 +139,10 @@ export default async function TechnologiesPage({
                     key={item}
                     className="flex gap-[10px] text-[16px] leading-[26px] font-normal text-black/85"
                   >
-                    <span aria-hidden className="text-brand">
-                      ✓
-                    </span>
+                    {/* Was the literal character U+2713, whose shape came from whatever
+                        font the reader happens to have. `icon-check.svg` is the
+                        same mark, drawn once. */}
+                    <CheckMark className="mt-[3px] h-[18px] w-[18px] shrink-0" />
                     {item}
                   </li>
                 ))}
@@ -182,26 +200,40 @@ function TechStackSection({
   if (!section) return null;
 
   return (
-    <section className="canvas px-6 xl:px-0" style={{ paddingTop: spacing }}>
-      <h2 className="text-[20px] leading-[29px] font-bold text-black xl:pl-[210px] xl:text-[24px]">
+    /*
+      The heading sat at `pl-210` and the tiles at `pl-301` — a 91px step with
+      nothing to justify it. Both are on the site gutter now, and the tiles are
+      a real grid rather than `flex-wrap` with a 9px gap, which was leaving a
+      ragged last row of different width on every one of the six sections.
+
+      The tiles themselves were flat white rectangles on a warm grey with no
+      edge and no state. They now have the hairline every other surface on this
+      site uses, and they lift on hover — these are third-party marks, so the
+      only thing to signal is "this is a discrete thing", which an edge does.
+    */
+    <section
+      className="canvas px-6 xl:px-[212px]"
+      style={{ paddingTop: spacing }}
+    >
+      <h2 className="text-[20px] leading-[29px] font-bold text-black xl:text-[22px] xl:leading-[30px]">
         {heading}
       </h2>
-      <div className="mt-[36px] flex flex-wrap gap-[9px] xl:mt-[63px] xl:pl-[301px]">
+      <ul className="mt-[28px] grid grid-cols-2 gap-[12px] sm:grid-cols-3 xl:mt-[36px] xl:grid-cols-6">
         {section.logos.map((logo) => (
-          <div
+          <li
             key={logo.file}
-            className="flex h-[88px] w-[167px] shrink-0 items-center justify-center rounded-[8px] bg-white"
+            className="flex h-[88px] items-center justify-center rounded-[10px] border border-black/[0.08] bg-white transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-[2px] hover:border-black/[0.16] hover:shadow-[0_10px_24px_-12px_rgb(6_42_82/0.22)] motion-reduce:hover:translate-y-0"
           >
             <Image
               src={logo.file}
               alt=""
               width={logo.w}
               height={logo.h}
-              className="max-h-[80px] w-auto max-w-[140px] object-contain"
+              className="max-h-[52px] w-auto max-w-[112px] object-contain"
             />
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }

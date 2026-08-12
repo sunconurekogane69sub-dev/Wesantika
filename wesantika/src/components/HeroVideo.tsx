@@ -33,15 +33,26 @@ const MIN_WIDTH = 1024;
 
 export function HeroVideo({
   src,
-  poster,
+  objectPosition,
   className = "",
 }: {
   src: string;
-  poster: string;
+  /**
+   * Must match the still underneath, exactly.
+   *
+   * This was missing, and it was the whole bug behind "the static image appears
+   * briefly". The `<Image>` beneath was cropped at its measured position — the
+   * Our Work hero at `50% 0%`, About at `50% 50%` — while the video defaulted to
+   * centre. So the first frame of playback landed on a different crop and the
+   * hero visibly jumped. It was never a loading delay; it was a position shift.
+   */
+  objectPosition: string;
   className?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [play, setPlay] = useState(false);
+  /** Flipped on the `playing` event, so the fade starts when frames do. */
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -77,14 +88,23 @@ export function HeroVideo({
     <video
       ref={ref}
       aria-hidden
-      poster={poster}
+      // No `poster`. The still is already rendered underneath as a real
+      // `<Image>` — with priority, sizing and format negotiation — so a poster
+      // here would be the same picture decoded a second time, and it would be
+      // the thing that flashes.
       muted
       loop
       playsInline
+      onPlaying={() => setVisible(true)}
       // No `src` and no `preload` until the effect has confirmed both gates,
       // so a phone or a reduced-motion user never requests the file at all.
       preload="none"
-      className={className}
+      style={{ objectPosition }}
+      // Fades up over the still rather than replacing it. With the crop now
+      // identical on both, the dissolve has nothing to reveal but motion.
+      className={`${className} transition-opacity duration-700 ease-out ${
+        visible ? "opacity-100" : "opacity-0"
+      }`}
     />
   );
 }

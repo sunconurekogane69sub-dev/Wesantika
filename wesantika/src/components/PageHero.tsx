@@ -111,7 +111,7 @@ export function PageHero({
       {video && (
         <HeroVideo
           src={video}
-          poster={image}
+          objectPosition={objectPosition}
           className="absolute inset-0 h-full w-full object-cover"
         />
       )}
