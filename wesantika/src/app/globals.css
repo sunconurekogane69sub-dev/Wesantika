@@ -38,11 +38,23 @@
      --color-brand-ink 5.7:1, so both inks are safe here. */
   --color-brand-tint: #eef5ff;
 
-  /* Footer / form navies */
-  --color-navy-950: #041d38; /* copyright bar */
-  --color-navy-900: #062a52; /* footer panel */
-  --color-navy-700: #0b3a68; /* input wells */
-  --color-navy-600: #1a527f; /* footer hairline */
+  /* Footer / form navies. Still used by the Contact page's timeline band, which
+     is content and stays on brand navy. */
+  --color-navy-950: #041d38;
+  --color-navy-900: #062a52; /* timeline band */
+  --color-navy-700: #0b3a68;
+  --color-navy-600: #1a527f;
+
+  /* Footer shell.
+     The footer was on the brand navies, and a saturated mid-blue is what dated
+     it — that blue reads as a 2014 corporate footer. These are much darker and
+     nearly desaturated, keeping only enough cool cast to belong to the same
+     palette. Measured on #0b111c: white 18.9:1, white/70 links 9.5:1,
+     brand-cta headings 7.6:1, and a white/45 input edge 4.5:1 against the
+     3:1 WCAG asks of a control boundary. */
+  --color-shell-900: #0b111c; /* footer panel and nav row */
+  --color-shell-950: #06090f; /* copyright bar */
+  --color-shell-800: #151d2b; /* input wells */
   --color-field: #afc7dc; /* input placeholder */
 
   /* Card + button hairline: #000000 at 30% */
@@ -177,53 +189,6 @@
   :focus-visible {
     outline: 2px solid var(--color-brand);
     outline-offset: 2px;
-  }
-}
-
-/* ---------------------------------------------------------------------------
-   The copyright line.
-
-   Every colour below was measured against the #041d38 bar it sits on:
-   #e8f2ff is 15.0:1, #7dd3fc 10.2:1, #ffffff 17.0:1. So the sheen can sweep
-   across the whole line without any part of it dropping under AA — which
-   matters, because this is legal text and it has to stay readable at the
-   moment it is least eye-catching.
-
-   The gradient is applied inside `@supports`. `background-clip: text` needs
-   `color: transparent` to show, and a browser that has one without the other
-   would render an invisible copyright notice. The solid colour is the base
-   state; the gradient only ever replaces it where it is known to work.
-   --------------------------------------------------------------------------- */
-@layer components {
-  .copyright-ink {
-    color: #e8f2ff;
-  }
-
-  @supports (background-clip: text) or (-webkit-background-clip: text) {
-    .copyright-ink {
-      background-image: linear-gradient(
-        100deg,
-        #e8f2ff 0%,
-        #7dd3fc 26%,
-        #ffffff 50%,
-        #7dd3fc 74%,
-        #e8f2ff 100%
-      );
-      background-size: 220% 100%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: copyright-sheen 14s linear infinite;
-    }
-  }
-
-  @keyframes copyright-sheen {
-    from {
-      background-position: 0% 50%;
-    }
-    to {
-      background-position: 220% 50%;
-    }
   }
 }
 

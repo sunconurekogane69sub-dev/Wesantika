@@ -230,7 +230,6 @@ export const zhHantTW: PartialDictionary = {
     /** Footer link-column headings. */
     navHeading: "網站導覽",
     servicesHeading: "服務項目",
-    channelsHeading: "聯絡方式",
     copyright: "© 2026 Wesantika ｜ 版權所有",
     privacy: "隱私權政策",
   },

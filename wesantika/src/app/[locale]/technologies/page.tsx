@@ -155,7 +155,8 @@ export default async function TechnologiesPage({
       <Footer
         strings={t.footer}
         office={t.contact.office}
-        nav={t.nav} rail={t.rail} serviceTitles={t.serviceDetails}
+        nav={t.nav}
+        serviceNames={t.servicesPage.offer.cards}
         locale={locale}
       />
     </>

@@ -234,7 +234,6 @@ export const vi: PartialDictionary = {
     /** Footer link-column headings. */
     navHeading: "Khám phá",
     servicesHeading: "Dịch vụ",
-    channelsHeading: "Liên hệ",
     copyright: "© 2026 Wesantika | Đã đăng ký bản quyền",
     privacy: "Chính sách bảo mật",
   },

@@ -231,7 +231,6 @@ export const th: PartialDictionary = {
     /** Footer link-column headings. */
     navHeading: "สำรวจ",
     servicesHeading: "บริการ",
-    channelsHeading: "ติดต่อเรา",
     copyright: "© 2026 Wesantika | สงวนลิขสิทธิ์",
     privacy: "นโยบายความเป็นส่วนตัว",
   },

@@ -224,7 +224,6 @@ export const ja: PartialDictionary = {
     /** Footer link-column headings. */
     navHeading: "サイト内",
     servicesHeading: "サービス",
-    channelsHeading: "お問い合わせ",
     copyright: "© 2026 Wesantika ｜ 無断転載を禁じます",
     privacy: "プライバシーポリシー",
   },

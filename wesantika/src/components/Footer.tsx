@@ -1,12 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  CONTACT_CHANNELS,
-  HEAD_OFFICE,
-  HEAD_OFFICE_MAP_URL,
-  NAV_ITEMS,
-  serviceDetailHref,
-} from "@/lib/content";
+import { HEAD_OFFICE, NAV_ITEMS, serviceDetailHref } from "@/lib/content";
 import type { Locale } from "@/lib/i18n/locales";
 import type { Dictionary } from "@/lib/i18n";
 import { ContactForm } from "./ContactForm";
@@ -30,11 +24,14 @@ import { Copyright } from "./Copyright";
  *   Services   six of the seventeen write-ups — the ones a visitor is most
  *              likely to be looking for, since linking all seventeen would make
  *              the footer taller than the pages above it
- *   Reach us   the four real channels, and the head office on a map
  *
- * Every label is already translated. The nav labels come from `nav`, the service
- * titles from `serviceTitles`, the channel names from `rail` — so this added no
- * new copy to five dictionaries beyond the three column headings.
+ * A third column listing the four contact channels was here and has been
+ * removed: `StickyContactRail` carries the same four on every page, and the
+ * Contact page spells them out in full. Three places for one list is two too
+ * many.
+ *
+ * Every label is already translated — nav labels from `nav`, service names from
+ * `serviceNames` — so this added no new copy beyond the two column headings.
  */
 
 /**
@@ -54,8 +51,7 @@ export function Footer({
   strings,
   office,
   nav,
-  rail,
-  serviceTitles,
+  serviceNames,
   locale,
   withForm = true,
 }: {
@@ -66,10 +62,16 @@ export function Footer({
   office: Dictionary["contact"]["office"];
   /** Reused for the Explore column — already translated, so no new copy. */
   nav: Dictionary["nav"];
-  /** Channel names for the Reach us column. */
-  rail: Dictionary["rail"];
-  /** Service write-up titles, for the Services column. */
-  serviceTitles: Dictionary["serviceDetails"];
+  /**
+   * Service names for the Services column.
+   *
+   * These come from the offer cards, not from `serviceDetails[id].eyebrow`,
+   * which is the *back-link* label on a detail page and is the literal string
+   * "Services" on all seventeen — so the column rendered "Services" six times
+   * over. The offer titles are the actual service names and are translated in
+   * all five locales.
+   */
+  serviceNames: Dictionary["servicesPage"]["offer"]["cards"];
   /**
    * The Contact page carries its own form, and two identical forms on one page
    * is worse than one — it makes "Send Message" ambiguous in a screen reader's
@@ -85,7 +87,7 @@ export function Footer({
     // scroll-mt clears the now-fixed 95px nav when #contact is jumped to.
     <footer id="contact" className="w-full scroll-mt-[95px]">
       {withForm && (
-        <div className="w-full bg-navy-900">
+        <div className="w-full bg-shell-900">
           {/*
             This panel was 958px tall — taller than the viewport of a 1440x900
             laptop, for a footer. It is now ~520px, from four changes, none of
@@ -142,13 +144,13 @@ export function Footer({
           Three columns on the same navy as the panel above, separated by a
           hairline rather than a colour change: this is the same surface, a
           different job. */}
-      <div className="w-full bg-navy-900">
+      <div className="w-full bg-shell-900">
         <div className="canvas px-6 xl:px-[212px]">
           <div className="h-px w-full bg-white/10" aria-hidden />
 
           <nav
             aria-label={strings.navHeading}
-            className="grid gap-[36px] py-[48px] sm:grid-cols-2 xl:grid-cols-[1fr_1.2fr_1fr_auto] xl:gap-[48px] xl:py-[56px]"
+            className="grid gap-[36px] py-[48px] sm:grid-cols-2 xl:grid-cols-[1fr_1.4fr_auto] xl:gap-[48px] xl:py-[56px]"
           >
             <div>
               <h2 className={headingClass}>{strings.navHeading}</h2>
@@ -177,7 +179,7 @@ export function Footer({
                 {FOOTER_SERVICES.map((id) => (
                   <li key={id}>
                     <Link href={serviceDetailHref(locale, id)} className={linkClass}>
-                      {serviceTitles[id].eyebrow}
+                      {serviceNames[id].title}
                     </Link>
                   </li>
                 ))}
@@ -189,38 +191,6 @@ export function Footer({
                     {nav.solution}
                     <span aria-hidden> →</span>
                   </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h2 className={headingClass}>{strings.channelsHeading}</h2>
-              <ul className="mt-[16px] flex flex-col gap-[6px]">
-                {CONTACT_CHANNELS.map((channel) => {
-                  const external = !channel.href.startsWith("mailto:");
-                  return (
-                    <li key={channel.id}>
-                      <a
-                        href={channel.href}
-                        {...(external
-                          ? { target: "_blank", rel: "noreferrer" }
-                          : {})}
-                        className={linkClass}
-                      >
-                        {rail[channel.id]}
-                      </a>
-                    </li>
-                  );
-                })}
-                <li>
-                  <a
-                    href={HEAD_OFFICE_MAP_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={linkClass}
-                  >
-                    {office.mapLink}
-                  </a>
                 </li>
               </ul>
             </div>
@@ -247,16 +217,9 @@ export function Footer({
         </div>
       </div>
 
-      {/* A hairline of brand light where the panel meets the copyright bar. The
-          two navies are close enough that the seam read as a printing error;
-          this makes it a deliberate edge. */}
-      <div
-        aria-hidden
-        className="h-px w-full bg-gradient-to-r from-transparent via-brand-cta/40 to-transparent"
-      />
 
-      <div className="w-full bg-navy-950">
-        <div className="canvas flex flex-col gap-2 px-6 py-[30px] sm:flex-row sm:items-center sm:justify-between xl:px-[212px]">
+      <div className="w-full bg-shell-950">
+        <div className="canvas flex flex-col gap-2 px-6 py-[22px] sm:flex-row sm:items-center sm:justify-between xl:px-[212px]">
           <Copyright text={strings.copyright} locale={locale} />
           {/*
             The design puts a "Privacy Policy" link here. It has no destination,

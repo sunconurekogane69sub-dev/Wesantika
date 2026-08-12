@@ -229,7 +229,6 @@ export const en = {
     /** Footer link-column headings. */
     navHeading: "Explore",
     servicesHeading: "Services",
-    channelsHeading: "Reach us",
     copyright: "© 2026 Wesantika. All Rights Reserved.",
     privacy: "Privacy Policy",
   },

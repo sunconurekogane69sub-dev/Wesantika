@@ -47,15 +47,18 @@ export function ServiceCard({
       />
 
       <div className="flex items-start gap-[16px]">
-        {/* The icons are distinct per service, so a disc here marks *which*
-            service rather than just repeating a decoration. Tint at rest,
-            brand-btn on hover — the same disc idiom as the Contact channels. */}
-        <span className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-[12px] bg-brand-tint transition-colors duration-200 group-hover:bg-brand-btn">
+        {/* The tile is static. It previously filled brand-btn on hover and the
+            icon scaled with it, and both were wrong: these nineteen icons carry
+            their own colours, so dropping them onto a saturated blue fill made
+            them fight it, and scaling a small multi-colour glyph just makes it
+            blur. The hover now lives entirely in the card — lift, shadow,
+            border, top rule, arrow — and the icon is left alone. */}
+        <span className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-[12px] bg-brand-tint">
           <Icon
             src={icon}
             width={26}
             height={26}
-            className="h-[26px] w-[26px] object-contain transition-transform duration-200 group-hover:scale-110"
+            className="h-[26px] w-[26px] object-contain"
           />
         </span>
         <h3 className="pt-[6px] text-[19px] leading-[28px] font-bold text-black transition-colors duration-200 group-hover:text-brand-ink xl:text-[20px] xl:leading-[28px]">

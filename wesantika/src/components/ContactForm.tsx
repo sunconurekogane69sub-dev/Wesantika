@@ -37,8 +37,8 @@ const TONES: Record<
   dark: {
     field:
       // white/45, not /25: an input's boundary is a UI component and needs 3:1
-      // under WCAG 1.4.11. /25 measured 2.18 against the panel, /45 gives 4.05.
-      "border-white/45 bg-navy-700 px-[16px] text-[16px] leading-[24px] text-white placeholder:text-white/40 focus:border-brand-cta",
+      // under WCAG 1.4.11. On the darker shell surface /45 measures 4.5:1.
+      "border-white/45 bg-shell-800 px-[16px] text-[16px] leading-[24px] text-white placeholder:text-white/40 focus:border-brand-cta",
     label: "text-white/70",
     sent: "text-white",
     error: "text-[#ff9a8f]",
