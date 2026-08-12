@@ -56,6 +56,7 @@ export default async function TechnologiesPage({
           140px gradient still carries the white nav type at 5.1:1. */}
       <PageHero
           image="/images/tech-hero.png"
+          video="/video/technologies-hero.mp4"
           objectPosition="50% 15%"
           title={tech.hero.title}
           body={tech.hero.body}

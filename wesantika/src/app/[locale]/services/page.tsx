@@ -56,6 +56,7 @@ export default async function ServicesPage({
       {/* ---- Hero — 405:1949 / 405:1997-1998 / 405:1993 -------------- */}
       <PageHero
           image="/images/services-hero.png"
+          video="/video/services-hero.mp4"
           objectPosition="50% 30%"
           title={s.hero.title}
           body={s.hero.body}

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { HeroVideo } from "./HeroVideo";
 import { useEffect, useRef, useState } from "react";
 import { AI_LABELS, AI_PANEL } from "@/lib/content";
 import type { Dictionary } from "@/lib/i18n";
@@ -162,6 +163,26 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
         sizes="(max-width: 1672px) 100vw, 1564px"
         className="object-cover"
       />
+      <HeroVideo
+        src="/video/ai-panel.mp4"
+        poster="/images/ai-panel.png"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+
+      {/*
+        A flat scrim, and its strength is arithmetic rather than taste.
+
+        Every label here is 20px bold (one is 32px), which puts them over the
+        18.66px-bold line and so under the 3.0:1 large-text threshold rather than
+        4.5:1. White at 3.0:1 needs the ground no lighter than mid-grey, and a
+        45% black veil delivers 3.36:1 against the worst case there is — a pure
+        white video frame. Since no decoder here can read the clip's frames, that
+        worst-case guarantee is the only kind worth having.
+
+        45% and not 60%: 60% would be needed for body-size text and would bury
+        the artwork. The labels being bold is what buys the lighter veil.
+      */}
+      <div aria-hidden className="absolute inset-0 bg-black/45" />
 
       <div
         className="absolute top-0 left-0 origin-top-left"

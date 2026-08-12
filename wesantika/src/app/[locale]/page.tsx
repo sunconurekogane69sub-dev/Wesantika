@@ -41,6 +41,7 @@ export default async function TopPage({
           bright, so white type wants the upper band. */}
       <PageHero
           image="/images/home-hero.jpg"
+          video="/video/home-hero.mp4"
           objectPosition="50% 0%"
           size="full"
           title={t.hero.title}
