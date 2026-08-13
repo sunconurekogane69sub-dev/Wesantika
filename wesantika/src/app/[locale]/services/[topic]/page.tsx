@@ -16,6 +16,21 @@ export function generateStaticParams() {
   );
 }
 
+/**
+ * The set of topics is fixed and fully enumerated above, so a slug that is not
+ * in it is not "not generated yet" — it does not exist.
+ *
+ * Saying so turns an unknown topic into a routing-layer 404, which is what
+ * `app/global-not-found.tsx` handles, and that page renders server-side and
+ * complete. Left to the default, the request matched this route, called
+ * `notFound()`, and landed on the segment boundary instead — which cannot see
+ * `params`, has to read its locale from React context, and therefore delivers
+ * an empty body followed by a client render.
+ *
+ * Same 404 either way; this one arrives in one response.
+ */
+export const dynamicParams = false;
+
 const resolve = (slug: string): ServiceDetailId | undefined =>
   SERVICE_DETAIL_TOPICS.find((topic) => topic.slug === slug)?.id;
 

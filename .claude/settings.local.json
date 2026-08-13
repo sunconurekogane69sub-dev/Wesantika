@@ -122,7 +122,13 @@
       "Bash(echo \"  --- exit: $? ---\")",
       "Bash(grep -E \"image=|video=|page.tsx-|PageHero$\")",
       "Bash(npx --yes kill-port 3000)",
-      "Bash(powershell -NoProfile -Command 'Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }')"
+      "Bash(powershell -NoProfile -Command 'Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }')",
+      "Bash(python -c \"print\\('py ok'\\)\")",
+      "Bash(python3 -c \"print\\('py3 ok'\\)\")",
+      "Bash(echo \"---exit $?---\")",
+      "Bash(echo \"exit=$?\")",
+      "Bash(awk '{printf \" %-42s %6.1f MB\\\\n\", $9, $5/1048576}')",
+      "Bash(curl -s http://localhost:3000/ja/nope)"
     ]
   }
 }

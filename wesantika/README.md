@@ -677,6 +677,38 @@ Everything below is a deliberate change. Nothing else was altered.
   unclear and which overlaps the sticky rail) and `180:762` (an empty 48×48 frame
   with no contents).
 
+## Rendering — every page is static again
+
+`app/[locale]/not-found.tsx` read the locale from an `x-locale` header, because a
+not-found boundary receives no route params. That boundary is part of every
+route's render tree, so one `headers()` call opted **all 122 pages** out of
+static rendering — the whole site rendered on demand, and nobody had chosen
+that. The locale now arrives from the layout through React context
+(`src/components/LocaleContext.tsx`), which costs nothing at request time.
+
+Only three routes render on demand now, all correctly: the two API endpoints and
+the 404.
+
+## The 404 page was very nearly unreachable
+
+`not-found.tsx` only catches `notFound()` thrown *inside* a segment. A URL
+matching no route never gets that far, and this app has no root `not-found`, so
+`/ja/nope` was served Next's built-in error card: unstyled, no navigation,
+English on every locale. The designed 404 only ever appeared for an unknown
+service topic — the rarest way to get one. The `x-locale` header existed to give
+that page its locale, and it was being set for a page almost nobody could reach.
+
+`app/global-not-found.tsx` (behind `experimental.globalNotFound`) now handles
+unmatched URLs at the routing layer, server-rendered and complete. A catch-all
+route under `[locale]` was tried first and rejected: composing a 404 through this
+app's dynamic root layout leaves the HTML body empty and defers the whole page to
+the client, which is a blank flash on every mistyped URL. `dynamicParams = false`
+on `services/[topic]` sends the unknown-topic case down the same path.
+
+`npm run smoke` now asserts the *body* of four 404 routes in three languages, not
+just the status code. Asserting only the status is what let this pass unnoticed
+for the life of the project.
+
 ## Before launch
 
 Everything below is a placeholder that will ship broken. None of it can be
@@ -688,9 +720,61 @@ filled in from the design file — each needs a real value from Wesantika.
 | ~~Four contact-rail links~~ | done | Real accounts supplied and in place — see below. |
 | ~~`CONTACT_TO_EMAIL`~~ | done | `lh.smartcoding@gmail.com`, and it is the code-level fallback too. |
 | SMTP credentials | `.env` | **The one thing still missing.** Without them the API provisions a disposable Ethereal mailbox — real SMTP, and the send genuinely succeeds, but the mail lands in a throwaway inbox nobody at Wesantika reads. |
-| Turnstile key pair | `.env` | Cloudflare's "always passes" test keys are in use, so the RFP form has no actual spam protection. |
+| Turnstile key pair | `.env` | Cloudflare's "always passes" test keys are in use, so the RFP form's captcha does nothing. Both endpoints are rate limited and the contact form has a honeypot regardless — see below — but a captcha that always passes is not protection. |
+
+### Spam controls on the two mail endpoints
+
+`/api/contact` is in the footer of every page and, until this pass, had nothing
+in front of it at all: no captcha, no limit, no authentication. One loop could
+put an unbounded number of messages into the company inbox, or get the sending
+domain classified as a spam source by its own provider.
+
+It now has three things, none of which changes what a person sees:
+
+- **A rate limit**, 5 an hour per address on contact and 3 on RFP
+  (`src/lib/rate-limit.ts`). Read the caveat at the top of that file before
+  trusting the number: the counters live in process memory, so on a platform
+  running several instances the effective limit is that number times however
+  many are warm. It removes the *unbounded* case and leaves a seam for Redis.
+- **A honeypot** — an off-screen `company_url` field. Anything that fills it in
+  gets a plain 200 and no mail. Bots are not told why.
+- **A stricter email pattern.** The old one excluded whitespace, so it stopped
+  CRLF header injection, but allowed `<`, `>` and `,` — and the value is
+  interpolated into a `Reply-To` address list, where `x>,<evil@host` parses as
+  two addresses.
 | Privacy Policy | `src/components/Footer.tsx` | A legal document about how this company handles data. Held back rather than shipped pointing at `#`; restoring it is one `Link` once the text exists. |
 | "within one business day" | `contact.next.steps.reply` in all 5 dictionaries | A **response-time commitment** written into the Contact page. One business day is the ordinary B2B default, but nobody at Wesantika has confirmed Wesantika can meet it. Confirm or reword. |
+
+## Hero video — `npm run media` / `npm run video`
+
+The six clips shipped as delivery masters: 2560×1440 at 30fps and 12–16 Mbps,
+**87.5MB in total**, every one of them behind a 55–78% black scrim with white
+type over it. A visitor to `/services` was downloading a 30.7MB background
+video. `home-hero.mp4` had always been the counter-example — 1280×720 at
+1.2 Mbps, 3.1MB, and nobody ever remarked on it.
+
+`npm run video` re-encodes anything over the 6MB budget through a bundled
+ffmpeg (`ffmpeg-static`, a devDependency): 1920 wide at most, 25fps where the
+source is above it, CRF 30, no audio, `+faststart`. Originals move aside to
+`<name>.mp4.orig`, which `.gitignore` excludes, and a second run encodes from
+those rather than stacking a lossy pass on a lossy pass.
+
+**87.5MB → 14.9MB, and `npm run media` passes for the first time.**
+
+One clip could not be fixed by encoding. The Technologies hero was falling green
+digits on black — the Matrix shot — which is thousands of small high-contrast
+glyphs moving every frame, the worst case for an inter-frame codec: it would not
+go below 11.6MB at any sensible quality. It was also a film reference standing in
+for the thing the page is about, on a site whose copy works hard to be credible
+rather than cinematic. It was replaced with a real editor on a real laptop at a
+shallow depth of field, from the unused footage in the same folder. Same claim
+without the costume, and the blur that makes it read as a photograph is also what
+makes it **0.7MB**.
+
+`scripts/faststart.mjs` is gone. It was a pure-Node moov relocator written
+because there was no encoder on the machine; ffmpeg does it with a flag.
+`npm run mp4:verify` stays — it is an independent structural check on whatever
+ends up in `public/video`.
 
 ## Still to do on the Services page
 

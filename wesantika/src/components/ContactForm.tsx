@@ -129,6 +129,30 @@ export function ContactForm({
         {field("company", { required: true, autoComplete: "organization" })}
       </div>
 
+      {/*
+        Honeypot. Anything that arrives in here was not typed by a person, and
+        `/api/contact` quietly discards the submission.
+
+        `aria-hidden` and `tabIndex={-1}` keep it away from assistive tech and
+        the tab order, so it is invisible to a screen reader as well as to the
+        eye — a honeypot that only hides visually is a trap for blind users, not
+        for bots. `autoComplete="off"` stops a password manager filling it in
+        and rejecting a genuine message.
+
+        Positioned off-screen rather than `display: none`: hiding it outright is
+        the first thing a bot checks for.
+      */}
+      <div aria-hidden className="absolute left-[-9999px] h-px w-px overflow-hidden">
+        <label htmlFor={id("company_url")}>Company website</label>
+        <input
+          id={id("company_url")}
+          name="company_url"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div>
         <label className={`${LABEL} ${skin.label}`} htmlFor={id("message")}>
           {strings.fields.message}

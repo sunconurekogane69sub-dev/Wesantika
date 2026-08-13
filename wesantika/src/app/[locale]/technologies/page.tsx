@@ -51,12 +51,26 @@ export default async function TechnologiesPage({
       <main id="main-content">
 
       {/* ---- Hero — 477:33 / 423:2389 / 423:2388 / 478:36 ------------
-          White type on the black gradient every hero now shares, over the
-          Technologies clip with the still as its base. Measured 7.4 / 7.3:1. */}
+
+          The clip changed. It was falling green digits on black — the Matrix
+          shot — which is a film reference standing in for the thing the page is
+          actually about, on a site whose copy works hard to be credible rather
+          than cinematic. It was also, not coincidentally, impossible to
+          compress: thousands of small high-contrast glyphs moving every frame
+          is the worst case for an inter-frame codec, and it stayed at 11.6MB
+          where every other hero came in under 6.
+
+          What replaced it is a real editor on a real laptop at a shallow depth
+          of field. It says the same thing without the costume, and the blur
+          that makes it read as a photograph rather than a screenshot is also
+          what makes it 0.7MB.
+
+          `50% 40%` centres the screen in the crop; the old 15% was framed for a
+          full-height effect that no longer exists. */}
       <PageHero
           image="/images/tech-hero.png"
           video="/video/technologies-hero.mp4"
-          objectPosition="50% 15%"
+          objectPosition="50% 40%"
           title={tech.hero.title}
           body={tech.hero.body}
         >

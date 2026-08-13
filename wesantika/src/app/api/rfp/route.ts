@@ -2,9 +2,22 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { env } from "@/lib/env";
 import { getMailer } from "@/lib/mailer";
+import { clientKey, hit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+/**
+ * Three RFPs an hour from one address.
+ *
+ * Turnstile already stops a bot that cannot solve a challenge, but it bounds
+ * how *hard* a request is to make, not how many are made — a solved token in a
+ * loop is still a loop, and this endpoint accepts a 10MB attachment per call.
+ * Lower than the contact limit because sending three genuine RFPs in an hour is
+ * already an unusual thing to do.
+ */
+const LIMIT = 3;
+const WINDOW_MS = 60 * 60 * 1000;
 
 /**
  * Fallbacks are the real mailbox, not a `.example` placeholder.
@@ -31,7 +44,9 @@ const ALLOWED_EXTENSIONS = [
   ".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip", ".txt", ".md",
 ];
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+/** Excludes address-list punctuation as well as whitespace — see the note in
+ *  `api/contact/route.ts` on `Reply-To` injection through `x>,<evil@host`. */
+const EMAIL_RE = /^[^\s@<>,;:"()[\]\\]+@[^\s@<>,;:"()[\]\\]+\.[^\s@<>,;:"()[\]\\]+$/;
 const text = (v: FormDataEntryValue | null) => (typeof v === "string" ? v.trim() : "");
 /** Strip CR/LF and quotes so user input can never forge a mail header. */
 const header = (v: string) => v.replace(/["\r\n]+/g, " ").trim();
@@ -54,6 +69,16 @@ async function verifyTurnstile(token: string, ip: string | null) {
 }
 
 export async function POST(request: Request) {
+  // Before `formData()`, so a flood is refused without first buffering a 10MB
+  // upload per request.
+  const limit = hit(`rfp:${clientKey(request)}`, LIMIT, WINDOW_MS);
+  if (!limit.ok) {
+    return NextResponse.json(
+      { error: "rate_limited" },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfter) } },
+    );
+  }
+
   let form: FormData;
   try {
     form = await request.formData();

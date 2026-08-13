@@ -57,8 +57,14 @@
   --color-shell-800: #151d2b; /* input wells */
   --color-field: #afc7dc; /* input placeholder */
 
-  /* Card + button hairline: #000000 at 30% */
-  --color-hairline: rgb(0 0 0 / 0.3);
+  /* Card + button hairline.
+     Authored as #000000 at 30%, which composites to #b2b2b2 on white and
+     measures **2.10:1** — below the 3:1 that WCAG 1.4.11 asks of the visual
+     boundary of a control. That is not a technicality here: several buttons on
+     this site are white with a hairline and nothing else, so the border is the
+     entire affordance, and at 2.1:1 it is close to invisible on a laptop screen
+     in daylight. 45% composites to #8c8c8c and measures 3.35:1. */
+  --color-hairline: rgb(0 0 0 / 0.45);
 
   /* Display face for headings, text face for everything else.
      Latin and Vietnamese get Manrope; Japanese, Chinese and Thai fall straight
@@ -81,6 +87,19 @@
      Tracking moves the other way — negative at display sizes, where default
      spacing reads loose, and none at text sizes. Applied to Latin only;
      see the :lang rules below.
+
+     **These ten tokens are documentation, not plumbing.** Nothing in `src/`
+     uses `text-body` or `text-h2`; every one of the 193 type declarations on
+     this site is an arbitrary `text-[16px]` with its leading spelled out beside
+     it. That is worth knowing before trusting the names: changing a value here
+     changes nothing on the page.
+
+     They are kept because they are the specification `npm run typography`
+     checks the arbitrary values against, and because the ratios below are the
+     reasoning that produced them. Converting the 193 sites to the scale is a
+     mechanical change with real regression risk and no visible benefit, so it
+     has not been done — but a reader should not have to discover that by
+     editing a token and finding nothing moves.
      --------------------------------------------------------------------- */
   --text-caption: 13px;
   --text-caption--line-height: 20px; /* 1.54 */
@@ -121,8 +140,21 @@
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
+  /*
+    Smooth scrolling, but only for readers who have not asked otherwise.
+
+    The `prefers-reduced-motion` block at the foot of this file zeroes
+    animations and transitions — it does *not* touch `scroll-behavior`, because
+    scrolling is neither. So the one large, full-viewport movement on the site
+    was the only motion still running for people who had explicitly turned
+    motion off, and it fires on the skip link: the first control a keyboard user
+    reaches. Declaring it inside the query rather than overriding it later means
+    it is never set in the first place.
+  */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
@@ -198,5 +230,18 @@
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+    /*
+      Duration alone does not stop a looping animation — it makes it loop
+      *faster*, which for anyone sensitive to motion is worse than the original,
+      not better. `iteration-count: 1` is what actually ends it. `delay` is
+      zeroed for the same reason: a 0.01ms animation still queued behind a 300ms
+      delay is a flash that arrives late.
+    */
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-delay: 0ms !important;
+    /* Belt and braces for the `no-preference` rule above: any nested scroll
+       container that sets its own smooth behaviour is covered here. */
+    scroll-behavior: auto !important;
   }
 }

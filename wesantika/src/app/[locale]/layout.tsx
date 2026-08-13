@@ -8,6 +8,7 @@ import {
 } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
+import { LocaleProvider } from "@/components/LocaleContext";
 import { OrganizationSchema } from "@/components/OrganizationSchema";
 import { SkipLink } from "@/components/SkipLink";
 import { getDictionary } from "@/lib/i18n";
@@ -121,7 +122,12 @@ export default async function LocaleLayout({
         {/* First focusable element in the document — it only works from here. */}
         <SkipLink label={t.a11y.skipToContent} />
         <OrganizationSchema locale={locale} />
-        {children}
+        {/* Publishes the locale to `not-found.tsx`, which gets no route params
+            of its own. See the note in LocaleContext.tsx — this is what keeps
+            every page statically rendered. */}
+        <LocaleProvider value={{ locale, nav: t.nav, notFound: t.notFound }}>
+          {children}
+        </LocaleProvider>
       </body>
     </html>
   );

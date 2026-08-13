@@ -182,10 +182,12 @@ const REGIONS = [
   { page: "Top", what: "body (tall viewport)", ground: "#ffffff", section: [1672, 1000],
     box: [212, 580, 720, 130], ink: "white", scrim: "heroGradient", size: 22 },
 
-  { page: "About", what: "nav strip", image: "images/about-hero.png", section: [1672, 560],
-    objectY: 0, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
-  { page: "About", what: "lead", image: "images/about-hero.png", section: [1672, 560],
-    objectY: 0, box: [212, 180, 620, 290], ink: "white", scrim: "heroGradient", size: 48 },
+  // Video hero — see the note on Top. Five of the six heroes are now clips;
+  // Contact below is the only one still drawing its still.
+  { page: "About", what: "nav strip", ground: "#ffffff", section: [1672, 560],
+    box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
+  { page: "About", what: "lead", ground: "#ffffff", section: [1672, 560],
+    box: [212, 180, 620, 290], ink: "white", scrim: "heroGradient", size: 48 },
 
   // --- About Us vision band (210:978) -----------------------------------
   { page: "About", what: "vision label", image: "images/vision-bg.png", section: [1672, 941],

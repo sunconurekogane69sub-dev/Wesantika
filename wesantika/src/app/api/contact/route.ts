@@ -2,9 +2,23 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { env } from "@/lib/env";
 import { getMailer } from "@/lib/mailer";
+import { clientKey, hit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+/**
+ * Five messages an hour from one address.
+ *
+ * This form is in the footer of every page, so it is the most reachable thing
+ * on the site, and it had no limit of any kind. Five is well above what a real
+ * enquiry needs — a person who sends a second message because they forgot
+ * something, and a third because they are unsure the first two arrived, is
+ * still comfortably inside it — and far below what makes an endpoint worth
+ * abusing. See the caveats at the top of `lib/rate-limit.ts`.
+ */
+const LIMIT = 5;
+const WINDOW_MS = 60 * 60 * 1000;
 
 /**
  * Fallbacks are the real mailbox, not a `.example` placeholder.
@@ -17,7 +31,18 @@ export const dynamic = "force-dynamic";
 const TO = env("CONTACT_TO_EMAIL") ?? "lh.smartcoding@gmail.com";
 const FROM = env("CONTACT_FROM_EMAIL") ?? "lh.smartcoding@gmail.com";
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+/**
+ * Deliberately stricter than "has an @ in it".
+ *
+ * The previous pattern was `/^[^\s@]+@[^\s@]+\.[^\s@]+$/`, which excludes
+ * whitespace — so it does stop the classic CRLF header injection — but permits
+ * `<`, `>`, `,` and `;`. This value is interpolated into a `Reply-To` address
+ * list, and `x>,<attacker@example.com` satisfies that pattern while parsing as
+ * *two* addresses once it lands in the header. Excluding the address-list
+ * punctuation closes it at the point of validation rather than relying on the
+ * mail library to re-escape.
+ */
+const EMAIL_RE = /^[^\s@<>,;:"()[\]\\]+@[^\s@<>,;:"()[\]\\]+\.[^\s@<>,;:"()[\]\\]+$/;
 
 const text = (value: unknown) => (typeof value === "string" ? value.trim() : "");
 
@@ -33,11 +58,35 @@ const escapeHtml = (value: string) =>
     .replace(/'/g, "&#39;");
 
 export async function POST(request: Request) {
+  const limit = hit(`contact:${clientKey(request)}`, LIMIT, WINDOW_MS);
+  if (!limit.ok) {
+    return NextResponse.json(
+      { error: "Too many messages from this address. Please try again later." },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfter) } },
+    );
+  }
+
   let body: Record<string, unknown>;
   try {
     body = (await request.json()) as Record<string, unknown>;
   } catch {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+  }
+
+  /*
+    Honeypot.
+
+    `company_url` is rendered off-screen, unlabelled and `tabIndex={-1}` — a
+    person filling in this form has no way to reach it, so anything in it came
+    from something that parsed the DOM and filled every input it found. That is
+    most of the automated traffic a public contact form gets, and it costs one
+    hidden field rather than a captcha on every page of the site.
+
+    The response is a plain 200 with no mail sent. Telling a bot *why* it was
+    rejected is how it learns to skip the field next time.
+  */
+  if (text(body.company_url)) {
+    return NextResponse.json({ ok: true, previewUrl: null });
   }
 
   const name = text(body.name);

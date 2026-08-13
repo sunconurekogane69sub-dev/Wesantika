@@ -95,13 +95,49 @@ for (const route of ROUTES) {
   for (const [, label] of present) console.log(`         unexpected: ${label}`);
 }
 
-// The 404 has to actually 404, not render a page with a 200.
-const notFound = await fetch(`${BASE}/en/no-such-page`);
-if (notFound.status === 404) {
-  console.log(`  ok   ${"/en/no-such-page".padEnd(30)} 404`);
-} else {
-  console.log(`  FAIL ${"/en/no-such-page".padEnd(30)} HTTP ${notFound.status}, expected 404`);
-  failures++;
+/*
+  The 404s.
+
+  This block used to assert the status code and nothing else, and it passed for
+  the entire life of the project while `/en/no-such-page` served Next's built-in
+  error card — unstyled, no navigation, English on every locale. The status was
+  right; the page was not the site's. Checking a status code tells you the
+  server disliked the URL, not what the reader was shown.
+
+  So each case now asserts the *body* as well, in the locale it was asked in:
+
+    unmatched URL       -> app/global-not-found.tsx
+    unknown topic       -> the same, via `dynamicParams = false`
+
+  The Japanese and Thai strings are the check that matters. They come from the
+  dictionaries, so they can only be present if the right page rendered *and* it
+  resolved the locale from the request rather than falling back to English —
+  the two things that were separately broken here.
+*/
+const NOT_FOUND = [
+  { path: "/en/no-such-page", needle: "This page does not exist" },
+  { path: "/ja/no-such-page", needle: "このページは存在しません" },
+  { path: "/th/no-such-page", needle: "ไม่พบหน้านี้" },
+  // Not a bad URL but a bad *topic* — a different route into the same page.
+  { path: "/en/services/no-such-topic", needle: "This page does not exist" },
+];
+
+for (const { path, needle } of NOT_FOUND) {
+  const res = await fetch(`${BASE}${path}`);
+  const html = await res.text();
+  const problems = [];
+  if (res.status !== 404) problems.push(`HTTP ${res.status}, expected 404`);
+  // Server-rendered, not deferred to the client: the marker has to be in the
+  // HTML itself, which is what separates this page from an empty shell.
+  if (!html.includes(needle)) problems.push("localised 404 copy missing from the HTML");
+  if (!html.includes('href="#main-content"')) problems.push("skip link missing");
+
+  if (problems.length === 0) {
+    console.log(`  ok   ${path.padEnd(30)} 404, branded, localised`);
+  } else {
+    console.log(`  FAIL ${path.padEnd(30)} ${problems.join("; ")}`);
+    failures++;
+  }
 }
 
 console.log("");

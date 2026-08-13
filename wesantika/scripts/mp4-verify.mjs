@@ -3,7 +3,14 @@
  *
  *     node scripts/mp4-verify.mjs
  *
- * This exists because `faststart.mjs` finds `stco` boxes by scanning the moov
+ * This was written for `faststart.mjs`, a pure-Node moov relocator used when no
+ * encoder was available on this machine. That script is gone — `npm run video`
+ * now passes `-movflags +faststart` to a real ffmpeg — but the check is worth
+ * keeping: it is an independent verification that the files in `public/video`
+ * are structurally sound, whoever produced them.
+ *
+ * The original hazard it was built for: that script found `stco` boxes by
+ * scanning the moov
  * buffer byte by byte, and four bytes spelling "stco" can occur inside sample
  * tables, track names or free space. A false match would rewrite something that
  * is not an offset table and silently corrupt the file — it would still parse,

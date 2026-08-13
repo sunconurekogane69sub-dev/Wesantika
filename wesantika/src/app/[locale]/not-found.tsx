@@ -1,74 +1,65 @@
-import Link from "next/link";
-import { headers } from "next/headers";
-import { Footer } from "@/components/Footer";
-import { Nav } from "@/components/Nav";
-import { NAV_ITEMS } from "@/lib/content";
-import { getDictionary } from "@/lib/i18n";
-import { DEFAULT_LOCALE, isLocale, type Locale } from "@/lib/i18n/locales";
+"use client";
+
+import { DEFAULT_LOCALE, useLocaleStrings } from "@/components/LocaleContext";
+import { NotFoundView } from "@/components/NotFoundView";
+import type { Dictionary } from "@/lib/i18n/types";
 
 /**
- * Next's default 404 is an unstyled black-on-white error card with no nav — a
- * dead end on a site whose pages all live behind a locale segment, where a typo
- * in the segment is the most likely way to arrive here.
+ * `notFound()` thrown from inside the `[locale]` segment.
  *
- * `not-found.tsx` cannot read route params, so the locale comes from the
- * `x-locale` header that `src/proxy.ts` sets on every locale-prefixed request.
+ * In practice that is one case: an unknown service topic, `/en/services/nope`.
+ * Every *other* 404 — a mistyped path, a stale link — matches no route at all
+ * and is handled a layer above by `app/global-not-found.tsx`, which can render
+ * server-side because it sits outside this segment. See the note there.
+ *
+ * ---------------------------------------------------------------------------
+ * Why this one is a client component
+ *
+ * A not-found boundary receives no route params, so the locale has to come from
+ * somewhere. It used to come from `headers()` — and because the boundary is
+ * part of every route's render tree, that single call opted **all 122 pages**
+ * out of static rendering. Nobody chose that; it was a side effect of one line,
+ * and it cost a CDN-cacheable marketing site its entire cache.
+ *
+ * The locale now arrives through context, published by the layout, which does
+ * get `params.locale`. No request-time API, so the pages stay static.
+ * ---------------------------------------------------------------------------
  */
-export default async function NotFound() {
-  const header = (await headers()).get("x-locale");
-  const locale: Locale = header && isLocale(header) ? header : DEFAULT_LOCALE;
-  const t = getDictionary(locale);
 
-  const destinations = NAV_ITEMS.filter(
-    (item): item is typeof item & { href: string } => Boolean(item.href),
-  );
+/** Copied verbatim from `notFound` and `nav` in `dictionaries/en.ts`.
+ *
+ *  A literal rather than `getDictionary(DEFAULT_LOCALE)`: that helper statically
+ *  imports all five catalogues, so calling it from a client component would ship
+ *  every translation on the site to serve a fallback. Only reached if this
+ *  renders above the provider, which means there was no valid locale segment to
+ *  be in the reader's language anyway. */
+const FLOOR: Pick<Dictionary, "notFound" | "nav"> = {
+  notFound: {
+    metaTitle: "Page not found",
+    title: "This page does not exist",
+    body: "The link may be out of date, or the page may have moved. These are the places worth trying.",
+    home: "Back to home",
+  },
+  nav: {
+    solution: "Solution",
+    about: "About Us",
+    work: "Our Work",
+    technologies: "Technologies",
+    contact: "Contact Us",
+    openMenu: "Toggle navigation",
+    languageLabel: "Change language",
+    comingSoon: "Coming soon",
+  },
+};
+
+export default function NotFound() {
+  const ctx = useLocaleStrings();
 
   return (
-    <>
-      <Nav locale={locale} nav={t.nav} alwaysSolid />
-
-      <main id="main-content" className="canvas px-6 pt-[180px] pb-[120px] xl:px-[212px]">
-        <p className="text-[16px] leading-[26px] font-bold tracking-wide text-brand-ink uppercase">
-          404
-        </p>
-        <h1 className="mt-[16px] max-w-[760px] text-[36px] leading-[1.15] font-bold text-black sm:text-[48px] xl:text-[64px] xl:leading-[70px]">
-          {t.notFound.title}
-        </h1>
-        <p className="mt-[24px] max-w-[640px] text-[18px] leading-[28px] text-black/75 xl:text-[20px]">
-          {t.notFound.body}
-        </p>
-
-        <ul className="mt-[40px] flex flex-wrap gap-[12px]">
-          <li>
-            <Link
-              href={`/${locale}`}
-              className="inline-flex h-[46px] items-center rounded-btn bg-brand-btn px-[24px] text-[16px] leading-[26px] font-bold text-white transition-opacity hover:opacity-90"
-            >
-              {t.notFound.home}
-            </Link>
-          </li>
-          {/* No filter for the home link any more: NAV_ITEMS no longer contains
-              one, and the "back to home" button above already covers it. */}
-          {destinations.map((item) => (
-              <li key={item.id}>
-                <Link
-                  href={`/${locale}${item.href}`}
-                  className="inline-flex h-[46px] items-center rounded-btn border border-hairline bg-white px-[24px] text-[16px] leading-[26px] font-bold text-black transition-colors hover:border-brand hover:text-brand"
-                >
-                  {t.nav[item.id]}
-                </Link>
-              </li>
-            ))}
-        </ul>
-      </main>
-
-      <Footer
-        strings={t.footer}
-        office={t.contact.office}
-        nav={t.nav}
-        serviceNames={t.servicesPage.offer.cards}
-        locale={locale}
-      />
-    </>
+    <NotFoundView
+      locale={ctx?.locale ?? DEFAULT_LOCALE}
+      nav={ctx?.nav ?? FLOOR.nav}
+      copy={ctx?.notFound ?? FLOOR.notFound}
+    />
   );
 }

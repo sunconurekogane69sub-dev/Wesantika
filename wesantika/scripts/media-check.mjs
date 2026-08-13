@@ -27,6 +27,9 @@
  *   ffmpeg -i in.mp4 -an -c:v libx264 -crf 30 -preset slow \
  *          -vf "scale=1920:-2,fps=25" -movflags +faststart out.mp4
  *
+ * You do not have to run that by hand: `npm run video` does exactly this, from
+ * a bundled ffmpeg, for every clip that is over budget.
+ *
  * `-an` matters: these are muted backgrounds, so every byte of audio is waste.
  */
 import { readFileSync, readdirSync, existsSync } from "node:fs";
