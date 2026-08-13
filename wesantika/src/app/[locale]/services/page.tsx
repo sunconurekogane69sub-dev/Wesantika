@@ -98,11 +98,25 @@ export default async function ServicesPage({
           {s.accelerate.heading}
         </h2>
 
-        {/* The authored gutter between the two cards was 190px — a full column
-            on a laptop, and a hole once the section moved onto the site gutter.
-            40px matches the offer grid below, so the two grids read as one
-            system rather than two. */}
-        <div className="mt-[44px] grid gap-[40px] md:grid-cols-2 xl:mt-[56px]">
+        {/* `max-w-[880px]` is not a taste call — it is the width the artwork
+            was drawn for.
+
+            `svc-ai.jpg` and `svc-legacy.jpg` are 364x400 portrait crops whose
+            subjects run off their own edges: the robot hand's wrist leaves the
+            frame at the right, the phone leaves it at the bottom left. That
+            works in the 420px card the design specifies, where the picture
+            fills the lower half of the card edge to edge.
+
+            Letting these two cards take the full 212px-gutter width made them
+            ~600px each, and `object-contain` then fits the portrait art by
+            height and centres it — so the subject floated in the middle with
+            dead space either side and a ~90px empty band under the DETAIL link.
+            880px puts the cards back at ~420 and the art back in its frame.
+
+            The authored gutter between them was 190px, a full column on a
+            laptop. 40px matches the offer grid below, so the two read as one
+            system. */}
+        <div className="mt-[44px] grid max-w-[880px] gap-[40px] md:grid-cols-2 xl:mt-[56px]">
           {/* These two sit directly above the seventeen offer cards, so they
               take the same resting state: a 1px hairline rather than 3px of
               saturated brand, going brand on hover. Leaving them at 3px while
@@ -194,7 +208,7 @@ export default async function ServicesPage({
         short labels, not three paragraphs, and stacking them made the section
         far taller than it needed to be.
       */}
-      <section className="relative mt-[100px] xl:mt-[160px]">
+      <section className="relative mt-[100px] overflow-hidden xl:mt-[160px]">
         <Image
           src="/images/svc-global.png"
           alt=""
@@ -202,6 +216,30 @@ export default async function ServicesPage({
           sizes="100vw"
           quality={90}
           className="object-cover object-center"
+        />
+        {/*
+          A white scrim over the left two-thirds — the mirror of the black one
+          every hero uses, for the same reason and by the same arithmetic.
+
+          Moving this band into normal flow put the copy where the artwork is
+          busiest: the second line of the intro ran straight across a
+          photographed face, and the middle "It requires" card sat over a
+          woman's head showing through its own 80% white fill. Black body copy
+          on an unconstrained photograph has no contrast guarantee at all — the
+          ground is whatever the picture happens to be doing at that pixel.
+
+          0.92 at the left edge holds black at 17.8:1 against the darkest thing
+          in this image, easing to nothing by 78% so the globe and the laptop on
+          the right survive intact. Measured by `npm run ink`, which now models
+          this ramp rather than the bare photograph.
+        */}
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, rgb(255 255 255 / 0.92) 0%, rgb(255 255 255 / 0.86) 42%, rgb(255 255 255 / 0) 78%)",
+          }}
         />
         <div className="canvas relative px-6 py-[80px] xl:px-[212px] xl:py-[112px]">
           <div className="max-w-[760px]">

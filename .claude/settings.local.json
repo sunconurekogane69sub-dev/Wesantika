@@ -128,7 +128,8 @@
       "Bash(echo \"---exit $?---\")",
       "Bash(echo \"exit=$?\")",
       "Bash(awk '{printf \" %-42s %6.1f MB\\\\n\", $9, $5/1048576}')",
-      "Bash(curl -s http://localhost:3000/ja/nope)"
+      "Bash(curl -s http://localhost:3000/ja/nope)",
+      "Bash(MSYS_NO_PATHCONV=1 node measure.mjs \"/en/about\")"
     ]
   }
 }

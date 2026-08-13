@@ -302,6 +302,25 @@ export const en = {
         "But because we know how to transform technology into lasting business success.",
       ],
     },
+    /**
+     * The five values were previously five English words baked into
+     * `core-values.png` — invisible to a screen reader (the image is `alt=""`),
+     * untranslatable in four locales, and set in a palette belonging to no part
+     * of this brand. They are text now. The wording is transcribed from that
+     * artwork, not written here: these are Wesantika's own stated values and
+     * inventing a sixth, or elaborating on the five, is not this file's job.
+     */
+    values: {
+      label: "Core values",
+      heading: "What we hold ourselves to",
+      items: {
+        customer: "Customer Focus",
+        result: "Result Orientation",
+        collaboration: "Collaboration",
+        empowerment: "Empowerment",
+        integrity: "Integrity",
+      },
+    },
   },
 
   /** Services page — Figma 405:2302 */
