@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { Icon } from "@/components/Icon";
 import { Nav } from "@/components/Nav";
 import { PageHero } from "@/components/PageHero";
+import { HeroCta } from "@/components/HeroCta";
 import { RfpDialog } from "@/components/RfpDialog";
 import { ServiceOfferCard } from "@/components/ServiceOfferCard";
 import { StickyContactRail } from "@/components/StickyContactRail";
@@ -62,12 +63,12 @@ export default async function ServicesPage({
           title={s.hero.title}
           body={s.hero.body}
         >
-          <Link
+          <HeroCta
             href={`/${locale}/contact`}
-            className="mt-[28px] inline-flex h-[48px] w-fit items-center justify-center rounded-btn bg-brand-btn px-[28px] text-[16px] leading-[24px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[32px]"
+            className="mt-[28px] xl:mt-[32px]"
           >
             {s.hero.cta}
-          </Link>
+          </HeroCta>
         </PageHero>
 
       {/* The rest of the hero paragraph. It was a 334-character sub-head sat on

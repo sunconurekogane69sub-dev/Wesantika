@@ -6,6 +6,7 @@ import { CheckMark } from "@/components/CheckMark";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { PageHero } from "@/components/PageHero";
+import { HeroCta } from "@/components/HeroCta";
 import { RfpDialog } from "@/components/RfpDialog";
 import { StickyContactRail } from "@/components/StickyContactRail";
 import { getDictionary } from "@/lib/i18n";
@@ -74,12 +75,12 @@ export default async function TechnologiesPage({
           title={tech.hero.title}
           body={tech.hero.body}
         >
-          <Link
+          <HeroCta
             href={`/${locale}/contact`}
-            className="mt-[28px] inline-flex h-[48px] w-fit items-center justify-center rounded-btn bg-brand-btn px-[28px] text-[16px] leading-[24px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 xl:mt-[32px]"
+            className="mt-[28px] xl:mt-[32px]"
           >
             {tech.hero.cta}
-          </Link>
+          </HeroCta>
         </PageHero>
 
       {/* The rest of the hero paragraph. At 466 characters (480 in Vietnamese)
