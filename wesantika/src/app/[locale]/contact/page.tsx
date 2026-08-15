@@ -72,13 +72,48 @@ export default async function ContactPage({
             y80 to the bottom edge of the file — 91% of its height — so a fixed
             height cropped 329 source rows off her whatever the object-position
             was, and `50% 30%` in particular cut the top of her head. The hero
-            now takes the image's own ratio and shows the composition whole. 65%
-            keeps her in frame on narrow viewports, where the crop turns
-            horizontal and she sits right of centre. */}
+            now takes the image's own ratio and shows the composition whole.
+
+            Where she is, measured off the pixels rather than judged by eye. She
+            is the only dark mass in a frame that is pale everywhere else, so a
+            luminance threshold isolates her: hair and navy suit run **x 865 to
+            1471** of 1731, with a trough at 1211-1254 where her white shirt
+            shows between the lapels. The dark past x1514 is the chair and the
+            window mullions, not her. Add the outstretched hand, which is skin
+            against sky and so invisible to that threshold, and the subject is
+            **x 830-1471, centred on x 1150 — 66.5% of the width**.
+
+            That is not the object-position, though, and the difference is the
+            whole point. `object-position: X%` aligns X% of the image with X% of
+            the box, so the visible window's centre lands at
+            (X * overflow + boxWidth / 2) / scaledWidth. Solving that for a
+            window centred on x1150 gives a number that climbs as the viewport
+            widens, because the overflow being distributed shrinks:
+
+              320px   77%     visible source 824-1485, she sits at 50.3%
+              375px   80%                    765-1540              49.9%
+              414px   84%                    736-1591              48.4%
+              640px  100%                    612-1731              48.1%   (h 520)
+              990px+  n/a     box matches the ratio, nothing is cropped
+
+            The old single 65% put her at 58% of the frame and cut 74 source
+            pixels off her right shoulder. Below 990px she is now within 3% of
+            centre at every phone width and never clipped; from 990px up the
+            hero is the image's own ratio, so there is no crop to position and
+            the value stops mattering. */}
         <PageHero
           image="/images/contact-hero.png"
           size="figure"
           objectPosition="65% 20%"
+          objectPositionClass={[
+            "[object-position:77%_20%]",
+            "min-[360px]:[object-position:80%_20%]",
+            "min-[400px]:[object-position:84%_20%]",
+            "sm:[object-position:100%_20%]",
+            // Past here nothing is cropped horizontally; back to the documented
+            // value so the prop and the class agree about the desktop hero.
+            "lg:[object-position:65%_20%]",
+          ].join(" ")}
           title={c.heroTitle}
           body={c.heroBody}
         >

@@ -133,7 +133,8 @@
       "Bash(awk 'NR>1{printf \"  %-34s %10.1f MB\\\\n\",$9,$5/1048576}')",
       "Bash(cp public/images/contact-hero.png __TRACKED_VAR__/contact-hero.png.prev)",
       "Bash(cp \"/d/Users/ralph/Documents/wesantica video/contact us.png\" public/images/contact-hero.png)",
-      "Bash(grep -iA3 contact)"
+      "Bash(grep -iA3 contact)",
+      "Bash(MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL='*' node scripts/overflow-check.mjs /en/contact)"
     ]
   }
 }

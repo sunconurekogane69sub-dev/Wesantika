@@ -103,6 +103,11 @@ const SIZE = {
    * mainstream desktop, 1920 and 2048 included — and past that it trims from
    * the bottom edge: 78 source rows at 2560, 244 at 3440, against a subject who
    * starts at y80. Her head and face are never in the cropped band at any width.
+   *
+   * At 3440 that bottom trim does reach the hand she is holding out, and there
+   * is no cap that avoids it: she occupies 91% of the image height, so keeping
+   * her whole on an ultra-wide would mean a 1647px hero — still more than one
+   * screen. Losing the hand on a 21:9 monitor is the better of the two.
    */
   figure: {
     section: "aspect-[1731/909] min-h-[440px] sm:min-h-[520px] max-h-[1200px]",
@@ -117,6 +122,7 @@ export function PageHero({
   image,
   video,
   objectPosition,
+  objectPositionClass,
   size = "page",
   title,
   body,
@@ -129,6 +135,20 @@ export function PageHero({
   video?: string;
   /** CSS object-position. Chosen per image by measurement, not by eye. */
   objectPosition: string;
+  /**
+   * Breakpoint-varying object-position, for a hero whose crop changes shape.
+   *
+   * `objectPosition` is one value applied as an inline style, which is right
+   * for a hero of fixed height: the crop is identical at every width, so one
+   * number describes it. The `figure` hero is not that — its box is much taller
+   * than the image's ratio on a phone and exactly the ratio on a desktop, so it
+   * crops horizontally at one end of the range and not at all at the other, and
+   * the value that frames the subject moves with the viewport.
+   *
+   * When given, these classes replace the inline style outright rather than
+   * layering over it — an inline style beats a class, so the two cannot coexist.
+   */
+  objectPositionClass?: string;
   size?: HeroSize;
   title: string;
   body?: string;
@@ -140,7 +160,25 @@ export function PageHero({
   const s = SIZE[size];
 
   return (
-    <section className={`relative ${s.section}`}>
+    /*
+      `w-full` is not belt-and-braces — it is what stops the `figure` hero
+      scrolling the page sideways on a phone.
+
+      An aspect-ratio box resolves one axis from the other, and a `min-height`
+      that raises the height sends the ratio back through the *width*. So at a
+      375px viewport this section laid out as: width auto -> 375, height from
+      the ratio -> 197, min-height clamps the height up to 440, and the width
+      was then re-derived from that height as 440 x 1731/909 = **838px**. An
+      838px section inside a 375px page, and 463px of sideways scroll on every
+      phone — on the one page whose hero uses a ratio rather than a height.
+
+      Measured rather than reasoned about: `scripts/overflow-check.mjs` loads
+      the page in Chrome and reports the offending element. `min-width: 0` does
+      not help, which is how you can tell this is the ratio talking and not a
+      flex minimum. Making the width definite is the fix — the ratio can then
+      only flow one way, into the height, which is what it was asked for.
+    */
+    <section className={`relative w-full ${s.section}`}>
       {/*
         Video only, on request — the stills no longer render behind it.
 
@@ -170,8 +208,8 @@ export function PageHero({
           priority
           sizes="100vw"
           quality={90}
-          className="object-cover"
-          style={{ objectPosition }}
+          className={`object-cover ${objectPositionClass ?? ""}`}
+          style={objectPositionClass ? undefined : { objectPosition }}
         />
       )}
 

@@ -14,7 +14,8 @@
     "typography": "node scripts/type-audit.mjs",
     "media": "node scripts/media-check.mjs",
     "mp4:verify": "node scripts/mp4-verify.mjs",
-    "video": "node scripts/encode-video.mjs"
+    "video": "node scripts/encode-video.mjs",
+    "overflow": "node scripts/overflow-check.mjs"
   },
   "dependencies": {
     "next": "^16.3.0",
