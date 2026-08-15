@@ -161,6 +161,7 @@ export const en = {
     heroTitle: "Let's talk about what you're building",
     heroBody:
       "Whether you have a signed-off specification or a problem you cannot yet name, the first conversation is the same: what needs to be true for this to work?",
+    heroCta: "Send a message",
     paths: {
       heading: "Two ways in",
       message: {
@@ -235,6 +236,7 @@ export const en = {
   about: {
     heroLead:
       "We help organizations transform ideas into scalable digital solutions through AI, cloud technologies, and expert software engineering. We believe lasting success is built through innovation, trusted partnerships, and engineering excellence.",
+    heroCta: "See our work",
     title: "About Us",
     blocks: {
       tomorrow: {
@@ -1197,6 +1199,7 @@ export const en = {
     heroTitle: "Our Work",
     heroBody:
       "Projects delivered with our partner companies across AI, blockchain, cloud, ERP and mobile — from first prototype through to production.",
+    heroCta: "Start a project",
     searchPlaceholder: "Search keywords...",
     searchLabel: "Search case studies",
     all: "All",

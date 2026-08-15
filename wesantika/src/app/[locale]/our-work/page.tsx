@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { CaseStudyBrowser } from "@/components/CaseStudyBrowser";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
+import { HeroCta } from "@/components/HeroCta";
 import { PageHero } from "@/components/PageHero";
 import { StickyContactRail } from "@/components/StickyContactRail";
 import { getDictionary } from "@/lib/i18n";
@@ -63,7 +64,14 @@ export default async function OurWorkPage({
         objectPosition="50% 50%"
         title={t.work.heroTitle}
         body={t.work.heroBody}
-      />
+      >
+        <HeroCta
+          href={`/${locale}/contact`}
+          className="mt-[28px] xl:mt-[32px]"
+        >
+          {t.work.heroCta}
+        </HeroCta>
+      </PageHero>
 
       <CaseStudyBrowser
         copy={{

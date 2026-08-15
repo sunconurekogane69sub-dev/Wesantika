@@ -163,6 +163,7 @@ export const vi: PartialDictionary = {
     heroTitle: "Hãy trao đổi về những gì bạn đang xây dựng",
     heroBody:
       "Dù bạn đã có bản đặc tả được phê duyệt hay mới chỉ có một vấn đề chưa gọi được tên, cuộc trao đổi đầu tiên vẫn giống nhau: điều gì cần đúng để việc này chạy được?",
+    heroCta: "Gửi tin nhắn",
     paths: {
       heading: "Hai cách bắt đầu",
       message: {
@@ -240,6 +241,7 @@ export const vi: PartialDictionary = {
   about: {
     heroLead:
       "Chúng tôi giúp các tổ chức biến ý tưởng thành giải pháp số có khả năng mở rộng, thông qua AI, công nghệ đám mây và kỹ thuật phần mềm chuyên sâu. Chúng tôi tin rằng thành công bền vững được xây dựng từ sự đổi mới, quan hệ đối tác đáng tin cậy và sự xuất sắc trong kỹ thuật.",
+    heroCta: "Xem dự án của chúng tôi",
     title: "Về chúng tôi",
     // about.blocks — intentionally untranslated, see the note above.
     vision: {
@@ -415,6 +417,7 @@ export const vi: PartialDictionary = {
     heroTitle: "Dự án",
     heroBody:
       "Những dự án chúng tôi triển khai cùng các công ty đối tác trong lĩnh vực AI, blockchain, đám mây, ERP và di động — từ nguyên mẫu đầu tiên đến khi vận hành thực tế.",
+    heroCta: "Bắt đầu dự án",
     searchPlaceholder: "Tìm theo từ khoá...",
     searchLabel: "Tìm kiếm dự án",
     all: "Tất cả",

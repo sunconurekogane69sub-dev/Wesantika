@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
+import { HeroCta } from "@/components/HeroCta";
 import { PageHero } from "@/components/PageHero";
 import { StickyContactRail } from "@/components/StickyContactRail";
 import { ABOUT_BLOCK_IDS } from "@/lib/content";
@@ -66,7 +67,18 @@ export default async function AboutPage({
         objectPosition="50% 50%"
         title={t.about.title}
         body={t.about.heroLead}
-      />
+      >
+        {/* About tells the story; Our Work is the evidence for it. Pointing
+            this at the case studies rather than at Contact keeps the three new
+            hero CTAs from all saying the same thing, and matches the order a
+            reader actually wants them in. */}
+        <HeroCta
+          href={`/${locale}/our-work`}
+          className="mt-[28px] xl:mt-[32px]"
+        >
+          {t.about.heroCta}
+        </HeroCta>
+      </PageHero>
 
       {/*
         ---- Narrative blocks — 210:979-994 ---------------------------

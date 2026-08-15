@@ -4,6 +4,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { Icon } from "@/components/Icon";
 import { Nav } from "@/components/Nav";
+import { HeroCta } from "@/components/HeroCta";
 import { PageHero } from "@/components/PageHero";
 import { RfpDialog } from "@/components/RfpDialog";
 import {
@@ -80,7 +81,14 @@ export default async function ContactPage({
           objectPosition="65% 20%"
           title={c.heroTitle}
           body={c.heroBody}
-        />
+        >
+          {/* Same page, not another one: `#message` is the form section below,
+              which already carries `scroll-mt-[95px]` so the fixed nav does not
+              cover its heading on arrival. */}
+          <HeroCta href="#message" className="mt-[28px] xl:mt-[32px]">
+            {c.heroCta}
+          </HeroCta>
+        </PageHero>
 
         {/* ---------- two ways in ---------- */}
         <section className="w-full bg-white">

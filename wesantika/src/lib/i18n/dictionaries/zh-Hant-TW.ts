@@ -163,6 +163,7 @@ export const zhHantTW: PartialDictionary = {
     heroTitle: "聊聊您正在打造的專案",
     heroBody:
       "無論您手上已有拍板定案的規格書，或只是還說不清楚的難題，第一次對話都一樣：要讓這件事成立，有哪些前提必須成立？",
+    heroCta: "傳送訊息",
     paths: {
       heading: "兩種聯絡方式",
       message: {
@@ -236,6 +237,7 @@ export const zhHantTW: PartialDictionary = {
   about: {
     heroLead:
       "我們透過 AI、雲端技術與專業的軟體工程，協助組織將想法轉化為可擴展的數位解決方案。我們相信，長遠的成功建立在創新、可信賴的合作關係與工程上的卓越之上。",
+    heroCta: "看看我們的作品",
     title: "關於我們",
     // about.blocks — intentionally untranslated, see the note above.
     vision: {
@@ -409,6 +411,7 @@ export const zhHantTW: PartialDictionary = {
     heroTitle: "服務案例",
     heroBody:
       "與合作夥伴共同交付的專案，涵蓋 AI、區塊鏈、雲端、ERP 與行動應用，從最初的原型到正式上線。",
+    heroCta: "開始您的專案",
     searchPlaceholder: "搜尋關鍵字...",
     searchLabel: "搜尋案例",
     all: "全部",

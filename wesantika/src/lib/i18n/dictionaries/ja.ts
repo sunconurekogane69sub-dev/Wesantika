@@ -156,6 +156,7 @@ export const ja: PartialDictionary = {
     heroTitle: "構想中のプロジェクトについて、お聞かせください",
     heroBody:
       "確定した仕様書がある場合も、まだ言語化できていない課題の段階でも、最初の対話は同じです。これを成立させるために、何が満たされている必要があるのか。",
+    heroCta: "メッセージを送る",
     paths: {
       heading: "2つの入り口",
       message: {
@@ -230,6 +231,7 @@ export const ja: PartialDictionary = {
   about: {
     heroLead:
       "AI、クラウド技術、そして熟練したソフトウェアエンジニアリングにより、アイデアをスケーラブルなデジタルソリューションへと変えるお手伝いをします。長く続く成功は、イノベーション、信頼できるパートナーシップ、そしてエンジニアリングの卓越性から生まれると考えています。",
+    heroCta: "実績を見る",
     title: "会社概要",
     blocks: {
       tomorrow: {
@@ -709,6 +711,7 @@ export const ja: PartialDictionary = {
     heroTitle: "実績",
     heroBody:
       "AI、ブロックチェーン、クラウド、ERP、モバイルの各領域で、パートナー企業とともに手がけた案件です。最初のプロトタイプから本番稼働まで。",
+    heroCta: "プロジェクトを相談する",
     searchPlaceholder: "キーワードで検索...",
     searchLabel: "実績を検索",
     all: "すべて",
