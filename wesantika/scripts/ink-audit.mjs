@@ -229,12 +229,14 @@ const REGIONS = [
   { page: "Our Work", what: "body", ground: "#ffffff", section: [1672, 560],
     box: [212, 310, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
 
-  { page: "Contact", what: "nav strip", image: "images/contact-hero.png", section: [1672, 560],
-    objectY: 0.3, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
-  { page: "Contact", what: "H1", image: "images/contact-hero.png", section: [1672, 560],
-    objectY: 0.3, box: [212, 180, 620, 130], ink: "white", scrim: "heroGradient", size: 48 },
-  { page: "Contact", what: "body", image: "images/contact-hero.png", section: [1672, 560],
-    objectY: 0.3, box: [212, 310, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
+  /* The hero is `size="figure"` now: 1672 x 878 is the image's own ratio, so
+     nothing is cropped and the copy sits lower in a taller box. */
+  { page: "Contact", what: "nav strip", image: "images/contact-hero.png", section: [1672, 878],
+    objectY: 0.2, box: [0, 0, 1672, 95], ink: "white", scrim: "nav", size: 16, bold: true },
+  { page: "Contact", what: "H1", image: "images/contact-hero.png", section: [1672, 878],
+    objectY: 0.2, box: [212, 376, 620, 130], ink: "white", scrim: "heroGradient", size: 48 },
+  { page: "Contact", what: "body", image: "images/contact-hero.png", section: [1672, 878],
+    objectY: 0.2, box: [212, 506, 620, 160], ink: "white", scrim: "heroGradient", size: 19 },
 
   /* --- AI Innovation panel (180:752) ------------------------------------
 

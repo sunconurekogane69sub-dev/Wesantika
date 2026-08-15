@@ -66,10 +66,18 @@ export default async function ContactPage({
       <Nav locale={locale} nav={t.nav} />
 
       <main id="main-content">
-        {/* ---------- hero ---------- */}
+        {/* ---------- hero ----------
+            `figure`, not `page`. The photograph has a person in it who runs from
+            y80 to the bottom edge of the file — 91% of its height — so a fixed
+            height cropped 329 source rows off her whatever the object-position
+            was, and `50% 30%` in particular cut the top of her head. The hero
+            now takes the image's own ratio and shows the composition whole. 65%
+            keeps her in frame on narrow viewports, where the crop turns
+            horizontal and she sits right of centre. */}
         <PageHero
           image="/images/contact-hero.png"
-          objectPosition="50% 30%"
+          size="figure"
+          objectPosition="65% 20%"
           title={c.heroTitle}
           body={c.heroBody}
         />

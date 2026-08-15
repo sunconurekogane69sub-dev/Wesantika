@@ -29,7 +29,7 @@ import { HeroVideo } from "./HeroVideo";
  * Every value here is measured — `npm run ink` models this exact crop and
  * fails the build if the copy stops clearing WCAG on its ground.
  */
-type HeroSize = "full" | "home" | "page";
+type HeroSize = "full" | "home" | "page" | "figure";
 
 const SIZE = {
   /**
@@ -59,6 +59,32 @@ const SIZE = {
   },
   page: {
     section: "h-[400px] sm:h-[470px] xl:h-[560px]",
+    title:
+      "text-[30px] leading-[1.18] sm:text-[38px] xl:text-[48px] xl:leading-[1.15]",
+    body: "mt-[16px] text-[16px] leading-[25px] sm:text-[17px] xl:mt-[20px] xl:text-[19px] xl:leading-[30px]",
+    measure: "max-w-[620px]",
+  },
+
+  /**
+   * Height follows the artwork, for a hero whose picture has a subject in it.
+   *
+   * The other three sizes are fixed heights, which is right when the background
+   * is a texture — a crop costs nothing because there is nothing in particular
+   * to lose. Contact's photograph is not a texture: a person occupies **y 80 to
+   * 908 of its 909 rows**, measured off the file, so 91% of the image height is
+   * subject. At the `page` height that hero cropped 329 source rows, and no
+   * `object-position` recovers that — every choice cuts either her head or the
+   * hand she is holding out.
+   *
+   * `aspect-[1731/909]` is the image's own ratio, so at any width wide enough to
+   * honour it, `object-cover` has nothing to remove and the composition arrives
+   * whole. `min-h` stops the hero collapsing to 197px on a phone, where the
+   * aspect alone would leave no room for the copy; below that width the crop
+   * becomes horizontal instead, which is why Contact positions the image at 65%
+   * — the subject sits right of centre and that is what a narrow viewport keeps.
+   */
+  figure: {
+    section: "aspect-[1731/909] min-h-[440px] sm:min-h-[520px]",
     title:
       "text-[30px] leading-[1.18] sm:text-[38px] xl:text-[48px] xl:leading-[1.15]",
     body: "mt-[16px] text-[16px] leading-[25px] sm:text-[17px] xl:mt-[20px] xl:text-[19px] xl:leading-[30px]",
