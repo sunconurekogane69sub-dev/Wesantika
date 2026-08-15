@@ -139,6 +139,43 @@
   max-width: 1672px;
 }
 
+/*
+  The side margin every section shares.
+
+  It used to be written inline, nineteen times, as `px-6 xl:px-[212px]` — 212
+  being the artboard's gutter. 212 of 1672 is 12.7% of the page and looks like
+  what it is. 212 of 1280, which is what `xl` actually turns it on at, is 33%,
+  and the step is a cliff rather than a ramp: the whole site loses 164px of
+  content width per side at one pixel of viewport.
+
+  The Contact page is where that became visible. Its form grid splits into
+  columns at the same breakpoint, so the fields measured **1231px at 1279 and
+  396px at 1280** — a third of the width, one pixel later, in the wrong
+  direction. Nothing about a slightly wider window should shrink a form.
+
+  So the gutter grows with the page instead of arriving all at once, and hits
+  212 exactly where the design says it should: when the viewport is as wide as
+  the artboard it was drawn on. Below the artboard it interpolates; the two
+  smaller steps keep a phone and a tablet from spending their width on margins.
+
+    360    24px      1280    64px
+    1024   48px      1672   212px      (0.3776px of gutter per px of viewport)
+
+  One utility, so a section cannot drift from the others — the same reason
+  PageHero exists.
+*/
+@utility gutter {
+  padding-inline: 24px;
+
+  @media (width >= 64rem) {
+    padding-inline: 48px;
+  }
+
+  @media (width >= 80rem) {
+    padding-inline: clamp(64px, calc((100vw - 1280px) * 0.37755 + 64px), 212px);
+  }
+}
+
 @layer base {
   /*
     Smooth scrolling, but only for readers who have not asked otherwise.

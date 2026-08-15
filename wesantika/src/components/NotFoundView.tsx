@@ -43,7 +43,7 @@ export function NotFoundView({
     <>
       <Nav locale={locale} nav={nav} alwaysSolid />
 
-      <main id="main-content" className="canvas px-6 pt-[180px] pb-[140px] xl:px-[212px]">
+      <main id="main-content" className="canvas gutter pt-[180px] pb-[140px]">
         <p className="text-[16px] leading-[26px] font-bold tracking-wide text-brand-ink uppercase">
           404
         </p>

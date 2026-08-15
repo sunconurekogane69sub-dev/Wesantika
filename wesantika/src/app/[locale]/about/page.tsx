@@ -144,7 +144,7 @@ export default async function AboutPage({
           quality={90}
           className="object-cover object-center"
         />
-        <div className="canvas relative px-6 py-[80px] xl:px-[212px] xl:py-[120px]">
+        <div className="canvas relative gutter py-[80px] xl:py-[120px]">
           {/* brand-ink, not brand: 20px normal needs 4.5:1 and #0f84fd only
               reaches 3.3:1 on this near-white band. */}
           <p className="text-[18px] leading-[28px] font-bold text-brand-ink xl:text-[20px]">

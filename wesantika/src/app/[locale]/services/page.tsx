@@ -76,7 +76,7 @@ export default async function ServicesPage({
           hero, which `npm run fit` showed overrunning in Vietnamese. The hero
           keeps the opening claim; this is the remainder, in the body where it
           belongs. */}
-      <section className="canvas px-6 pt-[56px] xl:px-[212px] xl:pt-[72px]">
+      <section className="canvas gutter pt-[56px] xl:pt-[72px]">
         <p className="max-w-[760px] text-[17px] leading-[28px] font-normal text-black/85 xl:text-[19px] xl:leading-[30px]">
           {s.hero.bodyMore}
         </p>
@@ -90,7 +90,7 @@ export default async function ServicesPage({
         over the place" looks like from the outside, so it now sits where the
         rest of the page sits, under the same brand rule the Why section uses.
       */}
-      <section className="canvas px-6 pt-[80px] xl:px-[212px] xl:pt-[140px]">
+      <section className="canvas gutter pt-[80px] xl:pt-[140px]">
         <span
           aria-hidden
           className="block h-[3px] w-[44px] rounded-full bg-brand"
@@ -169,7 +169,7 @@ export default async function ServicesPage({
       </section>
 
       {/* ---- Services We Offer — 405:1981 / 405:2322 ---------------- */}
-      <section className="canvas px-6 pt-[100px] xl:px-[212px] xl:pt-[150px]">
+      <section className="canvas gutter pt-[100px] xl:pt-[150px]">
         <h2 className="max-w-[975px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:text-[44px] xl:leading-[52px]">
           {s.offer.heading}
         </h2>
@@ -242,7 +242,7 @@ export default async function ServicesPage({
               "linear-gradient(to right, rgb(255 255 255 / 0.92) 0%, rgb(255 255 255 / 0.86) 42%, rgb(255 255 255 / 0) 78%)",
           }}
         />
-        <div className="canvas relative px-6 py-[80px] xl:px-[212px] xl:py-[112px]">
+        <div className="canvas relative gutter py-[80px] xl:py-[112px]">
           <div className="max-w-[760px]">
             <h2 className="text-[30px] leading-[1.18] font-bold text-black sm:text-[38px] xl:text-[44px] xl:leading-[52px]">
               {s.global.heading}
@@ -283,7 +283,7 @@ export default async function ServicesPage({
       </section>
 
       {/* ---- Send Your RFP — 405:1910 (same card as the Top page) ---- */}
-      <section className="canvas px-6 pt-[80px] xl:px-[212px] xl:pt-[120px]">
+      <section className="canvas gutter pt-[80px] xl:pt-[120px]">
         <div className="flex flex-col overflow-hidden rounded-panel border border-brand bg-white xl:min-h-[435px] xl:flex-row">
           <div className="px-8 py-10 xl:w-[631px] xl:shrink-0 xl:py-[46px] xl:pr-[24px] xl:pl-[58px]">
             <h2 className="max-w-[710px] text-[28px] leading-[36px] font-bold text-brand xl:text-[36px] xl:leading-[42px]">
@@ -363,7 +363,7 @@ export default async function ServicesPage({
         the same way is a language; two built differently is an accident.
       */}
       <section className="mt-[80px] w-full bg-brand-tint xl:mt-[120px]">
-        <div className="canvas grid gap-[40px] px-6 py-[72px] xl:grid-cols-[minmax(0,360px)_minmax(0,1fr)] xl:gap-[96px] xl:px-[212px] xl:py-[104px]">
+        <div className="canvas grid gap-[40px] gutter py-[72px] xl:grid-cols-[minmax(0,360px)_minmax(0,1fr)] xl:gap-[96px] xl:py-[104px]">
           <div className="xl:pt-[6px]">
             <span
               aria-hidden

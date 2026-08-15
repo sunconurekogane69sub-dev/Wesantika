@@ -92,7 +92,7 @@ export default async function ContactPage({
 
         {/* ---------- two ways in ---------- */}
         <section className="w-full bg-white">
-          <div className="canvas px-6 pt-[72px] pb-[16px] xl:px-[212px] xl:pt-[88px]">
+          <div className="canvas gutter pt-[72px] pb-[16px] xl:pt-[88px]">
             <h2 className="text-[28px] leading-[36px] font-bold text-black xl:text-[36px] xl:leading-[42px]">
               {c.paths.heading}
             </h2>
@@ -100,7 +100,7 @@ export default async function ContactPage({
             <div className="mt-[32px] grid gap-[24px] md:grid-cols-2">
               {/* Anchor rather than a route: the form is on this page, and a
                   scroll keeps the two options visible in the back-history. */}
-              <article className="flex flex-col rounded-[16px] border border-brand bg-brand-tint p-[32px]">
+              <article className="flex flex-col rounded-[16px] border border-brand bg-brand-tint p-[24px] sm:p-[32px]">
                 <h3 className="text-[22px] leading-[28px] font-bold text-black">
                   {c.paths.message.title}
                 </h3>
@@ -109,13 +109,13 @@ export default async function ContactPage({
                 </p>
                 <a
                   href="#message"
-                  className="mt-[24px] inline-flex h-[46px] w-fit items-center justify-center rounded-btn bg-brand-btn px-[24px] text-[16px] leading-[26px] font-bold text-white transition-opacity hover:opacity-90"
+                  className="mt-[24px] inline-flex min-h-[46px] w-fit max-w-full items-center justify-center rounded-btn bg-brand-btn px-[24px] py-[10px] text-[16px] leading-[26px] text-center font-bold text-white transition-opacity hover:opacity-90"
                 >
                   {c.paths.message.cta}
                 </a>
               </article>
 
-              <article className="flex flex-col rounded-[16px] border border-hairline bg-white p-[32px] transition-colors hover:border-brand">
+              <article className="flex flex-col rounded-[16px] border border-hairline bg-white p-[24px] transition-colors sm:p-[32px] hover:border-brand">
                 <h3 className="text-[22px] leading-[28px] font-bold text-black">
                   {c.paths.rfp.title}
                 </h3>
@@ -125,7 +125,7 @@ export default async function ContactPage({
                 <RfpDialog
                   copy={t.rfpModal}
                   label={c.paths.rfp.cta}
-                  className="mt-[24px] inline-flex h-[46px] w-fit cursor-pointer items-center justify-center rounded-btn border border-brand bg-white px-[24px] text-[16px] leading-[26px] font-bold whitespace-nowrap text-brand-ink transition-colors hover:bg-brand-btn hover:text-white"
+                  className="mt-[24px] inline-flex min-h-[46px] w-fit max-w-full cursor-pointer items-center justify-center rounded-btn border border-brand bg-white px-[24px] py-[10px] text-[16px] leading-[26px] text-center font-bold text-brand-ink transition-colors hover:bg-brand-btn hover:text-white"
                 />
               </article>
             </div>
@@ -134,8 +134,13 @@ export default async function ContactPage({
 
         {/* ---------- form + direct channels ---------- */}
         <section id="message" className="w-full scroll-mt-[95px] bg-white">
-          <div className="canvas grid gap-[48px] px-6 pt-[64px] pb-[80px] xl:grid-cols-[minmax(0,1fr)_380px] xl:gap-[80px] xl:px-[212px]">
-            <div>
+          <div className="canvas grid gap-[48px] gutter pt-[64px] pb-[80px] xl:grid-cols-[minmax(0,1fr)_380px] xl:gap-[80px]">
+            {/* Below xl this grid is a single column, so the form was taking the
+                full content width — 976px of input fields at a 1024px viewport.
+                The xl column is 788px wide, so capping at 760 keeps the field
+                measure the same on a tablet as on a desktop instead of letting
+                it stretch to twice a comfortable width. */}
+            <div className="max-w-[760px] xl:max-w-none">
               <h2 className="text-[28px] leading-[36px] font-bold text-black xl:text-[36px] xl:leading-[42px]">
                 {c.form.heading}
               </h2>
@@ -147,7 +152,10 @@ export default async function ContactPage({
               </div>
             </div>
 
-            <aside className="xl:pt-[8px]">
+            {/* Capped with the form for the same reason, so the two halves of
+                this section share an edge below xl instead of one stopping at
+                760 and the other running to the full 976. */}
+            <aside className="max-w-[760px] xl:max-w-none xl:pt-[8px]">
               <h2 className="text-[22px] leading-[28px] font-bold text-black">
                 {c.channels.heading}
               </h2>
@@ -167,7 +175,10 @@ export default async function ContactPage({
                 disc. Same asset, same colours, and the two places a visitor can
                 reach these four channels now look like the same thing.
               */}
-            <ul className="mt-[24px] flex flex-col gap-[12px]">
+              {/* Two across on a tablet, back to a single stack inside the
+                  380px desktop column — a row here is a disc and two words, so
+                  one per 760px line is almost entirely empty space. */}
+              <ul className="mt-[24px] grid gap-[12px] sm:grid-cols-2 xl:grid-cols-1">
                 {CONTACT_CHANNELS.map((channel) => {
                   const external = !channel.href.startsWith("mailto:");
                   return (
@@ -214,35 +225,40 @@ export default async function ContactPage({
                 The address itself is deliberately identical in all five locales
                 — see the note in src/lib/content.ts.
               */}
-              <address className="mt-[32px] block rounded-[12px] border border-hairline bg-white p-[24px] not-italic">
-                <h3 className="text-[18px] leading-[28px] font-bold text-black">
-                  {c.office.heading}
-                </h3>
-                <p className="mt-[10px] text-[15px] leading-[24px] text-black/80">
-                  {HEAD_OFFICE.lines.map((line) => (
-                    <span key={line} className="block">
-                      {line}
-                    </span>
-                  ))}
-                </p>
-                <a
-                  href={HEAD_OFFICE_MAP_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-[12px] inline-flex items-center gap-[6px] text-[15px] leading-[22px] font-bold text-brand-ink underline-offset-4 hover:underline"
-                >
-                  {c.office.mapLink}
-                  <span aria-hidden>→</span>
-                </a>
-              </address>
+              {/* Same idea, and at xl it is a one-column 16px-gap stack —
+                  which is exactly the mt-[32px]/mt-[16px] it replaces, so the
+                  desktop sidebar is unchanged. */}
+              <div className="mt-[32px] grid gap-[16px] sm:grid-cols-2 xl:grid-cols-1">
+                <address className="block rounded-[12px] border border-hairline bg-white p-[24px] not-italic">
+                  <h3 className="text-[18px] leading-[28px] font-bold text-black">
+                    {c.office.heading}
+                  </h3>
+                  <p className="mt-[10px] text-[15px] leading-[24px] text-black/80">
+                    {HEAD_OFFICE.lines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </p>
+                  <a
+                    href={HEAD_OFFICE_MAP_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-[12px] inline-flex items-center gap-[6px] text-[15px] leading-[22px] font-bold text-brand-ink underline-offset-4 hover:underline"
+                  >
+                    {c.office.mapLink}
+                    <span aria-hidden>→</span>
+                  </a>
+                </address>
 
-              <div className="mt-[16px] rounded-[12px] bg-brand-tint p-[24px]">
-                <h3 className="text-[18px] leading-[28px] font-bold text-black">
-                  {c.global.heading}
-                </h3>
-                <p className="mt-[10px] text-[15px] leading-[23px] text-black/75">
-                  {c.global.body}
-                </p>
+                <div className="rounded-[12px] bg-brand-tint p-[24px]">
+                  <h3 className="text-[18px] leading-[28px] font-bold text-black">
+                    {c.global.heading}
+                  </h3>
+                  <p className="mt-[10px] text-[15px] leading-[23px] text-black/75">
+                    {c.global.body}
+                  </p>
+                </div>
               </div>
             </aside>
           </div>
@@ -272,7 +288,7 @@ export default async function ContactPage({
             style={{ background: "radial-gradient(circle, #00aef7 0%, transparent 70%)" }}
           />
 
-          <div className="canvas relative grid gap-[48px] px-6 py-[80px] xl:grid-cols-[minmax(0,400px)_minmax(0,1fr)] xl:gap-[100px] xl:px-[212px] xl:py-[112px]">
+          <div className="canvas relative grid gap-[48px] gutter py-[80px] xl:grid-cols-[minmax(0,400px)_minmax(0,1fr)] xl:gap-[100px] xl:py-[112px]">
             <div className="xl:pt-[6px]">
               <span
                 aria-hidden

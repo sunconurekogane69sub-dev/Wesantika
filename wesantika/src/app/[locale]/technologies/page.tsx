@@ -87,7 +87,7 @@ export default async function TechnologiesPage({
           it was the longest sub-head on the site, and `npm run fit` showed it
           overrunning the 560px hero. The hero keeps the opening claim; this is
           the remainder, in the body where it belongs. */}
-      <section className="canvas px-6 pt-[56px] xl:px-[212px] xl:pt-[72px]">
+      <section className="canvas gutter pt-[56px] xl:pt-[72px]">
         <p className="max-w-[760px] text-[17px] leading-[28px] font-normal text-black/85 xl:text-[19px] xl:leading-[30px]">
           {tech.hero.bodyMore}
         </p>
@@ -105,7 +105,7 @@ export default async function TechnologiesPage({
         band: heading in one column, content in the other, both on the 212px
         site gutter. Three sections built the same way is a system.
       */}
-      <section className="canvas grid gap-[40px] px-6 pt-[70px] xl:grid-cols-[minmax(0,420px)_minmax(0,1fr)] xl:gap-[80px] xl:px-[212px] xl:pt-[88px]">
+      <section className="canvas grid gap-[40px] gutter pt-[70px] xl:grid-cols-[minmax(0,420px)_minmax(0,1fr)] xl:gap-[80px] xl:pt-[88px]">
         <div className="xl:pt-[6px]">
           <span
             aria-hidden
@@ -139,7 +139,7 @@ export default async function TechnologiesPage({
         <TechStackSection heading={headings.app} section={section("app")} />
 
         {/* ---- Pick Your Stack — 507:128 ---------------------------- */}
-        <section className="canvas px-6 pt-[88px] xl:px-[212px] xl:pt-[120px]">
+        <section className="canvas gutter pt-[88px] xl:pt-[120px]">
           <div className="flex flex-col overflow-hidden rounded-panel border border-hairline bg-white xl:min-h-[435px] xl:flex-row">
             <div className="px-8 py-10 xl:w-[631px] xl:shrink-0 xl:py-[46px] xl:pr-[24px] xl:pl-[58px]">
               <h2 className="max-w-[710px] text-[28px] leading-[36px] font-bold text-brand xl:text-[36px] xl:leading-[42px]">
@@ -227,7 +227,7 @@ function TechStackSection({
       only thing to signal is "this is a discrete thing", which an edge does.
     */
     <section
-      className="canvas px-6 xl:px-[212px]"
+      className="canvas gutter"
       style={{ paddingTop: spacing }}
     >
       <h2 className="text-[20px] leading-[29px] font-bold text-black xl:text-[22px] xl:leading-[30px]">

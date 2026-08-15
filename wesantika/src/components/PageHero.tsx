@@ -82,9 +82,30 @@ const SIZE = {
    * aspect alone would leave no room for the copy; below that width the crop
    * becomes horizontal instead, which is why Contact positions the image at 65%
    * — the subject sits right of centre and that is what a narrow viewport keeps.
+   *
+   * `max-h` is the other end of the same problem — but it is set high, and that
+   * is deliberate. An aspect-driven box has no upper bound at all, so the first
+   * instinct is to cap it at the 1000px the landing hero uses. Worked through
+   * against real screens, that is too tight:
+   *
+   *   16:9 desktop   hero = 0.525w      usable viewport = 0.5625w - chrome
+   *   1920 x 1080    1008px             ~950px
+   *   2560 x 1440    1344px             ~1310px
+   *
+   * On every 16:9 monitor the ratio lands the hero at just over one screenful
+   * on its own — it is self-scaling, not runaway, and a cap there would be
+   * cropping the subject to solve a problem that does not exist. What genuinely
+   * breaks is ultra-wide: 3440 x 1440 gives an 1806px hero against a ~1310px
+   * screen, 1.4 screens of photograph before a word of copy.
+   *
+   * So 1200px, which is where the hero stops fitting a screen rather than where
+   * a round number falls. It leaves **zero crop up to 2285px wide** — every
+   * mainstream desktop, 1920 and 2048 included — and past that it trims from
+   * the bottom edge: 78 source rows at 2560, 244 at 3440, against a subject who
+   * starts at y80. Her head and face are never in the cropped band at any width.
    */
   figure: {
-    section: "aspect-[1731/909] min-h-[440px] sm:min-h-[520px]",
+    section: "aspect-[1731/909] min-h-[440px] sm:min-h-[520px] max-h-[1200px]",
     title:
       "text-[30px] leading-[1.18] sm:text-[38px] xl:text-[48px] xl:leading-[1.15]",
     body: "mt-[16px] text-[16px] leading-[25px] sm:text-[17px] xl:mt-[20px] xl:text-[19px] xl:leading-[30px]",
@@ -188,7 +209,7 @@ export function PageHero({
       {/* One vertical mechanism for all six: centre the copy in the band below
           the fixed 95px nav. The old `pt-[255px] / [286px] / [356px]` stacks
           each needed re-tuning at every breakpoint. */}
-      <div className="canvas relative flex h-full flex-col justify-center px-6 pt-[95px] xl:px-[212px]">
+      <div className="canvas relative flex h-full flex-col justify-center gutter pt-[95px]">
         <Title className={`${s.measure} ${s.title} font-bold text-white`}>
           {title}
         </Title>

@@ -43,6 +43,14 @@ const LOCALES = [
  */
 const HOME = { height: 520 - 95, measure: 720 };
 const PAGE = { height: 560 - 95, measure: 620 };
+/**
+ * Contact's hero is `size="figure"` — its height follows the image's ratio, so
+ * the tight case is not a desktop window but the `sm:min-h-[520px]` clamp, the
+ * same floor the other interior heroes are measured against. Same box, kept
+ * separate so the reason is written down rather than inferred from a shared
+ * constant.
+ */
+const FIGURE = { height: 520 - 95, measure: 620 };
 
 const REGIONS = [
   {
@@ -83,7 +91,7 @@ const REGIONS = [
     ],
   },
   {
-    page: "Contact", box: PAGE,
+    page: "Contact", box: FIGURE,
     parts: [
       { path: "contact.heroTitle", size: 48, leading: 55 },
       { path: "contact.heroBody", size: 19, leading: 30, marginTop: 20 },

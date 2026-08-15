@@ -132,7 +132,8 @@
       "Bash(MSYS_NO_PATHCONV=1 node measure.mjs \"/en/about\")",
       "Bash(awk 'NR>1{printf \"  %-34s %10.1f MB\\\\n\",$9,$5/1048576}')",
       "Bash(cp public/images/contact-hero.png __TRACKED_VAR__/contact-hero.png.prev)",
-      "Bash(cp \"/d/Users/ralph/Documents/wesantica video/contact us.png\" public/images/contact-hero.png)"
+      "Bash(cp \"/d/Users/ralph/Documents/wesantica video/contact us.png\" public/images/contact-hero.png)",
+      "Bash(grep -iA3 contact)"
     ]
   }
 }

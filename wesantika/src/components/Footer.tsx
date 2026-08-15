@@ -100,7 +100,7 @@ export function Footer({
               gutter     pl-160/pr-208 -> 212 both sides, the site's gutter,
                                    which is also what the heroes above now use
           */}
-          <div className="canvas grid gap-[40px] px-6 py-[72px] xl:grid-cols-[minmax(0,1fr)_560px] xl:gap-[80px] xl:px-[212px] xl:py-[88px]">
+          <div className="canvas grid gap-[40px] gutter py-[72px] xl:grid-cols-[minmax(0,1fr)_560px] xl:gap-[80px] xl:py-[88px]">
             <div className="xl:max-w-[520px] xl:self-center">
               <h2 className="text-[26px] leading-[34px] font-bold text-white xl:text-[30px] xl:leading-[38px]">
                 {strings.heading}
@@ -145,7 +145,7 @@ export function Footer({
           hairline rather than a colour change: this is the same surface, a
           different job. */}
       <div className="w-full bg-shell-900">
-        <div className="canvas px-6 xl:px-[212px]">
+        <div className="canvas gutter">
           <div className="h-px w-full bg-white/10" aria-hidden />
 
           <nav
@@ -219,7 +219,7 @@ export function Footer({
 
 
       <div className="w-full bg-shell-950">
-        <div className="canvas flex flex-col gap-2 px-6 py-[22px] sm:flex-row sm:items-center sm:justify-between xl:px-[212px]">
+        <div className="canvas flex flex-col gap-2 gutter py-[22px] sm:flex-row sm:items-center sm:justify-between">
           <Copyright text={strings.copyright} locale={locale} />
           {/*
             The design puts a "Privacy Policy" link here. It has no destination,

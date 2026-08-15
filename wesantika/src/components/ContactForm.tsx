@@ -170,7 +170,10 @@ export function ContactForm({
       <button
         type="submit"
         disabled={sending}
-        className="mt-[4px] flex h-[48px] w-full items-center justify-center rounded-btn bg-brand-btn px-[24px] text-[16px] leading-[26px] font-bold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-fit sm:min-w-[200px]"
+        // min-h, not h-[48px]: `submitting` is a different and usually longer
+        // string than `submit`, and in Thai it is long enough to take a second
+        // line inside the 200px minimum. A fixed height would crop it.
+        className="mt-[4px] flex min-h-[48px] w-full items-center justify-center rounded-btn bg-brand-btn px-[24px] py-[11px] text-center text-[16px] leading-[26px] font-bold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:w-fit sm:min-w-[200px]"
       >
         {sending ? strings.submitting : strings.submit}
       </button>
