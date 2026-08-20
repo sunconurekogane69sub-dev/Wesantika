@@ -446,7 +446,7 @@ export const zhHantTW: PartialDictionary = {
     ],
     fields: {
       name: "姓名*",
-      phone: "聯絡電話*",
+      phone: "聯絡電話",
       company: "公司名稱*",
       email: "電子郵件*",
       brief: "專案說明*",

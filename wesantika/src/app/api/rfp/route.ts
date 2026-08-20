@@ -110,7 +110,6 @@ export async function POST(request: Request) {
 
   const errors: string[] = [];
   if (!name) errors.push("Name is required.");
-  if (!phone) errors.push("Business phone is required.");
   if (!company) errors.push("Company name is required.");
   if (!email) errors.push("Email is required.");
   else if (!EMAIL_RE.test(email)) errors.push("That email address looks invalid.");
@@ -145,7 +144,7 @@ export async function POST(request: Request) {
 
   const rows: Array<[string, string]> = [
     ["Name", name],
-    ["Business phone", phone],
+    ["Business phone", phone || "—"],
     ["Company", company],
     ["Email", email],
     ["Attachment", attachments[0]?.filename ?? "—"],

@@ -383,7 +383,12 @@ function Modal({
           {/* ---- form ------------------------------------------------- */}
           <form onSubmit={onSubmit} className="flex flex-col gap-[16px]">
             <input name="name" required placeholder={copy.fields.name} autoComplete="name" disabled={sending} className={FIELD} aria-label={copy.fields.name} />
-            <input name="phone" required placeholder={copy.fields.phone} autoComplete="tel" disabled={sending} className={FIELD} aria-label={copy.fields.phone} />
+            {/* Optional. The asterisk in every other placeholder is this
+                form's only required marker — there are no visible labels — so
+                dropping it from `fields.phone` is what tells the reader, and
+                `required` has to come off with it or the browser blocks a
+                submit for a field nothing marked as needed. */}
+            <input name="phone" placeholder={copy.fields.phone} autoComplete="tel" disabled={sending} className={FIELD} aria-label={copy.fields.phone} />
             <input name="company" required placeholder={copy.fields.company} autoComplete="organization" disabled={sending} className={FIELD} aria-label={copy.fields.company} />
             <input name="email" type="email" required placeholder={copy.fields.email} autoComplete="email" disabled={sending} className={FIELD} aria-label={copy.fields.email} />
             <textarea

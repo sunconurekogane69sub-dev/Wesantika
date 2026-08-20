@@ -449,7 +449,7 @@ export const th: PartialDictionary = {
     ],
     fields: {
       name: "ชื่อ*",
-      phone: "โทรศัพท์ที่ทำงาน*",
+      phone: "โทรศัพท์ที่ทำงาน",
       company: "ชื่อบริษัท*",
       email: "อีเมล*",
       brief: "รายละเอียดโครงการ*",

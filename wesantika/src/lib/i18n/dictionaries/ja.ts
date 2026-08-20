@@ -746,7 +746,7 @@ export const ja: PartialDictionary = {
     ],
     fields: {
       name: "お名前*",
-      phone: "電話番号*",
+      phone: "電話番号",
       company: "会社名*",
       email: "メールアドレス*",
       brief: "プロジェクト概要*",

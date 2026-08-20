@@ -1236,7 +1236,7 @@ export const en = {
     ],
     fields: {
       name: "Name*",
-      phone: "Business Phone*",
+      phone: "Business Phone",
       company: "Company Name*",
       email: "Email*",
       brief: "Project Brief*",

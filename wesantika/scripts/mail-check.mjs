@@ -699,6 +699,41 @@ try {
     }
   }
 
+  /* ------------------------------------- 8b. RFP, phone left blank ------- */
+  console.log("\n8b. RFP form — the phone number is optional");
+  {
+    /* Phone used to be required on this form and is not any more, so the
+       interesting case is not that a blank one is *accepted* — it is that the
+       mail still reads properly without it. A missing optional field that
+       renders as an empty row looks like a delivery fault to whoever opens the
+       enquiry, which is why the contact route has always written an em dash. */
+    const before = sink.messages.length;
+    const res = await postRfp(origin, "10.3.0.1", { ...VALID_RFP, phone: "" }, null);
+    check("HTTP 200 with no phone", res.status === 200, `got ${res.status}`);
+    check("mail sent", sink.messages.length === before + 1);
+    if (sink.messages.length === before + 1) {
+      const mime = parseMime(sink.messages[before].raw);
+      const plain = findPart(mime, "text/plain")?.content.toString("utf8") ?? "";
+      const html = findPart(mime, "text/html")?.content.toString("utf8") ?? "";
+      check("body shows an em dash, not a blank row", plain.includes("Business phone: —"));
+      check("the HTML table keeps the row too", html.includes("Business phone"));
+      check("every other field still arrived", plain.includes(VALID_RFP.company));
+    }
+
+    /* Omitted entirely rather than sent empty — a hand-built request, or a
+       browser that drops a blank input, must behave the same way. */
+    const absent = { ...VALID_RFP };
+    delete absent.phone;
+    const res2 = await postRfp(origin, "10.3.0.2", absent, null);
+    check("HTTP 200 with the field absent from the form data", res2.status === 200, `got ${res2.status}`);
+
+    /* Still capped when it *is* supplied — optional is not unvalidated. */
+    const tooLong = await postRfp(
+      origin, "10.3.0.3", { ...VALID_RFP, phone: "9".repeat(61) }, null,
+    );
+    check("a 61-character phone is still refused with 422", tooLong.status === 422, `got ${tooLong.status}`);
+  }
+
   /* -------------------------------- 9. RFP filename handling and unicode */
   console.log("\n9. RFP form — filename handling");
   {

@@ -452,7 +452,7 @@ export const vi: PartialDictionary = {
     ],
     fields: {
       name: "Họ và tên*",
-      phone: "Điện thoại công việc*",
+      phone: "Điện thoại công việc",
       company: "Tên công ty*",
       email: "Email*",
       brief: "Mô tả dự án*",
