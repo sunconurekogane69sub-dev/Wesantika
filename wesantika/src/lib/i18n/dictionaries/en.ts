@@ -184,7 +184,12 @@ export const en = {
       body: "We answer on whichever channel you start on.",
     },
     office: {
-      heading: "Head office",
+      /* Keyed by `Office.id` in lib/content.ts, so a third office is
+         one new key here rather than a new branch in the markup. */
+      names: {
+        thailand: "Head office",
+        singapore: "Singapore",
+      },
       mapLink: "Open in Google Maps",
     },
     next: {

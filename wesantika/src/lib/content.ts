@@ -122,37 +122,89 @@ export function serviceCardHref(locale: string, cardId: string): string {
 }
 
 /**
- * Head office.
+ * Where the company physically is.
  *
  * This lives here rather than in the dictionaries **on purpose**. An address is
  * not translated — it is what someone writes on an envelope, or reads out to a
  * driver, and a transliterated address is a misdelivered one. So the same Latin
- * transcription ships in all five locales; only the *label* above it is
- * translated (`contact.office.heading`).
+ * transcription ships in all five locales; only the *label* above each one is
+ * translated, via `contact.office.names[id]`.
  *
- * The parts below are split for `PostalAddress` in the Organization JSON-LD.
- * `lines` is what gets rendered, broken where a Thai address is conventionally
- * broken so it stays readable in a narrow column.
+ * `lines` is what gets rendered, broken where each country conventionally
+ * breaks an address so it stays readable in a narrow column. `postal` is the
+ * same address split into `PostalAddress` fields for the Organization JSON-LD —
+ * three lines of text tell a search engine nothing, and this is what a
+ * knowledge panel is built from.
+ *
+ * Order is meaningful: the first entry is the head office, which is the one
+ * `address` in the JSON-LD points at. Google asks for the headquarters there
+ * specifically, so additional offices go in `location` instead of being pushed
+ * into an array that a consumer would have to guess the order of.
  */
-export const HEAD_OFFICE = {
-  lines: [
-    "99/9 Moo 2, Chaeng Wattana Road",
-    "Bang Talat, Pak Kret District",
-    "Nonthaburi 11120, Thailand",
-  ],
-  postal: {
-    streetAddress: "99/9 Moo 2, Chaeng Wattana Road",
-    addressLocality: "Bang Talat, Pak Kret District",
-    addressRegion: "Nonthaburi",
-    postalCode: "11120",
-    addressCountry: "TH",
-  },
-} as const;
+export type Office = {
+  readonly id: "thailand" | "singapore";
+  readonly lines: readonly string[];
+  readonly postal: {
+    readonly streetAddress: string;
+    readonly addressLocality: string;
+    /** Absent for a city-state — Singapore has no region above the city. */
+    readonly addressRegion?: string;
+    readonly postalCode: string;
+    /** ISO 3166-1 alpha-2. */
+    readonly addressCountry: string;
+  };
+};
 
-/** Google Maps deep link — the documented query form, so it needs no place id. */
-export const HEAD_OFFICE_MAP_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  HEAD_OFFICE.lines.join(", "),
-)}`;
+export const OFFICES: readonly Office[] = [
+  {
+    id: "thailand",
+    lines: [
+      "99/9 Moo 2, Chaeng Wattana Road",
+      "Bang Talat, Pak Kret District",
+      "Nonthaburi 11120, Thailand",
+    ],
+    postal: {
+      streetAddress: "99/9 Moo 2, Chaeng Wattana Road",
+      addressLocality: "Bang Talat, Pak Kret District",
+      addressRegion: "Nonthaburi",
+      postalCode: "11120",
+      addressCountry: "TH",
+    },
+  },
+  {
+    /*
+      Singapore addresses are conventionally two lines: the street on the
+      first, then the word "Singapore" and the six-digit postal code on the
+      second. The postal code encodes the delivery point, so there is no
+      locality line between them and no region above the city — which is why
+      `addressRegion` is omitted here and present for Nonthaburi.
+    */
+    id: "singapore",
+    lines: ["250 Upper Thomson Road", "Singapore 574373"],
+    postal: {
+      streetAddress: "250 Upper Thomson Road",
+      addressLocality: "Singapore",
+      postalCode: "574373",
+      addressCountry: "SG",
+    },
+  },
+] as const;
+
+/** The head office, by the ordering rule above. */
+export const HEAD_OFFICE = OFFICES[0];
+
+/**
+ * Google Maps deep link — the documented query form, so it needs no place id.
+ *
+ * Built per office rather than as one constant: with two addresses a single
+ * exported URL is a trap, because the second link silently points at the
+ * first.
+ */
+export function officeMapUrl(office: Office): string {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    office.lines.join(", "),
+  )}`;
+}
 
 /**
  * Left rail of the services section — Figma 180:624-628.

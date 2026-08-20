@@ -179,7 +179,12 @@ export const ja: PartialDictionary = {
       body: "ご連絡いただいたチャネルでそのまま対応します。",
     },
     office: {
-      heading: "本社所在地",
+      /* Keyed by `Office.id` in lib/content.ts, so a third office is
+         one new key here rather than a new branch in the markup. */
+      names: {
+        thailand: "本社",
+        singapore: "シンガポール",
+      },
       mapLink: "Google マップで開く",
     },
     next: {

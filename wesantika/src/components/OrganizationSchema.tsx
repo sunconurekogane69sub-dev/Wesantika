@@ -1,13 +1,21 @@
-import { CONTACT_CHANNELS, HEAD_OFFICE } from "@/lib/content";
+import { CONTACT_CHANNELS, HEAD_OFFICE, OFFICES } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
 /**
  * Organization JSON-LD.
  *
- * The head office is the first genuinely verifiable fact about this company on
- * the site, and rendering it as three lines of text tells a search engine
- * nothing — `PostalAddress` does. This is also what a knowledge panel is built
- * from, and what "wesantika address" has to match to return anything useful.
+ * The offices are the first genuinely verifiable fact about this company on the
+ * site, and rendering them as lines of text tells a search engine nothing —
+ * `PostalAddress` does. This is also what a knowledge panel is built from, and
+ * what "wesantika address" has to match to return anything useful.
+ *
+ * `address` carries the **head office only**, on purpose. Google's Organization
+ * guidance asks for the headquarters there specifically, so putting two
+ * addresses into it would leave a consumer guessing which is which. The other
+ * offices go in `location`, which is the schema.org property for where an
+ * organization actually is, and they are emitted only when there is more than
+ * one — a `location` array repeating the single head office would say nothing
+ * that `address` had not already said.
  *
  * Everything here is real. The email is only emitted when it is not still on
  * `.example` (the RFC 2606 reserved TLD the placeholder uses), because
@@ -32,6 +40,14 @@ export function OrganizationSchema({ locale }: { locale: string }) {
       "@type": "PostalAddress",
       ...HEAD_OFFICE.postal,
     },
+    ...(OFFICES.length > 1
+      ? {
+          location: OFFICES.map((office) => ({
+            "@type": "Place",
+            address: { "@type": "PostalAddress", ...office.postal },
+          })),
+        }
+      : {}),
     ...(emailIsReal
       ? { contactPoint: [{ "@type": "ContactPoint", contactType: "sales", email }] }
       : {}),

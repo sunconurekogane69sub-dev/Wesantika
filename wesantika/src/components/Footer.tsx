@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { HEAD_OFFICE, NAV_ITEMS, serviceDetailHref } from "@/lib/content";
+import { NAV_ITEMS, OFFICES, serviceDetailHref } from "@/lib/content";
 import type { Locale } from "@/lib/i18n/locales";
 import type { Dictionary } from "@/lib/i18n";
 import { ContactForm } from "./ContactForm";
@@ -109,7 +109,7 @@ export function Footer({
                 {strings.subtitle}
               </p>
 
-              {/* The head office, on every page that carries the footer panel.
+              {/* The offices, on every page that carries the footer panel.
                   A postal address is the ordinary way a B2B visitor checks that
                   a supplier is a real company in a real place, and it is the one
                   piece of contact information that was missing everywhere.
@@ -118,19 +118,30 @@ export function Footer({
                   grid child, which is where it first landed and which pushed the
                   form out of the layout entirely.
 
+                  Two across from 480px up. Stacked, two addresses push the form
+                  most of a screen further down on a phone; side by side they
+                  cost four lines instead of eight, and each is only three lines
+                  long so neither column gets cramped. `min-[480px]` rather than
+                  `sm` because the pair still fits comfortably at 480 and that is
+                  where most of the phone range actually is.
+
                   Not translated — see the note in src/lib/content.ts. */}
-              <address className="mt-[24px] block not-italic xl:mt-[28px]">
-                <p className="text-[13px] leading-[20px] font-bold tracking-[0.02em] text-white/70">
-                  {office.heading}
-                </p>
-                <p className="mt-[8px] text-[15px] leading-[24px] font-normal text-white/85">
-                  {HEAD_OFFICE.lines.map((line) => (
-                    <span key={line} className="block">
-                      {line}
-                    </span>
-                  ))}
-                </p>
-              </address>
+              <div className="mt-[24px] grid gap-[20px] min-[480px]:grid-cols-2 xl:mt-[28px]">
+                {OFFICES.map((o) => (
+                  <address key={o.id} className="block not-italic">
+                    <p className="text-[13px] leading-[20px] font-bold tracking-[0.02em] text-white/70">
+                      {office.names[o.id]}
+                    </p>
+                    <p className="mt-[8px] text-[15px] leading-[24px] font-normal text-white/85">
+                      {o.lines.map((line) => (
+                        <span key={line} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </p>
+                  </address>
+                ))}
+              </div>
             </div>
 
             <div className="w-full">
