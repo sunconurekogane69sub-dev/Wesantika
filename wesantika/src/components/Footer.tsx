@@ -118,12 +118,17 @@ export function Footer({
                   grid child, which is where it first landed and which pushed the
                   form out of the layout entirely.
 
-                  Two across from 480px up. Stacked, two addresses push the form
-                  most of a screen further down on a phone; side by side they
-                  cost four lines instead of eight, and each is only three lines
-                  long so neither column gets cramped. `min-[480px]` rather than
-                  `sm` because the pair still fits comfortably at 480 and that is
-                  where most of the phone range actually is.
+                  Two across from 480px up. Stacked, the two addresses push the
+                  form most of a screen further down on a phone; side by side
+                  they cost three lines instead of seven, and the longer of the
+                  two is only three lines so neither column gets cramped.
+                  `min-[480px]` rather than `sm` because the pair still fits
+                  comfortably at 480 and that is where most of the phone range
+                  actually is.
+
+                  `items-start` is not needed: the two columns are labels over
+                  addresses of different lengths, and letting them share a top
+                  edge is the whole point of the grid.
 
                   Not translated — see the note in src/lib/content.ts. */}
               <div className="mt-[24px] grid gap-[20px] min-[480px]:grid-cols-2 xl:mt-[28px]">

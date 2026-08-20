@@ -133,16 +133,29 @@ export function serviceCardHref(locale: string, cardId: string): string {
  * `lines` is what gets rendered, broken where each country conventionally
  * breaks an address so it stays readable in a narrow column. `postal` is the
  * same address split into `PostalAddress` fields for the Organization JSON-LD —
- * three lines of text tell a search engine nothing, and this is what a
- * knowledge panel is built from.
+ * lines of text tell a search engine nothing, and this is what a knowledge
+ * panel is built from.
  *
- * Order is meaningful: the first entry is the head office, which is the one
- * `address` in the JSON-LD points at. Google asks for the headquarters there
- * specifically, so additional offices go in `location` instead of being pushed
- * into an array that a consumer would have to guess the order of.
+ * ## Order, and why the labels are place names
+ *
+ * Order is meaningful: **Singapore first**, because it is the primary base, and
+ * the JSON-LD `address` points at whichever entry leads the list.
+ *
+ * The labels used to be "Head office" for Thailand and "Singapore" for
+ * Singapore, which is two different kinds of label in one list — a *role*
+ * beside a *place*. Read together they do not compare, and they implied a
+ * ranking that put the wrong office at the top. Every entry is now labelled by
+ * where it is, so the list is parallel and the order alone carries the
+ * priority. That also keeps the labels honest: naming an office a "branch" or a
+ * "delivery centre" would be inventing a role nobody stated.
+ *
+ * Country rather than city, for both. Singapore is a city-state so the two are
+ * the same word, and the Thai office is in Nonthaburi — a province next to
+ * Bangkok, not in it, so "Bangkok" would be wrong and "Nonthaburi" means little
+ * to a reader outside Thailand.
  */
 export type Office = {
-  readonly id: "thailand" | "singapore";
+  readonly id: "singapore" | "thailand";
   readonly lines: readonly string[];
   readonly postal: {
     readonly streetAddress: string;
@@ -156,21 +169,6 @@ export type Office = {
 };
 
 export const OFFICES: readonly Office[] = [
-  {
-    id: "thailand",
-    lines: [
-      "99/9 Moo 2, Chaeng Wattana Road",
-      "Bang Talat, Pak Kret District",
-      "Nonthaburi 11120, Thailand",
-    ],
-    postal: {
-      streetAddress: "99/9 Moo 2, Chaeng Wattana Road",
-      addressLocality: "Bang Talat, Pak Kret District",
-      addressRegion: "Nonthaburi",
-      postalCode: "11120",
-      addressCountry: "TH",
-    },
-  },
   {
     /*
       Singapore addresses are conventionally two lines: the street on the
@@ -188,10 +186,31 @@ export const OFFICES: readonly Office[] = [
       addressCountry: "SG",
     },
   },
+  {
+    id: "thailand",
+    lines: [
+      "99/9 Moo 2, Chaeng Wattana Road",
+      "Bang Talat, Pak Kret District",
+      "Nonthaburi 11120, Thailand",
+    ],
+    postal: {
+      streetAddress: "99/9 Moo 2, Chaeng Wattana Road",
+      addressLocality: "Bang Talat, Pak Kret District",
+      addressRegion: "Nonthaburi",
+      postalCode: "11120",
+      addressCountry: "TH",
+    },
+  },
 ] as const;
 
-/** The head office, by the ordering rule above. */
-export const HEAD_OFFICE = OFFICES[0];
+/**
+ * The office the company leads with, by the ordering rule above.
+ *
+ * Named for what it is used for rather than for a job title nobody assigned.
+ * The previous name, `HEAD_OFFICE`, asserted a corporate structure the site has
+ * never stated, and it silently pointed at Thailand.
+ */
+export const PRIMARY_OFFICE = OFFICES[0];
 
 /**
  * Google Maps deep link — the documented query form, so it needs no place id.

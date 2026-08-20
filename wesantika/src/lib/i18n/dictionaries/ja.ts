@@ -182,8 +182,8 @@ export const ja: PartialDictionary = {
       /* Keyed by `Office.id` in lib/content.ts, so a third office is
          one new key here rather than a new branch in the markup. */
       names: {
-        thailand: "本社",
         singapore: "シンガポール",
+        thailand: "タイ",
       },
       mapLink: "Google マップで開く",
     },

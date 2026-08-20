@@ -49,7 +49,11 @@ const ROUTES = [
       ...COMMON,
       ['id="page-name"', "page contact form"],
       ['id="page-message"', "page message field"],
-      ["Head office", "office label"],
+      // Both offices, not one label: the previous marker was the literal
+      // "Head office", so renaming the label broke the test while an office
+      // quietly vanishing from the list would not have.
+      ["250 Upper Thomson Road", "Singapore office"],
+      ["Chaeng Wattana Road", "Thailand office"],
     ],
     mustNot: [['id="cf-name"', "duplicate footer form"]],
   },

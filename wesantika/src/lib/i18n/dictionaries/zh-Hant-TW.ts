@@ -189,8 +189,8 @@ export const zhHantTW: PartialDictionary = {
       /* Keyed by `Office.id` in lib/content.ts, so a third office is
          one new key here rather than a new branch in the markup. */
       names: {
-        thailand: "總部",
         singapore: "新加坡",
+        thailand: "泰國",
       },
       mapLink: "在 Google 地圖開啟",
     },

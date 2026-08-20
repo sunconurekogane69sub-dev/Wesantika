@@ -189,8 +189,8 @@ export const th: PartialDictionary = {
       /* Keyed by `Office.id` in lib/content.ts, so a third office is
          one new key here rather than a new branch in the markup. */
       names: {
-        thailand: "สำนักงานใหญ่",
         singapore: "สิงคโปร์",
+        thailand: "ไทย",
       },
       mapLink: "เปิดใน Google Maps",
     },

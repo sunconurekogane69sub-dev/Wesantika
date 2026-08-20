@@ -1,4 +1,4 @@
-import { CONTACT_CHANNELS, HEAD_OFFICE, OFFICES } from "@/lib/content";
+import { CONTACT_CHANNELS, OFFICES, PRIMARY_OFFICE } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
 /**
@@ -9,13 +9,18 @@ import { SITE_URL } from "@/lib/site";
  * `PostalAddress` does. This is also what a knowledge panel is built from, and
  * what "wesantika address" has to match to return anything useful.
  *
- * `address` carries the **head office only**, on purpose. Google's Organization
- * guidance asks for the headquarters there specifically, so putting two
- * addresses into it would leave a consumer guessing which is which. The other
- * offices go in `location`, which is the schema.org property for where an
- * organization actually is, and they are emitted only when there is more than
- * one — a `location` array repeating the single head office would say nothing
- * that `address` had not already said.
+ * `address` carries **one** office, on purpose: Google's Organization guidance
+ * asks for a single principal address there, so putting both into it would
+ * leave a consumer guessing which is which. It gets `PRIMARY_OFFICE`, the entry
+ * the site itself leads with — Singapore. That is also what decides which
+ * country a search engine files this company under, so it has to follow the
+ * priority the offices are listed in rather than whichever address was written
+ * down first.
+ *
+ * Every office, including that one, is then listed in `location` — the
+ * schema.org property for where an organization actually is. Emitted only when
+ * there is more than one office, because a `location` array repeating a single
+ * address would say nothing that `address` had not already said.
  *
  * Everything here is real. The email is only emitted when it is not still on
  * `.example` (the RFC 2606 reserved TLD the placeholder uses), because
@@ -38,7 +43,7 @@ export function OrganizationSchema({ locale }: { locale: string }) {
     image: `${SITE_URL}/images/og.png`,
     address: {
       "@type": "PostalAddress",
-      ...HEAD_OFFICE.postal,
+      ...PRIMARY_OFFICE.postal,
     },
     ...(OFFICES.length > 1
       ? {

@@ -187,8 +187,8 @@ export const en = {
       /* Keyed by `Office.id` in lib/content.ts, so a third office is
          one new key here rather than a new branch in the markup. */
       names: {
-        thailand: "Head office",
         singapore: "Singapore",
+        thailand: "Thailand",
       },
       mapLink: "Open in Google Maps",
     },
