@@ -44,7 +44,6 @@ export const vi: PartialDictionary = {
     cta: "Xem chi tiết dịch vụ",
     categories: {
       custom: "Phát triển phần mềm theo yêu cầu",
-      offshore: "Offshore & Outsourcing",
       ai: "Phát triển AI",
       qa: "Kiểm thử QA",
       infrastructure: "Hạ tầng",
@@ -93,14 +92,6 @@ export const vi: PartialDictionary = {
       maintenance: {
         title: "Bảo trì và hỗ trợ phần mềm",
         body: "Giám sát 24/7, bảo trì chủ động và nâng cấp tính năng. Các giải pháp của chúng tôi đảm bảo SLA nghiêm ngặt về tính ổn định, bảo mật và hiệu năng dài hạn của hệ thống.",
-      },
-      outsourcing: {
-        title: "Thuê ngoài phát triển phần mềm",
-        body: "Chúng tôi có năm mô hình thuê ngoài. Khi thuê ngoài phát triển phần mềm tại Việt Nam, bạn có thể tập trung vào hoạt động cốt lõi trong khi rút ngắn thời gian ra thị trường.",
-      },
-      offshoreTeams: {
-        title: "Giải pháp phát triển offshore",
-        body: "Phỏng vấn các lập trình viên hàng đầu ngay hôm nay. Đội ngũ của chúng tôi cung cấp dịch vụ phần mềm offshore chất lượng cao tại Việt Nam với chi phí hợp lý.",
       },
       aiDevelopment: {
         title: "Dịch vụ phát triển AI",
@@ -329,10 +320,6 @@ export const vi: PartialDictionary = {
         saas: {
           title: "Phát triển ứng dụng SaaS",
           body: "Các dự án SaaS phức tạp và dài hạn cần nhà cung cấp giàu kinh nghiệm mới triển khai thành công. Các kỹ sư kỳ cựu của Wesantika hỗ trợ chuyên sâu với hơn 12 năm kinh nghiệm. Chúng tôi tạo ra giải pháp SaaS vững chắc, trực quan, thúc đẩy doanh nghiệp hiện đại bằng những ứng dụng chất lượng cao.",
-        },
-        hire: {
-          title: "Thuê lập trình viên phần mềm",
-          body: "Lập trình viên của chúng tôi có kinh nghiệm dày dạn trong môi trường thuê ngoài, đã tham gia nhiều dự án toàn cầu thuộc nhiều ngành khác nhau. Đội ngũ thích ứng tốt với thách thức ở bất kỳ lĩnh vực nào. Tiếng Anh vững và hiểu biết văn hóa giúp chúng tôi làm việc thuận lợi với khách hàng trên toàn thế giới.",
         },
         qa: {
           title: "Dịch vụ kiểm thử QA phần mềm",

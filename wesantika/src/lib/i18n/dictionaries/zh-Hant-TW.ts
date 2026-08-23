@@ -44,7 +44,6 @@ export const zhHantTW: PartialDictionary = {
     cta: "查看服務詳情",
     categories: {
       custom: "客製化軟體開發",
-      offshore: "委外與離岸開發",
       ai: "AI 開發",
       qa: "QA 測試",
       infrastructure: "基礎架構",
@@ -93,14 +92,6 @@ export const zhHantTW: PartialDictionary = {
       maintenance: {
         title: "軟體維運與支援",
         body: "提供全天候監控、主動維護與功能升級。我們以嚴謹的 SLA 確保系統穩定性、安全性與長期效能。",
-      },
-      outsourcing: {
-        title: "軟體開發委外",
-        body: "我們提供五種委外合作模式。將軟體開發委外至越南，您可以專注於核心業務，同時加速產品上市。",
-      },
-      offshoreTeams: {
-        title: "離岸開發方案",
-        body: "立即面試頂尖工程師。我們在越南以合理成本提供高品質的離岸軟體開發服務。",
       },
       aiDevelopment: {
         title: "AI 開發服務",
@@ -324,10 +315,6 @@ export const zhHantTW: PartialDictionary = {
         saas: {
           title: "SaaS 應用程式開發",
           body: "長期且複雜的 SaaS 專案，需要經驗豐富的夥伴才能順利交付。Wesantika 的資深工程師以超過 12 年的經驗提供專業協助，打造穩健且直覺的 SaaS 方案，以高品質應用推動現代企業前進。",
-        },
-        hire: {
-          title: "招募軟體工程師",
-          body: "我們的工程師具備豐富的委外專案經驗，參與過各產業的眾多國際專案，善於處理各領域的挑戰。紮實的英語能力與跨文化理解，讓我們能順暢地與全球客戶協作。",
         },
         qa: {
           title: "軟體 QA 測試服務",

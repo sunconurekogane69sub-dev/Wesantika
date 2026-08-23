@@ -41,7 +41,6 @@ export const en = {
     cta: "See Service Details",
     categories: {
       custom: "Custom Software Development",
-      offshore: "Offshore & Outsourcing",
       ai: "AI Development",
       qa: "QA Testing",
       infrastructure: "Infrastructure",
@@ -90,14 +89,6 @@ export const en = {
       maintenance: {
         title: "Software Maintenance and Support",
         body: "Enjoy 24/7 monitoring, proactive maintenance, and feature upgrades. Our solutions ensure strict SLAs for system stability, security, and long-term performance.",
-      },
-      outsourcing: {
-        title: "Software Development Outsourcing",
-        body: "We have five outsourcing models. By outsourcing software development in Vietnam, you can focus on your core business while accelerating time-to-market.",
-      },
-      offshoreTeams: {
-        title: "Offshore Development Solutions",
-        body: "Interview elite developers today. Our team offers high-quality offshore software in Vietnam at a reasonable cost.",
       },
       aiDevelopment: {
         title: "AI Development Services",
@@ -391,10 +382,6 @@ export const en = {
         saas: {
           title: "SaaS Application Development",
           body: "Experienced vendors are essential for successfully delivering long-term and complex SaaS projects. Wesantika's seasoned engineers provide expert help, backed by over 12 years of experience. We create robust, intuitive SaaS solutions that empower modern businesses and drive the business forward with high-quality apps.",
-        },
-        hire: {
-          title: "Hire Software Developers",
-          body: "Our developers bring extensive experience from outsourcing environments, having participated in many global projects across various industries. Our team is adept at navigating challenges in any sector. Strong English skills and cultural knowledge help us interact with clients worldwide.",
         },
         qa: {
           title: "Software QA Testing Services",
@@ -770,44 +757,6 @@ export const en = {
       cta: "Discuss Your SaaS Platform",
     },
 
-    hire: {
-      metaTitle: "Hire Dedicated Developers",
-      metaDescription:
-        "Senior engineers who join your team, your standards and your standups - not a black box behind an account manager.",
-      eyebrow: "Services",
-      title: "Hire Dedicated Developers",
-      intro: [
-        "Most disappointing offshore engagements fail structurally, not technically. The team is set up to receive specifications rather than own outcomes, context arrives stripped from tickets, and questions travel through an account manager. Good engineers produce mediocre software under those conditions.",
-        "We staff the opposite way. Our engineers join your standups, see your customer feedback, and are expected to push back on requirements they think are wrong.",
-      ],
-      cards: [
-        {
-          title: "Dedicated Development Teams",
-          body: "A standing team with its own tech lead, working your backlog under **your definition of done**.",
-        },
-        {
-          title: "Team Augmentation",
-          body: "Individual engineers embedded into your existing team, **reporting to your leads** rather than around them.",
-        },
-        {
-          title: "Specialist Roles",
-          body: "AI/ML engineers, data engineers, DevOps, QA automation and **solution architects** for the gaps that are hardest to hire for.",
-        },
-        {
-          title: "Timezone Overlap",
-          body: "Working hours arranged for **real overlap with your team** - four hours is plenty when the team has enough context to decide without asking.",
-        },
-        {
-          title: "Vetting & Onboarding",
-          body: "Every engineer holds a degree in IT or engineering and is **technically assessed by our own seniors** before being proposed.",
-        },
-        {
-          title: "Scaling Up & Down",
-          body: "Adding or releasing capacity on a **defined notice period**, without renegotiating the whole engagement.",
-        },
-      ],
-      cta: "Talk to Us About Your Team",
-    },
 
     qa: {
       metaTitle: "QA & Software Testing Services",

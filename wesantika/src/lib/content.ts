@@ -86,12 +86,11 @@ export type ChannelId = (typeof CONTACT_CHANNELS)[number]["id"];
  * Innovation labels — promising interactivity that is not there — so each card
  * is a link, and this is where it goes.
  *
- * Eleven ids are the same on both sides. The rest are the same service under a
- * different name (`aiDevelopment` and `generativeAi` are both the AI write-up;
- * `outsourcing` and `offshoreTeams` are both Hire Developers). Two have no
- * honest match — `legacy` and `itServices` are covered across several write-ups
- * rather than by one — so they fall back to the Services index, which is a real
- * page and a sensible answer to "tell me more".
+ * Eleven ids are the same on both sides. Two are the same service under a
+ * different name (`aiDevelopment` and `generativeAi` are both the AI write-up).
+ * Two have no honest match — `legacy` and `itServices` are covered across
+ * several write-ups rather than by one — so they fall back to the Services
+ * index, which is a real page and a sensible answer to "tell me more".
  */
 export const SERVICE_CARD_DETAIL: Record<string, ServiceDetailId | null> = {
   custom: "custom",
@@ -109,8 +108,6 @@ export const SERVICE_CARD_DETAIL: Record<string, ServiceDetailId | null> = {
   generativeAi: "ai",
   qaTesting: "qa",
   cloudMigration: "cloud",
-  outsourcing: "hire",
-  offshoreTeams: "hire",
   legacy: null,
   itServices: null,
 };
@@ -228,13 +225,21 @@ export function officeMapUrl(office: Office): string {
 /**
  * Left rail of the services section — Figma 180:624-628.
  *
- * "Hire Developers" (180:629) was dropped on request. The node is still in the
- * Figma file, so re-syncing the rail from Figma would bring it back; the list
- * here is the authority.
+ * Three things have been withdrawn from this rail on request: the "Hire
+ * Developers" tab (180:629), the Hire Developers *write-up*, and then the
+ * **Offshore & Outsourcing** tab.
+ *
+ * The last one took its whole category with it, and that was the only sensible
+ * reading: the tab held exactly two cards, Software Development Outsourcing and
+ * Offshore Development Solutions, so removing both would have left a tab that
+ * selects and reveals nothing. An empty panel is worse than a missing one — it
+ * looks like a page that failed to load.
+ *
+ * Every one of those nodes is still in the Figma file, so re-syncing from Figma
+ * would bring them all back. The lists in this file are the authority.
  */
 export const SERVICE_CATEGORY_IDS = [
   "custom",
-  "offshore",
   "ai",
   "qa",
   "infrastructure",
@@ -247,8 +252,9 @@ export type ServiceCategoryId = (typeof SERVICE_CATEGORY_IDS)[number];
  * tab reveals.
  *
  * `custom` is the 11-card grid drawn in the Top frame (180:630-709). The other
- * four sets were designed off-canvas at x ≈ -1007 (578:472-607) and are keyed
- * to the rail label that sits above each cluster.
+ * three sets were designed off-canvas at x ≈ -1007 (578:472-607) and are keyed
+ * to the rail label that sits above each cluster. A fourth, `offshore`, was
+ * withdrawn — see the note on SERVICE_CATEGORY_IDS above.
  *
  * Card ids are unique across every set so the dictionary can keep one flat
  * `services.cards` map instead of nesting by category.
@@ -266,10 +272,6 @@ export const SERVICE_CARD_SETS = {
     { id: "frontend", icon: "/icons/icon-frontend.svg" },
     { id: "integration", icon: "/icons/icon-integration.svg" },
     { id: "maintenance", icon: "/icons/icon-maintenance.svg" },
-  ],
-  offshore: [
-    { id: "outsourcing", icon: "/icons/icon-outsourcing.svg" },
-    { id: "offshoreTeams", icon: "/icons/icon-offshore.svg" },
   ],
   ai: [
     { id: "aiDevelopment", icon: "/icons/icon-ai-development.svg" },
@@ -357,7 +359,6 @@ export const SERVICE_DETAIL_TOPICS = [
   { id: "product", slug: "software-product-development" },
   { id: "enterprise", slug: "enterprise-software-development" },
   { id: "saas", slug: "saas-application-development" },
-  { id: "hire", slug: "hire-developers" },
   { id: "qa", slug: "qa-testing" },
   { id: "integration", slug: "software-integration" },
   { id: "mvp", slug: "mvp-development" },
@@ -413,7 +414,6 @@ export const SERVICE_OFFER_CARDS = [
   { id: "product", image: "/images/svc-card-software-product.png", detail: "product" },
   { id: "enterprise", image: "/images/svc-card-enterprise.png", detail: "enterprise" },
   { id: "saas", image: "/images/svc-card-saas.png", detail: "saas" },
-  { id: "hire", image: "/images/svc-card-hire-developers.png", detail: "hire" },
   { id: "qa", image: "/images/svc-card-qa-testing.png", detail: "qa" },
   { id: "integration", image: "/images/svc-card-integration.png", detail: "integration" },
   { id: "mvp", image: "/images/svc-card-mvp.png", detail: "mvp" },
