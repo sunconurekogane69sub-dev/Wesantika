@@ -37,7 +37,7 @@ export function ServiceCard({
   return (
     <Link
       href={href}
-      className="group relative flex min-h-[160px] flex-col overflow-hidden rounded-card border border-hairline bg-white px-[25px] py-[20px] transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-[3px] hover:border-brand hover:shadow-[0_16px_36px_-14px_rgb(6_42_82/0.28)] focus-visible:-translate-y-[3px] focus-visible:border-brand motion-reduce:hover:translate-y-0"
+      className="group relative flex min-h-[184px] flex-col overflow-hidden rounded-card border border-hairline bg-white p-5 transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-[3px] hover:border-brand hover:shadow-[0_16px_36px_-14px_rgb(6_42_82/0.28)] focus-visible:-translate-y-[3px] focus-visible:border-brand motion-reduce:hover:translate-y-0"
     >
       {/* A brand hairline that wipes in along the top edge. Origin-left so it
           travels rather than fading, which is what ties it to the lift. */}
@@ -53,7 +53,7 @@ export function ServiceCard({
             them fight it, and scaling a small multi-colour glyph just makes it
             blur. The hover now lives entirely in the card — lift, shadow,
             border, top rule, arrow — and the icon is left alone. */}
-        <span className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-[12px] bg-brand-tint">
+        <span className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-card bg-brand-tint">
           <Icon
             src={icon}
             width={26}
@@ -61,20 +61,25 @@ export function ServiceCard({
             className="h-[26px] w-[26px] object-contain"
           />
         </span>
-        <h3 className="pt-[6px] text-[19px] leading-[28px] font-bold text-black transition-colors duration-200 group-hover:text-brand-ink xl:text-[20px] xl:leading-[28px]">
+        <h3 className="title-3 pt-[5px] text-black transition-colors duration-200 group-hover:text-brand-ink">
           {title}
         </h3>
       </div>
 
-      <p className="mt-[12px] text-[16px] leading-[26px] font-normal text-black/80">
+      <p className="small-text mt-3 font-normal text-black/70">
         {body}
       </p>
 
       {/* Slides out from the left edge on hover. It is the affordance the card
-          was missing: something that says this goes somewhere. */}
+          was missing: something that says this goes somewhere.
+
+          `mt-auto` pins it to the foot of the card. Grid rows stretch to their
+          tallest member, so without this the arrow sat directly under whichever
+          body happened to be shorter and the row's three cards had their
+          affordance at three different heights. */}
       <span
         aria-hidden
-        className="mt-[14px] inline-flex translate-x-[-6px] items-center text-[16px] leading-none font-bold text-brand-ink opacity-0 transition-[opacity,transform] duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100"
+        className="mt-auto inline-flex translate-x-[-6px] pt-4 items-center text-[16px] leading-none font-bold text-brand-ink opacity-0 transition-[opacity,transform] duration-200 ease-out group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100"
       >
         →
       </span>

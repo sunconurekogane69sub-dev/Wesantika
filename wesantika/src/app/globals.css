@@ -40,10 +40,7 @@
 
   /* Footer / form navies. Still used by the Contact page's timeline band, which
      is content and stays on brand navy. */
-  --color-navy-950: #041d38;
   --color-navy-900: #062a52; /* timeline band */
-  --color-navy-700: #0b3a68;
-  --color-navy-600: #1a527f;
 
   /* Footer shell.
      The footer was on the brand navies, and a saturated mid-blue is what dated
@@ -55,7 +52,6 @@
   --color-shell-900: #0b111c; /* footer panel and nav row */
   --color-shell-950: #06090f; /* copyright bar */
   --color-shell-800: #151d2b; /* input wells */
-  --color-field: #afc7dc; /* input placeholder */
 
   /* Card + button hairline.
      Authored as #000000 at 30%, which composites to #b2b2b2 on white and
@@ -122,13 +118,26 @@
   --text-h1: 64px;
   --text-h1--line-height: 70px; /* 1.09 */
 
-  /* Radii as authored */
-  --radius-pill-nav: 4px;
+  /*
+    Radii.
+
+    Seven values were in use across the components — 8 10 12 14 16 24 and
+    `full` — for four kinds of object. Radius is one of the strongest signals
+    that a set of things belong together, so seven of them on one page reads as
+    seven separate designs. Four steps now, each with a job:
+
+      field  6   inputs, where a large radius fights the caret
+      card  12   every card, tile and panel on the site
+      btn   14   buttons and pills, one step rounder than the cards they sit on
+      panel 20   full-bleed feature surfaces
+
+    `card` moved 8 -> 12 so that the cards and the icon tiles inside them agree;
+    at 8 against a 12px tile the card looked like the sharper of the two.
+  */
   --radius-field: 6px;
-  --radius-card: 8px;
+  --radius-card: 12px;
   --radius-btn: 14px;
-  --radius-panel: 24px;
-  --radius-hero-panel: 42px;
+  --radius-panel: 20px;
 }
 
 /* The Figma artboard is 1672px wide. Sections centre on that canvas and fall
@@ -174,6 +183,135 @@
   @media (width >= 80rem) {
     padding-inline: clamp(64px, calc((100vw - 1280px) * 0.37755 + 64px), 212px);
   }
+}
+
+/* ===========================================================================
+   The scale.
+
+   Counted before it was written: this site was using **eighteen** font sizes
+   (13 14 15 16 17 18 19 20 22 28 30 34 36 38 40 44 48 64), **seven** card radii
+   and **ten** section paddings. None of that was designed — it accumulated, one
+   arbitrary value at a time, and the result reads as approximately-aligned
+   rather than deliberate. A reader cannot name the problem but can see it: a
+   28px heading on one page and a 30px heading on the next says nothing except
+   that nobody was counting.
+
+   Nine type steps replace the eighteen. The ratio is roughly a major third at
+   the display end, relaxing towards the text end, which is the standard shape:
+   headings need contrast between steps, body copy needs none.
+
+   Every display step is fluid — `clamp()` between a phone value and a desktop
+   value — so a heading no longer needs three breakpoint overrides to look right
+   at three widths. That is what removes most of the `xl:text-[...]` noise.
+
+   Line height falls as size rises (1.68 at body, 1.05 at display) because long
+   lines of small text need air to find the next line and a 60px headline does
+   not. Tracking moves the other way and is applied Latin-only — see the :lang
+   rules below; negative tracking is wrong for CJK and breaks Thai mark stacking.
+   =========================================================================== */
+
+@utility display-1 {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5.2vw, 60px);
+  line-height: 1.06;
+  font-weight: 700;
+}
+@utility display-2 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.6vw, 44px);
+  line-height: 1.12;
+  font-weight: 700;
+}
+/* Section headings. One size, every section, every page. */
+@utility title-1 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 2.6vw, 34px);
+  line-height: 1.22;
+  font-weight: 700;
+}
+@utility title-2 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.7vw, 24px);
+  line-height: 1.3;
+  font-weight: 700;
+}
+/* Card titles. */
+@utility title-3 {
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 700;
+}
+/* The paragraph under a section heading. */
+@utility lead {
+  font-size: clamp(17px, 1.3vw, 19px);
+  line-height: 1.6;
+}
+@utility body-text {
+  font-size: 16px;
+  line-height: 1.68;
+}
+@utility small-text {
+  font-size: 14px;
+  line-height: 1.6;
+}
+/*
+  The label above a section heading.
+
+  Uppercase and tracked rather than coloured-and-bold, which is what it was in
+  three different ways across the site. At 13px it is well under the 18.66px
+  bold threshold, so it needs the full 4.5:1 — `brand-ink` measures 5.4:1 on
+  white where `brand` manages only 3.3:1.
+*/
+@utility eyebrow {
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------------------
+   Vertical rhythm.
+
+   Ten hand-picked section paddings (56 64 72 80 88 100 112 120 140 150) became
+   three named steps, each fluid. Fluid matters more here than in the type: a
+   fixed 88px of air is generous on a phone and mean on a 27-inch monitor, and
+   the fixed values were the reason the home page ran to 6200px with 400px dead
+   zones in it.
+   --------------------------------------------------------------------------- */
+/*
+  Two shapes, and the difference is not arbitrary.
+
+  A section on the page background only needs padding at the **top**: the space
+  below it belongs to whatever comes next, and if both siblings claimed it the
+  gap would be doubled. That is the model this site already used — every section
+  set `pt-` and none set `pb-` — and it is kept, because changing it means
+  re-tuning every boundary on six pages.
+
+  A section with its **own background** is different. Its colour stops where the
+  element stops, so it has to own the air at both ends or the band clamps around
+  its content. Those get `section-y`.
+
+  Three steps each. Fluid, so one class covers phone to 27-inch and the
+  `xl:pt-[...]` half of every declaration disappears.
+*/
+@utility section-t {
+  padding-top: clamp(56px, 7vw, 104px);
+}
+@utility section-t-sm {
+  padding-top: clamp(40px, 5vw, 72px);
+}
+@utility section-t-lg {
+  padding-top: clamp(72px, 9vw, 136px);
+}
+@utility section-y {
+  padding-block: clamp(56px, 7vw, 104px);
+}
+@utility section-y-sm {
+  padding-block: clamp(40px, 5vw, 72px);
+}
+@utility section-y-lg {
+  padding-block: clamp(72px, 9vw, 136px);
 }
 
 @layer base {

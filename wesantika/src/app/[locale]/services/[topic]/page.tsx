@@ -83,7 +83,7 @@ export default async function ServiceDetailPage({
       {/* The id is what the skip link targets. This page had the landmark but
           not the id, so "Skip to content" did nothing on all 85 of these. */}
       <main id="main-content" className="canvas px-6 pt-[95px] xl:px-0">
-        <div className="mx-auto max-w-[1140px] pt-[56px] xl:pt-[88px]">
+        <div className="mx-auto max-w-[1140px] section-t-sm">
           <Link
             href={`/${locale}/services`}
             className="text-[16px] leading-[26px] font-bold text-brand-ink underline-offset-4 hover:underline"
@@ -92,7 +92,7 @@ export default async function ServiceDetailPage({
             {d.eyebrow}
           </Link>
 
-          <h1 className="mt-[20px] max-w-[750px] text-[30px] leading-[1.2] font-semibold text-black sm:text-[36px] xl:text-[40px] xl:leading-[46px]">
+          <h1 className="display-2 mt-5 max-w-[22ch] text-black">
             {d.title}
           </h1>
 
@@ -110,9 +110,9 @@ export default async function ServiceDetailPage({
             {d.cards.map((card) => (
               <article
                 key={card.title}
-                className="flex flex-col rounded-[8px] border border-hairline bg-white px-[26px] py-[28px]"
+                className="flex flex-col rounded-card border border-hairline bg-white px-[26px] py-[28px]"
               >
-                <h2 className="text-[18px] leading-[28px] font-semibold text-[#212529]">
+                <h2 className="title-3 text-black">
                   {card.title}
                 </h2>
                 <p className="mt-[16px] text-[16px] leading-[24px] font-normal text-[#525252]">
@@ -127,7 +127,7 @@ export default async function ServiceDetailPage({
                 3.66:1, so the label is bold to qualify as large text. */}
             <Link
               href={`/${locale}/contact`}
-              className="inline-flex h-[48px] items-center justify-center rounded-[8px] bg-brand-btn px-[24px] text-[18px] leading-[28px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
+              className="inline-flex h-[48px] items-center justify-center rounded-card bg-brand-btn px-[24px] text-[18px] leading-[28px] font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90"
             >
               {d.cta}
             </Link>

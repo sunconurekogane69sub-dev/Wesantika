@@ -45,22 +45,19 @@ const SIZE = {
    */
   full: {
     section: "h-[100svh] min-h-[520px] max-h-[1000px]",
-    title:
-      "text-[38px] leading-[1.12] sm:text-[52px] xl:text-[68px] xl:leading-[1.08]",
+    title: "display-1",
     body: "mt-[22px] text-[17px] leading-[28px] sm:text-[19px] xl:mt-[28px] xl:text-[22px] xl:leading-[34px]",
     measure: "max-w-[720px]",
   },
   home: {
     section: "h-[560px] sm:h-[660px] xl:h-[760px]",
-    title:
-      "text-[36px] leading-[1.15] sm:text-[48px] xl:text-[60px] xl:leading-[1.1]",
+    title: "display-1",
     body: "mt-[20px] text-[17px] leading-[27px] sm:text-[19px] xl:mt-[26px] xl:text-[22px] xl:leading-[32px]",
     measure: "max-w-[680px]",
   },
   page: {
     section: "h-[400px] sm:h-[470px] xl:h-[560px]",
-    title:
-      "text-[30px] leading-[1.18] sm:text-[38px] xl:text-[48px] xl:leading-[1.15]",
+    title: "display-2",
     body: "mt-[16px] text-[16px] leading-[25px] sm:text-[17px] xl:mt-[20px] xl:text-[19px] xl:leading-[30px]",
     measure: "max-w-[620px]",
   },
@@ -111,8 +108,7 @@ const SIZE = {
    */
   figure: {
     section: "aspect-[1731/909] min-h-[440px] sm:min-h-[520px] max-h-[1200px]",
-    title:
-      "text-[30px] leading-[1.18] sm:text-[38px] xl:text-[48px] xl:leading-[1.15]",
+    title: "display-2",
     body: "mt-[16px] text-[16px] leading-[25px] sm:text-[17px] xl:mt-[20px] xl:text-[19px] xl:leading-[30px]",
     measure: "max-w-[620px]",
   },

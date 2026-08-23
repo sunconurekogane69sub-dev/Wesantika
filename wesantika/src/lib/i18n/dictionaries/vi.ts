@@ -33,12 +33,14 @@ export const vi: PartialDictionary = {
     title: "Phần mềm trụ được vào ngày tệ nhất.",
     subtitle:
       "Kỹ thuật phần mềm AI, đám mây và phát triển theo yêu cầu, cho những đội cần một hệ thống chạy thật chứ không phải nguyên mẫu. Mỗi dự án bắt đầu từ các ràng buộc, rồi thiết kế lùi từ đó.",
+    /* The landing hero's two actions. Two audiences: ready to talk,
+       and wants proof first. */
+    ctaPrimary: "Bắt đầu trao đổi",
+    ctaSecondary: "Xem dự án của chúng tôi",
   },
 
   services: {
     heading: "Dịch vụ toàn diện",
-      /** Rendered in the brand colour; must be a substring of heading. */
-      headingAccent: "Dịch vụ",
     cta: "Xem chi tiết dịch vụ",
     categories: {
       custom: "Phát triển phần mềm theo yêu cầu",
@@ -125,6 +127,11 @@ export const vi: PartialDictionary = {
         body: "Chuyển khối lượng công việc sang AWS, Azure và GCP theo chiến lược rehost, replatform và refactor. Chúng tôi bảo đảm gián đoạn tối thiểu, tuân thủ, tối ưu chi phí và khả năng mở rộng.",
       },
     },
+    /* Replaces `headingAccent`: emphasis now comes from the eyebrow
+       above the heading, which every locale can place identically —
+       a coloured word inside the sentence cannot be translated. */
+    eyebrow: "Chúng tôi làm gì",
+    lead: "Năm mảng chuyên môn, một đội ngũ triển khai. Phần lớn dự án bắt đầu từ một mảng rồi mở rộng.",
   },
 
   ai: {
@@ -249,6 +256,17 @@ export const vi: PartialDictionary = {
     heroCta: "Xem dự án của chúng tôi",
     title: "Về chúng tôi",
     // about.blocks — intentionally untranslated, see the note above.
+    values: {
+      label: "Giá trị cốt lõi",
+      heading: "Những điều chúng tôi tự đặt ra cho mình",
+      items: {
+        customer: "Lấy khách hàng làm trọng tâm",
+        result: "Hướng đến kết quả",
+        collaboration: "Hợp tác",
+        empowerment: "Trao quyền",
+        integrity: "Chính trực",
+      },
+    },
     vision: {
       label: "Tầm nhìn của chúng tôi",
       statement:
@@ -482,6 +500,15 @@ export const vi: PartialDictionary = {
     title: "Trang này không tồn tại",
     body: "Liên kết có thể đã cũ hoặc trang đã được chuyển. Bạn có thể thử các trang sau.",
     home: "Về trang chủ",
+  },
+
+  /* The runtime-error boundary. Sibling of `notFound` and reached the
+     same way — by something going wrong rather than by navigation — so it
+     lives beside it. */
+  error: {
+    title: "Đã xảy ra sự cố",
+    body: "Không tải được trang này. Thường chỉ là tạm thời — hãy thử lại, hoặc chuyển sang trang khác của website.",
+    retry: "Thử lại",
   },
 
   rail: {

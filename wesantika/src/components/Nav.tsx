@@ -187,7 +187,7 @@ export function Nav({
               turns transparent when solid, keeping the geometry stable. */}
           <Link
             href={href("/contact")}
-            className={`flex h-[35px] min-w-[115px] items-center justify-center rounded-pill-nav border bg-brand-cta px-[14px] text-[16px] leading-[26px] font-normal whitespace-nowrap text-white transition-all duration-300 ease-out hover:opacity-90 ${
+            className={`flex h-[35px] min-w-[115px] items-center justify-center rounded-card border bg-brand-cta px-[14px] text-[16px] leading-[26px] font-normal whitespace-nowrap text-white transition-all duration-300 ease-out hover:opacity-90 ${
               solid ? "border-transparent" : "border-white"
             }`}
           >

@@ -17,7 +17,9 @@
     "video": "node scripts/encode-video.mjs",
     "overflow": "node scripts/overflow-check.mjs",
     "mail": "node scripts/mail-check.mjs",
-    "turnstile": "node scripts/turnstile-check.mjs"
+    "turnstile": "node scripts/turnstile-check.mjs",
+    "check": "node scripts/check.mjs",
+    "a11y": "node scripts/a11y-check.mjs"
   },
   "dependencies": {
     "next": "^16.3.0",

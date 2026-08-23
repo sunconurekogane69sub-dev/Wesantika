@@ -76,8 +76,10 @@ export function HeroVideo({
       It existed so phones would fall back to the still rather than pull 19-31MB.
       With the still removed the fallback no longer exists, so gating by width
       would leave a phone looking at an empty hero — which is worse than the data
-      cost it was avoiding. The cost is real and unchanged; the fix for it is an
-      encoder, not a media query. `npm run media` stays red until then.
+      cost it was avoiding. The fix was the encoder rather than a media query,
+      and it has since been applied: `scripts/encode-video.mjs` brought the set
+      from 19-56MB down to 0.7-3.7MB and `npm run media` is green. The heaviest
+      clip, about-hero at 3.7MB, is still a real cost on a phone.
     */
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 

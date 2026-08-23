@@ -76,7 +76,7 @@ export default async function ServicesPage({
           hero, which `npm run fit` showed overrunning in Vietnamese. The hero
           keeps the opening claim; this is the remainder, in the body where it
           belongs. */}
-      <section className="canvas gutter pt-[56px] xl:pt-[72px]">
+      <section className="canvas gutter section-t-sm">
         <p className="max-w-[760px] text-[17px] leading-[28px] font-normal text-black/85 xl:text-[19px] xl:leading-[30px]">
           {s.hero.bodyMore}
         </p>
@@ -90,12 +90,12 @@ export default async function ServicesPage({
         over the place" looks like from the outside, so it now sits where the
         rest of the page sits, under the same brand rule the Why section uses.
       */}
-      <section className="canvas gutter pt-[80px] xl:pt-[140px]">
+      <section className="canvas gutter section-t">
         <span
           aria-hidden
           className="block h-[3px] w-[44px] rounded-full bg-brand"
         />
-        <h2 className="mt-[20px] max-w-[1021px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:text-[44px] xl:leading-[52px]">
+        <h2 className="title-1 mt-5 max-w-[24ch] text-black">
           {s.accelerate.heading}
         </h2>
 
@@ -130,7 +130,7 @@ export default async function ServicesPage({
             <Link
               key={highlight.id}
               href={serviceDetailHref(locale, highlight.detail)}
-              className="group relative flex min-h-[420px] flex-col overflow-hidden rounded-[16px] border border-hairline bg-white outline-none transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-[3px] hover:border-brand hover:shadow-[0_18px_40px_-16px_rgb(6_42_82/0.28)] focus-visible:-translate-y-[3px] focus-visible:border-brand focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-brand-ink motion-reduce:hover:translate-y-0 xl:min-h-[485px]"
+              className="group relative flex min-h-[420px] flex-col overflow-hidden rounded-card border border-hairline bg-white outline-none transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-[3px] hover:border-brand hover:shadow-[0_18px_40px_-16px_rgb(6_42_82/0.28)] focus-visible:-translate-y-[3px] focus-visible:border-brand focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-brand-ink motion-reduce:hover:translate-y-0 xl:min-h-[485px]"
             >
               <span
                 aria-hidden
@@ -169,8 +169,8 @@ export default async function ServicesPage({
       </section>
 
       {/* ---- Services We Offer — 405:1981 / 405:2322 ---------------- */}
-      <section className="canvas gutter pt-[100px] xl:pt-[150px]">
-        <h2 className="max-w-[975px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:text-[44px] xl:leading-[52px]">
+      <section className="canvas gutter section-t-lg">
+        <h2 className="title-1 max-w-[24ch] text-black">
           {s.offer.heading}
         </h2>
         <p className="mt-[20px] max-w-[860px] text-[17px] leading-[28px] font-normal text-black/85 xl:text-[19px] xl:leading-[30px]">
@@ -242,9 +242,9 @@ export default async function ServicesPage({
               "linear-gradient(to right, rgb(255 255 255 / 0.92) 0%, rgb(255 255 255 / 0.86) 42%, rgb(255 255 255 / 0) 78%)",
           }}
         />
-        <div className="canvas relative gutter py-[80px] xl:py-[112px]">
+        <div className="canvas relative gutter section-y">
           <div className="max-w-[760px]">
-            <h2 className="text-[30px] leading-[1.18] font-bold text-black sm:text-[38px] xl:text-[44px] xl:leading-[52px]">
+            <h2 className="title-1 text-black">
               {s.global.heading}
             </h2>
             <p className="mt-[22px] text-[17px] leading-[28px] font-normal text-black/85 xl:text-[19px] xl:leading-[30px]">
@@ -261,7 +261,7 @@ export default async function ServicesPage({
             {GLOBAL_TEAM_POINTS.map((point) => (
               <li
                 key={point.id}
-                className="flex items-center gap-[16px] rounded-[14px] border border-hairline bg-white/80 px-[20px] py-[18px] backdrop-blur-sm"
+                className="flex items-center gap-[16px] rounded-btn border border-hairline bg-white/80 px-[20px] py-[18px] backdrop-blur-sm"
               >
                 <Icon
                   src={point.icon}
@@ -283,10 +283,10 @@ export default async function ServicesPage({
       </section>
 
       {/* ---- Send Your RFP — 405:1910 (same card as the Top page) ---- */}
-      <section className="canvas gutter pt-[80px] xl:pt-[120px]">
+      <section className="canvas gutter section-t">
         <div className="flex flex-col overflow-hidden rounded-panel border border-brand bg-white xl:min-h-[435px] xl:flex-row">
           <div className="px-8 py-10 xl:w-[631px] xl:shrink-0 xl:py-[46px] xl:pr-[24px] xl:pl-[58px]">
-            <h2 className="max-w-[710px] text-[28px] leading-[36px] font-bold text-brand xl:text-[36px] xl:leading-[42px]">
+            <h2 className="title-1 max-w-[22ch] text-black">
               {t.rfp.heading}
             </h2>
             <p className="mt-[24px] max-w-[598px] text-[16px] leading-[26px] font-normal text-black/85 xl:mt-[30px]">
@@ -362,14 +362,14 @@ export default async function ServicesPage({
         heading holds one column and the content the other. Two sections built
         the same way is a language; two built differently is an accident.
       */}
-      <section className="mt-[80px] w-full bg-brand-tint xl:mt-[120px]">
-        <div className="canvas grid gap-[40px] gutter py-[72px] xl:grid-cols-[minmax(0,360px)_minmax(0,1fr)] xl:gap-[96px] xl:py-[104px]">
+      <section className="mt-[clamp(56px,7vw,104px)] w-full bg-brand-tint">
+        <div className="canvas grid gap-10 gutter section-y xl:grid-cols-[minmax(0,360px)_minmax(0,1fr)] xl:gap-24">
           <div className="xl:pt-[6px]">
             <span
               aria-hidden
               className="block h-[3px] w-[44px] rounded-full bg-brand"
             />
-            <h2 className="mt-[20px] text-[30px] leading-[1.15] font-bold text-black sm:text-[36px] xl:text-[42px] xl:leading-[50px]">
+            <h2 className="title-1 mt-5 text-black">
               {s.why.heading}
             </h2>
 

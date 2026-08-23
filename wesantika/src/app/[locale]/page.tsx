@@ -2,11 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AiProximityPanel } from "@/components/AiProximityPanel";
-import { AccentedHeading } from "@/components/AccentedHeading";
 import { CheckMark } from "@/components/CheckMark";
 import { Footer } from "@/components/Footer";
+import { HeroCta } from "@/components/HeroCta";
 import { Nav } from "@/components/Nav";
 import { PageHero } from "@/components/PageHero";
+import { Section } from "@/components/Section";
+import { SectionHeader } from "@/components/SectionHeader";
 import { RfpDialog } from "@/components/RfpDialog";
 import { ServiceTabs } from "@/components/ServiceTabs";
 import { StickyContactRail } from "@/components/StickyContactRail";
@@ -47,18 +49,31 @@ export default async function TopPage({
           size="full"
           title={t.hero.title}
           body={t.hero.subtitle}
-        />
+        >
+          {/*
+            The landing hero was the only one on the site with no call to
+            action — every interior page got one and the page whose entire job
+            is to convert did not. A visitor who agreed with the headline had
+            nothing to press.
 
-      {/* ---- Our Full-Range Services — 180:618-710 ------------------- */}
-      <section className="canvas px-6 pt-[64px] xl:px-0 xl:pt-[88px]">
-        {/* Ink for the phrase, brand for the one word. It used to be brand
-            throughout, which made the whole line read as a label rather than a
-            heading. Brand blue is 3.3:1 on white — fine here, because at 28px
-            and up it counts as large text. */}
-        <AccentedHeading
-          text={t.services.heading}
-          accent={t.services.headingAccent}
-          className="text-[28px] leading-[36px] font-bold text-black xl:pl-[212px] xl:text-[36px] xl:leading-[42px]"
+            Two, because there are two readers here: someone ready to talk, and
+            someone who wants proof first. Sending both to the same button loses
+            the second one.
+          */}
+          <div className="mt-8 flex flex-wrap items-center gap-3 xl:mt-10">
+            <HeroCta href={`/${locale}/contact`}>{t.hero.ctaPrimary}</HeroCta>
+            <HeroCta href={`/${locale}/our-work`} variant="secondary">
+              {t.hero.ctaSecondary}
+            </HeroCta>
+          </div>
+        </PageHero>
+
+      {/* ---- Services ------------------------------------------------ */}
+      <Section size="lg">
+        <SectionHeader
+          eyebrow={t.services.eyebrow}
+          title={t.services.heading}
+          lead={t.services.lead}
         />
 
         <ServiceTabs
@@ -75,7 +90,11 @@ export default async function TopPage({
           }))}
         />
 
-        <div className="mt-[80px] flex justify-center xl:mt-[130px]">
+        {/* Was `mt-[80px] xl:mt-[130px]` and centred, under a grid whose ragged
+            right-hand column already left a void — together that put roughly
+            400px of empty white between the last card and the button. Aligned
+            to the grid's left edge and on the normal rhythm. */}
+        <div className="mt-10 flex">
           <Link
             href={`/${locale}/services`}
             className="flex h-[48px] min-w-[200px] items-center justify-center rounded-card border border-hairline bg-white px-[20px] text-[16px] leading-[26px] font-bold whitespace-nowrap text-black transition-colors hover:border-brand hover:text-brand"
@@ -83,7 +102,7 @@ export default async function TopPage({
             {t.services.cta}
           </Link>
         </div>
-      </section>
+      </Section>
 
       {/*
         ---- AI Innovation — 180:725-761 -----------------------------
@@ -101,7 +120,7 @@ export default async function TopPage({
         The panel also goes edge to edge inside it — it was inset at
         `xl:px-[54px]`, which framed the one element that should not be framed.
       */}
-      <section className="relative mt-[100px] w-full overflow-hidden bg-shell-950 xl:mt-[155px]">
+      <section className="relative mt-[clamp(56px,7vw,104px)] w-full overflow-hidden bg-shell-950">
         {/* One soft brand glow, as on the Contact timeline. Depth, cheaply. */}
         <div
           aria-hidden
@@ -109,13 +128,13 @@ export default async function TopPage({
           style={{ background: "radial-gradient(circle, #00aef7 0%, transparent 70%)" }}
         />
 
-        <div className="canvas relative px-6 pt-[80px] pb-[80px] xl:px-[54px] xl:pt-[104px] xl:pb-[104px]">
+        <div className="canvas relative gutter section-y">
           <div className="mx-auto max-w-[900px] text-center">
             <span
               aria-hidden
               className="mx-auto block h-[3px] w-[44px] rounded-full bg-brand-cta"
             />
-            <h2 className="mt-[22px] text-[32px] leading-[1.15] font-bold text-white sm:text-[44px] xl:text-[56px] xl:leading-[64px]">
+            <h2 className="display-2 mt-5 text-white">
               {t.ai.heading}
             </h2>
             <p className="mx-auto mt-[20px] max-w-[760px] text-[17px] leading-[28px] font-normal text-white/75 xl:text-[19px] xl:leading-[30px]">
@@ -130,7 +149,7 @@ export default async function TopPage({
       </section>
 
       {/* ---- Send Your RFP — 180:711-724 ----------------------------- */}
-      <section className="canvas px-6 pt-[80px] xl:px-[186px] xl:pt-[107px]">
+      <section className="canvas gutter section-t">
         {/* min-h, never a fixed height. The authored card is 435px tall and clips
             (overflow-hidden), but that height only works in Figma because the
             heading (180:714, 710px wide) overlaps 161px into the image to stay on
@@ -143,7 +162,7 @@ export default async function TopPage({
               right gap, so the checklist rows keep their authored line breaks and
               no longer run under the image. */}
           <div className="px-8 py-10 xl:w-[631px] xl:shrink-0 xl:py-[46px] xl:pr-[24px] xl:pl-[58px]">
-            <h2 className="max-w-[710px] text-[28px] leading-[36px] font-bold text-brand xl:text-[36px] xl:leading-[42px]">
+            <h2 className="title-1 max-w-[22ch] text-black">
               {t.rfp.heading}
             </h2>
             <p className="mt-[24px] max-w-[598px] text-[16px] leading-[26px] font-normal text-black/85 xl:mt-[30px]">

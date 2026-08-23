@@ -127,16 +127,16 @@ export default async function ContactPage({
 
         {/* ---------- two ways in ---------- */}
         <section className="w-full bg-white">
-          <div className="canvas gutter pt-[72px] pb-[16px] xl:pt-[88px]">
-            <h2 className="text-[28px] leading-[36px] font-bold text-black xl:text-[36px] xl:leading-[42px]">
+          <div className="canvas gutter section-t">
+            <h2 className="title-1 text-black">
               {c.paths.heading}
             </h2>
 
             <div className="mt-[32px] grid gap-[24px] md:grid-cols-2">
               {/* Anchor rather than a route: the form is on this page, and a
                   scroll keeps the two options visible in the back-history. */}
-              <article className="flex flex-col rounded-[16px] border border-brand bg-brand-tint p-[24px] sm:p-[32px]">
-                <h3 className="text-[22px] leading-[28px] font-bold text-black">
+              <article className="flex flex-col rounded-card border border-brand bg-brand-tint p-[24px] sm:p-[32px]">
+                <h3 className="title-2 text-black">
                   {c.paths.message.title}
                 </h3>
                 <p className="mt-[12px] flex-1 text-[16px] leading-[24px] text-black/75">
@@ -150,8 +150,8 @@ export default async function ContactPage({
                 </a>
               </article>
 
-              <article className="flex flex-col rounded-[16px] border border-hairline bg-white p-[24px] transition-colors sm:p-[32px] hover:border-brand">
-                <h3 className="text-[22px] leading-[28px] font-bold text-black">
+              <article className="flex flex-col rounded-card border border-hairline bg-white p-[24px] transition-colors sm:p-[32px] hover:border-brand">
+                <h3 className="title-2 text-black">
                   {c.paths.rfp.title}
                 </h3>
                 <p className="mt-[12px] flex-1 text-[16px] leading-[24px] text-black/75">
@@ -169,14 +169,14 @@ export default async function ContactPage({
 
         {/* ---------- form + direct channels ---------- */}
         <section id="message" className="w-full scroll-mt-[95px] bg-white">
-          <div className="canvas grid gap-[48px] gutter pt-[64px] pb-[80px] xl:grid-cols-[minmax(0,1fr)_380px] xl:gap-[80px]">
+          <div className="canvas grid gap-12 gutter pt-10 pb-[clamp(56px,7vw,104px)] xl:grid-cols-[minmax(0,1fr)_380px] xl:gap-20">
             {/* Below xl this grid is a single column, so the form was taking the
                 full content width — 976px of input fields at a 1024px viewport.
                 The xl column is 788px wide, so capping at 760 keeps the field
                 measure the same on a tablet as on a desktop instead of letting
                 it stretch to twice a comfortable width. */}
             <div className="max-w-[760px] xl:max-w-none">
-              <h2 className="text-[28px] leading-[36px] font-bold text-black xl:text-[36px] xl:leading-[42px]">
+              <h2 className="title-1 text-black">
                 {c.form.heading}
               </h2>
               <p className="mt-[12px] text-[16px] leading-[24px] text-black/75">
@@ -191,7 +191,7 @@ export default async function ContactPage({
                 this section share an edge below xl instead of one stopping at
                 760 and the other running to the full 976. */}
             <aside className="max-w-[760px] xl:max-w-none xl:pt-[8px]">
-              <h2 className="text-[22px] leading-[28px] font-bold text-black">
+              <h2 className="title-2 text-black">
                 {c.channels.heading}
               </h2>
               <p className="mt-[10px] text-[16px] leading-[24px] text-black/75">
@@ -223,7 +223,7 @@ export default async function ContactPage({
                         {...(external
                           ? { target: "_blank", rel: "noreferrer" }
                           : {})}
-                        className="group flex items-center gap-[16px] rounded-[12px] border border-hairline bg-white px-[16px] py-[14px] transition-colors hover:border-brand hover:bg-brand-tint"
+                        className="group flex items-center gap-[16px] rounded-card border border-hairline bg-white px-[16px] py-[14px] transition-colors hover:border-brand hover:bg-brand-tint"
                       >
                         <span className="flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full bg-brand-btn">
                           <Icon
@@ -269,7 +269,7 @@ export default async function ContactPage({
                 {OFFICES.map((o) => (
                   <address
                     key={o.id}
-                    className="block rounded-[12px] border border-hairline bg-white p-[24px] not-italic"
+                    className="block rounded-card border border-hairline bg-white p-[24px] not-italic"
                   >
                     <h3 className="text-[18px] leading-[28px] font-bold text-black">
                       {c.office.names[o.id]}
@@ -293,7 +293,7 @@ export default async function ContactPage({
                   </address>
                 ))}
 
-                <div className="rounded-[12px] bg-brand-tint p-[24px]">
+                <div className="rounded-card bg-brand-tint p-[24px]">
                   <h3 className="text-[18px] leading-[28px] font-bold text-black">
                     {c.global.heading}
                   </h3>
@@ -327,16 +327,19 @@ export default async function ContactPage({
           <div
             aria-hidden
             className="pointer-events-none absolute -top-[30%] -right-[10%] h-[600px] w-[600px] rounded-full opacity-[0.18] blur-[120px]"
-            style={{ background: "radial-gradient(circle, #00aef7 0%, transparent 70%)" }}
+            style={{
+              background:
+                "radial-gradient(circle, var(--color-brand-cta) 0%, transparent 70%)",
+            }}
           />
 
-          <div className="canvas relative grid gap-[48px] gutter py-[80px] xl:grid-cols-[minmax(0,400px)_minmax(0,1fr)] xl:gap-[100px] xl:py-[112px]">
+          <div className="canvas relative grid gap-12 gutter section-y xl:grid-cols-[minmax(0,400px)_minmax(0,1fr)] xl:gap-24">
             <div className="xl:pt-[6px]">
               <span
                 aria-hidden
                 className="block h-[3px] w-[44px] rounded-full bg-brand-cta"
               />
-              <h2 className="mt-[20px] text-[28px] leading-[36px] font-bold text-white xl:text-[36px] xl:leading-[42px]">
+              <h2 className="title-1 mt-5 text-white">
                 {c.next.heading}
               </h2>
             </div>
@@ -362,7 +365,7 @@ export default async function ContactPage({
                         list above and the Why-choose grid on Services. */}
                     <span
                       aria-hidden
-                      className="relative z-10 flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full bg-brand-btn text-[15px] leading-none font-bold text-white shadow-[0_0_0_6px_rgb(6_42_82)]"
+                      className="relative z-10 flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full bg-brand-btn text-[15px] leading-none font-bold text-white shadow-[0_0_0_6px_var(--color-navy-900)]"
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>

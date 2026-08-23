@@ -77,7 +77,7 @@ type Status =
  * 14px of side padding reads as an input.
  */
 const FIELD =
-  "h-[48px] w-full rounded-[8px] border border-[#667085] bg-white px-[14px] text-[15px] leading-[22px] font-normal text-black outline-none transition-colors placeholder:font-normal placeholder:text-[#667085] focus:border-brand-btn focus:ring-2 focus:ring-brand-btn/25 disabled:opacity-60";
+  "h-[48px] w-full rounded-card border border-[#667085] bg-white px-[14px] text-[15px] leading-[22px] font-normal text-black outline-none transition-colors placeholder:font-normal placeholder:text-[#667085] focus:border-brand-btn focus:ring-2 focus:ring-brand-btn/25 disabled:opacity-60";
 
 /**
  * RFP modal — Figma 572:98 (976 x 700, 29px radius, photographic background).
@@ -298,7 +298,7 @@ function Modal({
         aria-labelledby={titleId}
         // 8px and 0.98 — a lift, not a bounce. Anything larger reads as a
         // toy on a panel this size. `motion-reduce` drops it to a plain fade.
-        className={`relative my-auto w-full max-w-[1000px] overflow-hidden rounded-[24px] bg-navy-900 shadow-[0_24px_64px_-12px_rgba(4,29,56,0.45)] transition-[opacity,transform] duration-200 ease-out motion-reduce:transform-none ${
+        className={`relative my-auto w-full max-w-[1000px] overflow-hidden rounded-panel bg-navy-900 shadow-[0_24px_64px_-12px_rgba(4,29,56,0.45)] transition-[opacity,transform] duration-200 ease-out motion-reduce:transform-none ${
           visible ? "translate-y-0 scale-100 opacity-100" : "translate-y-[8px] scale-[0.98] opacity-0"
         }`}
       >
@@ -320,7 +320,7 @@ function Modal({
         */}
         <div
           aria-hidden
-          className="absolute inset-0 rounded-[24px]"
+          className="absolute inset-0 rounded-panel"
           style={{
             background:
               "linear-gradient(100deg, #eef6ff 0%, #dbebff 46%, #7fb8ee 72%, #0a3f7a 100%)",
@@ -349,7 +349,7 @@ function Modal({
             */}
             <h2
               id={titleId}
-              className="text-[24px] leading-[1.25] font-bold text-black sm:text-[30px] sm:leading-[38px]"
+              className="title-1 text-black"
             >
               {copy.heading.lead}{" "}
               <span className="text-brand-ink">{copy.heading.emphasis}</span>
@@ -405,12 +405,12 @@ function Modal({
             <div ref={captchaRef} className="min-h-[65px]" />
 
             {/* ---- attachment ---------------------------------------- */}
-            <div className="flex items-center gap-[12px] rounded-[14px] border border-[#d6d3d1] bg-white p-[9px]">
+            <div className="flex items-center gap-[12px] rounded-btn border border-[#d6d3d1] bg-white p-[9px]">
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={sending}
-                className="flex h-[42px] cursor-pointer items-center gap-[8px] rounded-[12px] bg-brand-btn px-[16px] text-[14px] leading-none font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
+                className="flex h-[42px] cursor-pointer items-center gap-[8px] rounded-card bg-brand-btn px-[16px] text-[14px] leading-none font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
               >
                 <Icon src="/icons/icon-upload.svg" width={18} height={18} className="h-[18px] w-[18px]" />
                 {copy.chooseFile}
@@ -445,7 +445,7 @@ function Modal({
             */}
             <div aria-live="polite" className="min-h-[22px]">
               {status.kind === "sent" && (
-                <p className="rounded-[10px] bg-white px-[14px] py-[10px] text-[15px] leading-[22px] font-medium text-black">
+                <p className="rounded-card bg-white px-[14px] py-[10px] text-[15px] leading-[22px] font-medium text-black">
                   {copy.sent}
                   {status.previewUrl && (
                     <>
@@ -463,7 +463,7 @@ function Modal({
                 </p>
               )}
               {status.kind === "error" && (
-                <p className="rounded-[10px] bg-white px-[14px] py-[10px] text-[15px] leading-[22px] font-medium text-[#b3261e]">
+                <p className="rounded-card bg-white px-[14px] py-[10px] text-[15px] leading-[22px] font-medium text-[#b3261e]">
                   {status.message}
                 </p>
               )}

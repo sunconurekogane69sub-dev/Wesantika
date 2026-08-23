@@ -454,3 +454,20 @@ export const ABOUT_BLOCK_IDS = [
 ] as const;
 
 export type AboutBlockId = (typeof ABOUT_BLOCK_IDS)[number];
+
+/**
+ * The five core values, in the order the honeycomb graphic draws them.
+ *
+ * Order matters: this list is what builds the graphic's `alt`, and an alt that
+ * names the tiles in a different order than the picture shows them is worse
+ * than no order at all for anyone cross-referencing the two.
+ */
+export const ABOUT_VALUE_IDS = [
+  "customer",
+  "result",
+  "collaboration",
+  "empowerment",
+  "integrity",
+] as const;
+
+export type AboutValueId = (typeof ABOUT_VALUE_IDS)[number];

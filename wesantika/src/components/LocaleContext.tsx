@@ -23,9 +23,9 @@ import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n/locales";
  * from there gives the 404 the right locale with no request-time API, so the
  * pages go back to being files.
  *
- * Only `nav` and `notFound` travel. `nav` was already crossing the client
- * boundary for `<Nav>`, so the marginal cost is `notFound` — three strings, on
- * the order of a couple of hundred bytes a page. The Footer's strings are not
+ * Only `nav`, `notFound` and `error` travel. `nav` was already crossing the client
+ * boundary for `<Nav>`, so the marginal cost is the two
+ * boundaries' copy — six strings, on the order of half a kilobyte a page. The Footer's strings are not
  * here on purpose: they are the largest block in the dictionary (seventeen
  * service names among them) and putting them in context would push all of that
  * into every page's payload to serve one route that is meant never to be seen.
@@ -35,6 +35,9 @@ export type LocaleContextValue = {
   locale: Locale;
   nav: Dictionary["nav"];
   notFound: Dictionary["notFound"];
+  /* Three more strings, for `error.tsx`, which needs a locale for exactly the
+     same reason and cannot get one any other way. Same trade as `notFound`. */
+  error: Dictionary["error"];
 };
 
 const LocaleContext = createContext<LocaleContextValue | null>(null);

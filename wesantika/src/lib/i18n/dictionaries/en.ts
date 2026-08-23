@@ -30,12 +30,14 @@ export const en = {
     title: "Software that works on its worst day.",
     subtitle:
       "AI, cloud and custom software engineering for teams who need a production system, not a prototype. Every engagement starts with the constraints — then we design backwards from them.",
+    /* The landing hero's two actions. Two audiences: ready to talk,
+       and wants proof first. */
+    ctaPrimary: "Start a conversation",
+    ctaSecondary: "See our work",
   },
 
   services: {
     heading: "Our Full-Range Services",
-      /** Rendered in the brand colour; must be a substring of heading. */
-      headingAccent: "Services",
     cta: "See Service Details",
     categories: {
       custom: "Custom Software Development",
@@ -122,6 +124,11 @@ export const en = {
         body: "Migrate workloads to AWS, Azure, and GCP using rehost, replatform, and refactor strategies. We ensure minimal downtime, compliance, cost efficiency, and scalability.",
       },
     },
+    /* Replaces `headingAccent`: emphasis now comes from the eyebrow
+       above the heading, which every locale can place identically —
+       a coloured word inside the sentence cannot be translated. */
+    eyebrow: "What we do",
+    lead: "Five practices, one delivery team. Most engagements start in one and grow across several.",
   },
 
   ai: {
@@ -1266,6 +1273,15 @@ export const en = {
     title: "This page does not exist",
     body: "The link may be out of date, or the page may have moved. These are the places worth trying.",
     home: "Back to home",
+  },
+
+  /* The runtime-error boundary. Sibling of `notFound` and reached the
+     same way — by something going wrong rather than by navigation — so it
+     lives beside it. */
+  error: {
+    title: "Something went wrong",
+    body: "This page failed to load. That is usually temporary — try again, or head somewhere else on the site.",
+    retry: "Try again",
   },
 
   rail: {

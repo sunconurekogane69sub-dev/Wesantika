@@ -33,12 +33,14 @@ export const th: PartialDictionary = {
     title: "ซอฟต์แวร์ที่ไม่ล้มเมื่อใช้งานจริง",
     subtitle:
       "วิศวกรรมซอฟต์แวร์ด้าน AI คลาวด์ และระบบตามความต้องการ สำหรับทีมที่ต้องการระบบใช้งานจริง ไม่ใช่ต้นแบบ ทุกโครงการเริ่มจากการระบุข้อจำกัด แล้วออกแบบย้อนกลับจากจุดนั้น",
+    /* The landing hero's two actions. Two audiences: ready to talk,
+       and wants proof first. */
+    ctaPrimary: "เริ่มพูดคุยกับเรา",
+    ctaSecondary: "ดูผลงานของเรา",
   },
 
   services: {
     heading: "บริการครบวงจรของเรา",
-      /** Rendered in the brand colour; must be a substring of heading. */
-      headingAccent: "บริการ",
     cta: "ดูรายละเอียดบริการ",
     categories: {
       custom: "พัฒนาซอฟต์แวร์ตามความต้องการ",
@@ -125,6 +127,11 @@ export const th: PartialDictionary = {
         body: "ย้ายเวิร์กโหลดไปยัง AWS, Azure และ GCP ด้วยกลยุทธ์ rehost, replatform และ refactor เรารับประกันเวลาหยุดทำงานน้อยที่สุด การปฏิบัติตามข้อกำหนด ความคุ้มค่า และการขยายตัว",
       },
     },
+    /* Replaces `headingAccent`: emphasis now comes from the eyebrow
+       above the heading, which every locale can place identically —
+       a coloured word inside the sentence cannot be translated. */
+    eyebrow: "สิ่งที่เราทำ",
+    lead: "ห้าสายงาน ทีมส่งมอบเดียว งานส่วนใหญ่เริ่มจากสายงานเดียวแล้วขยายออกไป",
   },
 
   ai: {
@@ -246,6 +253,17 @@ export const th: PartialDictionary = {
     heroCta: "ดูผลงานของเรา",
     title: "เกี่ยวกับเรา",
     // about.blocks — intentionally untranslated, see the note above.
+    values: {
+      label: "ค่านิยมหลัก",
+      heading: "สิ่งที่เรายึดถือเป็นมาตรฐานของตัวเอง",
+      items: {
+        customer: "ยึดลูกค้าเป็นศูนย์กลาง",
+        result: "มุ่งผลลัพธ์",
+        collaboration: "การทำงานร่วมกัน",
+        empowerment: "การมอบอำนาจ",
+        integrity: "ความซื่อตรง",
+      },
+    },
     vision: {
       label: "วิสัยทัศน์ของเรา",
       statement:
@@ -479,6 +497,15 @@ export const th: PartialDictionary = {
     title: "ไม่พบหน้านี้",
     body: "ลิงก์อาจหมดอายุ หรือหน้านี้อาจถูกย้าย ลองไปที่หน้าเหล่านี้ดู",
     home: "กลับหน้าแรก",
+  },
+
+  /* The runtime-error boundary. Sibling of `notFound` and reached the
+     same way — by something going wrong rather than by navigation — so it
+     lives beside it. */
+  error: {
+    title: "เกิดข้อผิดพลาดบางอย่าง",
+    body: "โหลดหน้านี้ไม่สำเร็จ ส่วนใหญ่เป็นเพียงชั่วคราว ลองอีกครั้ง หรือไปยังหน้าอื่นของเว็บไซต์",
+    retry: "ลองอีกครั้ง",
   },
 
   rail: {

@@ -33,12 +33,14 @@ export const zhHantTW: PartialDictionary = {
     title: "在正式環境中不會停擺的軟體。",
     subtitle:
       "AI、雲端與客製化軟體工程。我們交付的是能承受實際運行的系統，而不是原型。每個專案都從釐清限制條件開始，再由此反推設計。",
+    /* The landing hero's two actions. Two audiences: ready to talk,
+       and wants proof first. */
+    ctaPrimary: "與我們談談",
+    ctaSecondary: "查看實績",
   },
 
   services: {
     heading: "完整服務範圍",
-      /** Rendered in the brand colour; must be a substring of heading. */
-      headingAccent: "服務",
     cta: "查看服務詳情",
     categories: {
       custom: "客製化軟體開發",
@@ -125,6 +127,11 @@ export const zhHantTW: PartialDictionary = {
         body: "以 rehost、replatform 與 refactor 策略，將工作負載遷移至 AWS、Azure 與 GCP。我們確保最短停機時間、法規遵循、成本效益與可擴展性。",
       },
     },
+    /* Replaces `headingAccent`: emphasis now comes from the eyebrow
+       above the heading, which every locale can place identically —
+       a coloured word inside the sentence cannot be translated. */
+    eyebrow: "服務領域",
+    lead: "五個領域，同一支交付團隊。多數專案從一個領域開始，再逐步延伸。",
   },
 
   ai: {
@@ -245,6 +252,17 @@ export const zhHantTW: PartialDictionary = {
     heroCta: "看看我們的作品",
     title: "關於我們",
     // about.blocks — intentionally untranslated, see the note above.
+    values: {
+      label: "核心價值",
+      heading: "我們對自己的要求",
+      items: {
+        customer: "以客戶為中心",
+        result: "結果導向",
+        collaboration: "協作",
+        empowerment: "賦能",
+        integrity: "誠信",
+      },
+    },
     vision: {
       label: "我們的願景",
       statement: "成為企業在創新最關鍵時刻願意信賴的技術夥伴。",
@@ -476,6 +494,15 @@ export const zhHantTW: PartialDictionary = {
     title: "這個頁面不存在",
     body: "連結可能已失效，或頁面已移動。您可以試試以下頁面。",
     home: "返回首頁",
+  },
+
+  /* The runtime-error boundary. Sibling of `notFound` and reached the
+     same way — by something going wrong rather than by navigation — so it
+     lives beside it. */
+  error: {
+    title: "發生了一些問題",
+    body: "此頁面載入失敗，通常只是暫時性的。請重試，或前往網站的其他頁面。",
+    retry: "重試",
   },
 
   rail: {

@@ -102,7 +102,7 @@ export function Footer({
           */}
           <div className="canvas grid gap-[40px] gutter py-[72px] xl:grid-cols-[minmax(0,1fr)_560px] xl:gap-[80px] xl:py-[88px]">
             <div className="xl:max-w-[520px] xl:self-center">
-              <h2 className="text-[26px] leading-[34px] font-bold text-white xl:text-[30px] xl:leading-[38px]">
+              <h2 className="title-1 text-white">
                 {strings.heading}
               </h2>
               <p className="mt-[14px] text-[16px] leading-[26px] font-normal text-white/80 xl:text-[17px]">

@@ -26,12 +26,14 @@ export const ja: PartialDictionary = {
     title: "本番環境で止まらないソフトウェアを。",
     subtitle:
       "AI・クラウド・受託開発のエンジニアリング。試作ではなく、実運用に耐えるシステムをつくります。まず制約条件を洗い出し、そこから逆算して設計します。",
+    /* The landing hero's two actions. Two audiences: ready to talk,
+       and wants proof first. */
+    ctaPrimary: "ご相談はこちら",
+    ctaSecondary: "実績を見る",
   },
 
   services: {
     heading: "提供サービス",
-      /** Rendered in the brand colour; must be a substring of heading. */
-      headingAccent: "サービス",
     cta: "サービス詳細を見る",
     categories: {
       custom: "カスタムソフトウェア開発",
@@ -118,6 +120,11 @@ export const ja: PartialDictionary = {
         body: "AWS・Azure・GCPへのワークロード移行を、リホスト／リプラットフォーム／リファクタの各手法で実施します。停止時間を最小限に抑え、コンプライアンス・コスト効率・拡張性を確保します。",
       },
     },
+    /* Replaces `headingAccent`: emphasis now comes from the eyebrow
+       above the heading, which every locale can place identically —
+       a coloured word inside the sentence cannot be translated. */
+    eyebrow: "事業領域",
+    lead: "5つの領域を、ひとつのチームで。多くの案件は1領域から始まり、複数へと広がっていきます。",
   },
 
   ai: {
@@ -289,6 +296,17 @@ export const ja: PartialDictionary = {
           "異なる発想。",
           "卓越性への、ひとつの共通した意志。",
         ],
+      },
+    },
+    values: {
+      label: "コアバリュー",
+      heading: "私たちが自らに課していること",
+      items: {
+        customer: "顧客本位",
+        result: "成果へのこだわり",
+        collaboration: "協働",
+        empowerment: "権限移譲",
+        integrity: "誠実",
       },
     },
     vision: {
@@ -776,6 +794,15 @@ export const ja: PartialDictionary = {
     title: "このページは存在しません",
     body: "リンクが古いか、ページが移動した可能性があります。以下のページをお試しください。",
     home: "トップへ戻る",
+  },
+
+  /* The runtime-error boundary. Sibling of `notFound` and reached the
+     same way — by something going wrong rather than by navigation — so it
+     lives beside it. */
+  error: {
+    title: "問題が発生しました",
+    body: "このページを読み込めませんでした。一時的な場合がほとんどです。再試行いただくか、別のページへお進みください。",
+    retry: "再試行",
   },
 
   rail: {

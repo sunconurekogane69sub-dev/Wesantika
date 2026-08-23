@@ -56,31 +56,26 @@ export function ServiceOfferCard({
       {detailHref && (
         <span
           aria-hidden
-          className="absolute inset-x-[-1px] top-[-1px] h-[3px] origin-left scale-x-0 rounded-t-[16px] bg-brand transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100"
+          className="absolute inset-x-[-1px] top-[-1px] h-[3px] origin-left scale-x-0 rounded-t-card bg-brand transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100"
         />
       )}
 
-      <div className="px-[26px] pt-[30px]">
-        <h3 className="text-[19px] leading-[28px] font-bold text-black transition-colors duration-200 group-hover:text-brand-ink xl:text-[20px] xl:leading-[30px]">
+      {/*
+        Title, then picture, then the link — in that order.
+
+        It used to be title, link, picture: the one control on the card sat
+        *between* the heading and the image it belonged to, in 15px blue caps,
+        which reads as a caption on the title rather than the card's action. A
+        card is a small poster; its call to action goes at the foot, where the
+        eye arrives after the content rather than on the way past it.
+      */}
+      <div className="px-6 pt-7">
+        <h3 className="title-3 text-black transition-colors duration-200 group-hover:text-brand-ink">
           {title}
         </h3>
-
-        {detailHref && (
-          <span
-            aria-hidden
-            className="mt-[10px] inline-flex items-baseline text-[15px] leading-[24px] font-bold text-brand-ink"
-          >
-            <span className="border-b border-brand-ink/0 transition-colors duration-200 group-hover:border-brand-ink/60">
-              {detailLabel}
-            </span>
-            <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-[5px]">
-              {" →"}
-            </span>
-          </span>
-        )}
       </div>
 
-      <div className="relative mx-[14px] mt-[22px] mb-[14px] h-[273px] flex-1 overflow-hidden rounded-[10px] bg-brand-tint">
+      <div className="relative mx-[14px] mt-5 h-[262px] flex-1 overflow-hidden rounded-card bg-brand-tint">
         {/* Two of the seventeen slots are vector, and Next's image optimizer
             answers 400 for SVG unless `dangerouslyAllowSVG` is set globally.
             Serving them straight from /public sidesteps that without loosening
@@ -100,11 +95,27 @@ export function ServiceOfferCard({
           {body}
         </p>
       </div>
+
+      {detailHref && (
+        <span
+          aria-hidden
+          className="inline-flex items-baseline px-6 pt-4 pb-6 text-[15px] leading-6 font-bold text-brand-ink"
+        >
+          <span className="border-b border-brand-ink/0 transition-colors duration-200 group-hover:border-brand-ink/60">
+            {detailLabel}
+          </span>
+          <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-[5px]">
+            {" →"}
+          </span>
+        </span>
+      )}
+      {/* Cards without a write-up keep the same foot so the row stays level. */}
+      {!detailHref && <span aria-hidden className="pb-6" />}
     </>
   );
 
   const shell =
-    "group relative flex min-h-[422px] w-full flex-col overflow-hidden rounded-[16px] border border-hairline bg-white";
+    "group relative flex min-h-[422px] w-full flex-col overflow-hidden rounded-card border border-hairline bg-white";
 
   // Two of the seventeen have no write-up yet. Those stay a plain article — a
   // card that looks clickable and is not is worse than one that looks static.

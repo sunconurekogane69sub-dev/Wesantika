@@ -6,7 +6,7 @@ import { Nav } from "@/components/Nav";
 import { HeroCta } from "@/components/HeroCta";
 import { PageHero } from "@/components/PageHero";
 import { StickyContactRail } from "@/components/StickyContactRail";
-import { ABOUT_BLOCK_IDS } from "@/lib/content";
+import { ABOUT_BLOCK_IDS, ABOUT_VALUE_IDS } from "@/lib/content";
 import { getDictionary } from "@/lib/i18n";
 import { isLocale } from "@/lib/i18n/locales";
 import { socialMetadata } from "@/lib/metadata";
@@ -92,13 +92,13 @@ export default async function AboutPage({
         720px, 17/28, and real space between paragraphs. The pull quote was
         indistinguishable from body copy; it now looks like a pull quote.
       */}
-      <section className="canvas px-6 pt-[64px] xl:px-0 xl:pt-[88px]">
+      <section className="canvas gutter section-t">
         <div className="mx-auto max-w-[720px]">
           {ABOUT_BLOCK_IDS.map((id, index) => {
             const block = t.about.blocks[id];
             return (
               <div key={id} className={index === 0 ? "" : "mt-[56px]"}>
-                <h2 className="text-[22px] leading-[30px] font-bold text-black xl:text-[26px] xl:leading-[34px]">
+                <h2 className="title-2 text-black">
                   {block.heading}
                 </h2>
                 <div className="mt-[18px] flex flex-col gap-[14px]">
@@ -144,7 +144,7 @@ export default async function AboutPage({
           quality={90}
           className="object-cover object-center"
         />
-        <div className="canvas relative gutter py-[80px] xl:py-[120px]">
+        <div className="canvas relative gutter section-y">
           {/* brand-ink, not brand: 20px normal needs 4.5:1 and #0f84fd only
               reaches 3.3:1 on this near-white band. */}
           <p className="text-[18px] leading-[28px] font-bold text-brand-ink xl:text-[20px]">
@@ -152,7 +152,7 @@ export default async function AboutPage({
           </p>
           <span aria-hidden className="mt-[8px] block h-[4px] w-[49px] bg-brand" />
 
-          <h2 className="mt-[32px] max-w-[760px] text-[30px] leading-[1.2] font-bold text-black sm:text-[38px] xl:mt-[40px] xl:text-[48px] xl:leading-[56px]">
+          <h2 className="title-1 mt-8 max-w-[22ch] text-black">
             {t.about.vision.statement}
           </h2>
 
@@ -169,18 +169,61 @@ export default async function AboutPage({
         </div>
       </section>
 
-      {/* ---- Core values — 210:997 -----------------------------------
-          Drawn 1976px wide inside a 1672px page, so it bleeds ~152px past
-          each edge. Reproduced as authored: oversized and clipped. */}
-      <section className="mt-[14px] w-full overflow-hidden">
-        <div className="relative aspect-[1976/1087] w-full xl:left-1/2 xl:w-[1976px] xl:-translate-x-1/2">
-          <Image
-            src="/images/core-values.png"
-            alt=""
-            fill
-            sizes="1976px"
-            className="object-contain"
-          />
+      {/*
+        ---- Core values — 210:997 ---------------------------------
+
+        This section was a single 1976x1087 PNG and nothing else: no heading, no
+        text, `alt=""`. Everything it says — the five value names — is pixels.
+
+        That is three separate failures stacked on one element. A screen reader
+        is told there is a decorative image and moves on, so the section does
+        not exist. A search engine sees the same nothing. And the words are
+        English on all five locales, which is WCAG 1.4.5 (Images of Text, AA) —
+        the one image-of-text rule that has no "essential" exemption here,
+        because these are five ordinary nouns that render perfectly well as
+        text.
+
+        What is fixed here is everything that could be fixed without redrawing
+        the artwork: the section gets its real heading and eyebrow from the
+        dictionary, so it is a section rather than a floating picture, and the
+        graphic gets an `alt` that names the five values in the reader's own
+        language. Structure, assistive tech and indexing all work now.
+
+        What is **not** fixed is the artwork itself: the words inside the
+        hexagons are still English pixels in every locale. Closing that means
+        rebuilding the honeycomb as markup — the strings are already sitting in
+        `about.values.items`, translated and unused, waiting for it — or
+        exporting five localised PNGs. That is a design decision, so it is
+        flagged rather than taken.
+
+        Drawn 1976px wide inside a 1672px page, so it bleeds ~152px past each
+        edge. Reproduced as authored: oversized and clipped.
+      */}
+      <section className="mt-[64px] xl:mt-[88px]">
+        <div className="canvas gutter">
+          <p className="text-[18px] leading-[28px] font-bold text-brand-ink xl:text-[20px]">
+            {t.about.values.label}
+          </p>
+          <span aria-hidden className="mt-[8px] block h-[4px] w-[49px] bg-brand" />
+          <h2 className="title-1 mt-6 max-w-[22ch] text-black">
+            {t.about.values.heading}
+          </h2>
+        </div>
+
+        <div className="mt-[14px] w-full overflow-hidden">
+          <div className="relative aspect-[1976/1087] w-full xl:left-1/2 xl:w-[1976px] xl:-translate-x-1/2">
+            <Image
+              src="/images/core-values.png"
+              /* Not decorative. The five names are the section's content and
+                 they exist nowhere else in the DOM, so the alt has to carry
+                 them — localised, because the dictionary has them and a reader
+                 on the Thai site should not be read five English words. */
+              alt={ABOUT_VALUE_IDS.map((id) => t.about.values.items[id]).join(", ")}
+              fill
+              sizes="1976px"
+              className="object-contain"
+            />
+          </div>
         </div>
       </section>
 

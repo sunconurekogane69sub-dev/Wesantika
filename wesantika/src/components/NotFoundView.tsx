@@ -47,7 +47,7 @@ export function NotFoundView({
         <p className="text-[16px] leading-[26px] font-bold tracking-wide text-brand-ink uppercase">
           404
         </p>
-        <h1 className="mt-[16px] max-w-[760px] text-[36px] leading-[1.15] font-bold text-black sm:text-[48px] xl:text-[64px] xl:leading-[70px]">
+        <h1 className="display-2 mt-4 max-w-[20ch] text-black">
           {copy.title}
         </h1>
         <p className="mt-[24px] max-w-[640px] text-[18px] leading-[28px] text-black/75 xl:text-[20px]">

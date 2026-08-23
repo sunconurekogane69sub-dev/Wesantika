@@ -87,7 +87,7 @@ export default async function TechnologiesPage({
           it was the longest sub-head on the site, and `npm run fit` showed it
           overrunning the 560px hero. The hero keeps the opening claim; this is
           the remainder, in the body where it belongs. */}
-      <section className="canvas gutter pt-[56px] xl:pt-[72px]">
+      <section className="canvas gutter section-t-sm">
         <p className="max-w-[760px] text-[17px] leading-[28px] font-normal text-black/85 xl:text-[19px] xl:leading-[30px]">
           {tech.hero.bodyMore}
         </p>
@@ -105,13 +105,13 @@ export default async function TechnologiesPage({
         band: heading in one column, content in the other, both on the 212px
         site gutter. Three sections built the same way is a system.
       */}
-      <section className="canvas grid gap-[40px] gutter pt-[70px] xl:grid-cols-[minmax(0,420px)_minmax(0,1fr)] xl:gap-[80px] xl:pt-[88px]">
+      <section className="canvas grid gap-10 gutter section-t xl:grid-cols-[minmax(0,420px)_minmax(0,1fr)] xl:gap-20">
         <div className="xl:pt-[6px]">
           <span
             aria-hidden
             className="block h-[3px] w-[44px] rounded-full bg-brand"
           />
-          <h2 className="mt-[20px] text-[28px] leading-[1.18] font-bold text-black sm:text-[34px] xl:text-[38px] xl:leading-[46px]">
+          <h2 className="title-1 mt-5 text-black">
             {tech.stacksHeading}
           </h2>
         </div>
@@ -132,17 +132,17 @@ export default async function TechnologiesPage({
       {/* Was `bg-[#f7f7f7]` — an ad-hoc *warm* neutral on a site that is cool blue
           throughout, the same fault the Services band had. And `pb-[186px]`, which
           is a Figma coordinate rather than a spacing decision. */}
-      <div className="mt-[80px] w-full bg-brand-tint pt-[72px] pb-[96px] xl:mt-[104px] xl:pt-[88px] xl:pb-[112px]">
+      <div className="mt-[clamp(56px,7vw,104px)] w-full bg-brand-tint section-y">
         <TechStackSection heading={headings.ai} section={section("ai")} />
         <TechStackSection heading={headings.backend} section={section("backend")} />
         <TechStackSection heading={headings.frontend} section={section("frontend")} />
         <TechStackSection heading={headings.app} section={section("app")} />
 
         {/* ---- Pick Your Stack — 507:128 ---------------------------- */}
-        <section className="canvas gutter pt-[88px] xl:pt-[120px]">
+        <section className="canvas gutter section-t">
           <div className="flex flex-col overflow-hidden rounded-panel border border-hairline bg-white xl:min-h-[435px] xl:flex-row">
             <div className="px-8 py-10 xl:w-[631px] xl:shrink-0 xl:py-[46px] xl:pr-[24px] xl:pl-[58px]">
-              <h2 className="max-w-[710px] text-[28px] leading-[36px] font-bold text-brand xl:text-[36px] xl:leading-[42px]">
+              <h2 className="title-1 max-w-[22ch] text-black">
                 {tech.rfp.heading}
               </h2>
               <p className="mt-[24px] max-w-[598px] text-[16px] leading-[26px] font-normal text-black/85 xl:mt-[30px]">
@@ -230,14 +230,14 @@ function TechStackSection({
       className="canvas gutter"
       style={{ paddingTop: spacing }}
     >
-      <h2 className="text-[20px] leading-[29px] font-bold text-black xl:text-[22px] xl:leading-[30px]">
+      <h2 className="title-2 text-black">
         {heading}
       </h2>
       <ul className="mt-[28px] grid grid-cols-2 gap-[12px] sm:grid-cols-3 xl:mt-[36px] xl:grid-cols-6">
         {section.logos.map((logo) => (
           <li
             key={logo.file}
-            className="flex h-[88px] items-center justify-center rounded-[10px] border border-black/[0.08] bg-white transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-[2px] hover:border-black/[0.16] hover:shadow-[0_10px_24px_-12px_rgb(6_42_82/0.22)] motion-reduce:hover:translate-y-0"
+            className="flex h-[88px] items-center justify-center rounded-card border border-black/[0.08] bg-white transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-[2px] hover:border-black/[0.16] hover:shadow-[0_10px_24px_-12px_rgb(6_42_82/0.22)] motion-reduce:hover:translate-y-0"
           >
             <Image
               src={logo.file}

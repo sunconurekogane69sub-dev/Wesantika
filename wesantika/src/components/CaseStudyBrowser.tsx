@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import {
   CASE_STUDIES,
   WORK_INDUSTRIES,
@@ -80,7 +80,10 @@ export function CaseStudyBrowser({ copy }: { copy: BrowserCopy }) {
   };
 
   return (
-    <div className="canvas px-6 py-[70px] xl:px-[150px] xl:py-[90px]">
+    <div /* Was `px-6 xl:px-[150px]` — a fifth gutter value, so the case-study
+         grid sat on a different left edge from every other section on the
+         site. On the shared one now. */
+      className="canvas gutter section-y">
       {/* ---- search ------------------------------------------------- */}
       <label className="sr-only" htmlFor="work-search">
         {copy.searchLabel}
@@ -152,10 +155,24 @@ function FilterBand({
   active: string | null;
   onChange: (v: string | null) => void;
 }) {
+  const labelId = useId();
+
+  /*
+    `role="group"` with `aria-labelledby`, not a bare sr-only paragraph.
+
+    The label was already here and already invisible-but-present, which is the
+    right instinct — but nothing connected it to the chips, so a screen reader
+    read "Services" as a stray line of text and then eleven unrelated toggle
+    buttons. Naming the group is what makes the chips belong to it, and it is
+    the difference between "Services group, Healthcare, pressed" and
+    "Healthcare, pressed".
+  */
   return (
     <div className="mt-[28px]">
-      <p className="sr-only">{label}</p>
-      <div className="flex flex-wrap gap-[10px]">
+      <p id={labelId} className="sr-only">
+        {label}
+      </p>
+      <div role="group" aria-labelledby={labelId} className="flex flex-wrap gap-[10px]">
         <Chip label={all} active={active === null} onClick={() => onChange(null)} />
         {options.map((option) => (
           <Chip
@@ -197,7 +214,7 @@ function Chip({
 
 function Card({ study }: { study: CaseStudy }) {
   return (
-    <article className="group flex flex-col overflow-hidden rounded-[16px] border border-hairline bg-white transition-shadow hover:shadow-[0_14px_32px_rgb(0_0_0/0.12)]">
+    <article className="group flex flex-col overflow-hidden rounded-card border border-hairline bg-white transition-shadow hover:shadow-[0_14px_32px_rgb(0_0_0/0.12)]">
       <div className="relative aspect-[407/220] w-full bg-[#f6f7fc]">
         <Image
           src={study.image}
@@ -218,9 +235,24 @@ function Card({ study }: { study: CaseStudy }) {
             </span>
           ))}
         </div>
-        <h3 className="mt-[12px] text-[16px] leading-[24px] font-semibold text-[#101624]">
+        {/*
+          h2, not h3.
+
+          These cards are the page's content sitting directly under its h1 —
+          there is no section heading between them, because the band above is a
+          search box and two rows of filter chips rather than a titled section.
+          As h3 the outline read h1 -> h3, which is a level skipped, and a
+          screen reader navigating by heading is told these are subsections of
+          something that does not exist. `npm run a11y` catches this.
+
+          Making the cards h2 is the honest fix. Inventing a visible "Case
+          studies" heading to justify h3 would be adding design to satisfy a
+          validator, and 16px semibold is the right *look* for a card title
+          whatever its level — heading level is structure, not size.
+        */}
+        <h2 className="mt-[12px] text-[16px] leading-[24px] font-semibold text-[#101624]">
           {study.title}
-        </h3>
+        </h2>
         {/* The card was a title and nothing else — 70 of them, which read as a
             list rather than a body of work. The description is what makes the
             grid worth scanning. It is written from the title and the tags, so it

@@ -122,10 +122,12 @@ export default async function LocaleLayout({
         {/* First focusable element in the document — it only works from here. */}
         <SkipLink label={t.a11y.skipToContent} />
         <OrganizationSchema locale={locale} />
-        {/* Publishes the locale to `not-found.tsx`, which gets no route params
-            of its own. See the note in LocaleContext.tsx — this is what keeps
+        {/* Publishes the locale to `not-found.tsx` and `error.tsx`, neither of
+            which gets route params of its own. See the note in LocaleContext.tsx — this is what keeps
             every page statically rendered. */}
-        <LocaleProvider value={{ locale, nav: t.nav, notFound: t.notFound }}>
+        <LocaleProvider
+          value={{ locale, nav: t.nav, notFound: t.notFound, error: t.error }}
+        >
           {children}
         </LocaleProvider>
       </body>

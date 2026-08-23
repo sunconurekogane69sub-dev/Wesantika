@@ -175,7 +175,7 @@ export function AiProximityPanel({ labels }: { labels: Dictionary["ai"]["labels"
   return (
     <div
       ref={surfaceRef}
-      className="relative w-full overflow-hidden rounded-hero-panel"
+      className="relative w-full overflow-hidden rounded-panel"
       style={{ aspectRatio: `${AI_PANEL.width} / ${AI_PANEL.height}` }}
     >
       {/* Video only here too. The dark ground stands in until the first frame,
